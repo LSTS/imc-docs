@@ -1,0 +1,2905 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Development Messages &mdash; IMC v5.4.11 Specification</title>
+    
+    <link rel="stylesheet" href="_static/pydoctheme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '5.4.11',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="top" title="IMC v5.4.11 Specification" href="index.html" />
+    <link rel="next" title="Custom Messages" href="Custom.html" />
+    <link rel="prev" title="External Messages" href="External.html" /> 
+  </head>
+  <body>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="development-messages">
+<h1>Development Messages<a class="headerlink" href="#development-messages" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="target">
+<span id="id1"></span><h2>Target<a class="headerlink" href="#target" title="Permalink to this headline">¶</a></h2>
+<p>Target.</p>
+<ul class="simple">
+<li>Abbreviation: Target</li>
+<li>Identification Number: 800</li>
+<li>Payload Size: 31+  bytes</li>
+<li>Message Size: 53+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="9%" />
+<col width="14%" />
+<col width="7%" />
+<col width="40%" />
+<col width="17%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Label</td>
+<td>label</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>Target identifier.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Latitude WGS-84</td>
+<td>lat</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>WGS-84 Latitude coordinate.</td>
+<td>min=-1.5707963267948966,
+max=1.5707963267948966</td>
+</tr>
+<tr class="row-even"><td>Longitude WGS-84</td>
+<td>lon</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>WGS-84 Longitude coordinate.</td>
+<td>min=-3.141592653589793,
+max=3.141592653589793</td>
+</tr>
+<tr class="row-odd"><td>Z Reference</td>
+<td>z</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Z axis reference. Use z_units to specify whether z represents
+depth, altitude or other.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Z Units</td>
+<td>z_units</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="Message Format.html#enum-zunits"><span class="std std-ref">Enum Z Units</span></a>)</td>
+<td>uint8_t</td>
+<td>Units of the z reference.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Course Over Ground</td>
+<td>cog</td>
+<td><em>rad</em></td>
+<td>fp32_t</td>
+<td>Course Over Ground (true).</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Speed Over Ground</td>
+<td>sog</td>
+<td><em>m/s</em></td>
+<td>fp32_t</td>
+<td>Speed Over Ground.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="entityparameter">
+<span id="id2"></span><h2>EntityParameter<a class="headerlink" href="#entityparameter" title="Permalink to this headline">¶</a></h2>
+<p>Entity parameter.</p>
+<ul class="simple">
+<li>Abbreviation: EntityParameter</li>
+<li>Identification Number: 801</li>
+<li>Payload Size: 4+  bytes</li>
+<li>Message Size: 26+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="8%" />
+<col width="15%" />
+<col width="7%" />
+<col width="12%" />
+<col width="36%" />
+<col width="22%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Name</td>
+<td>name</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>Name of the parameter.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Value</td>
+<td>value</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>Current value of the parameter.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="entityparameters">
+<span id="id3"></span><h2>EntityParameters<a class="headerlink" href="#entityparameters" title="Permalink to this headline">¶</a></h2>
+<p>List of entity parameters.</p>
+<ul class="simple">
+<li>Abbreviation: EntityParameters</li>
+<li>Identification Number: 802</li>
+<li>Payload Size: 4+  bytes</li>
+<li>Message Size: 26+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="14%" />
+<col width="6%" />
+<col width="26%" />
+<col width="21%" />
+<col width="20%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Entity Name</td>
+<td>name</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>Name of the entity.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Parameters</td>
+<td>params</td>
+<td><em>-</em></td>
+<td>message-list
+(<a class="reference internal" href="#entityparameter"><span class="std std-ref">EntityParameter</span></a>)</td>
+<td>List of parameters.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="queryentityparameters">
+<span id="id4"></span><h2>QueryEntityParameters<a class="headerlink" href="#queryentityparameters" title="Permalink to this headline">¶</a></h2>
+<p>No description</p>
+<ul class="simple">
+<li>Abbreviation: QueryEntityParameters</li>
+<li>Identification Number: 803</li>
+<li>Payload Size: 6+  bytes</li>
+<li>Message Size: 28+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="17%" />
+<col width="18%" />
+<col width="8%" />
+<col width="14%" />
+<col width="17%" />
+<col width="26%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Entity Name</td>
+<td>name</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Visibility</td>
+<td>visibility</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Scope</td>
+<td>scope</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="setentityparameters">
+<span id="id5"></span><h2>SetEntityParameters<a class="headerlink" href="#setentityparameters" title="Permalink to this headline">¶</a></h2>
+<p>No description</p>
+<ul class="simple">
+<li>Abbreviation: SetEntityParameters</li>
+<li>Identification Number: 804</li>
+<li>Payload Size: 4+  bytes</li>
+<li>Message Size: 26+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="15%" />
+<col width="7%" />
+<col width="28%" />
+<col width="14%" />
+<col width="22%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Entity Name</td>
+<td>name</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Parameters</td>
+<td>params</td>
+<td><em>-</em></td>
+<td>message-list
+(<a class="reference internal" href="#entityparameter"><span class="std std-ref">EntityParameter</span></a>)</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="saveentityparameters">
+<span id="id6"></span><h2>SaveEntityParameters<a class="headerlink" href="#saveentityparameters" title="Permalink to this headline">¶</a></h2>
+<p>No description</p>
+<ul class="simple">
+<li>Abbreviation: SaveEntityParameters</li>
+<li>Identification Number: 805</li>
+<li>Payload Size: 2+  bytes</li>
+<li>Message Size: 24+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="17%" />
+<col width="18%" />
+<col width="8%" />
+<col width="14%" />
+<col width="17%" />
+<col width="26%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Entity Name</td>
+<td>name</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="create-session">
+<span id="createsession"></span><h2>Create Session<a class="headerlink" href="#create-session" title="Permalink to this headline">¶</a></h2>
+<p>Request creating a new session with this remote peer. Example
+session sequence is shown in the following diagram.</p>
+<div class="figure">
+<img alt="_images/session_sequence.png" src="_images/session_sequence.png" />
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">align:</th><td class="field-body">center</td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li>Abbreviation: CreateSession</li>
+<li>Identification Number: 806</li>
+<li>Payload Size: 4 bytes</li>
+<li>Message Size: 26 bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="11%" />
+<col width="5%" />
+<col width="8%" />
+<col width="49%" />
+<col width="15%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Session Timeout</td>
+<td>timeout</td>
+<td><em>-</em></td>
+<td>uint32_t</td>
+<td>Session timeout, in seconds. If no messages are received from
+the remote peer, the session will be closed after this ammount
+of seconds have ellapsed.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="close-session">
+<span id="closesession"></span><h2>Close Session<a class="headerlink" href="#close-session" title="Permalink to this headline">¶</a></h2>
+<p>Request closing of an ongoing session</p>
+<ul class="simple">
+<li>Abbreviation: CloseSession</li>
+<li>Identification Number: 807</li>
+<li>Payload Size: 4 bytes</li>
+<li>Message Size: 26 bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="24%" />
+<col width="17%" />
+<col width="7%" />
+<col width="12%" />
+<col width="16%" />
+<col width="24%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Session Identifier</td>
+<td>sessid</td>
+<td><em>-</em></td>
+<td>uint32_t</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="session-subscription">
+<span id="sessionsubscription"></span><h2>Session Subscription<a class="headerlink" href="#session-subscription" title="Permalink to this headline">¶</a></h2>
+<p>No description</p>
+<ul class="simple">
+<li>Abbreviation: SessionSubscription</li>
+<li>Identification Number: 808</li>
+<li>Payload Size: 6+  bytes</li>
+<li>Message Size: 28+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="18%" />
+<col width="11%" />
+<col width="5%" />
+<col width="8%" />
+<col width="44%" />
+<col width="15%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Session Identifier</td>
+<td>sessid</td>
+<td><em>-</em></td>
+<td>uint32_t</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Messages to subscribe</td>
+<td>messages</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>Comma-separated list of messages to subscribe. Example:
+“EstimatedState,EulerAngles,Temperature”</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="session-keep-alive">
+<span id="sessionkeepalive"></span><h2>Session Keep-Alive<a class="headerlink" href="#session-keep-alive" title="Permalink to this headline">¶</a></h2>
+<p>Message exchanged to prevent a session from timing out</p>
+<ul class="simple">
+<li>Abbreviation: SessionKeepAlive</li>
+<li>Identification Number: 809</li>
+<li>Payload Size: 4 bytes</li>
+<li>Message Size: 26 bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="24%" />
+<col width="17%" />
+<col width="7%" />
+<col width="12%" />
+<col width="16%" />
+<col width="24%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Session Identifier</td>
+<td>sessid</td>
+<td><em>-</em></td>
+<td>uint32_t</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="session-status">
+<span id="sessionstatus"></span><h2>Session Status<a class="headerlink" href="#session-status" title="Permalink to this headline">¶</a></h2>
+<p>Message transmitted periodically to inform the state of a communication session</p>
+<ul class="simple">
+<li>Abbreviation: SessionStatus</li>
+<li>Identification Number: 810</li>
+<li>Payload Size: 5 bytes</li>
+<li>Message Size: 27 bytes</li>
+<li>Flags: periodic</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="18%" />
+<col width="12%" />
+<col width="32%" />
+<col width="9%" />
+<col width="12%" />
+<col width="18%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Session Identifier</td>
+<td>sessid</td>
+<td><em>-</em></td>
+<td>uint32_t</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Status</td>
+<td>status</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="#sessionstatus-enum-status"><span class="std std-ref">Enum Status</span></a>)</td>
+<td>uint8_t</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="enum-status">
+<span id="sessionstatus-enum-prefix-status"></span><span id="sessionstatus-enum-status"></span><h3>Enum Status<a class="headerlink" href="#enum-status" title="Permalink to this headline">¶</a></h3>
+<p>No description</p>
+<ul class="simple">
+<li>Abbreviation: status</li>
+<li>Prefix: STATUS</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="28%" />
+<col width="30%" />
+<col width="28%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>1</td>
+<td>Established</td>
+<td>ESTABLISHED</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>2</td>
+<td>Closed</td>
+<td>CLOSED</td>
+<td><em>-</em></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="push-entity-parameters">
+<span id="pushentityparameters"></span><h2>Push Entity Parameters<a class="headerlink" href="#push-entity-parameters" title="Permalink to this headline">¶</a></h2>
+<p>No description</p>
+<ul class="simple">
+<li>Abbreviation: PushEntityParameters</li>
+<li>Identification Number: 811</li>
+<li>Payload Size: 2+  bytes</li>
+<li>Message Size: 24+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="17%" />
+<col width="18%" />
+<col width="8%" />
+<col width="14%" />
+<col width="17%" />
+<col width="26%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Entity Name</td>
+<td>name</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="pop-entity-parameters">
+<span id="popentityparameters"></span><h2>Pop Entity Parameters<a class="headerlink" href="#pop-entity-parameters" title="Permalink to this headline">¶</a></h2>
+<p>No description</p>
+<ul class="simple">
+<li>Abbreviation: PopEntityParameters</li>
+<li>Identification Number: 812</li>
+<li>Payload Size: 2+  bytes</li>
+<li>Message Size: 24+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="17%" />
+<col width="18%" />
+<col width="8%" />
+<col width="14%" />
+<col width="17%" />
+<col width="26%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Entity Name</td>
+<td>name</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="i-o-event">
+<span id="ioevent"></span><h2>I/O Event<a class="headerlink" href="#i-o-event" title="Permalink to this headline">¶</a></h2>
+<p>Notification of an I/O event.</p>
+<ul class="simple">
+<li>Abbreviation: IoEvent</li>
+<li>Identification Number: 813</li>
+<li>Payload Size: 3+  bytes</li>
+<li>Message Size: 25+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="12%" />
+<col width="24%" />
+<col width="9%" />
+<col width="26%" />
+<col width="17%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Type</td>
+<td>type</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="#ioevent-enum-type"><span class="std std-ref">Enum Type</span></a>)</td>
+<td>uint8_t</td>
+<td>Event type.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Error Message</td>
+<td>error</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>Human-readable error message.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="enum-type">
+<span id="ioevent-enum-prefix-iov-type"></span><span id="ioevent-enum-type"></span><h3>Enum Type<a class="headerlink" href="#enum-type" title="Permalink to this headline">¶</a></h3>
+<p>Event type.</p>
+<ul class="simple">
+<li>Abbreviation: type</li>
+<li>Prefix: IOV_TYPE</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="33%" />
+<col width="27%" />
+<col width="25%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>1</td>
+<td>Input Available</td>
+<td>INPUT</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>2</td>
+<td>Input Error</td>
+<td>INPUT_ERROR</td>
+<td><em>-</em></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="uamtxframe">
+<span id="id7"></span><h2>UamTxFrame<a class="headerlink" href="#uamtxframe" title="Permalink to this headline">¶</a></h2>
+<p>No description</p>
+<ul class="simple">
+<li>Abbreviation: UamTxFrame</li>
+<li>Identification Number: 814</li>
+<li>Payload Size: 7+  bytes</li>
+<li>Message Size: 29+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="18%" />
+<col width="12%" />
+<col width="32%" />
+<col width="10%" />
+<col width="11%" />
+<col width="18%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Sequence Id</td>
+<td>seq</td>
+<td><em>-</em></td>
+<td>uint16_t</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Destination System</td>
+<td>sys_dst</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Flags</td>
+<td>flags</td>
+<td><em>Bitfield</em>
+(<a class="reference internal" href="#uamtxframe-bitfield-flags"><span class="std std-ref">Bitfield Flags</span></a>)</td>
+<td>uint8_t</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Data</td>
+<td>data</td>
+<td><em>-</em></td>
+<td>rawdata</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="bitfield-flags">
+<span id="uamtxframe-bitfield-prefix-utf"></span><span id="uamtxframe-bitfield-flags"></span><h3>Bitfield Flags<a class="headerlink" href="#bitfield-flags" title="Permalink to this headline">¶</a></h3>
+<p>No description</p>
+<ul class="simple">
+<li>Abbreviation: flags</li>
+<li>Prefix: UTF</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="33%" />
+<col width="27%" />
+<col width="25%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0x01</td>
+<td>Acknowledgement</td>
+<td>ACK</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>0x02</td>
+<td>Delayed</td>
+<td>DELAYED</td>
+<td><em>-</em></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="uamrxframe">
+<span id="id8"></span><h2>UamRxFrame<a class="headerlink" href="#uamrxframe" title="Permalink to this headline">¶</a></h2>
+<p>No description</p>
+<ul class="simple">
+<li>Abbreviation: UamRxFrame</li>
+<li>Identification Number: 815</li>
+<li>Payload Size: 7+  bytes</li>
+<li>Message Size: 29+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="18%" />
+<col width="12%" />
+<col width="32%" />
+<col width="10%" />
+<col width="11%" />
+<col width="18%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Source System</td>
+<td>sys_src</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Destination System</td>
+<td>sys_dst</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Flags</td>
+<td>flags</td>
+<td><em>Bitfield</em>
+(<a class="reference internal" href="#uamrxframe-bitfield-flags"><span class="std std-ref">Bitfield Flags</span></a>)</td>
+<td>uint8_t</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Data</td>
+<td>data</td>
+<td><em>-</em></td>
+<td>rawdata</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="uamrxframe-bitfield-prefix-urf">
+<span id="uamrxframe-bitfield-flags"></span><span id="id9"></span><h3>Bitfield Flags<a class="headerlink" href="#uamrxframe-bitfield-prefix-urf" title="Permalink to this headline">¶</a></h3>
+<p>No description</p>
+<ul class="simple">
+<li>Abbreviation: flags</li>
+<li>Prefix: URF</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="28%" />
+<col width="30%" />
+<col width="28%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0x01</td>
+<td>Promiscuous</td>
+<td>PROMISCUOUS</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>0x02</td>
+<td>Delayed</td>
+<td>DELAYED</td>
+<td><em>-</em></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="uamtxstatus">
+<span id="id10"></span><h2>UamTxStatus<a class="headerlink" href="#uamtxstatus" title="Permalink to this headline">¶</a></h2>
+<p>No description</p>
+<ul class="simple">
+<li>Abbreviation: UamTxStatus</li>
+<li>Identification Number: 816</li>
+<li>Payload Size: 5+  bytes</li>
+<li>Message Size: 27+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="13%" />
+<col width="31%" />
+<col width="10%" />
+<col width="12%" />
+<col width="19%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Sequence Id</td>
+<td>seq</td>
+<td><em>-</em></td>
+<td>uint16_t</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Value</td>
+<td>value</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="#uamtxstatus-enum-value"><span class="std std-ref">Enum Value</span></a>)</td>
+<td>uint8_t</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Error Message</td>
+<td>error</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="enum-value">
+<span id="uamtxstatus-enum-prefix-uts"></span><span id="uamtxstatus-enum-value"></span><h3>Enum Value<a class="headerlink" href="#enum-value" title="Permalink to this headline">¶</a></h3>
+<p>No description</p>
+<ul class="simple">
+<li>Abbreviation: value</li>
+<li>Prefix: UTS</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="44%" />
+<col width="23%" />
+<col width="21%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0</td>
+<td>Transmission Completed</td>
+<td>DONE</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>Transmission Failed</td>
+<td>FAILED</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-even"><td>2</td>
+<td>Transmission Canceled</td>
+<td>CANCELED</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>3</td>
+<td>Modem is busy</td>
+<td>BUSY</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-even"><td>4</td>
+<td>Invalid address</td>
+<td>INV_ADDR</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>5</td>
+<td>In Progress</td>
+<td>IP</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-even"><td>6</td>
+<td>Unsupported operation</td>
+<td>UNSUPPORTED</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>7</td>
+<td>Invalid transmission size</td>
+<td>INV_SIZE</td>
+<td><em>-</em></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="uamrxrange">
+<span id="id11"></span><h2>UamRxRange<a class="headerlink" href="#uamrxrange" title="Permalink to this headline">¶</a></h2>
+<p>No description</p>
+<ul class="simple">
+<li>Abbreviation: UamRxRange</li>
+<li>Identification Number: 817</li>
+<li>Payload Size: 8+  bytes</li>
+<li>Message Size: 30+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="17%" />
+<col width="18%" />
+<col width="8%" />
+<col width="14%" />
+<col width="17%" />
+<col width="26%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Sequence Id</td>
+<td>seq</td>
+<td><em>-</em></td>
+<td>uint16_t</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>System</td>
+<td>sys</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Value</td>
+<td>value</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="formation-control-parameters">
+<span id="formctrlparam"></span><h2>Formation Control Parameters<a class="headerlink" href="#formation-control-parameters" title="Permalink to this headline">¶</a></h2>
+<p>Formation controller paramenters, as: trajectory gains, control boundary layer thickness, and formation shape gains.</p>
+<ul class="simple">
+<li>Abbreviation: FormCtrlParam</li>
+<li>Identification Number: 820</li>
+<li>Payload Size: 21 bytes</li>
+<li>Message Size: 43 bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="5%" />
+<col width="14%" />
+<col width="4%" />
+<col width="59%" />
+<col width="8%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Action</td>
+<td>Action</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="#formctrlparam-enum-action"><span class="std std-ref">Enum Action</span></a>)</td>
+<td>uint8_t</td>
+<td>Action on the vehicle formation control parameters.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Longitudinal Gain</td>
+<td>LonGain</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Trajectory gain over the vehicle longitudinal direction.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Lateral Gain</td>
+<td>LatGain</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Trajectory gain over the vehicle lateral direction.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Boundary Layer Thickness</td>
+<td>BondThick</td>
+<td><em>-</em></td>
+<td>uint32_t</td>
+<td>Control sliding surface boundary layer thickness.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Leader Gain</td>
+<td>LeadGain</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Formation shape gain (absolute vehicle position tracking).
+Leader control importance gain (relative to the sum of every other formation vehicle).</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Deconfliction Gain</td>
+<td>DeconflGain</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Collision avoidance and formation shape gain (position tracking relative to the other formation vehicles).
+Individual vehicle importance gain (relative to the leader), when the relative position or the velocity state indicate higher probability of collision.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="enum-action">
+<span id="formctrlparam-enum-prefix-op"></span><span id="formctrlparam-enum-action"></span><h3>Enum Action<a class="headerlink" href="#enum-action" title="Permalink to this headline">¶</a></h3>
+<p>Action on the vehicle formation control parameters.</p>
+<ul class="simple">
+<li>Abbreviation: Action</li>
+<li>Prefix: OP</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="21%" />
+<col width="33%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0</td>
+<td>Request</td>
+<td>REQ</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>Set</td>
+<td>SET</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-even"><td>2</td>
+<td>Report</td>
+<td>REP</td>
+<td><em>-</em></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="formation-evaluation-data">
+<span id="formationeval"></span><h2>Formation Evaluation Data<a class="headerlink" href="#formation-evaluation-data" title="Permalink to this headline">¶</a></h2>
+<p>Formation control performance evaluation variables.</p>
+<ul class="simple">
+<li>Abbreviation: FormationEval</li>
+<li>Identification Number: 821</li>
+<li>Payload Size: 12 bytes</li>
+<li>Message Size: 34 bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="19%" />
+<col width="11%" />
+<col width="4%" />
+<col width="6%" />
+<col width="46%" />
+<col width="14%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Mean position error</td>
+<td>err_mean</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Mean position error relative to the formation reference.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Absolute minimum distance</td>
+<td>dist_min_abs</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Overall minimum distance to any other vehicle in the formation.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Mean minimum distance</td>
+<td>dist_min_mean</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Mean minimum distance to any other vehicle in the formation.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="formationcontrolparams">
+<span id="id12"></span><h2>Formation Control Parameters<a class="headerlink" href="#formationcontrolparams" title="Permalink to this headline">¶</a></h2>
+<p>Formation controller paramenters, as: trajectory gains,
+control boundary layer thickness, and formation shape gains.</p>
+<ul class="simple">
+<li>Abbreviation: FormationControlParams</li>
+<li>Identification Number: 822</li>
+<li>Payload Size: 41 bytes</li>
+<li>Message Size: 63 bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="7%" />
+<col width="16%" />
+<col width="3%" />
+<col width="54%" />
+<col width="7%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Action</td>
+<td>Action</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="#formationcontrolparams-enum-action"><span class="std std-ref">Enum Action</span></a>)</td>
+<td>uint8_t</td>
+<td>Action on the vehicle formation control parameters.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Longitudinal Gain</td>
+<td>lon_gain</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Trajectory gain over the vehicle longitudinal direction.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Lateral Gain</td>
+<td>lat_gain</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Trajectory gain over the vehicle lateral direction.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Boundary Layer Thickness</td>
+<td>bond_thick</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Control sliding surface boundary layer thickness.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Leader Gain</td>
+<td>lead_gain</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Formation shape gain (absolute vehicle position tracking).
+Leader control importance gain (relative to the sum of every other formation vehicle).</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Deconfliction Gain</td>
+<td>deconfl_gain</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Collision avoidance and formation shape gain (position tracking relative to the other formation vehicles).
+Individual vehicle importance gain (relative to the leader), when the relative position or the velocity state indicate higher probability of collision.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Acceleration Switch Gain</td>
+<td>accel_switch_gain</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Switch gain to compensate the worst case of the wind flow acceleration.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Safety Distance</td>
+<td>safe_dist</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Inter-vehicle safety distance.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Deconfliction Offset</td>
+<td>deconflict_offset</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Distance offset which defines the buffer area beyond the safety distace.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Acceleration Safety Margin</td>
+<td>accel_safe_margin</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Safety margin to compensate for possible shortfalls from the predicted maximum acceleration that a vehicle can generate.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Maximum Longitudinal Acceleration</td>
+<td>accel_lim_x</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Maximum predicted longitudinal acceleration a vehicle can generate.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="formationcontrolparams-enum-prefix-op">
+<span id="formationcontrolparams-enum-action"></span><span id="id13"></span><h3>Enum Action<a class="headerlink" href="#formationcontrolparams-enum-prefix-op" title="Permalink to this headline">¶</a></h3>
+<p>Action on the vehicle formation control parameters.</p>
+<ul class="simple">
+<li>Abbreviation: Action</li>
+<li>Prefix: OP</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="21%" />
+<col width="33%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0</td>
+<td>Request</td>
+<td>REQ</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>Set</td>
+<td>SET</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-even"><td>2</td>
+<td>Report</td>
+<td>REP</td>
+<td><em>-</em></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="formationevaluation">
+<span id="id14"></span><h2>Formation Evaluation Data<a class="headerlink" href="#formationevaluation" title="Permalink to this headline">¶</a></h2>
+<p>Formation control performance evaluation variables.</p>
+<ul class="simple">
+<li>Abbreviation: FormationEvaluation</li>
+<li>Identification Number: 823</li>
+<li>Payload Size: 65 bytes</li>
+<li>Message Size: 87 bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="8%" />
+<col width="19%" />
+<col width="15%" />
+<col width="35%" />
+<col width="9%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Type</td>
+<td>type</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="#formationevaluation-enum-type"><span class="std std-ref">Enum Type</span></a>)</td>
+<td>uint8_t</td>
+<td>Indicates if the message is a request, or a reply to a previous request.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Operation</td>
+<td>op</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="#formationevaluation-enum-op"><span class="std std-ref">Enum Operation</span></a>)</td>
+<td>uint8_t</td>
+<td>Operation to perform.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Mean Position Error</td>
+<td>err_mean</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Mean position error relative to the formation reference.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Absolute Minimum Distance</td>
+<td>dist_min_abs</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Overall minimum distance to any other vehicle in the formation.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Mean Minimum Distance</td>
+<td>dist_min_mean</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Mean minimum distance to any other vehicle in the formation.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Mean Roll Rate</td>
+<td>roll_rate_mean</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Mean minimum distance to any other vehicle in the formation.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Evaluation Time</td>
+<td>time</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Period over which the evaluation data is averaged.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Formation Control Parameters</td>
+<td>ControlParams</td>
+<td><em>-</em></td>
+<td>message
+(<a class="reference internal" href="#formationcontrolparams"><span class="std std-ref">Formation Control Parameters</span></a>)</td>
+<td>Formation controller paramenters during the evaluation period.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="formationevaluation-enum-prefix-fc">
+<span id="formationevaluation-enum-type"></span><span id="id15"></span><h3>Enum Type<a class="headerlink" href="#formationevaluation-enum-prefix-fc" title="Permalink to this headline">¶</a></h3>
+<p>Indicates if the message is a request, or a reply to a previous request.</p>
+<ul class="simple">
+<li>Abbreviation: type</li>
+<li>Prefix: FC</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="21%" />
+<col width="33%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0</td>
+<td>Request</td>
+<td>REQUEST</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>Report</td>
+<td>REPORT</td>
+<td><em>-</em></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="enum-operation">
+<span id="formationevaluation-enum-prefix-op"></span><span id="formationevaluation-enum-op"></span><h3>Enum Operation<a class="headerlink" href="#enum-operation" title="Permalink to this headline">¶</a></h3>
+<p>Operation to perform.</p>
+<ul class="simple">
+<li>Abbreviation: op</li>
+<li>Prefix: OP</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="17%" />
+<col width="22%" />
+<col width="49%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0</td>
+<td>Start</td>
+<td>START</td>
+<td>Start the formation maneuver.</td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>Stop</td>
+<td>STOP</td>
+<td>Stop the formation maneuver.</td>
+</tr>
+<tr class="row-even"><td>2</td>
+<td>Ready</td>
+<td>READY</td>
+<td>Stop the formation maneuver.</td>
+</tr>
+<tr class="row-odd"><td>3</td>
+<td>Executing</td>
+<td>EXECUTING</td>
+<td>Stop the formation maneuver.</td>
+</tr>
+<tr class="row-even"><td>4</td>
+<td>Failure</td>
+<td>FAILURE</td>
+<td>Stop the formation maneuver.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="soi-waypoint">
+<span id="soiwaypoint"></span><h2>SOI Waypoint<a class="headerlink" href="#soi-waypoint" title="Permalink to this headline">¶</a></h2>
+<p>No description</p>
+<ul class="simple">
+<li>Abbreviation: SoiWaypoint</li>
+<li>Identification Number: 850</li>
+<li>Payload Size: 14 bytes</li>
+<li>Message Size: 36 bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="21%" />
+<col width="18%" />
+<col width="8%" />
+<col width="13%" />
+<col width="16%" />
+<col width="25%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Latitude</td>
+<td>lat</td>
+<td><em>°</em></td>
+<td>fp32_t</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Longitude</td>
+<td>lon</td>
+<td><em>°</em></td>
+<td>fp32_t</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Time Of Arrival</td>
+<td>eta</td>
+<td><em>-</em></td>
+<td>uint32_t</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Duration</td>
+<td>duration</td>
+<td><em>s</em></td>
+<td>uint16_t</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="soi-plan">
+<span id="soiplan"></span><h2>SOI Plan<a class="headerlink" href="#soi-plan" title="Permalink to this headline">¶</a></h2>
+<p>No description</p>
+<ul class="simple">
+<li>Abbreviation: SoiPlan</li>
+<li>Identification Number: 851</li>
+<li>Payload Size: 4+  bytes</li>
+<li>Message Size: 26+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="18%" />
+<col width="15%" />
+<col width="7%" />
+<col width="24%" />
+<col width="14%" />
+<col width="22%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Plan Identifier</td>
+<td>plan_id</td>
+<td><em>-</em></td>
+<td>uint16_t</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Waypoints</td>
+<td>waypoints</td>
+<td><em>-</em></td>
+<td>message-list
+(<a class="reference internal" href="#soiwaypoint"><span class="std std-ref">SOI Waypoint</span></a>)</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="soi-command">
+<span id="soicommand"></span><h2>SOI Command<a class="headerlink" href="#soi-command" title="Permalink to this headline">¶</a></h2>
+<p>No description</p>
+<ul class="simple">
+<li>Abbreviation: SoiCommand</li>
+<li>Identification Number: 852</li>
+<li>Payload Size: 12+  bytes</li>
+<li>Message Size: 34+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="12%" />
+<col width="29%" />
+<col width="15%" />
+<col width="11%" />
+<col width="17%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Type</td>
+<td>type</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="#soicommand-enum-type"><span class="std std-ref">Enum Type</span></a>)</td>
+<td>uint8_t</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Command</td>
+<td>command</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="#soicommand-enum-command"><span class="std std-ref">Enum Command</span></a>)</td>
+<td>uint8_t</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Settings</td>
+<td>settings</td>
+<td><em>TupleList</em></td>
+<td>plaintext</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Plan</td>
+<td>plan</td>
+<td><em>-</em></td>
+<td>message
+(<a class="reference internal" href="#soiplan"><span class="std std-ref">SOI Plan</span></a>)</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Extra Information</td>
+<td>info</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="soicommand-enum-prefix-soitype">
+<span id="soicommand-enum-type"></span><span id="id16"></span><h3>Enum Type<a class="headerlink" href="#soicommand-enum-prefix-soitype" title="Permalink to this headline">¶</a></h3>
+<p>No description</p>
+<ul class="simple">
+<li>Abbreviation: type</li>
+<li>Prefix: SOITYPE</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="21%" />
+<col width="33%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>1</td>
+<td>Request</td>
+<td>REQUEST</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>2</td>
+<td>Success</td>
+<td>SUCCESS</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-even"><td>3</td>
+<td>Error</td>
+<td>ERROR</td>
+<td><em>-</em></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="enum-command">
+<span id="soicommand-enum-prefix-soicmd"></span><span id="soicommand-enum-command"></span><h3>Enum Command<a class="headerlink" href="#enum-command" title="Permalink to this headline">¶</a></h3>
+<p>No description</p>
+<ul class="simple">
+<li>Abbreviation: command</li>
+<li>Prefix: SOICMD</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="35%" />
+<col width="27%" />
+<col width="25%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>1</td>
+<td>Execute Plan</td>
+<td>EXEC</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>2</td>
+<td>Stop Execution</td>
+<td>STOP</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-even"><td>3</td>
+<td>Set Parameters</td>
+<td>SET_PARAMS</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>4</td>
+<td>Get Parameters</td>
+<td>GET_PARAMS</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-even"><td>5</td>
+<td>Get Plan</td>
+<td>GET_PLAN</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>6</td>
+<td>Resume Execution</td>
+<td>RESUME</td>
+<td><em>-</em></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="soi-state">
+<span id="soistate"></span><h2>SOI State<a class="headerlink" href="#soi-state" title="Permalink to this headline">¶</a></h2>
+<p>No description</p>
+<ul class="simple">
+<li>Abbreviation: SoiState</li>
+<li>Identification Number: 853</li>
+<li>Payload Size: 6 bytes</li>
+<li>Message Size: 28 bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="19%" />
+<col width="13%" />
+<col width="28%" />
+<col width="9%" />
+<col width="12%" />
+<col width="19%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>State</td>
+<td>state</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="#soistate-enum-state"><span class="std std-ref">Enum State</span></a>)</td>
+<td>uint8_t</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Plan Identifier</td>
+<td>plan_id</td>
+<td><em>-</em></td>
+<td>uint16_t</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Waypoint Identifier</td>
+<td>wpt_id</td>
+<td><em>-</em></td>
+<td>uint8_t</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Settings Checksum</td>
+<td>settings_chk</td>
+<td><em>-</em></td>
+<td>uint16_t</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="enum-state">
+<span id="soistate-enum-prefix-soistate"></span><span id="soistate-enum-state"></span><h3>Enum State<a class="headerlink" href="#enum-state" title="Permalink to this headline">¶</a></h3>
+<p>No description</p>
+<ul class="simple">
+<li>Abbreviation: state</li>
+<li>Prefix: SOISTATE</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="24%" />
+<col width="31%" />
+<col width="29%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>1</td>
+<td>Executing</td>
+<td>EXEC</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>2</td>
+<td>Idle</td>
+<td>IDLE</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-even"><td>3</td>
+<td>Inactive</td>
+<td>INACTIVE</td>
+<td><em>-</em></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="message-fragment">
+<span id="messagepart"></span><h2>Message Fragment<a class="headerlink" href="#message-fragment" title="Permalink to this headline">¶</a></h2>
+<p>No description</p>
+<ul class="simple">
+<li>Abbreviation: MessagePart</li>
+<li>Identification Number: 877</li>
+<li>Payload Size: 5+  bytes</li>
+<li>Message Size: 27+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="30%" />
+<col width="16%" />
+<col width="7%" />
+<col width="10%" />
+<col width="15%" />
+<col width="22%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Transmission Unique Id</td>
+<td>uid</td>
+<td><em>-</em></td>
+<td>uint8_t</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Fragment Number</td>
+<td>frag_number</td>
+<td><em>-</em></td>
+<td>uint8_t</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Total Number of fragments</td>
+<td>num_frags</td>
+<td><em>-</em></td>
+<td>uint8_t</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Fragment Data</td>
+<td>data</td>
+<td><em>-</em></td>
+<td>rawdata</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="neptus-blob">
+<span id="neptusblob"></span><h2>Neptus Blob<a class="headerlink" href="#neptus-blob" title="Permalink to this headline">¶</a></h2>
+<p>No description</p>
+<ul class="simple">
+<li>Abbreviation: NeptusBlob</li>
+<li>Identification Number: 888</li>
+<li>Payload Size: 4+  bytes</li>
+<li>Message Size: 26+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="17%" />
+<col width="18%" />
+<col width="8%" />
+<col width="14%" />
+<col width="17%" />
+<col width="26%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>ContentType</td>
+<td>content_type</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Content</td>
+<td>content</td>
+<td><em>-</em></td>
+<td>rawdata</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="aborted">
+<span id="id17"></span><h2>Aborted<a class="headerlink" href="#aborted" title="Permalink to this headline">¶</a></h2>
+<p>This message signals that an <a class="reference internal" href="Plan Supervision.html#abort"><span class="std std-ref">Abort</span></a> message was received and acted upon.</p>
+<ul class="simple">
+<li>Abbreviation: Aborted</li>
+<li>Identification Number: 889</li>
+<li>Payload Size: 0 bytes</li>
+<li>Message Size: 22 bytes</li>
+</ul>
+<p>This message has no fields.</p>
+</div>
+<div class="section" id="usbl-angles">
+<span id="usblangles"></span><h2>USBL Angles<a class="headerlink" href="#usbl-angles" title="Permalink to this headline">¶</a></h2>
+<p>This message contains information, collected using USBL, about the
+bearing and elevation of a target.</p>
+<ul class="simple">
+<li>Abbreviation: UsblAngles</li>
+<li>Identification Number: 890</li>
+<li>Payload Size: 10 bytes</li>
+<li>Message Size: 32 bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="16%" />
+<col width="8%" />
+<col width="12%" />
+<col width="27%" />
+<col width="24%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Target</td>
+<td>target</td>
+<td><em>-</em></td>
+<td>uint16_t</td>
+<td>Target’s IMC address.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Bearing</td>
+<td>bearing</td>
+<td><em>rad</em></td>
+<td>fp32_t</td>
+<td>Target’s bearing.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Elevation</td>
+<td>elevation</td>
+<td><em>rad</em></td>
+<td>fp32_t</td>
+<td>Target’s elevation.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="usbl-position">
+<span id="usblposition"></span><h2>USBL Position<a class="headerlink" href="#usbl-position" title="Permalink to this headline">¶</a></h2>
+<p>This message contains information, collected using USBL, about a
+target’s position.</p>
+<ul class="simple">
+<li>Abbreviation: UsblPosition</li>
+<li>Identification Number: 891</li>
+<li>Payload Size: 14 bytes</li>
+<li>Message Size: 36 bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="11%" />
+<col width="5%" />
+<col width="8%" />
+<col width="54%" />
+<col width="16%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Target</td>
+<td>target</td>
+<td><em>-</em></td>
+<td>uint16_t</td>
+<td>Target’s IMC address.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>X</td>
+<td>x</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>X coordinate of the target in the local device’s reference frame.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Y</td>
+<td>y</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Y coordinate of the target in the local device’s reference frame.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Z</td>
+<td>z</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Z coordinate of the target in the local device’s reference frame.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="usbl-fix">
+<span id="usblfix"></span><h2>USBL Fix<a class="headerlink" href="#usbl-fix" title="Permalink to this headline">¶</a></h2>
+<p>This message contains the WGS-84 position of a target computed using
+USBL.</p>
+<ul class="simple">
+<li>Abbreviation: UsblFix</li>
+<li>Identification Number: 892</li>
+<li>Payload Size: 23 bytes</li>
+<li>Message Size: 45 bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="9%" />
+<col width="15%" />
+<col width="7%" />
+<col width="38%" />
+<col width="18%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Target</td>
+<td>target</td>
+<td><em>-</em></td>
+<td>uint16_t</td>
+<td>Target’s IMC address.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Latitude (WGS-84)</td>
+<td>lat</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>WGS-84 Latitude.</td>
+<td>min=-1.5707963267948966,
+max=1.5707963267948966</td>
+</tr>
+<tr class="row-even"><td>Longitude (WGS-84)</td>
+<td>lon</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>WGS-84 Longitude.</td>
+<td>min=-3.141592653589793,
+max=3.141592653589793</td>
+</tr>
+<tr class="row-odd"><td>Z Units</td>
+<td>z_units</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="Message Format.html#enum-zunits"><span class="std std-ref">Enum Z Units</span></a>)</td>
+<td>uint8_t</td>
+<td>Units of the z reference.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Z Reference</td>
+<td>z</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Target reference in the z axis. Use z_units to specify
+whether z represents depth, altitude or other.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="parameters-xml">
+<span id="parametersxml"></span><h2>Parameters XML<a class="headerlink" href="#parameters-xml" title="Permalink to this headline">¶</a></h2>
+<p>Message containing the parameters XML of the source system.</p>
+<ul class="simple">
+<li>Abbreviation: ParametersXml</li>
+<li>Identification Number: 893</li>
+<li>Payload Size: 4+  bytes</li>
+<li>Message Size: 26+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="10%" />
+<col width="4%" />
+<col width="8%" />
+<col width="49%" />
+<col width="14%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Locale</td>
+<td>locale</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>The locale used to produce this parameters XML.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Configuration Data</td>
+<td>config</td>
+<td><em>-</em></td>
+<td>rawdata</td>
+<td>The parameters XML file compressed using the GNU zip (gzip) format.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="get-parameters-xml">
+<span id="getparametersxml"></span><h2>Get Parameters XML<a class="headerlink" href="#get-parameters-xml" title="Permalink to this headline">¶</a></h2>
+<p>Request the destination system to send its parameters XML file via a
+<a class="reference internal" href="#parametersxml"><span class="std std-ref">Parameters XML</span></a> message.</p>
+<ul class="simple">
+<li>Abbreviation: GetParametersXml</li>
+<li>Identification Number: 894</li>
+<li>Payload Size: 0 bytes</li>
+<li>Message Size: 22 bytes</li>
+</ul>
+<p>This message has no fields.</p>
+</div>
+<div class="section" id="set-image-coordinates">
+<span id="setimagecoords"></span><h2>Set Image Coordinates<a class="headerlink" href="#set-image-coordinates" title="Permalink to this headline">¶</a></h2>
+<p>Message containing the x and y coordinates of object to track in remote peer.</p>
+<ul class="simple">
+<li>Abbreviation: SetImageCoords</li>
+<li>Identification Number: 895</li>
+<li>Payload Size: 5 bytes</li>
+<li>Message Size: 27 bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="12%" />
+<col width="5%" />
+<col width="9%" />
+<col width="41%" />
+<col width="17%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Camera Identifier</td>
+<td>camId</td>
+<td><em>-</em></td>
+<td>uint8_t</td>
+<td>Camera identifier.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>X</td>
+<td>x</td>
+<td><em>px</em></td>
+<td>uint16_t</td>
+<td>X coordinate of the target in the image frame.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Y</td>
+<td>y</td>
+<td><em>px</em></td>
+<td>uint16_t</td>
+<td>Y coordinate of the target in the image frame.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="get-image-coordinates">
+<span id="getimagecoords"></span><h2>Get Image Coordinates<a class="headerlink" href="#get-image-coordinates" title="Permalink to this headline">¶</a></h2>
+<p>Message containing the x and y coordinates of object to track in image slave.</p>
+<ul class="simple">
+<li>Abbreviation: GetImageCoords</li>
+<li>Identification Number: 896</li>
+<li>Payload Size: 5 bytes</li>
+<li>Message Size: 27 bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="12%" />
+<col width="5%" />
+<col width="9%" />
+<col width="41%" />
+<col width="17%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Camera Identifier</td>
+<td>camId</td>
+<td><em>-</em></td>
+<td>uint8_t</td>
+<td>Camera identifier.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>X</td>
+<td>x</td>
+<td><em>px</em></td>
+<td>uint16_t</td>
+<td>X coordinate of the target in the image frame.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Y</td>
+<td>y</td>
+<td><em>px</em></td>
+<td>uint16_t</td>
+<td>Y coordinate of the target in the image frame.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="get-world-coordinates">
+<span id="getworldcoordinates"></span><h2>Get World Coordinates<a class="headerlink" href="#get-world-coordinates" title="Permalink to this headline">¶</a></h2>
+<p>Message containing the x, y and z coordinates of object in the real world.</p>
+<ul class="simple">
+<li>Abbreviation: GetWorldCoordinates</li>
+<li>Identification Number: 897</li>
+<li>Payload Size: 29 bytes</li>
+<li>Message Size: 51 bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="9%" />
+<col width="11%" />
+<col width="18%" />
+<col width="7%" />
+<col width="39%" />
+<col width="16%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Tracking</td>
+<td>tracking</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="Message Format.html#enum-boolean"><span class="std std-ref">Enum Boolean Value</span></a>)</td>
+<td>uint8_t</td>
+<td>True when system is tracking.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Latitude</td>
+<td>lat</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>Latitude of the real world frame origin.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Longitude</td>
+<td>lon</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>Longitude of the real world frame origin.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>X</td>
+<td>x</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>X offsets of the target in the real world frame.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Y</td>
+<td>y</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Y offsets of the target in the real world frame.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Z</td>
+<td>z</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Z offsets of the target in the real world frame.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="usbl-angles-extended">
+<span id="usblanglesextended"></span><h2>USBL Angles Extended<a class="headerlink" href="#usbl-angles-extended" title="Permalink to this headline">¶</a></h2>
+<p>This message contains information, collected using USBL, about the
+bearing and elevation of a target.</p>
+<ul class="simple">
+<li>Abbreviation: UsblAnglesExtended</li>
+<li>Identification Number: 898</li>
+<li>Payload Size: 34+  bytes</li>
+<li>Message Size: 56+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="11%" />
+<col width="5%" />
+<col width="8%" />
+<col width="44%" />
+<col width="19%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Target</td>
+<td>target</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>Target’s system name.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Local Bearing</td>
+<td>lbearing</td>
+<td><em>rad</em></td>
+<td>fp32_t</td>
+<td>Target’s bearing in the local device’s reference frame.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Local Elevation</td>
+<td>lelevation</td>
+<td><em>rad</em></td>
+<td>fp32_t</td>
+<td>Target’s elevation in the local device’s reference frame.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Bearing</td>
+<td>bearing</td>
+<td><em>rad</em></td>
+<td>fp32_t</td>
+<td>Target’s bearing in the navigation reference frame.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Elevation</td>
+<td>elevation</td>
+<td><em>rad</em></td>
+<td>fp32_t</td>
+<td>Target’s elevation in the navigation reference frame.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Roll Angle</td>
+<td>phi</td>
+<td><em>rad</em></td>
+<td>fp32_t</td>
+<td>Rotation around the device longitudinal axis.</td>
+<td>min=-3.141592653589793,
+max=3.141592653589793</td>
+</tr>
+<tr class="row-even"><td>Pitch Angle</td>
+<td>theta</td>
+<td><em>rad</em></td>
+<td>fp32_t</td>
+<td>Rotation around the device lateral or transverse axis.</td>
+<td>min=-1.57079632679490,
+max=1.57079632679490</td>
+</tr>
+<tr class="row-odd"><td>Yaw Angle</td>
+<td>psi</td>
+<td><em>rad</em></td>
+<td>fp32_t</td>
+<td>Rotation around the device vertical axis.</td>
+<td>min=-3.141592653589793,
+max=3.141592653589793</td>
+</tr>
+<tr class="row-even"><td>Accuracy</td>
+<td>accuracy</td>
+<td><em>rad</em></td>
+<td>fp32_t</td>
+<td>Accuracy of the fix.</td>
+<td>min=0,
+max=3.141592653589793</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="usbl-position-extended">
+<span id="usblpositionextended"></span><h2>USBL Position Extended<a class="headerlink" href="#usbl-position-extended" title="Permalink to this headline">¶</a></h2>
+<p>This message contains information, collected using USBL, about a
+target’s position.</p>
+<ul class="simple">
+<li>Abbreviation: UsblPositionExtended</li>
+<li>Identification Number: 899</li>
+<li>Payload Size: 42+  bytes</li>
+<li>Message Size: 64+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="9%" />
+<col width="10%" />
+<col width="5%" />
+<col width="8%" />
+<col width="49%" />
+<col width="18%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Target</td>
+<td>target</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>Target’s system name.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>X</td>
+<td>x</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>X coordinate of the target in the local device’s reference frame.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Y</td>
+<td>y</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Y coordinate of the target in the local device’s reference frame.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Z</td>
+<td>z</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Z coordinate of the target in the local device’s reference frame.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>N</td>
+<td>n</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>X coordinate of the target in the navigation reference frame.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>E</td>
+<td>e</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Y coordinate of the target in the navigation reference frame.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>D</td>
+<td>d</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Z coordinate of the target in the navigation reference frame.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Roll Angle</td>
+<td>phi</td>
+<td><em>rad</em></td>
+<td>fp32_t</td>
+<td>Rotation around the device longitudinal axis.</td>
+<td>min=-3.141592653589793,
+max=3.141592653589793</td>
+</tr>
+<tr class="row-even"><td>Pitch Angle</td>
+<td>theta</td>
+<td><em>rad</em></td>
+<td>fp32_t</td>
+<td>Rotation around the device lateral or transverse axis.</td>
+<td>min=-1.57079632679490,
+max=1.57079632679490</td>
+</tr>
+<tr class="row-odd"><td>Yaw Angle</td>
+<td>psi</td>
+<td><em>rad</em></td>
+<td>fp32_t</td>
+<td>Rotation around the device vertical axis.</td>
+<td>min=-3.141592653589793,
+max=3.141592653589793</td>
+</tr>
+<tr class="row-even"><td>Accuracy</td>
+<td>accuracy</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Accuracy of the position fix.</td>
+<td>min=0</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="usbl-fix-extended">
+<span id="usblfixextended"></span><h2>USBL Fix Extended<a class="headerlink" href="#usbl-fix-extended" title="Permalink to this headline">¶</a></h2>
+<p>This message contains the WGS-84 position of a target computed using
+USBL.</p>
+<ul class="simple">
+<li>Abbreviation: UsblFixExtended</li>
+<li>Identification Number: 900</li>
+<li>Payload Size: 27+  bytes</li>
+<li>Message Size: 49+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="9%" />
+<col width="15%" />
+<col width="7%" />
+<col width="38%" />
+<col width="17%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Target</td>
+<td>target</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>Target’s system name.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Latitude (WGS-84)</td>
+<td>lat</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>WGS-84 Latitude.</td>
+<td>min=-1.5707963267948966,
+max=1.5707963267948966</td>
+</tr>
+<tr class="row-even"><td>Longitude (WGS-84)</td>
+<td>lon</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>WGS-84 Longitude.</td>
+<td>min=-3.141592653589793,
+max=3.141592653589793</td>
+</tr>
+<tr class="row-odd"><td>Z Units</td>
+<td>z_units</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="Message Format.html#enum-zunits"><span class="std std-ref">Enum Z Units</span></a>)</td>
+<td>uint8_t</td>
+<td>Units of the z reference.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Z Reference</td>
+<td>z</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Target reference in the z axis. Use z_units to specify
+whether z represents depth, altitude or other.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Accuracy</td>
+<td>accuracy</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Accuracy of the position fix.</td>
+<td>min=0</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<h3><a href="index.html">Table Of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Message Format.html">Message Format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Core.html">Core Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Simulation.html">Simulation Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Storage.html">Storage Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Networking.html">Networking Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Acoustic Networking.html">Acoustic Networking Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Sensors.html">Sensors Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Actuation.html">Actuation Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Navigation.html">Navigation Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Guidance.html">Guidance Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Maneuvering.html">Maneuvering Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Vehicle Supervision.html">Vehicle Supervision Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Plan Supervision.html">Plan Supervision Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CCU.html">CCU Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Autonomy.html">Autonomy Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Vision.html">Vision Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="External.html">External Messages</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Development Messages</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#target">Target</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#entityparameter">EntityParameter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#entityparameters">EntityParameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#queryentityparameters">QueryEntityParameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#setentityparameters">SetEntityParameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#saveentityparameters">SaveEntityParameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#create-session">Create Session</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#close-session">Close Session</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#session-subscription">Session Subscription</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#session-keep-alive">Session Keep-Alive</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#session-status">Session Status</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#push-entity-parameters">Push Entity Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pop-entity-parameters">Pop Entity Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#i-o-event">I/O Event</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#uamtxframe">UamTxFrame</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#uamrxframe">UamRxFrame</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#uamtxstatus">UamTxStatus</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#uamrxrange">UamRxRange</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#formation-control-parameters">Formation Control Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#formation-evaluation-data">Formation Evaluation Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#formationcontrolparams">Formation Control Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#formationevaluation">Formation Evaluation Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#soi-waypoint">SOI Waypoint</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#soi-plan">SOI Plan</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#soi-command">SOI Command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#soi-state">SOI State</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#message-fragment">Message Fragment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#neptus-blob">Neptus Blob</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#aborted">Aborted</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#usbl-angles">USBL Angles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#usbl-position">USBL Position</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#usbl-fix">USBL Fix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#parameters-xml">Parameters XML</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#get-parameters-xml">Get Parameters XML</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#set-image-coordinates">Set Image Coordinates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#get-image-coordinates">Get Image Coordinates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#get-world-coordinates">Get World Coordinates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#usbl-angles-extended">USBL Angles Extended</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#usbl-position-extended">USBL Position Extended</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#usbl-fix-extended">USBL Fix Extended</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Custom.html">Custom Messages</a></li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013-2017, Universidade do Porto - Faculdade de Engenharia - LSTS.
+      <br/>
+      Last updated on Aug 21, 2019.
+    </div>
+  </body>
+</html>

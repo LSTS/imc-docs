@@ -1,0 +1,1190 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Actuation Messages &mdash; IMC v5.4.11 Specification</title>
+    
+    <link rel="stylesheet" href="_static/pydoctheme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '5.4.11',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="top" title="IMC v5.4.11 Specification" href="index.html" />
+    <link rel="next" title="Navigation Messages" href="Navigation.html" />
+    <link rel="prev" title="Sensors Messages" href="Sensors.html" /> 
+  </head>
+  <body>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="actuation-messages">
+<h1>Actuation Messages<a class="headerlink" href="#actuation-messages" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="camera-zoom">
+<span id="camerazoom"></span><h2>Camera Zoom<a class="headerlink" href="#camera-zoom" title="Permalink to this headline">¶</a></h2>
+<p>Camera Zoom.</p>
+<ul class="simple">
+<li>Abbreviation: CameraZoom</li>
+<li>Identification Number: 300</li>
+<li>Payload Size: 3 bytes</li>
+<li>Message Size: 25 bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="9%" />
+<col width="22%" />
+<col width="6%" />
+<col width="36%" />
+<col width="13%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Camera Number</td>
+<td>id</td>
+<td><em>-</em></td>
+<td>uint8_t</td>
+<td>The identification number of the destination camera.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Absolute Zoom Level</td>
+<td>zoom</td>
+<td><em>-</em></td>
+<td>uint8_t</td>
+<td>Absolute zoom level.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Action</td>
+<td>action</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="#camerazoom-enum-action"><span class="std std-ref">Enum Action</span></a>)</td>
+<td>uint8_t</td>
+<td>The zoom action to perform.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="enum-action">
+<span id="camerazoom-enum-prefix-action"></span><span id="camerazoom-enum-action"></span><h3>Enum Action<a class="headerlink" href="#enum-action" title="Permalink to this headline">¶</a></h3>
+<p>The zoom action to perform.</p>
+<ul class="simple">
+<li>Abbreviation: action</li>
+<li>Prefix: ACTION</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="29%" />
+<col width="29%" />
+<col width="27%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0</td>
+<td>Reset Zoom</td>
+<td>ZOOM_RESET</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>Zoom In</td>
+<td>ZOOM_IN</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-even"><td>2</td>
+<td>Zoom Out</td>
+<td>ZOOM_OUT</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>3</td>
+<td>Stop Zooming</td>
+<td>ZOOM_STOP</td>
+<td><em>-</em></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="set-thruster-actuation">
+<span id="setthrusteractuation"></span><h2>Set Thruster Actuation<a class="headerlink" href="#set-thruster-actuation" title="Permalink to this headline">¶</a></h2>
+<p>Actuate directly on a thruster.</p>
+<ul class="simple">
+<li>Abbreviation: SetThrusterActuation</li>
+<li>Identification Number: 301</li>
+<li>Payload Size: 5 bytes</li>
+<li>Message Size: 27 bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="11%" />
+<col width="5%" />
+<col width="7%" />
+<col width="46%" />
+<col width="16%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Thruster Number</td>
+<td>id</td>
+<td><em>-</em></td>
+<td>uint8_t</td>
+<td>The identification number of the destination thruster.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Actuation Value</td>
+<td>value</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Actuation magnitude.</td>
+<td>min=-1,
+max=1</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="set-servo-position">
+<span id="setservoposition"></span><h2>Set Servo Position<a class="headerlink" href="#set-servo-position" title="Permalink to this headline">¶</a></h2>
+<p>Set the position of a servo.</p>
+<ul class="simple">
+<li>Abbreviation: SetServoPosition</li>
+<li>Identification Number: 302</li>
+<li>Payload Size: 5 bytes</li>
+<li>Message Size: 27 bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="12%" />
+<col width="6%" />
+<col width="7%" />
+<col width="44%" />
+<col width="21%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Identifier</td>
+<td>id</td>
+<td><em>-</em></td>
+<td>uint8_t</td>
+<td>The identification number of the destination servo.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Position</td>
+<td>value</td>
+<td><em>rad</em></td>
+<td>fp32_t</td>
+<td>Actuation magnitude.</td>
+<td>min=-1.5707963267948966,
+max=1.5707963267948966</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="set-control-surface-deflection">
+<span id="setcontrolsurfacedeflection"></span><h2>Set Control Surface Deflection<a class="headerlink" href="#set-control-surface-deflection" title="Permalink to this headline">¶</a></h2>
+<p>Set the deflection angle of a control surface.</p>
+<ul class="simple">
+<li>Abbreviation: SetControlSurfaceDeflection</li>
+<li>Identification Number: 303</li>
+<li>Payload Size: 5 bytes</li>
+<li>Message Size: 27 bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="11%" />
+<col width="6%" />
+<col width="7%" />
+<col width="50%" />
+<col width="16%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Identifier</td>
+<td>id</td>
+<td><em>-</em></td>
+<td>uint8_t</td>
+<td>The identification number of the destination control surface.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Angle</td>
+<td>angle</td>
+<td><em>rad</em></td>
+<td>fp32_t</td>
+<td>Actuation magnitude.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="remote-actions-request">
+<span id="remoteactionsrequest"></span><h2>Remote Actions Request<a class="headerlink" href="#remote-actions-request" title="Permalink to this headline">¶</a></h2>
+<p>This message is used as query to request for the possible remote
+actions (operation=QUERY and the list is empty in this
+case). The vehicle responds using the same message type
+returning the tuplelist with the pairs: Action,Type
+(operation=REPORT). The type of action can be Axis, Hat or
+Button.</p>
+<ul class="simple">
+<li>Abbreviation: RemoteActionsRequest</li>
+<li>Identification Number: 304</li>
+<li>Payload Size: 3+  bytes</li>
+<li>Message Size: 25+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="7%" />
+<col width="9%" />
+<col width="26%" />
+<col width="7%" />
+<col width="36%" />
+<col width="13%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>operation</td>
+<td>op</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="#remoteactionsrequest-enum-op"><span class="std std-ref">Enum operation</span></a>)</td>
+<td>uint8_t</td>
+<td>Operation to perform.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Actions</td>
+<td>actions</td>
+<td><em>TupleList</em></td>
+<td>plaintext</td>
+<td>Example: “Propulsion=Axis,PanTilt=Hat,Lights=Button”</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="enum-operation">
+<span id="remoteactionsrequest-enum-prefix-op"></span><span id="remoteactionsrequest-enum-op"></span><h3>Enum operation<a class="headerlink" href="#enum-operation" title="Permalink to this headline">¶</a></h3>
+<p>Operation to perform.</p>
+<ul class="simple">
+<li>Abbreviation: op</li>
+<li>Prefix: OP</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="17%" />
+<col width="19%" />
+<col width="33%" />
+<col width="31%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0</td>
+<td>Report</td>
+<td>REPORT</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>Query</td>
+<td>QUERY</td>
+<td><em>-</em></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="remote-actions">
+<span id="remoteactions"></span><h2>Remote Actions<a class="headerlink" href="#remote-actions" title="Permalink to this headline">¶</a></h2>
+<p>This message is used to send a periodic update of values for
+each remote action. If the action is not on the list the assumed
+value is 0.</p>
+<ul class="simple">
+<li>Abbreviation: RemoteActions</li>
+<li>Identification Number: 305</li>
+<li>Payload Size: 2+  bytes</li>
+<li>Message Size: 24+  bytes</li>
+<li>Flags: periodic</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="9%" />
+<col width="9%" />
+<col width="7%" />
+<col width="56%" />
+<col width="13%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Actions</td>
+<td>actions</td>
+<td><em>TupleList</em></td>
+<td>plaintext</td>
+<td>List of values for each remote action (e.g: “Propeller=0.6,PanTilt=0.75,Lights=1”).</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="button-event">
+<span id="buttonevent"></span><h2>Button Event<a class="headerlink" href="#button-event" title="Permalink to this headline">¶</a></h2>
+<p>Event of a specific hardware button.</p>
+<ul class="simple">
+<li>Abbreviation: ButtonEvent</li>
+<li>Identification Number: 306</li>
+<li>Payload Size: 2 bytes</li>
+<li>Message Size: 24 bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="18%" />
+<col width="8%" />
+<col width="11%" />
+<col width="28%" />
+<col width="25%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Button</td>
+<td>button</td>
+<td><em>-</em></td>
+<td>uint8_t</td>
+<td>Button identifier.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Value</td>
+<td>value</td>
+<td><em>-</em></td>
+<td>uint8_t</td>
+<td>Value of the button.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="lcd-control">
+<span id="lcdcontrol"></span><h2>LCD Control<a class="headerlink" href="#lcd-control" title="Permalink to this headline">¶</a></h2>
+<p>Control LCD.</p>
+<ul class="simple">
+<li>Abbreviation: LcdControl</li>
+<li>Identification Number: 307</li>
+<li>Payload Size: 3+  bytes</li>
+<li>Message Size: 25+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="8%" />
+<col width="10%" />
+<col width="21%" />
+<col width="8%" />
+<col width="37%" />
+<col width="15%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Operation</td>
+<td>op</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="#lcdcontrol-enum-op"><span class="std std-ref">Enum Operation</span></a>)</td>
+<td>uint8_t</td>
+<td>The LCD action to perform</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Text</td>
+<td>text</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>Text to be written (if defined write operation).</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="lcdcontrol-enum-prefix-op">
+<span id="lcdcontrol-enum-op"></span><span id="id1"></span><h3>Enum Operation<a class="headerlink" href="#lcdcontrol-enum-prefix-op" title="Permalink to this headline">¶</a></h3>
+<p>The LCD action to perform</p>
+<ul class="simple">
+<li>Abbreviation: op</li>
+<li>Prefix: OP</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="35%" />
+<col width="27%" />
+<col width="25%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0</td>
+<td>Turn off display</td>
+<td>TURN_OFF</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>Turn on display</td>
+<td>TURN_ON</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-even"><td>2</td>
+<td>Clear display</td>
+<td>CLEAR</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>3</td>
+<td>Write Line #0</td>
+<td>WRITE0</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-even"><td>4</td>
+<td>Write Line #1</td>
+<td>WRITE1</td>
+<td><em>-</em></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="power-operation">
+<span id="poweroperation"></span><h2>Power Operation<a class="headerlink" href="#power-operation" title="Permalink to this headline">¶</a></h2>
+<p>This message allows controlling the system’s power lines.</p>
+<ul class="simple">
+<li>Abbreviation: PowerOperation</li>
+<li>Identification Number: 308</li>
+<li>Payload Size: 13 bytes</li>
+<li>Message Size: 35 bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="11%" />
+<col width="25%" />
+<col width="7%" />
+<col width="30%" />
+<col width="15%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Operation</td>
+<td>op</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="#poweroperation-enum-op"><span class="std std-ref">Enum Operation</span></a>)</td>
+<td>uint8_t</td>
+<td>Operation type.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Time Remaining</td>
+<td>time_remain</td>
+<td><em>s</em></td>
+<td>fp32_t</td>
+<td>Time remaining to complete operation.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Scheduled Time</td>
+<td>sched_time</td>
+<td><em>s</em></td>
+<td>fp64_t</td>
+<td>Scheduled time of operation.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="poweroperation-enum-prefix-pop">
+<span id="poweroperation-enum-op"></span><span id="id2"></span><h3>Enum Operation<a class="headerlink" href="#poweroperation-enum-prefix-pop" title="Permalink to this headline">¶</a></h3>
+<p>Operation type.</p>
+<ul class="simple">
+<li>Abbreviation: op</li>
+<li>Prefix: POP</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="22%" />
+<col width="16%" />
+<col width="56%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0</td>
+<td>Power Down</td>
+<td>PWR_DOWN</td>
+<td>Request the destination entity of this message to power down
+it’s devices immediately. If the destination entity is the
+special entity ‘0’ the whole system will power down.</td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>Power Down in Progress</td>
+<td>PWR_DOWN_IP</td>
+<td>The latest power down request is in progress and the time
+remaining until power down is given in field ‘time_remain’.</td>
+</tr>
+<tr class="row-even"><td>2</td>
+<td>Power Down Aborted</td>
+<td>PWR_DOWN_ABORTED</td>
+<td>The latest power down request was aborted.</td>
+</tr>
+<tr class="row-odd"><td>3</td>
+<td>Schedule Power Down</td>
+<td>SCHED_PWR_DOWN</td>
+<td>Request the destination entity of this message to power down
+it’s devices at the time given in the field ‘sched_time’. If
+the destination entity is the special entity ‘0’ the whole
+system will power down.</td>
+</tr>
+<tr class="row-even"><td>4</td>
+<td>Power Up</td>
+<td>PWR_UP</td>
+<td>Request the destination entity of this message to power up
+it’s devices.</td>
+</tr>
+<tr class="row-odd"><td>5</td>
+<td>Power Up in Progress</td>
+<td>PWR_UP_IP</td>
+<td>The latest power up request is in progress.</td>
+</tr>
+<tr class="row-even"><td>6</td>
+<td>Schedule Power Up</td>
+<td>SCHED_PWR_UP</td>
+<td>Request the destination entity of this message to power up
+it’s devices at the time given in the field ‘sched_time’. If
+the destination entity is the special entity ‘0’ the whole
+system will power up.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="power-channel-control">
+<span id="powerchannelcontrol"></span><h2>Power Channel Control<a class="headerlink" href="#power-channel-control" title="Permalink to this headline">¶</a></h2>
+<p>This message allows controlling power channels.</p>
+<ul class="simple">
+<li>Abbreviation: PowerChannelControl</li>
+<li>Identification Number: 309</li>
+<li>Payload Size: 11+  bytes</li>
+<li>Message Size: 33+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="11%" />
+<col width="29%" />
+<col width="8%" />
+<col width="24%" />
+<col width="15%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Channel Name</td>
+<td>name</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>The name of the power channel.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Operation</td>
+<td>op</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="#powerchannelcontrol-enum-op"><span class="std std-ref">Enum Operation</span></a>)</td>
+<td>uint8_t</td>
+<td>Operation to perform.</td>
+<td>max=6</td>
+</tr>
+<tr class="row-even"><td>Scheduled Time</td>
+<td>sched_time</td>
+<td><em>s</em></td>
+<td>fp64_t</td>
+<td>Scheduled time of operation.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="powerchannelcontrol-enum-prefix-pcc-op">
+<span id="powerchannelcontrol-enum-op"></span><span id="id3"></span><h3>Enum Operation<a class="headerlink" href="#powerchannelcontrol-enum-prefix-pcc-op" title="Permalink to this headline">¶</a></h3>
+<p>Operation to perform.</p>
+<ul class="simple">
+<li>Abbreviation: op</li>
+<li>Prefix: PCC_OP</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="7%" />
+<col width="20%" />
+<col width="14%" />
+<col width="60%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0</td>
+<td>Turn Off</td>
+<td>TURN_OFF</td>
+<td>Turn off power channel specified in field ‘id’.</td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>Turn On</td>
+<td>TURN_ON</td>
+<td>Turn on power channel specified in field ‘id’.</td>
+</tr>
+<tr class="row-even"><td>2</td>
+<td>Toggle</td>
+<td>TOGGLE</td>
+<td>Toggle power channel specified in field ‘id’.</td>
+</tr>
+<tr class="row-odd"><td>3</td>
+<td>Schedule Turn On</td>
+<td>SCHED_ON</td>
+<td>Turn on power channel specified in field ‘id’ in
+‘sched_time’ seconds.</td>
+</tr>
+<tr class="row-even"><td>4</td>
+<td>Schedule Turn Off</td>
+<td>SCHED_OFF</td>
+<td>Turn off power channel specified in field ‘id’ in
+‘sched_time’ seconds.</td>
+</tr>
+<tr class="row-odd"><td>5</td>
+<td>Reset Schedules</td>
+<td>SCHED_RESET</td>
+<td>Reset all scheduled operations for the channel specified in
+field ‘id’.</td>
+</tr>
+<tr class="row-even"><td>6</td>
+<td>Save Current State</td>
+<td>SAVE</td>
+<td>Save the current state of the channel ‘id’ to persistent
+storage.</td>
+</tr>
+<tr class="row-odd"><td>7</td>
+<td>Restart</td>
+<td>RESTART</td>
+<td>Restart power channel specified in field ‘id’.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="query-power-channel-state">
+<span id="querypowerchannelstate"></span><h2>Query Power Channel State<a class="headerlink" href="#query-power-channel-state" title="Permalink to this headline">¶</a></h2>
+<p>Request the state of power channels.</p>
+<ul class="simple">
+<li>Abbreviation: QueryPowerChannelState</li>
+<li>Identification Number: 310</li>
+<li>Payload Size: 0 bytes</li>
+<li>Message Size: 22 bytes</li>
+</ul>
+<p>This message has no fields.</p>
+</div>
+<div class="section" id="power-channel-state">
+<span id="powerchannelstate"></span><h2>Power Channel State<a class="headerlink" href="#power-channel-state" title="Permalink to this headline">¶</a></h2>
+<p>Message conveying the state of a power channel.</p>
+<ul class="simple">
+<li>Abbreviation: PowerChannelState</li>
+<li>Identification Number: 311</li>
+<li>Payload Size: 3+  bytes</li>
+<li>Message Size: 25+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="12%" />
+<col width="33%" />
+<col width="9%" />
+<col width="24%" />
+<col width="17%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Name</td>
+<td>name</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>Power Channel Name.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>State</td>
+<td>state</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="#powerchannelstate-enum-state"><span class="std std-ref">Enum State</span></a>)</td>
+<td>uint8_t</td>
+<td>State of the Power Channel.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="enum-state">
+<span id="powerchannelstate-enum-prefix-pcs"></span><span id="powerchannelstate-enum-state"></span><h3>Enum State<a class="headerlink" href="#enum-state" title="Permalink to this headline">¶</a></h3>
+<p>State of the Power Channel.</p>
+<ul class="simple">
+<li>Abbreviation: state</li>
+<li>Prefix: PCS</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="12%" />
+<col width="28%" />
+<col width="46%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0</td>
+<td>Off</td>
+<td>OFF</td>
+<td>Power channel is off.</td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>On</td>
+<td>ON</td>
+<td>Power channel is on.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="led-brightness">
+<span id="ledbrightness"></span><h2>LED Brightness<a class="headerlink" href="#led-brightness" title="Permalink to this headline">¶</a></h2>
+<p>Brightness value of an LED (Light-Emitting Diode).</p>
+<ul class="simple">
+<li>Abbreviation: LedBrightness</li>
+<li>Identification Number: 312</li>
+<li>Payload Size: 3+  bytes</li>
+<li>Message Size: 25+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="9%" />
+<col width="18%" />
+<col width="8%" />
+<col width="14%" />
+<col width="25%" />
+<col width="26%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Name</td>
+<td>name</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>LED name.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Value</td>
+<td>value</td>
+<td><em>-</em></td>
+<td>uint8_t</td>
+<td>Brightness value.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="query-led-brightness">
+<span id="queryledbrightness"></span><h2>Query LED Brightness<a class="headerlink" href="#query-led-brightness" title="Permalink to this headline">¶</a></h2>
+<p>Query the brightness of an LED (Light-Emitting Diode). The
+recipient of this message shall reply with ‘LedBrightness’.</p>
+<ul class="simple">
+<li>Abbreviation: QueryLedBrightness</li>
+<li>Identification Number: 313</li>
+<li>Payload Size: 2+  bytes</li>
+<li>Message Size: 24+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="9%" />
+<col width="20%" />
+<col width="9%" />
+<col width="16%" />
+<col width="19%" />
+<col width="29%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Name</td>
+<td>name</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>LED name.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="set-led-brightness">
+<span id="setledbrightness"></span><h2>Set LED Brightness<a class="headerlink" href="#set-led-brightness" title="Permalink to this headline">¶</a></h2>
+<p>Control the brightness of an LED (Light-Emitting Diode). The
+recipient of this message shall set the intensity of the LED to
+the desired ‘value’ and reply with ‘LedBrightness’.</p>
+<ul class="simple">
+<li>Abbreviation: SetLedBrightness</li>
+<li>Identification Number: 314</li>
+<li>Payload Size: 3+  bytes</li>
+<li>Message Size: 25+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="8%" />
+<col width="16%" />
+<col width="7%" />
+<col width="13%" />
+<col width="32%" />
+<col width="24%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Name</td>
+<td>name</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>LED name.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Value</td>
+<td>value</td>
+<td><em>-</em></td>
+<td>uint8_t</td>
+<td>Desired brightness value.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="set-pwm">
+<span id="setpwm"></span><h2>Set PWM<a class="headerlink" href="#set-pwm" title="Permalink to this headline">¶</a></h2>
+<p>Set properties of a PWM signal channel.</p>
+<ul class="simple">
+<li>Abbreviation: SetPWM</li>
+<li>Identification Number: 315</li>
+<li>Payload Size: 9 bytes</li>
+<li>Message Size: 31 bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="10%" />
+<col width="4%" />
+<col width="7%" />
+<col width="48%" />
+<col width="15%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Channel Identifier</td>
+<td>id</td>
+<td><em>-</em></td>
+<td>uint8_t</td>
+<td>PWM channel identifier.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Period</td>
+<td>period</td>
+<td><em>µs</em></td>
+<td>uint32_t</td>
+<td>The total period of the PWM signal (sum of active and inactive
+time of the PWM).</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Duty Cycle</td>
+<td>duty_cycle</td>
+<td><em>µs</em></td>
+<td>uint32_t</td>
+<td>The active time of the PWM signal. The duty cycle value must
+be less or equal to the period.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="pwm">
+<span id="id4"></span><h2>PWM<a class="headerlink" href="#pwm" title="Permalink to this headline">¶</a></h2>
+<p>Properties of a PWM signal channel.</p>
+<ul class="simple">
+<li>Abbreviation: PWM</li>
+<li>Identification Number: 316</li>
+<li>Payload Size: 9 bytes</li>
+<li>Message Size: 31 bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="10%" />
+<col width="4%" />
+<col width="7%" />
+<col width="48%" />
+<col width="15%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Channel Identifier</td>
+<td>id</td>
+<td><em>-</em></td>
+<td>uint8_t</td>
+<td>PWM channel identifier.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Period</td>
+<td>period</td>
+<td><em>µs</em></td>
+<td>uint32_t</td>
+<td>The total period of the PWM signal (sum of active and inactive
+time of the PWM).</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Duty Cycle</td>
+<td>duty_cycle</td>
+<td><em>µs</em></td>
+<td>uint32_t</td>
+<td>The active time of the PWM signal. The duty cycle value is
+less or equal to the period.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<h3><a href="index.html">Table Of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Message Format.html">Message Format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Core.html">Core Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Simulation.html">Simulation Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Storage.html">Storage Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Networking.html">Networking Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Acoustic Networking.html">Acoustic Networking Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Sensors.html">Sensors Messages</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Actuation Messages</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#camera-zoom">Camera Zoom</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#set-thruster-actuation">Set Thruster Actuation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#set-servo-position">Set Servo Position</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#set-control-surface-deflection">Set Control Surface Deflection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#remote-actions-request">Remote Actions Request</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#remote-actions">Remote Actions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#button-event">Button Event</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#lcd-control">LCD Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#power-operation">Power Operation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#power-channel-control">Power Channel Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#query-power-channel-state">Query Power Channel State</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#power-channel-state">Power Channel State</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#led-brightness">LED Brightness</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#query-led-brightness">Query LED Brightness</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#set-led-brightness">Set LED Brightness</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#set-pwm">Set PWM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pwm">PWM</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Navigation.html">Navigation Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Guidance.html">Guidance Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Maneuvering.html">Maneuvering Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Vehicle Supervision.html">Vehicle Supervision Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Plan Supervision.html">Plan Supervision Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CCU.html">CCU Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Autonomy.html">Autonomy Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Vision.html">Vision Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="External.html">External Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Development.html">Development Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Custom.html">Custom Messages</a></li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013-2017, Universidade do Porto - Faculdade de Engenharia - LSTS.
+      <br/>
+      Last updated on Aug 21, 2019.
+    </div>
+  </body>
+</html>

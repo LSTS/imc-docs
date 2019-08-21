@@ -1,0 +1,1167 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Core Messages &mdash; IMC v5.4.11 Specification</title>
+    
+    <link rel="stylesheet" href="_static/pydoctheme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '5.4.11',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="top" title="IMC v5.4.11 Specification" href="index.html" />
+    <link rel="next" title="Simulation Messages" href="Simulation.html" />
+    <link rel="prev" title="Message Format" href="Message Format.html" /> 
+  </head>
+  <body>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="core-messages">
+<h1>Core Messages<a class="headerlink" href="#core-messages" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="entity-state">
+<span id="entitystate"></span><h2>Entity State<a class="headerlink" href="#entity-state" title="Permalink to this headline">¶</a></h2>
+<p>State reported by an entity in the vehicle. The source entity is
+identified in the message header.</p>
+<ul class="simple">
+<li>Abbreviation: EntityState</li>
+<li>Identification Number: 1</li>
+<li>Payload Size: 4+  bytes</li>
+<li>Message Size: 26+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="8%" />
+<col width="22%" />
+<col width="7%" />
+<col width="35%" />
+<col width="12%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>State</td>
+<td>state</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="#entitystate-enum-state"><span class="std std-ref">Enum State</span></a>)</td>
+<td>uint8_t</td>
+<td>State of entity.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Flags</td>
+<td>flags</td>
+<td><em>Bitfield</em>
+(<a class="reference internal" href="#entitystate-bitfield-flags"><span class="std std-ref">Bitfield Flags</span></a>)</td>
+<td>uint8_t</td>
+<td>Complementary entity state flags.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Complementary description</td>
+<td>description</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>Complementary human-readable description of entity state.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="enum-state">
+<span id="entitystate-enum-prefix-esta"></span><span id="entitystate-enum-state"></span><h3>Enum State<a class="headerlink" href="#enum-state" title="Permalink to this headline">¶</a></h3>
+<p>State of entity.</p>
+<ul class="simple">
+<li>Abbreviation: state</li>
+<li>Prefix: ESTA</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="35%" />
+<col width="27%" />
+<col width="25%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0</td>
+<td>Bootstrapping</td>
+<td>BOOT</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>Normal Operation</td>
+<td>NORMAL</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-even"><td>2</td>
+<td>Fault</td>
+<td>FAULT</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>3</td>
+<td>Error</td>
+<td>ERROR</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-even"><td>4</td>
+<td>Failure</td>
+<td>FAILURE</td>
+<td><em>-</em></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="bitfield-flags">
+<span id="entitystate-bitfield-prefix-efla"></span><span id="entitystate-bitfield-flags"></span><h3>Bitfield Flags<a class="headerlink" href="#bitfield-flags" title="Permalink to this headline">¶</a></h3>
+<p>Complementary entity state flags.</p>
+<ul class="simple">
+<li>Abbreviation: flags</li>
+<li>Prefix: EFLA</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="42%" />
+<col width="29%" />
+<col width="19%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0x01</td>
+<td>Human Intervention Required</td>
+<td>HUMAN_INTERVENTION</td>
+<td><em>-</em></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="query-entity-state">
+<span id="queryentitystate"></span><h2>Query Entity State<a class="headerlink" href="#query-entity-state" title="Permalink to this headline">¶</a></h2>
+<p>Request entities to report their state. Entities should respond
+by issuing an appropriate EntityState message.</p>
+<ul class="simple">
+<li>Abbreviation: QueryEntityState</li>
+<li>Identification Number: 2</li>
+<li>Payload Size: 0 bytes</li>
+<li>Message Size: 22 bytes</li>
+<li>Flags: periodic</li>
+</ul>
+<p>This message has no fields.</p>
+</div>
+<div class="section" id="entity-information">
+<span id="entityinfo"></span><h2>Entity Information<a class="headerlink" href="#entity-information" title="Permalink to this headline">¶</a></h2>
+<p>This message describes an entity.</p>
+<ul class="simple">
+<li>Abbreviation: EntityInfo</li>
+<li>Identification Number: 3</li>
+<li>Payload Size: 9+  bytes</li>
+<li>Message Size: 31+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="11%" />
+<col width="5%" />
+<col width="8%" />
+<col width="47%" />
+<col width="15%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Entity Identifier</td>
+<td>id</td>
+<td><em>-</em></td>
+<td>uint8_t</td>
+<td>Entity identifier.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Label</td>
+<td>label</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>Entity label or empty if the entity id is not valid.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Component name</td>
+<td>component</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>Name of the plugin/component/subsystem associated with this
+entity.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Activation Time</td>
+<td>act_time</td>
+<td><em>s</em></td>
+<td>uint16_t</td>
+<td>Amount of time needed to properly activate the entity.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Deactivation Time</td>
+<td>deact_time</td>
+<td><em>s</em></td>
+<td>uint16_t</td>
+<td>Amount of time needed to properly deactivate the entity.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="query-entity-information">
+<span id="queryentityinfo"></span><h2>Query Entity Information<a class="headerlink" href="#query-entity-information" title="Permalink to this headline">¶</a></h2>
+<p>Request information about an entity identifier. The receiving
+system shall reply with an EntityInfo message with the details
+of that entity.</p>
+<ul class="simple">
+<li>Abbreviation: QueryEntityInfo</li>
+<li>Identification Number: 4</li>
+<li>Payload Size: 1 bytes</li>
+<li>Message Size: 23 bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="22%" />
+<col width="16%" />
+<col width="7%" />
+<col width="10%" />
+<col width="23%" />
+<col width="23%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Entity Identifier</td>
+<td>id</td>
+<td><em>-</em></td>
+<td>uint8_t</td>
+<td>Entity identifier.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="entity-list">
+<span id="entitylist"></span><h2>Entity List<a class="headerlink" href="#entity-list" title="Permalink to this headline">¶</a></h2>
+<p>This message describes the names and identification numbers of
+all entities in the system.</p>
+<ul class="simple">
+<li>Abbreviation: EntityList</li>
+<li>Identification Number: 5</li>
+<li>Payload Size: 3+  bytes</li>
+<li>Message Size: 25+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="12%" />
+<col width="25%" />
+<col width="10%" />
+<col width="25%" />
+<col width="18%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>operation</td>
+<td>op</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="#entitylist-enum-op"><span class="std std-ref">Enum operation</span></a>)</td>
+<td>uint8_t</td>
+<td>Operation to perform.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>list</td>
+<td>list</td>
+<td><em>TupleList</em></td>
+<td>plaintext</td>
+<td>Example: “Battery=11;CTD=3”</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="enum-operation">
+<span id="entitylist-enum-prefix-op"></span><span id="entitylist-enum-op"></span><h3>Enum operation<a class="headerlink" href="#enum-operation" title="Permalink to this headline">¶</a></h3>
+<p>Operation to perform.</p>
+<ul class="simple">
+<li>Abbreviation: op</li>
+<li>Prefix: OP</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="17%" />
+<col width="19%" />
+<col width="33%" />
+<col width="31%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0</td>
+<td>Report</td>
+<td>REPORT</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>Query</td>
+<td>QUERY</td>
+<td><em>-</em></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="cpu-usage">
+<span id="cpuusage"></span><h2>CPU Usage<a class="headerlink" href="#cpu-usage" title="Permalink to this headline">¶</a></h2>
+<p>Report of software CPU usage.</p>
+<ul class="simple">
+<li>Abbreviation: CpuUsage</li>
+<li>Identification Number: 7</li>
+<li>Payload Size: 1 bytes</li>
+<li>Message Size: 23 bytes</li>
+<li>Flags: periodic</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="13%" />
+<col width="5%" />
+<col width="8%" />
+<col width="50%" />
+<col width="8%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Usage percentage</td>
+<td>value</td>
+<td><em>%</em></td>
+<td>uint8_t</td>
+<td>The CPU usage, in percentage, of the sending software.</td>
+<td>max=100</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="transport-bindings">
+<span id="transportbindings"></span><h2>Transport Bindings<a class="headerlink" href="#transport-bindings" title="Permalink to this headline">¶</a></h2>
+<p>Message generated when tasks bind to messages.</p>
+<ul class="simple">
+<li>Abbreviation: TransportBindings</li>
+<li>Identification Number: 8</li>
+<li>Payload Size: 4+  bytes</li>
+<li>Message Size: 26+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="17%" />
+<col width="12%" />
+<col width="5%" />
+<col width="10%" />
+<col width="38%" />
+<col width="17%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Consumer name</td>
+<td>consumer</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>The name of the consumer (e.g. task name).</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Message Identifier</td>
+<td>message_id</td>
+<td><em>-</em></td>
+<td>uint16_t</td>
+<td>The id of the message to be listened to.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="restart-system">
+<span id="restartsystem"></span><h2>Restart System<a class="headerlink" href="#restart-system" title="Permalink to this headline">¶</a></h2>
+<p>Request the destination system to restart itself.</p>
+<ul class="simple">
+<li>Abbreviation: RestartSystem</li>
+<li>Identification Number: 9</li>
+<li>Payload Size: 1 bytes</li>
+<li>Message Size: 23 bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="13%" />
+<col width="33%" />
+<col width="9%" />
+<col width="13%" />
+<col width="19%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Restart Type</td>
+<td>type</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="#restartsystem-enum-type"><span class="std std-ref">Enum Restart Type</span></a>)</td>
+<td>uint8_t</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="enum-restart-type">
+<span id="restartsystem-enum-prefix-rstype"></span><span id="restartsystem-enum-type"></span><h3>Enum Restart Type<a class="headerlink" href="#enum-restart-type" title="Permalink to this headline">¶</a></h3>
+<p>No description</p>
+<ul class="simple">
+<li>Abbreviation: type</li>
+<li>Prefix: RSTYPE</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="14%" />
+<col width="25%" />
+<col width="48%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>1</td>
+<td>Dune</td>
+<td>DUNE</td>
+<td>Request a DUNE restart</td>
+</tr>
+<tr class="row-odd"><td>2</td>
+<td>System</td>
+<td>SYSTEM</td>
+<td>Request a system restart.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="device-calibration-control">
+<span id="devcalibrationcontrol"></span><h2>Device Calibration Control<a class="headerlink" href="#device-calibration-control" title="Permalink to this headline">¶</a></h2>
+<p>This message controls the calibration procedure of a given
+device. The destination device is selected using the destination
+entity identification number.</p>
+<ul class="simple">
+<li>Abbreviation: DevCalibrationControl</li>
+<li>Identification Number: 12</li>
+<li>Payload Size: 1 bytes</li>
+<li>Message Size: 23 bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="9%" />
+<col width="12%" />
+<col width="34%" />
+<col width="8%" />
+<col width="20%" />
+<col width="17%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Operation</td>
+<td>op</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="#devcalibrationcontrol-enum-op"><span class="std std-ref">Enum Operation</span></a>)</td>
+<td>uint8_t</td>
+<td>Operation to perform.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="devcalibrationcontrol-enum-prefix-dcal">
+<span id="devcalibrationcontrol-enum-op"></span><span id="id1"></span><h3>Enum Operation<a class="headerlink" href="#devcalibrationcontrol-enum-prefix-dcal" title="Permalink to this headline">¶</a></h3>
+<p>Operation to perform.</p>
+<ul class="simple">
+<li>Abbreviation: op</li>
+<li>Prefix: DCAL</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="32%" />
+<col width="14%" />
+<col width="48%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0</td>
+<td>Start</td>
+<td>START</td>
+<td>Start calibration procedure.</td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>Stop</td>
+<td>STOP</td>
+<td>Stop calibration procedure.</td>
+</tr>
+<tr class="row-even"><td>2</td>
+<td>Perform Next Calibration Step</td>
+<td>STEP_NEXT</td>
+<td>Perform next step of the calibration procedure.</td>
+</tr>
+<tr class="row-odd"><td>3</td>
+<td>Perform Previous Calibration Step</td>
+<td>STEP_PREVIOUS</td>
+<td>Perform previous step of the calibration procedure.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="device-calibration-state">
+<span id="devcalibrationstate"></span><h2>Device Calibration State<a class="headerlink" href="#device-calibration-state" title="Permalink to this headline">¶</a></h2>
+<p>State of the calibration procedure.</p>
+<ul class="simple">
+<li>Abbreviation: DevCalibrationState</li>
+<li>Identification Number: 13</li>
+<li>Payload Size: 5+  bytes</li>
+<li>Message Size: 27+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="9%" />
+<col width="27%" />
+<col width="7%" />
+<col width="32%" />
+<col width="12%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Total Steps</td>
+<td>total_steps</td>
+<td><em>-</em></td>
+<td>uint8_t</td>
+<td>Total number of steps of the calibration procedure.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Current Step Number</td>
+<td>step_number</td>
+<td><em>-</em></td>
+<td>uint8_t</td>
+<td>Number of the current step being performed.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Description</td>
+<td>step</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>Human-readable description of the current step.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Flags</td>
+<td>flags</td>
+<td><em>Bitfield</em>
+(<a class="reference internal" href="#devcalibrationstate-bitfield-flags"><span class="std std-ref">Bitfield Flags</span></a>)</td>
+<td>uint8_t</td>
+<td>Additional flags.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="devcalibrationstate-bitfield-prefix-dcs">
+<span id="devcalibrationstate-bitfield-flags"></span><span id="id2"></span><h3>Bitfield Flags<a class="headerlink" href="#devcalibrationstate-bitfield-prefix-dcs" title="Permalink to this headline">¶</a></h3>
+<p>Additional flags.</p>
+<ul class="simple">
+<li>Abbreviation: flags</li>
+<li>Prefix: DCS</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="5%" />
+<col width="27%" />
+<col width="18%" />
+<col width="49%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0x01</td>
+<td>Previous Step Not Supported</td>
+<td>PREVIOUS_NOT_SUPPORTED</td>
+<td>Jumping to the previous calibration step is not supported.</td>
+</tr>
+<tr class="row-odd"><td>0x02</td>
+<td>Next Step Not Supported</td>
+<td>NEXT_NOT_SUPPORTED</td>
+<td>Jumping to the next calibration step is not supported.</td>
+</tr>
+<tr class="row-even"><td>0x04</td>
+<td>Waiting Device Calibration Control</td>
+<td>WAITING_CONTROL</td>
+<td>The calibration procedure was suspended and must be resumed or
+cancelled with a DeviceCalibrationControl message.</td>
+</tr>
+<tr class="row-odd"><td>0x08</td>
+<td>Calibration Error</td>
+<td>ERROR</td>
+<td>Calibration was interrupted due to an error and must be
+restarted or cancelled with a DeviceCalibrationControl
+message.</td>
+</tr>
+<tr class="row-even"><td>0x10</td>
+<td>Calibration Procedure Completed</td>
+<td>COMPLETED</td>
+<td>The calibration procedure was completed.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="entity-activation-state">
+<span id="entityactivationstate"></span><h2>Entity Activation State<a class="headerlink" href="#entity-activation-state" title="Permalink to this headline">¶</a></h2>
+<p>State of entity activation/deactivation.</p>
+<ul class="simple">
+<li>Abbreviation: EntityActivationState</li>
+<li>Identification Number: 14</li>
+<li>Payload Size: 3+  bytes</li>
+<li>Message Size: 25+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="11%" />
+<col width="34%" />
+<col width="9%" />
+<col width="25%" />
+<col width="16%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>State</td>
+<td>state</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="#entityactivationstate-enum-state"><span class="std std-ref">Enum State</span></a>)</td>
+<td>uint8_t</td>
+<td>Current state.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Error</td>
+<td>error</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>Human-readable error message.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="entityactivationstate-enum-prefix-eas">
+<span id="entityactivationstate-enum-state"></span><span id="id3"></span><h3>Enum State<a class="headerlink" href="#entityactivationstate-enum-prefix-eas" title="Permalink to this headline">¶</a></h3>
+<p>Current state.</p>
+<ul class="simple">
+<li>Abbreviation: state</li>
+<li>Prefix: EAS</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="5%" />
+<col width="20%" />
+<col width="11%" />
+<col width="64%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0</td>
+<td>Entity is Inactive</td>
+<td>INACTIVE</td>
+<td>Entity is inactive.</td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>Entity is Active</td>
+<td>ACTIVE</td>
+<td>Entity is active.</td>
+</tr>
+<tr class="row-even"><td>2</td>
+<td>Activation in Progress</td>
+<td>ACT_IP</td>
+<td>Activation is in progress.</td>
+</tr>
+<tr class="row-odd"><td>3</td>
+<td>Activation Completed</td>
+<td>ACT_DONE</td>
+<td>Activation is completed.</td>
+</tr>
+<tr class="row-even"><td>4</td>
+<td>Activation Failed</td>
+<td>ACT_FAIL</td>
+<td>The activation procedure failed and the field ‘error’ contains the error message.</td>
+</tr>
+<tr class="row-odd"><td>5</td>
+<td>Deactivation In Progress</td>
+<td>DEACT_IP</td>
+<td>Deactivation is in progress.</td>
+</tr>
+<tr class="row-even"><td>6</td>
+<td>Deactivation Completed</td>
+<td>DEACT_DONE</td>
+<td>Deactivation is in progress.</td>
+</tr>
+<tr class="row-odd"><td>7</td>
+<td>Deactivation Failed</td>
+<td>DEACT_FAIL</td>
+<td>The deactivation procedure failed and the field ‘error’ contains the error message.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="query-entity-activation-state">
+<span id="queryentityactivationstate"></span><h2>Query Entity Activation State<a class="headerlink" href="#query-entity-activation-state" title="Permalink to this headline">¶</a></h2>
+<p>Query the activation/deactivation state of an entity. The
+recipient shall reply with an EntityActivationState message.</p>
+<ul class="simple">
+<li>Abbreviation: QueryEntityActivationState</li>
+<li>Identification Number: 15</li>
+<li>Payload Size: 0 bytes</li>
+<li>Message Size: 22 bytes</li>
+</ul>
+<p>This message has no fields.</p>
+</div>
+<div class="section" id="vehicle-operational-limits">
+<span id="vehicleoperationallimits"></span><h2>Vehicle Operational Limits<a class="headerlink" href="#vehicle-operational-limits" title="Permalink to this headline">¶</a></h2>
+<p>Vehicle opertional limits.
+For aircraft this should represent the flight envelope and the dynamic contraints.</p>
+<ul class="simple">
+<li>Abbreviation: VehicleOperationalLimits</li>
+<li>Identification Number: 16</li>
+<li>Payload Size: 69 bytes</li>
+<li>Message Size: 91 bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="19%" />
+<col width="9%" />
+<col width="19%" />
+<col width="4%" />
+<col width="39%" />
+<col width="9%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Action on the vehicle operational limits</td>
+<td>op</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="#vehicleoperationallimits-enum-op"><span class="std std-ref">Enum Action on the vehicle operational limits</span></a>)</td>
+<td>uint8_t</td>
+<td>Action on the vehicle operation limits</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Minimum speed</td>
+<td>speed_min</td>
+<td><em>m/s</em></td>
+<td>fp32_t</td>
+<td>Minimum operation speed.
+For aircraft this is equal or larger then the stall speed.</td>
+<td>min=0</td>
+</tr>
+<tr class="row-even"><td>Maximum speed</td>
+<td>speed_max</td>
+<td><em>m/s</em></td>
+<td>fp32_t</td>
+<td>Maximum operation speed.
+For aircraft this is limited by the engine power or structural contrains.</td>
+<td>min=0</td>
+</tr>
+<tr class="row-odd"><td>Longitudinal maximum acceleration</td>
+<td>long_accel</td>
+<td><em>m/s/s</em></td>
+<td>fp32_t</td>
+<td>Maximum longitudinal acceleration.</td>
+<td>min=0</td>
+</tr>
+<tr class="row-even"><td>Maximum MSL altitude</td>
+<td>alt_max_msl</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Maximum altitude above mean-sea-level.</td>
+<td>min=0</td>
+</tr>
+<tr class="row-odd"><td>Maximum Dive Rate Speed Fraction</td>
+<td>dive_fraction_max</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Maximum dive rate (negative vertical speed) as a fraction of the longitudinal speed.</td>
+<td>min=0</td>
+</tr>
+<tr class="row-even"><td>Maximum Climb Rate Speed Fraction</td>
+<td>climb_fraction_max</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Maximum climb rate (positive vertical speed) as a fraction of the longitudinal speed.</td>
+<td>min=0</td>
+</tr>
+<tr class="row-odd"><td>Bank limit</td>
+<td>bank_max</td>
+<td><em>rad</em></td>
+<td>fp32_t</td>
+<td>Limit to the bank angle (roll; angle over the xx body-axis).</td>
+<td>min=0</td>
+</tr>
+<tr class="row-even"><td>Bank rate limit</td>
+<td>p_max</td>
+<td><em>rad/s</em></td>
+<td>fp32_t</td>
+<td>Limit to the bank angular rate (roll; angle over the xx body-axis).</td>
+<td>min=0</td>
+</tr>
+<tr class="row-odd"><td>Minimum pitch angle</td>
+<td>pitch_min</td>
+<td><em>rad</em></td>
+<td>fp32_t</td>
+<td>Minimum pitch angle (angle over the xx body-axis).</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Maximum pitch angle</td>
+<td>pitch_max</td>
+<td><em>rad</em></td>
+<td>fp32_t</td>
+<td>Maximum pitch angle (angle over the xx body-axis).</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Maximum pitch rate</td>
+<td>q_max</td>
+<td><em>rad/s</em></td>
+<td>fp32_t</td>
+<td>Maximum pitch angular rate (angle over the xx body-axis).</td>
+<td>min=0</td>
+</tr>
+<tr class="row-even"><td>Minimum load factor</td>
+<td>g_min</td>
+<td><em>g</em></td>
+<td>fp32_t</td>
+<td>Minimum load factor, i.e., maximum positive acceleration in the zz body-axis
+as a factor of the gravity acceleration at mean-sea-level.</td>
+<td>max=0</td>
+</tr>
+<tr class="row-odd"><td>Maximum load factor</td>
+<td>g_max</td>
+<td><em>g</em></td>
+<td>fp32_t</td>
+<td>Maximum load factor, i.e., maximum negative acceleration in the zz body-axis
+as a factor of the gravity acceleration at mean-sea-level.</td>
+<td>min=0</td>
+</tr>
+<tr class="row-even"><td>Maximum lateral load factor</td>
+<td>g_lat_max</td>
+<td><em>g</em></td>
+<td>fp32_t</td>
+<td>Maximum lateral load factor, i.e., maximum acceleration in the yy body-axis
+as a factor of the gravity acceleration at mean-sea-level.</td>
+<td>min=0</td>
+</tr>
+<tr class="row-odd"><td>Minimum RPMs</td>
+<td>rpm_min</td>
+<td><em>rpm</em></td>
+<td>fp32_t</td>
+<td>Minimum motor RPMs.</td>
+<td>min=0</td>
+</tr>
+<tr class="row-even"><td>Maximum RPMs</td>
+<td>rpm_max</td>
+<td><em>rpm</em></td>
+<td>fp32_t</td>
+<td>Maximum motor RPMs.</td>
+<td>min=0</td>
+</tr>
+<tr class="row-odd"><td>Maximum RPM rate</td>
+<td>rpm_rate_max</td>
+<td><em>rpm/s</em></td>
+<td>fp32_t</td>
+<td>Maximum motor RPMs’ rate of change.</td>
+<td>min=0</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="enum-action-on-the-vehicle-operational-limits">
+<span id="vehicleoperationallimits-enum-prefix-op"></span><span id="vehicleoperationallimits-enum-op"></span><h3>Enum Action on the vehicle operational limits<a class="headerlink" href="#enum-action-on-the-vehicle-operational-limits" title="Permalink to this headline">¶</a></h3>
+<p>Action on the vehicle operation limits</p>
+<ul class="simple">
+<li>Abbreviation: op</li>
+<li>Prefix: OP</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="21%" />
+<col width="33%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0</td>
+<td>Request</td>
+<td>REQUEST</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>Set</td>
+<td>SET</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-even"><td>2</td>
+<td>Report</td>
+<td>REPORT</td>
+<td><em>-</em></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="message-list">
+<span id="msglist"></span><h2>Message List<a class="headerlink" href="#message-list" title="Permalink to this headline">¶</a></h2>
+<p>No description</p>
+<ul class="simple">
+<li>Abbreviation: MsgList</li>
+<li>Identification Number: 20</li>
+<li>Payload Size: 2+  bytes</li>
+<li>Message Size: 24+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="18%" />
+<col width="8%" />
+<col width="18%" />
+<col width="17%" />
+<col width="26%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Messages</td>
+<td>msgs</td>
+<td><em>-</em></td>
+<td>message-list</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<h3><a href="index.html">Table Of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Message Format.html">Message Format</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Core Messages</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#entity-state">Entity State</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#query-entity-state">Query Entity State</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#entity-information">Entity Information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#query-entity-information">Query Entity Information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#entity-list">Entity List</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#cpu-usage">CPU Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#transport-bindings">Transport Bindings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#restart-system">Restart System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#device-calibration-control">Device Calibration Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#device-calibration-state">Device Calibration State</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#entity-activation-state">Entity Activation State</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#query-entity-activation-state">Query Entity Activation State</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#vehicle-operational-limits">Vehicle Operational Limits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#message-list">Message List</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Simulation.html">Simulation Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Storage.html">Storage Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Networking.html">Networking Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Acoustic Networking.html">Acoustic Networking Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Sensors.html">Sensors Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Actuation.html">Actuation Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Navigation.html">Navigation Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Guidance.html">Guidance Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Maneuvering.html">Maneuvering Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Vehicle Supervision.html">Vehicle Supervision Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Plan Supervision.html">Plan Supervision Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CCU.html">CCU Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Autonomy.html">Autonomy Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Vision.html">Vision Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="External.html">External Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Development.html">Development Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Custom.html">Custom Messages</a></li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013-2017, Universidade do Porto - Faculdade de Engenharia - LSTS.
+      <br/>
+      Last updated on Aug 21, 2019.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,3383 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Sensors Messages &mdash; IMC v5.4.11 Specification</title>
+    
+    <link rel="stylesheet" href="_static/pydoctheme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '5.4.11',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="top" title="IMC v5.4.11 Specification" href="index.html" />
+    <link rel="next" title="Actuation Messages" href="Actuation.html" />
+    <link rel="prev" title="Acoustic Networking Messages" href="Acoustic Networking.html" /> 
+  </head>
+  <body>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="sensors-messages">
+<h1>Sensors Messages<a class="headerlink" href="#sensors-messages" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="revolutions-per-minute">
+<span id="rpm"></span><h2>Revolutions Per Minute<a class="headerlink" href="#revolutions-per-minute" title="Permalink to this headline">¶</a></h2>
+<p>Number of revolutions per minute.</p>
+<ul class="simple">
+<li>Abbreviation: Rpm</li>
+<li>Identification Number: 250</li>
+<li>Payload Size: 2 bytes</li>
+<li>Message Size: 24 bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="8%" />
+<col width="15%" />
+<col width="8%" />
+<col width="10%" />
+<col width="38%" />
+<col width="22%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Value</td>
+<td>value</td>
+<td><em>rpm</em></td>
+<td>int16_t</td>
+<td>Number of revolutions per minute.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="voltage">
+<span id="id1"></span><h2>Voltage<a class="headerlink" href="#voltage" title="Permalink to this headline">¶</a></h2>
+<p>Report of electrical voltage.</p>
+<ul class="simple">
+<li>Abbreviation: Voltage</li>
+<li>Identification Number: 251</li>
+<li>Payload Size: 4 bytes</li>
+<li>Message Size: 26 bytes</li>
+<li>Flags: periodic</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="18%" />
+<col width="11%" />
+<col width="5%" />
+<col width="6%" />
+<col width="46%" />
+<col width="15%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Measured Voltage Value</td>
+<td>value</td>
+<td><em>V</em></td>
+<td>fp32_t</td>
+<td>The value of the internal electrical voltage as measured by
+the sensor.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="current">
+<span id="id2"></span><h2>Current<a class="headerlink" href="#current" title="Permalink to this headline">¶</a></h2>
+<p>Report of electrical current.</p>
+<ul class="simple">
+<li>Abbreviation: Current</li>
+<li>Identification Number: 252</li>
+<li>Payload Size: 4 bytes</li>
+<li>Message Size: 26 bytes</li>
+<li>Flags: periodic</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="18%" />
+<col width="11%" />
+<col width="5%" />
+<col width="6%" />
+<col width="46%" />
+<col width="15%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Measured Current Value</td>
+<td>value</td>
+<td><em>A</em></td>
+<td>fp32_t</td>
+<td>The value of the internal electrical current as measured by
+the sensor.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="gps-fix">
+<span id="gpsfix"></span><h2>GPS Fix<a class="headerlink" href="#gps-fix" title="Permalink to this headline">¶</a></h2>
+<p>Report of a GPS fix.</p>
+<ul class="simple">
+<li>Abbreviation: GpsFix</li>
+<li>Identification Number: 253</li>
+<li>Payload Size: 56 bytes</li>
+<li>Message Size: 78 bytes</li>
+<li>Flags: periodic</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="18%" />
+<col width="7%" />
+<col width="18%" />
+<col width="5%" />
+<col width="38%" />
+<col width="14%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Validity</td>
+<td>validity</td>
+<td><em>Bitfield</em>
+(<a class="reference internal" href="#gpsfix-bitfield-validity"><span class="std std-ref">Bitfield Validity</span></a>)</td>
+<td>uint16_t</td>
+<td>Validity of fields.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Type</td>
+<td>type</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="#gpsfix-enum-type"><span class="std std-ref">Enum Type</span></a>)</td>
+<td>uint8_t</td>
+<td>Type of fix.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>UTC Year</td>
+<td>utc_year</td>
+<td><em>-</em></td>
+<td>uint16_t</td>
+<td>UTC year.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>UTC Month</td>
+<td>utc_month</td>
+<td><em>-</em></td>
+<td>uint8_t</td>
+<td>UTC month.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>UTC Day</td>
+<td>utc_day</td>
+<td><em>-</em></td>
+<td>uint8_t</td>
+<td>UTC day.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>UTC Time of Fix</td>
+<td>utc_time</td>
+<td><em>s</em></td>
+<td>fp32_t</td>
+<td>UTC time of the GPS fix measured in seconds since 00:00:00 (midnight).</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Latitude WGS-84</td>
+<td>lat</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>WGS-84 Latitude coordinate.</td>
+<td>min=-1.5707963267948966,
+max=1.5707963267948966</td>
+</tr>
+<tr class="row-odd"><td>Longitude WGS-84</td>
+<td>lon</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>WGS-84 Longitude coordinate.</td>
+<td>min=-3.141592653589793,
+max=3.141592653589793</td>
+</tr>
+<tr class="row-even"><td>Height above WGS-84 ellipsoid</td>
+<td>height</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Height above WGS-84 ellipsoid.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Number of Satellites</td>
+<td>satellites</td>
+<td><em>-</em></td>
+<td>uint8_t</td>
+<td>Number of satellites used by the GPS device to compute the
+solution.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Course Over Ground</td>
+<td>cog</td>
+<td><em>rad</em></td>
+<td>fp32_t</td>
+<td>Course Over Ground (true).</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Speed Over Ground</td>
+<td>sog</td>
+<td><em>m/s</em></td>
+<td>fp32_t</td>
+<td>Speed Over Ground.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Horizontal Dilution of Precision</td>
+<td>hdop</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Horizontal dilution of precision.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Vertical Dilution of Precision</td>
+<td>vdop</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Vertical dilution of precision.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Horizontal Accuracy Estimate</td>
+<td>hacc</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Horizontal Accuracy Estimate.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Vertical Accuracy Estimate</td>
+<td>vacc</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Vertical Accuracy Estimate.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="bitfield-validity">
+<span id="gpsfix-bitfield-prefix-gfv"></span><span id="gpsfix-bitfield-validity"></span><h3>Bitfield Validity<a class="headerlink" href="#bitfield-validity" title="Permalink to this headline">¶</a></h3>
+<p>Validity of fields.</p>
+<ul class="simple">
+<li>Abbreviation: validity</li>
+<li>Prefix: GFV</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="7%" />
+<col width="33%" />
+<col width="11%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0x0001</td>
+<td>Valid Date</td>
+<td>VALID_DATE</td>
+<td>Fields ‘utc_year’, ‘utc_month’ and ‘utc_day’ are valid.</td>
+</tr>
+<tr class="row-odd"><td>0x0002</td>
+<td>Valid Time</td>
+<td>VALID_TIME</td>
+<td>Field ‘utc_time’ is valid.</td>
+</tr>
+<tr class="row-even"><td>0x0004</td>
+<td>Valid Position</td>
+<td>VALID_POS</td>
+<td>Fields ‘lat’, ‘lon’, ‘altitude’ and ‘satellites’ are valid.</td>
+</tr>
+<tr class="row-odd"><td>0x0008</td>
+<td>Valid Course Over Ground</td>
+<td>VALID_COG</td>
+<td>Field ‘cog’ is valid.</td>
+</tr>
+<tr class="row-even"><td>0x0010</td>
+<td>Valid Speed Over Ground</td>
+<td>VALID_SOG</td>
+<td>Field ‘sog’ is valid.</td>
+</tr>
+<tr class="row-odd"><td>0x0020</td>
+<td>Valid Horizontal Accuracy Estimate</td>
+<td>VALID_HACC</td>
+<td>Field ‘hacc’ is valid.</td>
+</tr>
+<tr class="row-even"><td>0x0040</td>
+<td>Valid Vertical Accuracy Estimate</td>
+<td>VALID_VACC</td>
+<td>Field ‘vacc’ is valid.</td>
+</tr>
+<tr class="row-odd"><td>0x0080</td>
+<td>Valid Horizontal Dilution of Precision</td>
+<td>VALID_HDOP</td>
+<td>Field ‘hdop’ is valid.</td>
+</tr>
+<tr class="row-even"><td>0x0100</td>
+<td>Valid Vertical Dilution of Precision</td>
+<td>VALID_VDOP</td>
+<td>Field ‘vdop’ is valid.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="enum-type">
+<span id="gpsfix-enum-prefix-gft"></span><span id="gpsfix-enum-type"></span><h3>Enum Type<a class="headerlink" href="#enum-type" title="Permalink to this headline">¶</a></h3>
+<p>Type of fix.</p>
+<ul class="simple">
+<li>Abbreviation: type</li>
+<li>Prefix: GFT</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="25%" />
+<col width="25%" />
+<col width="40%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0x00</td>
+<td>Stand Alone</td>
+<td>STANDALONE</td>
+<td>Stand alone solution.</td>
+</tr>
+<tr class="row-odd"><td>0x01</td>
+<td>Differential</td>
+<td>DIFFERENTIAL</td>
+<td>Differential solution.</td>
+</tr>
+<tr class="row-even"><td>0x02</td>
+<td>Dead Reckoning</td>
+<td>DEAD_RECKONING</td>
+<td>Dead reckoning solution.</td>
+</tr>
+<tr class="row-odd"><td>0x03</td>
+<td>Manual Input</td>
+<td>MANUAL_INPUT</td>
+<td>Manual solution.</td>
+</tr>
+<tr class="row-even"><td>0x04</td>
+<td>Simulation</td>
+<td>SIMULATION</td>
+<td>Simulated solution.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="euler-angles">
+<span id="eulerangles"></span><h2>Euler Angles<a class="headerlink" href="#euler-angles" title="Permalink to this headline">¶</a></h2>
+<p>Report of spatial orientation according to SNAME’s notation
+(1950).</p>
+<ul class="simple">
+<li>Abbreviation: EulerAngles</li>
+<li>Identification Number: 254</li>
+<li>Payload Size: 40 bytes</li>
+<li>Message Size: 62 bytes</li>
+<li>Flags: periodic</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="10%" />
+<col width="5%" />
+<col width="6%" />
+<col width="46%" />
+<col width="18%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Device Time</td>
+<td>time</td>
+<td><em>s</em></td>
+<td>fp64_t</td>
+<td>The device time.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Roll Angle</td>
+<td>phi</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>Rotation around the vehicle longitudinal axis.</td>
+<td>min=-3.141592653589793,
+max=3.141592653589793</td>
+</tr>
+<tr class="row-even"><td>Pitch Angle</td>
+<td>theta</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>Rotation around the vehicle lateral or transverse axis.</td>
+<td>min=-1.57079632679490,
+max=1.57079632679490</td>
+</tr>
+<tr class="row-odd"><td>Yaw Angle (True)</td>
+<td>psi</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>Rotation around the vehicle vertical axis. A value of 0 means
+the vehicle is oriented towards true north. In cases where the
+sensor cannot measure the true heading, this field will have
+the same value as Yaw (Magnetic).</td>
+<td>min=-3.141592653589793,
+max=3.141592653589793</td>
+</tr>
+<tr class="row-even"><td>Yaw Angle (Magnetic)</td>
+<td>psi_magnetic</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>Rotation around the vehicle vertical axis. A value of 0 means
+the vehicle is oriented towards magnetic north. In cases where
+the sensor cannot measure the magnetic heading, this field
+will have the same value as Yaw (True).</td>
+<td>min=-3.141592653589793,
+max=3.141592653589793</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="euler-angles-delta">
+<span id="euleranglesdelta"></span><h2>Euler Angles Delta<a class="headerlink" href="#euler-angles-delta" title="Permalink to this headline">¶</a></h2>
+<p>Component of incremetal orientation vector over a period of time.</p>
+<ul class="simple">
+<li>Abbreviation: EulerAnglesDelta</li>
+<li>Identification Number: 255</li>
+<li>Payload Size: 36 bytes</li>
+<li>Message Size: 58 bytes</li>
+<li>Flags: periodic</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="12%" />
+<col width="6%" />
+<col width="7%" />
+<col width="47%" />
+<col width="17%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Device Time</td>
+<td>time</td>
+<td><em>s</em></td>
+<td>fp64_t</td>
+<td>The device time.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>X</td>
+<td>x</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>X component.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Y</td>
+<td>y</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>Y component.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Z</td>
+<td>z</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>Z component.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Timestep</td>
+<td>timestep</td>
+<td><em>s</em></td>
+<td>fp32_t</td>
+<td>Period of time of the orientation vector increments.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="angular-velocity">
+<span id="angularvelocity"></span><h2>Angular Velocity<a class="headerlink" href="#angular-velocity" title="Permalink to this headline">¶</a></h2>
+<p>Vector quantifying the direction and magnitude of the measured
+angular velocity that a device is exposed to.</p>
+<ul class="simple">
+<li>Abbreviation: AngularVelocity</li>
+<li>Identification Number: 256</li>
+<li>Payload Size: 32 bytes</li>
+<li>Message Size: 54 bytes</li>
+<li>Flags: periodic</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="17%" />
+<col width="11%" />
+<col width="10%" />
+<col width="22%" />
+<col width="24%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Device Time</td>
+<td>time</td>
+<td><em>s</em></td>
+<td>fp64_t</td>
+<td>The device time.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>X</td>
+<td>x</td>
+<td><em>rad/s</em></td>
+<td>fp64_t</td>
+<td>X component.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Y</td>
+<td>y</td>
+<td><em>rad/s</em></td>
+<td>fp64_t</td>
+<td>Y component.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Z</td>
+<td>z</td>
+<td><em>rad/s</em></td>
+<td>fp64_t</td>
+<td>Z component.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="acceleration">
+<span id="id3"></span><h2>Acceleration<a class="headerlink" href="#acceleration" title="Permalink to this headline">¶</a></h2>
+<p>Vector quantifying the direction and magnitude of the measured
+acceleration that a device is exposed to.</p>
+<ul class="simple">
+<li>Abbreviation: Acceleration</li>
+<li>Identification Number: 257</li>
+<li>Payload Size: 32 bytes</li>
+<li>Message Size: 54 bytes</li>
+<li>Flags: periodic</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="17%" />
+<col width="11%" />
+<col width="10%" />
+<col width="22%" />
+<col width="24%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Device Time</td>
+<td>time</td>
+<td><em>s</em></td>
+<td>fp64_t</td>
+<td>The device time.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>X</td>
+<td>x</td>
+<td><em>m/s/s</em></td>
+<td>fp64_t</td>
+<td>X component.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Y</td>
+<td>y</td>
+<td><em>m/s/s</em></td>
+<td>fp64_t</td>
+<td>Y component.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Z</td>
+<td>z</td>
+<td><em>m/s/s</em></td>
+<td>fp64_t</td>
+<td>Z component.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="magnetic-field">
+<span id="magneticfield"></span><h2>Magnetic Field<a class="headerlink" href="#magnetic-field" title="Permalink to this headline">¶</a></h2>
+<p>Vector quantifying the direction and magnitude of the measured
+magnetic field that a device is exposed to.</p>
+<ul class="simple">
+<li>Abbreviation: MagneticField</li>
+<li>Identification Number: 258</li>
+<li>Payload Size: 32 bytes</li>
+<li>Message Size: 54 bytes</li>
+<li>Flags: periodic</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="18%" />
+<col width="8%" />
+<col width="10%" />
+<col width="23%" />
+<col width="25%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Device Time</td>
+<td>time</td>
+<td><em>s</em></td>
+<td>fp64_t</td>
+<td>The device time.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>X</td>
+<td>x</td>
+<td><em>G</em></td>
+<td>fp64_t</td>
+<td>X component.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Y</td>
+<td>y</td>
+<td><em>G</em></td>
+<td>fp64_t</td>
+<td>Y component.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Z</td>
+<td>z</td>
+<td><em>G</em></td>
+<td>fp64_t</td>
+<td>Z component.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="ground-velocity">
+<span id="groundvelocity"></span><h2>Ground Velocity<a class="headerlink" href="#ground-velocity" title="Permalink to this headline">¶</a></h2>
+<p>Vector quantifying the direction and magnitude of the measured
+velocity relative to the ground that a device is exposed to.</p>
+<ul class="simple">
+<li>Abbreviation: GroundVelocity</li>
+<li>Identification Number: 259</li>
+<li>Payload Size: 25 bytes</li>
+<li>Message Size: 47 bytes</li>
+<li>Flags: periodic</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="7%" />
+<col width="9%" />
+<col width="28%" />
+<col width="6%" />
+<col width="36%" />
+<col width="13%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Validity</td>
+<td>validity</td>
+<td><em>Bitfield</em>
+(<a class="reference internal" href="#groundvelocity-bitfield-validity"><span class="std std-ref">Bitfield Validity</span></a>)</td>
+<td>uint8_t</td>
+<td>Each bit of this field represents if a given velocity
+component is valid.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>X</td>
+<td>x</td>
+<td><em>m/s</em></td>
+<td>fp64_t</td>
+<td>X component.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Y</td>
+<td>y</td>
+<td><em>m/s</em></td>
+<td>fp64_t</td>
+<td>Y component.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Z</td>
+<td>z</td>
+<td><em>m/s</em></td>
+<td>fp64_t</td>
+<td>Z component.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="groundvelocity-bitfield-prefix-val">
+<span id="groundvelocity-bitfield-validity"></span><span id="id4"></span><h3>Bitfield Validity<a class="headerlink" href="#groundvelocity-bitfield-prefix-val" title="Permalink to this headline">¶</a></h3>
+<p>Each bit of this field represents if a given velocity
+component is valid.</p>
+<ul class="simple">
+<li>Abbreviation: validity</li>
+<li>Prefix: VAL</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="39%" />
+<col width="25%" />
+<col width="23%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0x01</td>
+<td>X component is valid</td>
+<td>VEL_X</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>0x02</td>
+<td>Y component is valid</td>
+<td>VEL_Y</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-even"><td>0x04</td>
+<td>Z component is valid</td>
+<td>VEL_Z</td>
+<td><em>-</em></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="water-velocity">
+<span id="watervelocity"></span><h2>Water Velocity<a class="headerlink" href="#water-velocity" title="Permalink to this headline">¶</a></h2>
+<p>Vector quantifying the direction and magnitude of the measured
+velocity relative to the water that a device is exposed to.</p>
+<ul class="simple">
+<li>Abbreviation: WaterVelocity</li>
+<li>Identification Number: 260</li>
+<li>Payload Size: 25 bytes</li>
+<li>Message Size: 47 bytes</li>
+<li>Flags: periodic</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="7%" />
+<col width="9%" />
+<col width="28%" />
+<col width="6%" />
+<col width="37%" />
+<col width="13%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Validity</td>
+<td>validity</td>
+<td><em>Bitfield</em>
+(<a class="reference internal" href="#watervelocity-bitfield-validity"><span class="std std-ref">Bitfield Validity</span></a>)</td>
+<td>uint8_t</td>
+<td>Each bit of this field represents if a given velocity
+component is valid.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>X</td>
+<td>x</td>
+<td><em>m/s</em></td>
+<td>fp64_t</td>
+<td>X component.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Y</td>
+<td>y</td>
+<td><em>m/s</em></td>
+<td>fp64_t</td>
+<td>Y component.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Z</td>
+<td>z</td>
+<td><em>m/s</em></td>
+<td>fp64_t</td>
+<td>Z component.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="watervelocity-bitfield-prefix-val">
+<span id="watervelocity-bitfield-validity"></span><span id="id5"></span><h3>Bitfield Validity<a class="headerlink" href="#watervelocity-bitfield-prefix-val" title="Permalink to this headline">¶</a></h3>
+<p>Each bit of this field represents if a given velocity
+component is valid.</p>
+<ul class="simple">
+<li>Abbreviation: validity</li>
+<li>Prefix: VAL</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="39%" />
+<col width="25%" />
+<col width="23%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0x01</td>
+<td>X component is valid</td>
+<td>VEL_X</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>0x02</td>
+<td>Y component is valid</td>
+<td>VEL_Y</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-even"><td>0x04</td>
+<td>Z component is valid</td>
+<td>VEL_Z</td>
+<td><em>-</em></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="velocity-delta">
+<span id="velocitydelta"></span><h2>Velocity Delta<a class="headerlink" href="#velocity-delta" title="Permalink to this headline">¶</a></h2>
+<p>Component of incremetal velocity vector.</p>
+<ul class="simple">
+<li>Abbreviation: VelocityDelta</li>
+<li>Identification Number: 261</li>
+<li>Payload Size: 32 bytes</li>
+<li>Message Size: 54 bytes</li>
+<li>Flags: periodic</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="18%" />
+<col width="9%" />
+<col width="10%" />
+<col width="23%" />
+<col width="25%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Device Time</td>
+<td>time</td>
+<td><em>s</em></td>
+<td>fp64_t</td>
+<td>The device time.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>X</td>
+<td>x</td>
+<td><em>m/s</em></td>
+<td>fp64_t</td>
+<td>X component.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Y</td>
+<td>y</td>
+<td><em>m/s</em></td>
+<td>fp64_t</td>
+<td>Y component.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Z</td>
+<td>z</td>
+<td><em>m/s</em></td>
+<td>fp64_t</td>
+<td>Z component.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="distance">
+<span id="id6"></span><h2>Distance<a class="headerlink" href="#distance" title="Permalink to this headline">¶</a></h2>
+<p>Distance measurement detected by the device.</p>
+<ul class="simple">
+<li>Abbreviation: Distance</li>
+<li>Identification Number: 262</li>
+<li>Payload Size: 9+  bytes</li>
+<li>Message Size: 31+  bytes</li>
+<li>Flags: periodic</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="10%" />
+<col width="23%" />
+<col width="15%" />
+<col width="24%" />
+<col width="14%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Validity</td>
+<td>validity</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="#distance-enum-validity"><span class="std std-ref">Enum Validity</span></a>)</td>
+<td>uint8_t</td>
+<td>Validity of the measurement.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Location</td>
+<td>location</td>
+<td><em>-</em></td>
+<td>message-list
+(<a class="reference internal" href="#devicestate"><span class="std std-ref">Device State</span></a>)</td>
+<td>Device Location in the system.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Beam Configuration</td>
+<td>beam_config</td>
+<td><em>-</em></td>
+<td>message-list
+(<a class="reference internal" href="#beamconfig"><span class="std std-ref">Beam Configuration</span></a>)</td>
+<td>Beam configuration of the device.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Measured Distance</td>
+<td>value</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Measured distance.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="enum-validity">
+<span id="distance-enum-prefix-dv"></span><span id="distance-enum-validity"></span><h3>Enum Validity<a class="headerlink" href="#enum-validity" title="Permalink to this headline">¶</a></h3>
+<p>Validity of the measurement.</p>
+<ul class="simple">
+<li>Abbreviation: validity</li>
+<li>Prefix: DV</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="16%" />
+<col width="25%" />
+<col width="45%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0</td>
+<td>Invalid</td>
+<td>INVALID</td>
+<td>Measurement is invalid.</td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>Valid</td>
+<td>VALID</td>
+<td>Measurement is valid.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="temperature">
+<span id="id7"></span><h2>Temperature<a class="headerlink" href="#temperature" title="Permalink to this headline">¶</a></h2>
+<p>Report of temperature.</p>
+<ul class="simple">
+<li>Abbreviation: Temperature</li>
+<li>Identification Number: 263</li>
+<li>Payload Size: 4 bytes</li>
+<li>Message Size: 26 bytes</li>
+<li>Flags: periodic</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="17%" />
+<col width="11%" />
+<col width="5%" />
+<col width="6%" />
+<col width="45%" />
+<col width="16%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Measured Temperature</td>
+<td>value</td>
+<td><em>°C</em></td>
+<td>fp32_t</td>
+<td>The value of the temperature as measured by the sensor.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="pressure">
+<span id="id8"></span><h2>Pressure<a class="headerlink" href="#pressure" title="Permalink to this headline">¶</a></h2>
+<p>Report of external pressure.</p>
+<ul class="simple">
+<li>Abbreviation: Pressure</li>
+<li>Identification Number: 264</li>
+<li>Payload Size: 8 bytes</li>
+<li>Message Size: 30 bytes</li>
+<li>Flags: periodic</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="11%" />
+<col width="6%" />
+<col width="7%" />
+<col width="44%" />
+<col width="16%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Measured Pressure</td>
+<td>value</td>
+<td><em>hPa</em></td>
+<td>fp64_t</td>
+<td>The value of the pressure as measured by the sensor.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="depth">
+<span id="id9"></span><h2>Depth<a class="headerlink" href="#depth" title="Permalink to this headline">¶</a></h2>
+<p>Depth report.</p>
+<ul class="simple">
+<li>Abbreviation: Depth</li>
+<li>Identification Number: 265</li>
+<li>Payload Size: 4 bytes</li>
+<li>Message Size: 26 bytes</li>
+<li>Flags: periodic</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="14%" />
+<col width="6%" />
+<col width="8%" />
+<col width="35%" />
+<col width="20%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Measured Depth</td>
+<td>value</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Depth value measured by a sensor.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="depth-offset">
+<span id="depthoffset"></span><h2>Depth Offset<a class="headerlink" href="#depth-offset" title="Permalink to this headline">¶</a></h2>
+<p>Report of Depth Offset.</p>
+<ul class="simple">
+<li>Abbreviation: DepthOffset</li>
+<li>Identification Number: 266</li>
+<li>Payload Size: 4 bytes</li>
+<li>Message Size: 26 bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="21%" />
+<col width="18%" />
+<col width="8%" />
+<col width="10%" />
+<col width="19%" />
+<col width="25%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Measured Offset</td>
+<td>value</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Depth offset.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="sound-speed">
+<span id="soundspeed"></span><h2>Sound Speed<a class="headerlink" href="#sound-speed" title="Permalink to this headline">¶</a></h2>
+<p>Sound Speed report.</p>
+<ul class="simple">
+<li>Abbreviation: SoundSpeed</li>
+<li>Identification Number: 267</li>
+<li>Payload Size: 4 bytes</li>
+<li>Message Size: 26 bytes</li>
+<li>Flags: periodic</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="10%" />
+<col width="5%" />
+<col width="6%" />
+<col width="48%" />
+<col width="15%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Computed Sound Speed</td>
+<td>value</td>
+<td><em>m/s</em></td>
+<td>fp32_t</td>
+<td>Estimated sound speed. Negative values denote invalid estimates.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="water-density">
+<span id="waterdensity"></span><h2>Water Density<a class="headerlink" href="#water-density" title="Permalink to this headline">¶</a></h2>
+<p>Water Density report.</p>
+<ul class="simple">
+<li>Abbreviation: WaterDensity</li>
+<li>Identification Number: 268</li>
+<li>Payload Size: 4 bytes</li>
+<li>Message Size: 26 bytes</li>
+<li>Flags: periodic</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="23%" />
+<col width="14%" />
+<col width="12%" />
+<col width="8%" />
+<col width="24%" />
+<col width="19%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Computed Water Density</td>
+<td>value</td>
+<td><em>kg/m/m/m</em></td>
+<td>fp32_t</td>
+<td>Computed Water Density.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="conductivity">
+<span id="id10"></span><h2>Conductivity<a class="headerlink" href="#conductivity" title="Permalink to this headline">¶</a></h2>
+<p>Report of conductivity.</p>
+<ul class="simple">
+<li>Abbreviation: Conductivity</li>
+<li>Identification Number: 269</li>
+<li>Payload Size: 4 bytes</li>
+<li>Message Size: 26 bytes</li>
+<li>Flags: periodic</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="18%" />
+<col width="11%" />
+<col width="5%" />
+<col width="6%" />
+<col width="45%" />
+<col width="15%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Measured Conductivity</td>
+<td>value</td>
+<td><em>S/m</em></td>
+<td>fp32_t</td>
+<td>The value of the conductivity as measured by the sensor.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="salinity">
+<span id="id11"></span><h2>Salinity<a class="headerlink" href="#salinity" title="Permalink to this headline">¶</a></h2>
+<p>Report of salinity.</p>
+<ul class="simple">
+<li>Abbreviation: Salinity</li>
+<li>Identification Number: 270</li>
+<li>Payload Size: 4 bytes</li>
+<li>Message Size: 26 bytes</li>
+<li>Flags: periodic</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="12%" />
+<col width="5%" />
+<col width="7%" />
+<col width="45%" />
+<col width="17%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Measured Salinity</td>
+<td>value</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>The value of the salinity as measured by the sensor.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="wind-speed">
+<span id="windspeed"></span><h2>Wind Speed<a class="headerlink" href="#wind-speed" title="Permalink to this headline">¶</a></h2>
+<p>Measurement of wind speed.</p>
+<ul class="simple">
+<li>Abbreviation: WindSpeed</li>
+<li>Identification Number: 271</li>
+<li>Payload Size: 12 bytes</li>
+<li>Message Size: 34 bytes</li>
+<li>Flags: periodic</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="12%" />
+<col width="6%" />
+<col width="7%" />
+<col width="48%" />
+<col width="17%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Direction</td>
+<td>direction</td>
+<td><em>rad</em></td>
+<td>fp32_t</td>
+<td>Direction of the measured wind speed.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Speed</td>
+<td>speed</td>
+<td><em>m/s</em></td>
+<td>fp32_t</td>
+<td>The value of the wind speed as measured by the sensor.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Turbulence</td>
+<td>turbulence</td>
+<td><em>m/s</em></td>
+<td>fp32_t</td>
+<td>Wind turbulence intensity.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="relative-humidity">
+<span id="relativehumidity"></span><h2>Relative Humidity<a class="headerlink" href="#relative-humidity" title="Permalink to this headline">¶</a></h2>
+<p>Measurement of relative humidity.</p>
+<ul class="simple">
+<li>Abbreviation: RelativeHumidity</li>
+<li>Identification Number: 272</li>
+<li>Payload Size: 4 bytes</li>
+<li>Message Size: 26 bytes</li>
+<li>Flags: periodic</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="27%" />
+<col width="15%" />
+<col width="7%" />
+<col width="9%" />
+<col width="32%" />
+<col width="10%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Relative Humidity Value</td>
+<td>value</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Value of relative humidity.</td>
+<td>min=0,
+max=100</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="device-data-text">
+<span id="devdatatext"></span><h2>Device Data (Text)<a class="headerlink" href="#device-data-text" title="Permalink to this headline">¶</a></h2>
+<p>Verbatim representation of device data in plain text format.</p>
+<ul class="simple">
+<li>Abbreviation: DevDataText</li>
+<li>Identification Number: 273</li>
+<li>Payload Size: 2+  bytes</li>
+<li>Message Size: 24+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="12%" />
+<col width="5%" />
+<col width="10%" />
+<col width="49%" />
+<col width="18%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Value</td>
+<td>value</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>Plain text data as extracted directly from the device.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="device-data-binary">
+<span id="devdatabinary"></span><h2>Device Data (Binary)<a class="headerlink" href="#device-data-binary" title="Permalink to this headline">¶</a></h2>
+<p>Verbatim representation of device data in binary format.</p>
+<ul class="simple">
+<li>Abbreviation: DevDataBinary</li>
+<li>Identification Number: 274</li>
+<li>Payload Size: 2+  bytes</li>
+<li>Message Size: 24+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="13%" />
+<col width="5%" />
+<col width="8%" />
+<col width="50%" />
+<col width="18%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Value</td>
+<td>value</td>
+<td><em>-</em></td>
+<td>rawdata</td>
+<td>Raw binary data as extracted directly from the device.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="force">
+<span id="id12"></span><h2>Force<a class="headerlink" href="#force" title="Permalink to this headline">¶</a></h2>
+<p>Force measurement.</p>
+<ul class="simple">
+<li>Abbreviation: Force</li>
+<li>Identification Number: 275</li>
+<li>Payload Size: 4 bytes</li>
+<li>Message Size: 26 bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="20%" />
+<col width="17%" />
+<col width="7%" />
+<col width="10%" />
+<col width="22%" />
+<col width="24%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Measured Force</td>
+<td>value</td>
+<td><em>N</em></td>
+<td>fp32_t</td>
+<td>Force magnitude.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="sonar-data">
+<span id="sonardata"></span><h2>Sonar Data<a class="headerlink" href="#sonar-data" title="Permalink to this headline">¶</a></h2>
+<p>This message contains the data acquired by a single sonar
+measurement. The following describes the format used to
+fill the data field used in this message. (Byte order is
+little endian.)</p>
+<p><strong>Sidescan:</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="17%" />
+<col width="53%" />
+<col width="31%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Data</th>
+<th class="head">Name</th>
+<th class="head">Type</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>A</td>
+<td>Ranges data</td>
+<td>uintX_t</td>
+</tr>
+</tbody>
+</table>
+<div class="figure">
+<img alt="_images/imc_sidescan.png" src="_images/imc_sidescan.png" />
+</div>
+<ul class="simple">
+<li>The type <em>uintX_t</em> will depend on the number of bits per unit, and it should be a multiple of 8.</li>
+<li>Furthermore, for now, 32 bits is the highest value of bits per unit supported.</li>
+</ul>
+<p><strong>Multibeam:</strong></p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="5%" />
+<col width="7%" />
+<col width="21%" />
+<col width="8%" />
+<col width="59%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Index</th>
+<th class="head">Section</th>
+<th class="head">Name</th>
+<th class="head">Type</th>
+<th class="head">Comments</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>1</td>
+<td>H1</td>
+<td>Number of points</td>
+<td>uint16_t</td>
+<td>Number of data points</td>
+</tr>
+<tr class="row-odd"><td>2</td>
+<td>H2</td>
+<td>Start angle</td>
+<td>fp32_t</td>
+<td>In radians</td>
+</tr>
+<tr class="row-even"><td>3</td>
+<td>H3</td>
+<td>Flags</td>
+<td>uint8_t</td>
+<td>Refer to next table</td>
+</tr>
+<tr class="row-odd"><td>4</td>
+<td>H4 ?</td>
+<td>Angle scale factor</td>
+<td>fp32_t</td>
+<td>Used for angle steps in radians</td>
+</tr>
+<tr class="row-even"><td>5</td>
+<td>H5 ?</td>
+<td>Intensities scale factor</td>
+<td>fp32_t</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>6</td>
+<td>D1 ?</td>
+<td>Angle steps[H1]</td>
+<td>uint16_t</td>
+<td>Values in radians</td>
+</tr>
+<tr class="row-even"><td>7</td>
+<td>D2</td>
+<td>Ranges[H1]</td>
+<td>uintX_t</td>
+<td>Ranges data points (scale factor from common field “Scaling Factor”)</td>
+</tr>
+<tr class="row-odd"><td>8</td>
+<td>D3 ?</td>
+<td>Intensities[H1]</td>
+<td>uintX_t</td>
+<td>Intensities data points</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="26%" />
+<col width="58%" />
+<col width="16%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Section</th>
+<th class="head">Flag Label</th>
+<th class="head">Bit</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>H4.1</td>
+<td>Intensities flag</td>
+<td>0</td>
+</tr>
+<tr class="row-odd"><td>H4.2</td>
+<td>Angle step flag</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<div class="figure">
+<img alt="_images/imc_multibeam.png" src="_images/imc_multibeam.png" />
+</div>
+<p><em>Notes:</em></p>
+<ul class="simple">
+<li>Each angle at step <em>i</em> can be calculated is defined by:</li>
+</ul>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">angle</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">H2_start_angle</span> <span class="o">+</span> <span class="p">(</span><span class="mi">32</span><span class="o">-</span><span class="n">bit</span> <span class="nb">sum</span> <span class="n">of</span> <span class="n">D1_angle_step</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="n">through</span> <span class="n">D1_angle_step</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">*</span> <span class="n">H4_scaling_factor</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>If bit H4.1 is not set then sections H5 and D3 won’t exist.</li>
+<li>If bit H4.2 is not set then sections H4 and D1 won’t exist. In case this bit is set, then the angle steps is read from field “Beam Width” from “Beam Configuration”.</li>
+<li>The type <em>uintX_t</em> will depend on the number of bits per unit, and it should be a multiple of 8.</li>
+<li>Furthermore, for now, 32 bits is the highest value of bits per unit supported.</li>
+</ul>
+<p><em>How to write ranges and intensities data:</em></p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">data_unit</span> <span class="o">=</span> <span class="p">(</span><span class="n">Integer</span><span class="p">)</span> <span class="p">(</span><span class="n">data_value</span> <span class="o">/</span> <span class="n">scale_factor</span><span class="p">);</span>
+<span class="n">bytes_per_unit</span> <span class="o">=</span> <span class="n">bits_per_unit</span> <span class="o">/</span> <span class="mi">8</span><span class="p">;</span>
+<span class="n">LOOP</span><span class="p">:</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">until</span> <span class="n">i</span> <span class="o">=</span> <span class="n">bytes_per_unit</span>
+    <span class="n">byte</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">data_unit</span> <span class="o">&gt;&gt;</span> <span class="mi">8</span> <span class="o">*</span> <span class="n">i</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mh">0xFF</span><span class="p">);</span>
+
+<span class="n">write</span><span class="p">(</span><span class="n">byte</span><span class="p">);</span>
+</pre></div>
+</td></tr></table></div>
+<p><strong>Common:</strong></p>
+<ul class="simple">
+<li>Abbreviation: SonarData</li>
+<li>Identification Number: 276</li>
+<li>Payload Size: 18+  bytes</li>
+<li>Message Size: 40+  bytes</li>
+<li>Flags: periodic</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="9%" />
+<col width="18%" />
+<col width="12%" />
+<col width="37%" />
+<col width="12%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Type</td>
+<td>type</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="#sonardata-enum-type"><span class="std std-ref">Enum Type</span></a>)</td>
+<td>uint8_t</td>
+<td>Type of sonar.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Frequency</td>
+<td>frequency</td>
+<td><em>Hz</em></td>
+<td>uint32_t</td>
+<td>Operating frequency.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Minimum Range</td>
+<td>min_range</td>
+<td><em>m</em></td>
+<td>uint16_t</td>
+<td>Minimum range.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Maximum Range</td>
+<td>max_range</td>
+<td><em>m</em></td>
+<td>uint16_t</td>
+<td>Maximum range.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Bits Per Data Point</td>
+<td>bits_per_point</td>
+<td><em>bit</em></td>
+<td>uint8_t</td>
+<td>Size of the data unit. (Should be multiple of 8)</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Scaling Factor</td>
+<td>scale_factor</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Scaling factor used to multiply each data unit to restore the
+original floating point value.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Beam Configuration</td>
+<td>beam_config</td>
+<td><em>-</em></td>
+<td>message-list
+(<a class="reference internal" href="#beamconfig"><span class="std std-ref">Beam Configuration</span></a>)</td>
+<td>Beam configuration of the device.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Data</td>
+<td>data</td>
+<td><em>-</em></td>
+<td>rawdata</td>
+<td>Data acquired by the measurement.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="sonardata-enum-prefix-st">
+<span id="sonardata-enum-type"></span><span id="id13"></span><h3>Enum Type<a class="headerlink" href="#sonardata-enum-prefix-st" title="Permalink to this headline">¶</a></h3>
+<p>Type of sonar.</p>
+<ul class="simple">
+<li>Abbreviation: type</li>
+<li>Prefix: ST</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="29%" />
+<col width="29%" />
+<col width="27%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0</td>
+<td>Sidescan</td>
+<td>SIDESCAN</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>Echo Sounder</td>
+<td>ECHOSOUNDER</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-even"><td>2</td>
+<td>Multibeam</td>
+<td>MULTIBEAM</td>
+<td><em>-</em></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="pulse">
+<span id="id14"></span><h2>Pulse<a class="headerlink" href="#pulse" title="Permalink to this headline">¶</a></h2>
+<p>Hardware pulse detection.</p>
+<ul class="simple">
+<li>Abbreviation: Pulse</li>
+<li>Identification Number: 277</li>
+<li>Payload Size: 0 bytes</li>
+<li>Message Size: 22 bytes</li>
+<li>Flags: periodic</li>
+</ul>
+<p>This message has no fields.</p>
+</div>
+<div class="section" id="pulse-detection-control">
+<span id="pulsedetectioncontrol"></span><h2>Pulse Detection Control<a class="headerlink" href="#pulse-detection-control" title="Permalink to this headline">¶</a></h2>
+<p>Control of hardware pulse detection.</p>
+<ul class="simple">
+<li>Abbreviation: PulseDetectionControl</li>
+<li>Identification Number: 278</li>
+<li>Payload Size: 1 bytes</li>
+<li>Message Size: 23 bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="8%" />
+<col width="10%" />
+<col width="28%" />
+<col width="6%" />
+<col width="35%" />
+<col width="14%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Operation</td>
+<td>op</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="#pulsedetectioncontrol-enum-op"><span class="std std-ref">Enum Operation</span></a>)</td>
+<td>uint8_t</td>
+<td>Activate or deactivate hardware pulse detection.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="enum-operation">
+<span id="pulsedetectioncontrol-enum-prefix-pop"></span><span id="pulsedetectioncontrol-enum-op"></span><h3>Enum Operation<a class="headerlink" href="#enum-operation" title="Permalink to this headline">¶</a></h3>
+<p>Activate or deactivate hardware pulse detection.</p>
+<ul class="simple">
+<li>Abbreviation: op</li>
+<li>Prefix: POP</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="38%" />
+<col width="25%" />
+<col width="24%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0</td>
+<td>Pulse Detection OFF</td>
+<td>OFF</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>Pulse Detection ON</td>
+<td>ON</td>
+<td><em>-</em></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="fuel-level">
+<span id="fuellevel"></span><h2>Fuel Level<a class="headerlink" href="#fuel-level" title="Permalink to this headline">¶</a></h2>
+<p>Report of fuel level.</p>
+<ul class="simple">
+<li>Abbreviation: FuelLevel</li>
+<li>Identification Number: 279</li>
+<li>Payload Size: 10+  bytes</li>
+<li>Message Size: 32+  bytes</li>
+<li>Flags: periodic</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="10%" />
+<col width="9%" />
+<col width="8%" />
+<col width="46%" />
+<col width="14%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Value</td>
+<td>value</td>
+<td><em>%</em></td>
+<td>fp32_t</td>
+<td>Fuel level percentage of the system.</td>
+<td>min=0,
+max=100</td>
+</tr>
+<tr class="row-odd"><td>Confidence Level</td>
+<td>confidence</td>
+<td><em>%</em></td>
+<td>fp32_t</td>
+<td>Percentage level of confidence in the estimation of the amount
+of energy in the batteries.</td>
+<td>min=0,
+max=100</td>
+</tr>
+<tr class="row-even"><td>Operation Modes</td>
+<td>opmodes</td>
+<td><em>TupleList</em></td>
+<td>plaintext</td>
+<td>Operation mode name and the estimated time available in that
+mode in hours. Example: “Motion=1.5”</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="gps-navigation-data">
+<span id="gpsnavdata"></span><h2>GPS Navigation Data<a class="headerlink" href="#gps-navigation-data" title="Permalink to this headline">¶</a></h2>
+<p>Report of GPS navigation data.</p>
+<ul class="simple">
+<li>Abbreviation: GpsNavData</li>
+<li>Identification Number: 280</li>
+<li>Payload Size: 68 bytes</li>
+<li>Message Size: 90 bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="29%" />
+<col width="11%" />
+<col width="6%" />
+<col width="8%" />
+<col width="30%" />
+<col width="16%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>GPS Millisecond Time of Week</td>
+<td>itow</td>
+<td><em>ms</em></td>
+<td>uint32_t</td>
+<td>GPS Millisecond Time of Week.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Latitude</td>
+<td>lat</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>Latitude.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Longitude</td>
+<td>lon</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>Longitude.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Height above ellipsoid</td>
+<td>height_ell</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Height Above Ellipsoid.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Height above sea level</td>
+<td>height_sea</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Height Above Sea Level.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Horizontal Accuracy Estimate</td>
+<td>hacc</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Horizontal Accuracy Estimate.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Vertical Accuracy Estimate</td>
+<td>vacc</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Vertical Accuracy Estimate.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>NED North Velocity</td>
+<td>vel_n</td>
+<td><em>m/s</em></td>
+<td>fp32_t</td>
+<td>NED North Velocity.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>NED East Velocity</td>
+<td>vel_e</td>
+<td><em>m/s</em></td>
+<td>fp32_t</td>
+<td>NED East Velocity.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>NED Down Velocity</td>
+<td>vel_d</td>
+<td><em>m/s</em></td>
+<td>fp32_t</td>
+<td>NED Down Velocity.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Speed (3D)</td>
+<td>speed</td>
+<td><em>m/s</em></td>
+<td>fp32_t</td>
+<td>NED Down Velocity.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Ground Speed (2D)</td>
+<td>gspeed</td>
+<td><em>m/s</em></td>
+<td>fp32_t</td>
+<td>NED Down Velocity.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Heading (2D)</td>
+<td>heading</td>
+<td><em>rad</em></td>
+<td>fp32_t</td>
+<td>NED Down Velocity.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Speed Accuracy Estimate</td>
+<td>sacc</td>
+<td><em>m/s</em></td>
+<td>fp32_t</td>
+<td>NED Down Velocity.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Course / Heading Accuracy Estimate</td>
+<td>cacc</td>
+<td><em>rad</em></td>
+<td>fp32_t</td>
+<td>Course / Heading Accuracy Estimate.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="servo-position">
+<span id="servoposition"></span><h2>Servo Position<a class="headerlink" href="#servo-position" title="Permalink to this headline">¶</a></h2>
+<p>Actual position of a servo.</p>
+<ul class="simple">
+<li>Abbreviation: ServoPosition</li>
+<li>Identification Number: 281</li>
+<li>Payload Size: 5 bytes</li>
+<li>Message Size: 27 bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="14%" />
+<col width="7%" />
+<col width="9%" />
+<col width="31%" />
+<col width="27%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Identifier</td>
+<td>id</td>
+<td><em>-</em></td>
+<td>uint8_t</td>
+<td>Servo identifier.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Position</td>
+<td>value</td>
+<td><em>rad</em></td>
+<td>fp32_t</td>
+<td>Value of the servo position.</td>
+<td>min=-1.5707963267948966,
+max=1.5707963267948966</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="device-state">
+<span id="devicestate"></span><h2>Device State<a class="headerlink" href="#device-state" title="Permalink to this headline">¶</a></h2>
+<p>Location of a specific device in the system infrastructure.</p>
+<ul class="simple">
+<li>Abbreviation: DeviceState</li>
+<li>Identification Number: 282</li>
+<li>Payload Size: 24 bytes</li>
+<li>Message Size: 46 bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="20%" />
+<col width="13%" />
+<col width="7%" />
+<col width="8%" />
+<col width="34%" />
+<col width="19%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Device Position - X</td>
+<td>x</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Device’s position over the X axis.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Device Position - Y</td>
+<td>y</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Device’s position over the Y axis.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Device Position - Z</td>
+<td>z</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Device’s position over the Z axis.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Device Rotation - X</td>
+<td>phi</td>
+<td><em>rad</em></td>
+<td>fp32_t</td>
+<td>Device’s rotation over the X axis.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Device Rotation - Y</td>
+<td>theta</td>
+<td><em>rad</em></td>
+<td>fp32_t</td>
+<td>Device’s rotation over the Y axis.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Device Rotation - Z</td>
+<td>psi</td>
+<td><em>rad</em></td>
+<td>fp32_t</td>
+<td>Device’s rotation over the Z axis.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="beam-configuration">
+<span id="beamconfig"></span><h2>Beam Configuration<a class="headerlink" href="#beam-configuration" title="Permalink to this headline">¶</a></h2>
+<p>Beam configuration of the device.</p>
+<ul class="simple">
+<li>Abbreviation: BeamConfig</li>
+<li>Identification Number: 283</li>
+<li>Payload Size: 8 bytes</li>
+<li>Message Size: 30 bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="11%" />
+<col width="5%" />
+<col width="6%" />
+<col width="49%" />
+<col width="18%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Beam Width</td>
+<td>beam_width</td>
+<td><em>rad</em></td>
+<td>fp32_t</td>
+<td>Beam width of the instrument. A negative number denotes that
+this information is not available or is not applicable.</td>
+<td>min=0,
+max=3.141592653589793</td>
+</tr>
+<tr class="row-odd"><td>Beam Height</td>
+<td>beam_height</td>
+<td><em>rad</em></td>
+<td>fp32_t</td>
+<td>Beam height of the instrument. A negative number denotes that
+this information is not available or is not applicable.</td>
+<td>min=0,
+max=3.141592653589793</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="data-sanity">
+<span id="datasanity"></span><h2>Data Sanity<a class="headerlink" href="#data-sanity" title="Permalink to this headline">¶</a></h2>
+<p>Report sanity or lack of it in the data output by a sensor.</p>
+<ul class="simple">
+<li>Abbreviation: DataSanity</li>
+<li>Identification Number: 284</li>
+<li>Payload Size: 1 bytes</li>
+<li>Message Size: 23 bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="7%" />
+<col width="12%" />
+<col width="26%" />
+<col width="7%" />
+<col width="32%" />
+<col width="17%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Sanity</td>
+<td>sane</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="#datasanity-enum-sane"><span class="std std-ref">Enum Sanity</span></a>)</td>
+<td>uint8_t</td>
+<td>Whether the data is sane or not sane.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="enum-sanity">
+<span id="datasanity-enum-prefix-ds"></span><span id="datasanity-enum-sane"></span><h3>Enum Sanity<a class="headerlink" href="#enum-sanity" title="Permalink to this headline">¶</a></h3>
+<p>Whether the data is sane or not sane.</p>
+<ul class="simple">
+<li>Abbreviation: sane</li>
+<li>Prefix: DS</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="20%" />
+<col width="28%" />
+<col width="38%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0</td>
+<td>Sane</td>
+<td>SANE</td>
+<td>Data is sane.</td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>Not Sane</td>
+<td>NOT_SANE</td>
+<td>Data is not sane.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="rhodamine-dye">
+<span id="rhodaminedye"></span><h2>Rhodamine Dye<a class="headerlink" href="#rhodamine-dye" title="Permalink to this headline">¶</a></h2>
+<p>Rhodamine Dye measurement.</p>
+<ul class="simple">
+<li>Abbreviation: RhodamineDye</li>
+<li>Identification Number: 285</li>
+<li>Payload Size: 4 bytes</li>
+<li>Message Size: 26 bytes</li>
+<li>Flags: periodic</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="8%" />
+<col width="15%" />
+<col width="8%" />
+<col width="9%" />
+<col width="38%" />
+<col width="22%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Value</td>
+<td>value</td>
+<td><em>PPB</em></td>
+<td>fp32_t</td>
+<td>Amount of rhodamine dye detected.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="crude-oil">
+<span id="crudeoil"></span><h2>Crude Oil<a class="headerlink" href="#crude-oil" title="Permalink to this headline">¶</a></h2>
+<p>Crude oil measurement.</p>
+<ul class="simple">
+<li>Abbreviation: CrudeOil</li>
+<li>Identification Number: 286</li>
+<li>Payload Size: 4 bytes</li>
+<li>Message Size: 26 bytes</li>
+<li>Flags: periodic</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="8%" />
+<col width="16%" />
+<col width="8%" />
+<col width="9%" />
+<col width="36%" />
+<col width="23%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Value</td>
+<td>value</td>
+<td><em>PPB</em></td>
+<td>fp32_t</td>
+<td>Amount of crude oil detected.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="fine-oil">
+<span id="fineoil"></span><h2>Fine Oil<a class="headerlink" href="#fine-oil" title="Permalink to this headline">¶</a></h2>
+<p>Fine oil measurement.</p>
+<ul class="simple">
+<li>Abbreviation: FineOil</li>
+<li>Identification Number: 287</li>
+<li>Payload Size: 4 bytes</li>
+<li>Message Size: 26 bytes</li>
+<li>Flags: periodic</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="8%" />
+<col width="16%" />
+<col width="8%" />
+<col width="9%" />
+<col width="35%" />
+<col width="23%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Value</td>
+<td>value</td>
+<td><em>PPB</em></td>
+<td>fp32_t</td>
+<td>Amount of fine oil detected.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="turbidity">
+<span id="id15"></span><h2>Turbidity<a class="headerlink" href="#turbidity" title="Permalink to this headline">¶</a></h2>
+<p>Turbidity measurement.</p>
+<ul class="simple">
+<li>Abbreviation: Turbidity</li>
+<li>Identification Number: 288</li>
+<li>Payload Size: 4 bytes</li>
+<li>Message Size: 26 bytes</li>
+<li>Flags: periodic</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="9%" />
+<col width="18%" />
+<col width="9%" />
+<col width="11%" />
+<col width="26%" />
+<col width="26%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Value</td>
+<td>value</td>
+<td><em>NTU</em></td>
+<td>fp32_t</td>
+<td>Turbidity reading.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="chlorophyll">
+<span id="id16"></span><h2>Chlorophyll<a class="headerlink" href="#chlorophyll" title="Permalink to this headline">¶</a></h2>
+<p>Chlorophyll measurement.</p>
+<ul class="simple">
+<li>Abbreviation: Chlorophyll</li>
+<li>Identification Number: 289</li>
+<li>Payload Size: 4 bytes</li>
+<li>Message Size: 26 bytes</li>
+<li>Flags: periodic</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="9%" />
+<col width="18%" />
+<col width="10%" />
+<col width="10%" />
+<col width="28%" />
+<col width="25%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Value</td>
+<td>value</td>
+<td><em>µg/L</em></td>
+<td>fp32_t</td>
+<td>Chlorophyll reading.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="fluorescein">
+<span id="id17"></span><h2>Fluorescein<a class="headerlink" href="#fluorescein" title="Permalink to this headline">¶</a></h2>
+<p>Fluorescein measurement.</p>
+<ul class="simple">
+<li>Abbreviation: Fluorescein</li>
+<li>Identification Number: 290</li>
+<li>Payload Size: 4 bytes</li>
+<li>Message Size: 26 bytes</li>
+<li>Flags: periodic</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="9%" />
+<col width="18%" />
+<col width="9%" />
+<col width="10%" />
+<col width="28%" />
+<col width="26%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Value</td>
+<td>value</td>
+<td><em>PPB</em></td>
+<td>fp32_t</td>
+<td>Fluorescein reading.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="phycocyanin">
+<span id="id18"></span><h2>Phycocyanin<a class="headerlink" href="#phycocyanin" title="Permalink to this headline">¶</a></h2>
+<p>Phycocyanin measurement.</p>
+<ul class="simple">
+<li>Abbreviation: Phycocyanin</li>
+<li>Identification Number: 291</li>
+<li>Payload Size: 4 bytes</li>
+<li>Message Size: 26 bytes</li>
+<li>Flags: periodic</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="9%" />
+<col width="18%" />
+<col width="9%" />
+<col width="10%" />
+<col width="28%" />
+<col width="26%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Value</td>
+<td>value</td>
+<td><em>PPB</em></td>
+<td>fp32_t</td>
+<td>Phycocyanin reading.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="phycoerythrin">
+<span id="id19"></span><h2>Phycoerythrin<a class="headerlink" href="#phycoerythrin" title="Permalink to this headline">¶</a></h2>
+<p>Phycoerythrin measurement.</p>
+<ul class="simple">
+<li>Abbreviation: Phycoerythrin</li>
+<li>Identification Number: 292</li>
+<li>Payload Size: 4 bytes</li>
+<li>Message Size: 26 bytes</li>
+<li>Flags: periodic</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="9%" />
+<col width="18%" />
+<col width="9%" />
+<col width="10%" />
+<col width="30%" />
+<col width="25%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Value</td>
+<td>value</td>
+<td><em>PPB</em></td>
+<td>fp32_t</td>
+<td>Phycoerythrin reading.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="gps-fix-rtk">
+<span id="gpsfixrtk"></span><h2>GPS Fix RTK<a class="headerlink" href="#gps-fix-rtk" title="Permalink to this headline">¶</a></h2>
+<p>Report of an RTK-GPS fix.</p>
+<ul class="simple">
+<li>Abbreviation: GpsFixRtk</li>
+<li>Identification Number: 293</li>
+<li>Payload Size: 58 bytes</li>
+<li>Message Size: 80 bytes</li>
+<li>Flags: periodic</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="18%" />
+<col width="7%" />
+<col width="19%" />
+<col width="5%" />
+<col width="39%" />
+<col width="13%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Validity</td>
+<td>validity</td>
+<td><em>Bitfield</em>
+(<a class="reference internal" href="#gpsfixrtk-bitfield-validity"><span class="std std-ref">Bitfield Validity</span></a>)</td>
+<td>uint16_t</td>
+<td>Validity of fields.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Type</td>
+<td>type</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="#gpsfixrtk-enum-type"><span class="std std-ref">Enum Type</span></a>)</td>
+<td>uint8_t</td>
+<td>Type of fix.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>GPS Time of Week</td>
+<td>tow</td>
+<td><em>-</em></td>
+<td>uint32_t</td>
+<td>GPS Time of Week.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Base Latitude WGS-84</td>
+<td>base_lat</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>WGS-84 Latitude coordinate of the base.</td>
+<td>min=-1.5707963267948966,
+max=1.5707963267948966</td>
+</tr>
+<tr class="row-even"><td>Base Longitude WGS-84</td>
+<td>base_lon</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>WGS-84 Longitude coordinate of the base.</td>
+<td>min=-3.141592653589793,
+max=3.141592653589793</td>
+</tr>
+<tr class="row-odd"><td>Base Height above WGS-84 ellipsoid</td>
+<td>base_height</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Height above WGS-84 ellipsoid of the base.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Position North</td>
+<td>n</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Baseline North coordinate.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Position East</td>
+<td>e</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Baseline East coordinate.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Position Down</td>
+<td>d</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Baseline Down coordinate.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Velocity North</td>
+<td>v_n</td>
+<td><em>m/s</em></td>
+<td>fp32_t</td>
+<td>Velocity North coordinate.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Velocity East</td>
+<td>v_e</td>
+<td><em>m/s</em></td>
+<td>fp32_t</td>
+<td>Velocity East coordinate.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Velocity Down</td>
+<td>v_d</td>
+<td><em>m/s</em></td>
+<td>fp32_t</td>
+<td>Velocity Down coordinate.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Number of Satellites</td>
+<td>satellites</td>
+<td><em>-</em></td>
+<td>uint8_t</td>
+<td>Number of satellites used in solution.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>IAR Hypotheses</td>
+<td>iar_hyp</td>
+<td><em>-</em></td>
+<td>uint16_t</td>
+<td>Number of hypotheses in the Integer Ambiguity Resolution (smaller is better).</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>IAR Ratio</td>
+<td>iar_ratio</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Quality ratio of Integer Ambiguity Resolution (bigger is better).</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="gpsfixrtk-bitfield-prefix-rfv">
+<span id="gpsfixrtk-bitfield-validity"></span><span id="id20"></span><h3>Bitfield Validity<a class="headerlink" href="#gpsfixrtk-bitfield-prefix-rfv" title="Permalink to this headline">¶</a></h3>
+<p>Validity of fields.</p>
+<ul class="simple">
+<li>Abbreviation: validity</li>
+<li>Prefix: RFV</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="8%" />
+<col width="16%" />
+<col width="14%" />
+<col width="61%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0x0001</td>
+<td>Valid Time</td>
+<td>VALID_TIME</td>
+<td>Field ‘tow’ is valid.</td>
+</tr>
+<tr class="row-odd"><td>0x0002</td>
+<td>Valid Base LLH</td>
+<td>VALID_BASE</td>
+<td>Fields ‘base_lat’, ‘base_lon’ and ‘base_height’ are valid.</td>
+</tr>
+<tr class="row-even"><td>0x0004</td>
+<td>Valid Position</td>
+<td>VALID_POS</td>
+<td>Fields ‘n’, ‘e’, ‘d’ are valid.</td>
+</tr>
+<tr class="row-odd"><td>0x0008</td>
+<td>Valid Velocity</td>
+<td>VALID_VEL</td>
+<td>Fields ‘v_n’, ‘v_e’, ‘v_d’ are valid.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="gpsfixrtk-enum-prefix-rtk">
+<span id="gpsfixrtk-enum-type"></span><span id="id21"></span><h3>Enum Type<a class="headerlink" href="#gpsfixrtk-enum-prefix-rtk" title="Permalink to this headline">¶</a></h3>
+<p>Type of fix.</p>
+<ul class="simple">
+<li>Abbreviation: type</li>
+<li>Prefix: RTK</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="10%" />
+<col width="20%" />
+<col width="60%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0x00</td>
+<td>None</td>
+<td>NONE</td>
+<td>No solution, but RTK task is running.</td>
+</tr>
+<tr class="row-odd"><td>0x01</td>
+<td>Obs</td>
+<td>OBS</td>
+<td>No solution, but receiving observations.</td>
+</tr>
+<tr class="row-even"><td>0x02</td>
+<td>Float</td>
+<td>FLOAT</td>
+<td>Floating point solution of IAR.</td>
+</tr>
+<tr class="row-odd"><td>0x03</td>
+<td>Fixed</td>
+<td>FIXED</td>
+<td>Fixed (single) solution of IAR.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="external-navigation-data">
+<span id="externalnavdata"></span><h2>External Navigation Data<a class="headerlink" href="#external-navigation-data" title="Permalink to this headline">¶</a></h2>
+<p>This message is a representation of the state of the vehicle,
+as seen by an external navigation computer.</p>
+<p>An example usage is when DUNE is used with ardupilot. The
+data gathered from the autopilot is a complete navigation
+solution.</p>
+<p>ExternalNavData contains an inline Estimated State, which
+is a complete description of the system
+in terms of parameters such as position, orientation and
+velocities at a particular moment in time.</p>
+<p>The Type field selects wether the navigation data is a
+full state estimation, or only concerns attitude or
+position/velocity.</p>
+<ul class="simple">
+<li>Abbreviation: ExternalNavData</li>
+<li>Identification Number: 294</li>
+<li>Payload Size: 91 bytes</li>
+<li>Message Size: 113 bytes</li>
+<li>Flags: periodic</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="9%" />
+<col width="24%" />
+<col width="17%" />
+<col width="25%" />
+<col width="13%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Estimated State</td>
+<td>state</td>
+<td><em>-</em></td>
+<td>message
+(<a class="reference internal" href="Navigation.html#estimatedstate"><span class="std std-ref">Estimated State</span></a>)</td>
+<td>External Navigation Data.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Nav Data Type</td>
+<td>type</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="#externalnavdata-enum-type"><span class="std std-ref">Enum Nav Data Type</span></a>)</td>
+<td>uint8_t</td>
+<td>The type of external navigation data</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="enum-nav-data-type">
+<span id="externalnavdata-enum-prefix-extnav"></span><span id="externalnavdata-enum-type"></span><h3>Enum Nav Data Type<a class="headerlink" href="#enum-nav-data-type" title="Permalink to this headline">¶</a></h3>
+<p>The type of external navigation data</p>
+<ul class="simple">
+<li>Abbreviation: type</li>
+<li>Prefix: EXTNAV</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="9%" />
+<col width="54%" />
+<col width="19%" />
+<col width="18%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0</td>
+<td>Full State</td>
+<td>FULL</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>Attitude Heading Reference System Only</td>
+<td>AHRS</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-even"><td>2</td>
+<td>Position Reference System only</td>
+<td>POSREF</td>
+<td><em>-</em></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="dissolved-oxygen">
+<span id="dissolvedoxygen"></span><h2>Dissolved Oxygen<a class="headerlink" href="#dissolved-oxygen" title="Permalink to this headline">¶</a></h2>
+<p>Dissolved Oxygen measurement.</p>
+<ul class="simple">
+<li>Abbreviation: DissolvedOxygen</li>
+<li>Identification Number: 295</li>
+<li>Payload Size: 4 bytes</li>
+<li>Message Size: 26 bytes</li>
+<li>Flags: periodic</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="9%" />
+<col width="17%" />
+<col width="7%" />
+<col width="10%" />
+<col width="33%" />
+<col width="24%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Value</td>
+<td>value</td>
+<td><em>µM</em></td>
+<td>fp32_t</td>
+<td>Dissolved Oxygen reading.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="air-saturation">
+<span id="airsaturation"></span><h2>Air Saturation<a class="headerlink" href="#air-saturation" title="Permalink to this headline">¶</a></h2>
+<p>Air Saturation measurement.</p>
+<ul class="simple">
+<li>Abbreviation: AirSaturation</li>
+<li>Identification Number: 296</li>
+<li>Payload Size: 4 bytes</li>
+<li>Message Size: 26 bytes</li>
+<li>Flags: periodic</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="9%" />
+<col width="18%" />
+<col width="8%" />
+<col width="10%" />
+<col width="31%" />
+<col width="25%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Value</td>
+<td>value</td>
+<td><em>%</em></td>
+<td>fp32_t</td>
+<td>Air Saturation reading.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="throttle">
+<span id="id22"></span><h2>Throttle<a class="headerlink" href="#throttle" title="Permalink to this headline">¶</a></h2>
+<p>Throttle e.g. for Plane/Copter .</p>
+<ul class="simple">
+<li>Abbreviation: Throttle</li>
+<li>Identification Number: 297</li>
+<li>Payload Size: 8 bytes</li>
+<li>Message Size: 30 bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="8%" />
+<col width="15%" />
+<col width="7%" />
+<col width="9%" />
+<col width="40%" />
+<col width="22%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Value</td>
+<td>value</td>
+<td><em>%</em></td>
+<td>fp64_t</td>
+<td>The value of the desired throttle.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="ph">
+<span id="id23"></span><h2>pH<a class="headerlink" href="#ph" title="Permalink to this headline">¶</a></h2>
+<p>Report of pH.</p>
+<ul class="simple">
+<li>Abbreviation: PH</li>
+<li>Identification Number: 298</li>
+<li>Payload Size: 4 bytes</li>
+<li>Message Size: 26 bytes</li>
+<li>Flags: periodic</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="7%" />
+<col width="14%" />
+<col width="6%" />
+<col width="8%" />
+<col width="47%" />
+<col width="19%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Value</td>
+<td>value</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>The value of the pH as measured by the sensor.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="redox-potential">
+<span id="redox"></span><h2>Redox Potential<a class="headerlink" href="#redox-potential" title="Permalink to this headline">¶</a></h2>
+<p>Report of Redox Potential.</p>
+<ul class="simple">
+<li>Abbreviation: Redox</li>
+<li>Identification Number: 299</li>
+<li>Payload Size: 4 bytes</li>
+<li>Message Size: 26 bytes</li>
+<li>Flags: periodic</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="7%" />
+<col width="13%" />
+<col width="6%" />
+<col width="8%" />
+<col width="48%" />
+<col width="19%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Value</td>
+<td>value</td>
+<td><em>V</em></td>
+<td>fp32_t</td>
+<td>The value of the Redox as measured by the sensor.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<h3><a href="index.html">Table Of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Message Format.html">Message Format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Core.html">Core Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Simulation.html">Simulation Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Storage.html">Storage Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Networking.html">Networking Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Acoustic Networking.html">Acoustic Networking Messages</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Sensors Messages</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#revolutions-per-minute">Revolutions Per Minute</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#voltage">Voltage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#current">Current</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#gps-fix">GPS Fix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#euler-angles">Euler Angles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#euler-angles-delta">Euler Angles Delta</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#angular-velocity">Angular Velocity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#acceleration">Acceleration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#magnetic-field">Magnetic Field</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ground-velocity">Ground Velocity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#water-velocity">Water Velocity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#velocity-delta">Velocity Delta</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#distance">Distance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#temperature">Temperature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pressure">Pressure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#depth">Depth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#depth-offset">Depth Offset</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sound-speed">Sound Speed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#water-density">Water Density</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#conductivity">Conductivity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#salinity">Salinity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#wind-speed">Wind Speed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#relative-humidity">Relative Humidity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#device-data-text">Device Data (Text)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#device-data-binary">Device Data (Binary)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#force">Force</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sonar-data">Sonar Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pulse">Pulse</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pulse-detection-control">Pulse Detection Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#fuel-level">Fuel Level</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#gps-navigation-data">GPS Navigation Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#servo-position">Servo Position</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#device-state">Device State</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#beam-configuration">Beam Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#data-sanity">Data Sanity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rhodamine-dye">Rhodamine Dye</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#crude-oil">Crude Oil</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#fine-oil">Fine Oil</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#turbidity">Turbidity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#chlorophyll">Chlorophyll</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#fluorescein">Fluorescein</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#phycocyanin">Phycocyanin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#phycoerythrin">Phycoerythrin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#gps-fix-rtk">GPS Fix RTK</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#external-navigation-data">External Navigation Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#dissolved-oxygen">Dissolved Oxygen</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#air-saturation">Air Saturation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#throttle">Throttle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ph">pH</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#redox-potential">Redox Potential</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Actuation.html">Actuation Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Navigation.html">Navigation Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Guidance.html">Guidance Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Maneuvering.html">Maneuvering Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Vehicle Supervision.html">Vehicle Supervision Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Plan Supervision.html">Plan Supervision Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CCU.html">CCU Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Autonomy.html">Autonomy Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Vision.html">Vision Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="External.html">External Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Development.html">Development Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Custom.html">Custom Messages</a></li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013-2017, Universidade do Porto - Faculdade de Engenharia - LSTS.
+      <br/>
+      Last updated on Aug 21, 2019.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,493 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>IMC v5.4.11-unknown &mdash; IMC v5.4.11 Specification</title>
+    
+    <link rel="stylesheet" href="_static/pydoctheme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '5.4.11',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="top" title="IMC v5.4.11 Specification" href="#" />
+    <link rel="next" title="Message Format" href="Message Format.html" /> 
+  </head>
+  <body>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="imc-v5-4-11-unknown">
+<h1>IMC v5.4.11-unknown<a class="headerlink" href="#imc-v5-4-11-unknown" title="Permalink to this headline">¶</a></h1>
+<p>This document describes the communications protocol associated
+with the LSTS software framework. Concepts such as <em>message</em>,
+<em>field</em> and <em>packet</em> are explained in detail in the subsequent
+chapters.</p>
+<p>Inter module communication is achieved by the exchange of messages
+that can be recognized and interpreted by all participating
+modules. A message is a self-contained collection of data fields
+conveying relevant information about a given subject. The mean by
+which the messages are exchanged is not described in this
+document, but the reader can assume that at least the UDP Internet
+protocol is available at all ends of the communications channel.</p>
+<p>The Neptus Command and Control Unit (CCU), currently being used at
+LSTS, supports mission planning and control, using the described
+messaging API. This software entity can be used to define a plan
+before execution and monitor the plan’s execution by presenting an
+operating console. For further details on this software contact
+the LSTS.</p>
+<p>A CCU exercises authority over a vehicle (real or
+simulated). Usually this term is applied to software in the class
+of LSTS Neptus, but can also be applied to software modules
+extending the vehicle core control software.</p>
+<p>The LSTS reserves itself the right to use message identification
+numbers up to 999. Thus if a third party needs to extend this API
+it must use identification numbers starting at 1000. The
+identification number 65535 has a special meaning and must not be
+used to extend the IMC protocol.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Message Format.html">Message Format</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Message Format.html#field-types">Field types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Message Format.html#serialization">Serialization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Message Format.html#header">Header</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Message Format.html#footer">Footer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Message Format.html#flags">Flags</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Message Format.html#reference-of-units">Reference of Units</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Message Format.html#reference-of-global-enumerations">Reference of Global Enumerations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Message Format.html#reference-of-global-bitfields">Reference of Global Bitfields</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Message Format.html#reference-of-message-groups">Reference of Message-Groups</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Core.html">Core Messages</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Core.html#entity-state">Entity State</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Core.html#query-entity-state">Query Entity State</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Core.html#entity-information">Entity Information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Core.html#query-entity-information">Query Entity Information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Core.html#entity-list">Entity List</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Core.html#cpu-usage">CPU Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Core.html#transport-bindings">Transport Bindings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Core.html#restart-system">Restart System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Core.html#device-calibration-control">Device Calibration Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Core.html#device-calibration-state">Device Calibration State</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Core.html#entity-activation-state">Entity Activation State</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Core.html#query-entity-activation-state">Query Entity Activation State</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Core.html#vehicle-operational-limits">Vehicle Operational Limits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Core.html#message-list">Message List</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Simulation.html">Simulation Messages</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Simulation.html#simulated-state">Simulated State</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Simulation.html#leak-simulation">Leak Simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Simulation.html#underwater-acoustics-simulation">Underwater Acoustics Simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Simulation.html#dynamics-simulation-parameters">Dynamics Simulation Parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Storage.html">Storage Messages</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Storage.html#storage-usage">Storage Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Storage.html#cache-control">Cache Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Storage.html#logging-control">Logging Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Storage.html#log-book-entry">Log Book Entry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Storage.html#log-book-control">Log Book Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Storage.html#replay-control">Replay Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Storage.html#clock-control">Clock Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Storage.html#historic-ctd">Historic CTD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Storage.html#historic-telemetry">Historic Telemetry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Storage.html#historic-sonar-data">Historic Sonar Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Storage.html#historic-event">Historic Event</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Storage.html#vertical-profile">Vertical Profile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Storage.html#profile-sample">Profile Sample</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Networking.html">Networking Messages</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Networking.html#heartbeat">Heartbeat</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Networking.html#announce">Announce</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Networking.html#announce-service">Announce Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Networking.html#receive-signal-strength-information">Receive Signal Strength Information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Networking.html#voltage-standing-wave-ratio">Voltage Standing Wave Ratio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Networking.html#link-level">Link Level</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Networking.html#sms">SMS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Networking.html#sms-transmit">SMS Transmit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Networking.html#sms-receive">SMS Receive</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Networking.html#sms-state">SMS State</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Networking.html#text-message">Text Message</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Networking.html#received-iridium-message">Received Iridium Message</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Networking.html#transmit-iridium-message">Transmit Iridium Message</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Networking.html#iridium-transmission-status">Iridium Transmission Status</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Networking.html#group-membership-state">Group Membership State</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Networking.html#system-group">System Group</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Networking.html#link-latency">Link Latency</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Networking.html#extended-receive-signal-strength-information">Extended Receive Signal Strength Information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Networking.html#historic-data-series">Historic Data Series</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Networking.html#compressed-historic-data-series">Compressed Historic Data Series</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Networking.html#historic-data-sample">Historic Data Sample</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Networking.html#historic-data-query">Historic Data Query</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Networking.html#remote-command">Remote Command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Networking.html#communication-systems-query">Communication Systems Query</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Networking.html#telemetry-message">Telemetry Message</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Acoustic Networking.html">Acoustic Networking Messages</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Acoustic Networking.html#lbl-range">LBL Range</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Acoustic Networking.html#lbl-beacon-configuration">LBL Beacon Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Acoustic Networking.html#lbl-configuration">LBL Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Acoustic Networking.html#acoustic-message">Acoustic Message</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Acoustic Networking.html#acoustic-operation">Acoustic Operation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Acoustic Networking.html#acoustic-systems-query">Acoustic Systems Query</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Acoustic Networking.html#acoustic-systems">Acoustic Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Acoustic Networking.html#acoustic-link-quality">Acoustic Link Quality</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Acoustic Networking.html#acoustic-transmission-request">Acoustic Transmission Request</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Acoustic Networking.html#acoustic-transmission-status">Acoustic Transmission Status</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Sensors.html">Sensors Messages</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Sensors.html#revolutions-per-minute">Revolutions Per Minute</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Sensors.html#voltage">Voltage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Sensors.html#current">Current</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Sensors.html#gps-fix">GPS Fix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Sensors.html#euler-angles">Euler Angles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Sensors.html#euler-angles-delta">Euler Angles Delta</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Sensors.html#angular-velocity">Angular Velocity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Sensors.html#acceleration">Acceleration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Sensors.html#magnetic-field">Magnetic Field</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Sensors.html#ground-velocity">Ground Velocity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Sensors.html#water-velocity">Water Velocity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Sensors.html#velocity-delta">Velocity Delta</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Sensors.html#distance">Distance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Sensors.html#temperature">Temperature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Sensors.html#pressure">Pressure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Sensors.html#depth">Depth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Sensors.html#depth-offset">Depth Offset</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Sensors.html#sound-speed">Sound Speed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Sensors.html#water-density">Water Density</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Sensors.html#conductivity">Conductivity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Sensors.html#salinity">Salinity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Sensors.html#wind-speed">Wind Speed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Sensors.html#relative-humidity">Relative Humidity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Sensors.html#device-data-text">Device Data (Text)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Sensors.html#device-data-binary">Device Data (Binary)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Sensors.html#force">Force</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Sensors.html#sonar-data">Sonar Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Sensors.html#pulse">Pulse</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Sensors.html#pulse-detection-control">Pulse Detection Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Sensors.html#fuel-level">Fuel Level</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Sensors.html#gps-navigation-data">GPS Navigation Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Sensors.html#servo-position">Servo Position</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Sensors.html#device-state">Device State</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Sensors.html#beam-configuration">Beam Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Sensors.html#data-sanity">Data Sanity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Sensors.html#rhodamine-dye">Rhodamine Dye</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Sensors.html#crude-oil">Crude Oil</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Sensors.html#fine-oil">Fine Oil</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Sensors.html#turbidity">Turbidity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Sensors.html#chlorophyll">Chlorophyll</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Sensors.html#fluorescein">Fluorescein</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Sensors.html#phycocyanin">Phycocyanin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Sensors.html#phycoerythrin">Phycoerythrin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Sensors.html#gps-fix-rtk">GPS Fix RTK</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Sensors.html#external-navigation-data">External Navigation Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Sensors.html#dissolved-oxygen">Dissolved Oxygen</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Sensors.html#air-saturation">Air Saturation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Sensors.html#throttle">Throttle</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Sensors.html#ph">pH</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Sensors.html#redox-potential">Redox Potential</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Actuation.html">Actuation Messages</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Actuation.html#camera-zoom">Camera Zoom</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Actuation.html#set-thruster-actuation">Set Thruster Actuation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Actuation.html#set-servo-position">Set Servo Position</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Actuation.html#set-control-surface-deflection">Set Control Surface Deflection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Actuation.html#remote-actions-request">Remote Actions Request</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Actuation.html#remote-actions">Remote Actions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Actuation.html#button-event">Button Event</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Actuation.html#lcd-control">LCD Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Actuation.html#power-operation">Power Operation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Actuation.html#power-channel-control">Power Channel Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Actuation.html#query-power-channel-state">Query Power Channel State</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Actuation.html#power-channel-state">Power Channel State</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Actuation.html#led-brightness">LED Brightness</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Actuation.html#query-led-brightness">Query LED Brightness</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Actuation.html#set-led-brightness">Set LED Brightness</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Actuation.html#set-pwm">Set PWM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Actuation.html#pwm">PWM</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Navigation.html">Navigation Messages</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Navigation.html#estimated-state">Estimated State</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Navigation.html#estimated-stream-velocity">Estimated Stream Velocity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Navigation.html#indicated-speed">Indicated Speed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Navigation.html#true-speed">True Speed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Navigation.html#navigation-uncertainty">Navigation Uncertainty</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Navigation.html#navigation-data">Navigation Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Navigation.html#gps-fix-rejection">GPS Fix Rejection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Navigation.html#lbl-range-acceptance">LBL Range Acceptance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Navigation.html#dvl-rejection">DVL Rejection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Navigation.html#lbl-beacon-position-estimate">LBL Beacon Position Estimate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Navigation.html#alignment-state">Alignment State</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Navigation.html#groupstreamvelocity">GroupStreamVelocity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Navigation.html#airflow">Airflow</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Guidance.html">Guidance Messages</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Guidance.html#desired-heading">Desired Heading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Guidance.html#desired-z">Desired Z</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Guidance.html#desired-speed">Desired Speed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Guidance.html#desired-roll">Desired Roll</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Guidance.html#desired-pitch">Desired Pitch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Guidance.html#desired-vertical-rate">Desired Vertical Rate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Guidance.html#desired-path">Desired Path</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Guidance.html#desired-control">Desired Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Guidance.html#desired-heading-rate">Desired Heading Rate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Guidance.html#desired-velocity">Desired Velocity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Guidance.html#path-control-state">Path Control State</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Guidance.html#allocated-control-torques">Allocated Control Torques</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Guidance.html#control-parcel">Control Parcel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Guidance.html#brake">Brake</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Guidance.html#desired-linear-state">Desired Linear State</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Guidance.html#desired-throttle">Desired Throttle</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Maneuvering.html">Maneuvering Messages</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Maneuvering.html#goto-maneuver">Goto Maneuver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Maneuvering.html#popup-maneuver">PopUp Maneuver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Maneuvering.html#teleoperation-maneuver">Teleoperation Maneuver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Maneuvering.html#loiter-maneuver">Loiter Maneuver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Maneuvering.html#idlemaneuver">Idle Maneuver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Maneuvering.html#low-level-control-maneuver">Low Level Control Maneuver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Maneuvering.html#rows-maneuver">Rows Maneuver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Maneuvering.html#follow-path-maneuver">Follow Path Maneuver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Maneuvering.html#path-point">Path Point</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Maneuvering.html#yo-yo-maneuver">Yo-Yo Maneuver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Maneuvering.html#teleoperation-done">Teleoperation Done</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Maneuvering.html#station-keeping">Station Keeping</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Maneuvering.html#elevator-maneuver">Elevator Maneuver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Maneuvering.html#follow-trajectory">Follow Trajectory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Maneuvering.html#trajectory-point">Trajectory Point</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Maneuvering.html#custom-maneuver">Custom Maneuver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Maneuvering.html#vehicle-formation">Vehicle Formation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Maneuvering.html#vehicle-formation-participant">Vehicle Formation Participant</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Maneuvering.html#stop-maneuver">Stop Maneuver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Maneuvering.html#register-maneuver">Register Maneuver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Maneuvering.html#maneuver-control-state">Maneuver Control State</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Maneuvering.html#follow-system">Follow System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Maneuvering.html#communications-relay">Communications Relay</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Maneuvering.html#cover-area">Cover Area</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Maneuvering.html#polygon-vertex">Polygon Vertex</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Maneuvering.html#compass-calibration-maneuver">Compass Calibration Maneuver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Maneuvering.html#formation-parameters">Formation Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Maneuvering.html#formation-plan-execution">Formation Plan Execution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Maneuvering.html#follow-reference-maneuver">Follow Reference Maneuver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Maneuvering.html#reference-to-follow">Reference To Follow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Maneuvering.html#follow-reference-state">Follow Reference State</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Maneuvering.html#formation-monitoring-data">Formation Monitoring Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Maneuvering.html#relative-state">Relative State</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Maneuvering.html#dislodge-maneuver">Dislodge Maneuver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Maneuvering.html#formation">Formation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Maneuvering.html#launch-maneuver">Launch Maneuver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Maneuvering.html#drop-maneuver">Drop Maneuver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Maneuvering.html#scheduled-goto">Scheduled Goto</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Maneuvering.html#rows-coverage">Rows Coverage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Maneuvering.html#sample-maneuver">Sample Maneuver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Maneuvering.html#image-tracking">Image Tracking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Maneuvering.html#takeoff-maneuver">Takeoff Maneuver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Maneuvering.html#land-maneuver">Land Maneuver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Maneuvering.html#autonomous-section">Autonomous Section</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Maneuvering.html#follow-point-maneuver">Follow Point Maneuver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Maneuvering.html#alignment-maneuver">Alignment Maneuver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Maneuvering.html#station-keeping-extended">Station Keeping Extended</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Maneuvering.html#magnetometer-maneuver">Magnetometer Maneuver</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Vehicle Supervision.html">Vehicle Supervision Messages</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Vehicle Supervision.html#vehicle-state">Vehicle State</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Vehicle Supervision.html#vehicle-command">Vehicle Command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Vehicle Supervision.html#monitor-entity-state">Monitor Entity State</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Vehicle Supervision.html#entity-monitoring-state">Entity Monitoring State</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Vehicle Supervision.html#operational-limits">Operational Limits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Vehicle Supervision.html#get-operational-limits">Get Operational Limits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Vehicle Supervision.html#calibration">Calibration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Vehicle Supervision.html#control-loops">Control Loops</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Vehicle Supervision.html#vehicle-medium">Vehicle Medium</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Vehicle Supervision.html#collision">Collision</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Vehicle Supervision.html#formation-tracking-state">Formation Tracking State</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Vehicle Supervision.html#autopilot-mode">Autopilot Mode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Vehicle Supervision.html#formationstate">Formation Tracking State</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Vehicle Supervision.html#report-control">Report Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Vehicle Supervision.html#state-report">State Report</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Vehicle Supervision.html#transmission-request">Transmission Request</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Vehicle Supervision.html#transmission-status">Transmission Status</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Vehicle Supervision.html#sms-transmission-request">SMS Transmission Request</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Vehicle Supervision.html#sms-transmission-status">SMS Transmission Status</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Vehicle Supervision.html#vtol-state">VTOL State</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Vehicle Supervision.html#arming-state">Arming State</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Vehicle Supervision.html#tcp-transmission-request">TCP Transmission Request</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Vehicle Supervision.html#tcp-transmission-status">TCP Transmission Status</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Plan Supervision.html">Plan Supervision Messages</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Plan Supervision.html#abort">Abort</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Plan Supervision.html#plan-specification">Plan Specification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Plan Supervision.html#plan-maneuver">Plan Maneuver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Plan Supervision.html#plan-transition">Plan Transition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Plan Supervision.html#emergency-control">Emergency Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Plan Supervision.html#emergency-control-state">Emergency Control State</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Plan Supervision.html#plan-db">Plan DB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Plan Supervision.html#plan-db-state">Plan DB State</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Plan Supervision.html#plan-db-information">Plan DB Information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Plan Supervision.html#plan-control">Plan Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Plan Supervision.html#plan-control-state">Plan Control State</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Plan Supervision.html#plan-variable">Plan Variable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Plan Supervision.html#plan-generation">Plan Generation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Plan Supervision.html#leader-state">Leader State</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Plan Supervision.html#plan-statistics">Plan Statistics</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="CCU.html">CCU Messages</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="CCU.html#reported-state">Reported State</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CCU.html#remote-sensor-info">Remote Sensor Info</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CCU.html#map">Map</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CCU.html#map-feature">Map Feature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CCU.html#mappoint">MapPoint</a></li>
+<li class="toctree-l2"><a class="reference internal" href="CCU.html#ccu-event">CCU Event</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Autonomy.html">Autonomy Messages</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Autonomy.html#vehicle-links">Vehicle Links</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Autonomy.html#trex-observation">TREX Observation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Autonomy.html#trex-command">TREX Command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Autonomy.html#trex-operation">TREX Operation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Autonomy.html#trex-attribute">TREX Attribute</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Autonomy.html#trex-token">TREX Token</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Autonomy.html#trex-plan">TREX Plan</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Autonomy.html#event">Event</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Vision.html">Vision Messages</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Vision.html#compressed-image">Compressed Image</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Vision.html#image-transmission-settings">Image Transmission Settings</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="External.html">External Messages</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="External.html#remote-state">Remote State</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Development.html">Development Messages</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Development.html#target">Target</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Development.html#entityparameter">EntityParameter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Development.html#entityparameters">EntityParameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Development.html#queryentityparameters">QueryEntityParameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Development.html#setentityparameters">SetEntityParameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Development.html#saveentityparameters">SaveEntityParameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Development.html#create-session">Create Session</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Development.html#close-session">Close Session</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Development.html#session-subscription">Session Subscription</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Development.html#session-keep-alive">Session Keep-Alive</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Development.html#session-status">Session Status</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Development.html#push-entity-parameters">Push Entity Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Development.html#pop-entity-parameters">Pop Entity Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Development.html#i-o-event">I/O Event</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Development.html#uamtxframe">UamTxFrame</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Development.html#uamrxframe">UamRxFrame</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Development.html#uamtxstatus">UamTxStatus</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Development.html#uamrxrange">UamRxRange</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Development.html#formation-control-parameters">Formation Control Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Development.html#formation-evaluation-data">Formation Evaluation Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Development.html#formationcontrolparams">Formation Control Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Development.html#formationevaluation">Formation Evaluation Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Development.html#soi-waypoint">SOI Waypoint</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Development.html#soi-plan">SOI Plan</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Development.html#soi-command">SOI Command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Development.html#soi-state">SOI State</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Development.html#message-fragment">Message Fragment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Development.html#neptus-blob">Neptus Blob</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Development.html#aborted">Aborted</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Development.html#usbl-angles">USBL Angles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Development.html#usbl-position">USBL Position</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Development.html#usbl-fix">USBL Fix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Development.html#parameters-xml">Parameters XML</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Development.html#get-parameters-xml">Get Parameters XML</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Development.html#set-image-coordinates">Set Image Coordinates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Development.html#get-image-coordinates">Get Image Coordinates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Development.html#get-world-coordinates">Get World Coordinates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Development.html#usbl-angles-extended">USBL Angles Extended</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Development.html#usbl-position-extended">USBL Position Extended</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Development.html#usbl-fix-extended">USBL Fix Extended</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Custom.html">Custom Messages</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Custom.html#total-magnetic-field-intensity">Total Magnetic Field Intensity</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<h3><a href="#">Table Of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Message Format.html">Message Format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Core.html">Core Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Simulation.html">Simulation Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Storage.html">Storage Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Networking.html">Networking Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Acoustic Networking.html">Acoustic Networking Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Sensors.html">Sensors Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Actuation.html">Actuation Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Navigation.html">Navigation Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Guidance.html">Guidance Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Maneuvering.html">Maneuvering Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Vehicle Supervision.html">Vehicle Supervision Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Plan Supervision.html">Plan Supervision Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CCU.html">CCU Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Autonomy.html">Autonomy Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Vision.html">Vision Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="External.html">External Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Development.html">Development Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Custom.html">Custom Messages</a></li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013-2017, Universidade do Porto - Faculdade de Engenharia - LSTS.
+      <br/>
+      Last updated on Aug 21, 2019.
+    </div>
+  </body>
+</html>

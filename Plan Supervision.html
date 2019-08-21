@@ -1,0 +1,2063 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Plan Supervision Messages &mdash; IMC v5.4.11 Specification</title>
+    
+    <link rel="stylesheet" href="_static/pydoctheme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '5.4.11',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="top" title="IMC v5.4.11 Specification" href="index.html" />
+    <link rel="next" title="CCU Messages" href="CCU.html" />
+    <link rel="prev" title="Vehicle Supervision Messages" href="Vehicle Supervision.html" /> 
+  </head>
+  <body>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="plan-supervision-messages">
+<h1>Plan Supervision Messages<a class="headerlink" href="#plan-supervision-messages" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="abort">
+<span id="id1"></span><h2>Abort<a class="headerlink" href="#abort" title="Permalink to this headline">¶</a></h2>
+<p>Stops any executing actions and put the system in a standby mode.</p>
+<ul class="simple">
+<li>Abbreviation: Abort</li>
+<li>Identification Number: 550</li>
+<li>Payload Size: 0 bytes</li>
+<li>Message Size: 22 bytes</li>
+</ul>
+<p>This message has no fields.</p>
+</div>
+<div class="section" id="plan-specification">
+<span id="planspecification"></span><h2>Plan Specification<a class="headerlink" href="#plan-specification" title="Permalink to this headline">¶</a></h2>
+<p>Identity and description of a plan’s general parameters,
+associated with plan loading (i.e. load plan command in
+<em>PlanCommand</em>).</p>
+<p>A plan specification is defined by a plan identifier, a set of
+maneuver specifications and a start maneuver from that set.</p>
+<p>See the <a class="reference internal" href="#planmaneuver"><span class="std std-ref">Plan Maneuver</span></a> message for details on maneuver
+specification.</p>
+<ul class="simple">
+<li>Abbreviation: PlanSpecification</li>
+<li>Identification Number: 551</li>
+<li>Payload Size: 18+  bytes</li>
+<li>Message Size: 40+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="10%" />
+<col width="4%" />
+<col width="17%" />
+<col width="43%" />
+<col width="13%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Plan ID</td>
+<td>plan_id</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>The plan’s identifier.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Plan Description</td>
+<td>description</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>Verbose text description of plan.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Namespace</td>
+<td>vnamespace</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>Namespace for plan variables.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Plan Variables</td>
+<td>variables</td>
+<td><em>-</em></td>
+<td>message-list
+(<a class="reference internal" href="#planvariable"><span class="std std-ref">Plan Variable</span></a>)</td>
+<td>Plan variables.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Starting maneuver</td>
+<td>start_man_id</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>Indicates the id of the starting maneuver for this plan.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Maneuvers</td>
+<td>maneuvers</td>
+<td><em>-</em></td>
+<td>message-list
+(<a class="reference internal" href="#planmaneuver"><span class="std std-ref">Plan Maneuver</span></a>)</td>
+<td>List of maneuver specifications.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Transitions</td>
+<td>transitions</td>
+<td><em>-</em></td>
+<td>message-list
+(<a class="reference internal" href="#plantransition"><span class="std std-ref">Plan Transition</span></a>)</td>
+<td>List of maneuver specifications.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Start Actions</td>
+<td>start_actions</td>
+<td><em>-</em></td>
+<td>message-list</td>
+<td>Contains an optionally defined ‘MessageList’ for actions fired
+on plan activation.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>End Actions</td>
+<td>end_actions</td>
+<td><em>-</em></td>
+<td>message-list</td>
+<td>Contains an optionally defined ‘MessageList’ for actions fired
+on plan termination.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="plan-maneuver">
+<span id="planmaneuver"></span><h2>Plan Maneuver<a class="headerlink" href="#plan-maneuver" title="Permalink to this headline">¶</a></h2>
+<p>Named plan maneuver.</p>
+<ul class="simple">
+<li>Abbreviation: PlanManeuver</li>
+<li>Identification Number: 552</li>
+<li>Payload Size: 8+  bytes</li>
+<li>Message Size: 30+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="10%" />
+<col width="4%" />
+<col width="13%" />
+<col width="43%" />
+<col width="14%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Maneuver ID</td>
+<td>maneuver_id</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>The maneuver ID.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Maneuver Specification</td>
+<td>data</td>
+<td><em>-</em></td>
+<td>message
+(<a class="reference internal" href="Message Format.html#maneuver"><span class="std std-ref">Message-Group Maneuver</span></a>)</td>
+<td>The maneuver specification.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Start Actions</td>
+<td>start_actions</td>
+<td><em>-</em></td>
+<td>message-list</td>
+<td>Contains an optionally defined ‘MessageList’ for actions fired
+on plan activation.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>End Actions</td>
+<td>end_actions</td>
+<td><em>-</em></td>
+<td>message-list</td>
+<td>Contains an optionally defined ‘MessageList’ for actions fired
+on plan termination.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="plan-transition">
+<span id="plantransition"></span><h2>Plan Transition<a class="headerlink" href="#plan-transition" title="Permalink to this headline">¶</a></h2>
+<p>Describes a plan transition within a plan specification. A
+transition states the vehicle conditions that must be met to
+signal the transition, the maneuver that should be started as a
+result, and an optional set of actions triggered by the
+transition.</p>
+<ul class="simple">
+<li>Abbreviation: PlanTransition</li>
+<li>Identification Number: 553</li>
+<li>Payload Size: 8+  bytes</li>
+<li>Message Size: 30+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="19%" />
+<col width="10%" />
+<col width="4%" />
+<col width="10%" />
+<col width="44%" />
+<col width="14%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Source</td>
+<td>source_man</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>Comma separated list of maneuver IDs, or the special value ‘.’
+to identify a global plan transition.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Destination Maneuver Name</td>
+<td>dest_man</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>Target maneuver name.
+If it equals the special value ‘_done_’ then plan should
+terminate with a success status.
+If it equals the special value ‘_error_’ then the plan should
+terminate with an error status.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Transition conditions</td>
+<td>conditions</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>Comma separated list of conditions for transition. Each
+condition identifier corresponds to a known predicate which is
+interpreted and tested internally by the vehicle.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Transition actions</td>
+<td>actions</td>
+<td><em>-</em></td>
+<td>message-list</td>
+<td>Messages processed when the transition is triggered.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="emergency-control">
+<span id="emergencycontrol"></span><h2>Emergency Control<a class="headerlink" href="#emergency-control" title="Permalink to this headline">¶</a></h2>
+<p>No description</p>
+<ul class="simple">
+<li>Abbreviation: EmergencyControl</li>
+<li>Identification Number: 554</li>
+<li>Payload Size: 21+  bytes</li>
+<li>Message Size: 43+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="10%" />
+<col width="30%" />
+<col width="21%" />
+<col width="10%" />
+<col width="15%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Command</td>
+<td>command</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="#emergencycontrol-enum-command"><span class="std std-ref">Enum Command</span></a>)</td>
+<td>uint8_t</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Plan Specification</td>
+<td>plan</td>
+<td><em>-</em></td>
+<td>message
+(<a class="reference internal" href="#planspecification"><span class="std std-ref">Plan Specification</span></a>)</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="enum-command">
+<span id="emergencycontrol-enum-prefix-ectl"></span><span id="emergencycontrol-enum-command"></span><h3>Enum Command<a class="headerlink" href="#enum-command" title="Permalink to this headline">¶</a></h3>
+<p>No description</p>
+<ul class="simple">
+<li>Abbreviation: command</li>
+<li>Prefix: ECTL</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="23%" />
+<col width="32%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0</td>
+<td>Enable</td>
+<td>ENABLE</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>Disable</td>
+<td>DISABLE</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-even"><td>2</td>
+<td>Start</td>
+<td>START</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>3</td>
+<td>Stop</td>
+<td>STOP</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-even"><td>4</td>
+<td>Query</td>
+<td>QUERY</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>5</td>
+<td>Set Plan</td>
+<td>SET_PLAN</td>
+<td><em>-</em></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="emergency-control-state">
+<span id="emergencycontrolstate"></span><h2>Emergency Control State<a class="headerlink" href="#emergency-control-state" title="Permalink to this headline">¶</a></h2>
+<p>No description</p>
+<ul class="simple">
+<li>Abbreviation: EmergencyControlState</li>
+<li>Identification Number: 555</li>
+<li>Payload Size: 4+  bytes</li>
+<li>Message Size: 26+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="18%" />
+<col width="11%" />
+<col width="35%" />
+<col width="9%" />
+<col width="11%" />
+<col width="16%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>State</td>
+<td>state</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="#emergencycontrolstate-enum-state"><span class="std std-ref">Enum State</span></a>)</td>
+<td>uint8_t</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Plan Id</td>
+<td>plan_id</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Communications Level</td>
+<td>comm_level</td>
+<td><em>%</em></td>
+<td>uint8_t</td>
+<td>&#160;</td>
+<td>max=100</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="enum-state">
+<span id="emergencycontrolstate-enum-prefix-ecs"></span><span id="emergencycontrolstate-enum-state"></span><h3>Enum State<a class="headerlink" href="#enum-state" title="Permalink to this headline">¶</a></h3>
+<p>No description</p>
+<ul class="simple">
+<li>Abbreviation: state</li>
+<li>Prefix: ECS</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="31%" />
+<col width="31%" />
+<col width="25%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0</td>
+<td>Not Configured</td>
+<td>NOT_CONFIGURED</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>Disabled</td>
+<td>DISABLED</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-even"><td>2</td>
+<td>Enabled</td>
+<td>ENABLED</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>3</td>
+<td>Armed</td>
+<td>ARMED</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-even"><td>4</td>
+<td>Active</td>
+<td>ACTIVE</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>5</td>
+<td>Stopping</td>
+<td>STOPPING</td>
+<td><em>-</em></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="plan-db">
+<span id="plandb"></span><h2>Plan DB<a class="headerlink" href="#plan-db" title="Permalink to this headline">¶</a></h2>
+<p>Request/reply to plan database.</p>
+<ul class="simple">
+<li>Abbreviation: PlanDB</li>
+<li>Identification Number: 556</li>
+<li>Payload Size: 10+  bytes</li>
+<li>Message Size: 32+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="8%" />
+<col width="16%" />
+<col width="6%" />
+<col width="43%" />
+<col width="11%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Type</td>
+<td>type</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="#plandb-enum-type"><span class="std std-ref">Enum Type</span></a>)</td>
+<td>uint8_t</td>
+<td>Indicates if the message is a request, or a reply to a
+previous request.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Operation</td>
+<td>op</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="#plandb-enum-op"><span class="std std-ref">Enum Operation</span></a>)</td>
+<td>uint8_t</td>
+<td><p class="first">Indicates the operation affecting the DB.</p>
+<p>The operation may relate to a single plan or the entire plan DB.
+For each request,  a plan DB may reply with any number of ‘in progress’
+replies followed by a success or a failure reply.</p>
+<p class="last">The ‘op’, ‘request_id’ and ‘plan_id’ fields of a request will be echoed
+in one or more responses to that request.
+The operation at stake also determines a certain type of the ‘arg’ field,
+and whether or not the ‘plan_id’ field needs to be set.</p>
+</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Request ID</td>
+<td>request_id</td>
+<td><em>-</em></td>
+<td>uint16_t</td>
+<td>Request ID. This may be used by interfacing modules,
+e.g. using sequence counters, to annotate requests and
+appropriately identify replies</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Plan ID</td>
+<td>plan_id</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>Plan identifier for the operation, if one is required.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Argument</td>
+<td>arg</td>
+<td><em>-</em></td>
+<td>message</td>
+<td>Request or reply argument.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Complementary Information</td>
+<td>info</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>Human-readable complementary information. For example this
+may be used to detail reasons for failure, or to report
+in-progress information.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="enum-type">
+<span id="plandb-enum-prefix-dbt"></span><span id="plandb-enum-type"></span><h3>Enum Type<a class="headerlink" href="#enum-type" title="Permalink to this headline">¶</a></h3>
+<p>Indicates if the message is a request, or a reply to a
+previous request.</p>
+<ul class="simple">
+<li>Abbreviation: type</li>
+<li>Prefix: DBT</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="39%" />
+<col width="25%" />
+<col width="23%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0</td>
+<td>Request</td>
+<td>REQUEST</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>Reply – Success</td>
+<td>SUCCESS</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-even"><td>2</td>
+<td>Reply – Failure</td>
+<td>FAILURE</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>3</td>
+<td>Reply – In Progress</td>
+<td>IN_PROGRESS</td>
+<td><em>-</em></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="enum-operation">
+<span id="plandb-enum-prefix-dbop"></span><span id="plandb-enum-op"></span><h3>Enum Operation<a class="headerlink" href="#enum-operation" title="Permalink to this headline">¶</a></h3>
+<p>Indicates the operation affecting the DB.</p>
+<p>The operation may relate to a single plan or the entire plan DB.
+For each request,  a plan DB may reply with any number of ‘in progress’
+replies followed by a success or a failure reply.</p>
+<p>The ‘op’, ‘request_id’ and ‘plan_id’ fields of a request will be echoed
+in one or more responses to that request.
+The operation at stake also determines a certain type of the ‘arg’ field,
+and whether or not the ‘plan_id’ field needs to be set.</p>
+<ul class="simple">
+<li>Abbreviation: op</li>
+<li>Prefix: DBOP</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="27%" />
+<col width="12%" />
+<col width="54%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0</td>
+<td>Set Plan</td>
+<td>SET</td>
+<td>Set a plan in the DB. The ‘plan_id’ field identifies the
+plan, and a pre-existing plan with the same identifier, if
+any will be overwritten. For requests, the ‘arg’ field must
+contain a ‘PlanSpecification’ message.</td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>Delete Plan</td>
+<td>DEL</td>
+<td>Delete a plan from the DB. The ‘plan_id’ field identifies
+the plan to delete.</td>
+</tr>
+<tr class="row-even"><td>2</td>
+<td>Get Plan</td>
+<td>GET</td>
+<td>Get a plan stored in the DB.The ‘plan_id’ field identifies
+the plan. Successful replies will yield a
+‘PlanSpecification’ message in the ‘arg’ field.</td>
+</tr>
+<tr class="row-odd"><td>3</td>
+<td>Get Plan Info</td>
+<td>GET_INFO</td>
+<td>Get DB state for a stored plan. The ‘plan_id’ field
+identifies the plan. Successful replies will yield a
+‘PlanDBInformation’ message in the ‘arg’ field.</td>
+</tr>
+<tr class="row-even"><td>4</td>
+<td>Clear Database</td>
+<td>CLEAR</td>
+<td>Clear the entire DB.</td>
+</tr>
+<tr class="row-odd"><td>5</td>
+<td>Get Database State (Simple)</td>
+<td>GET_STATE</td>
+<td>Get state of the entire DB. Successful replies will yield a
+‘PlanDBState’ message in the ‘arg’ field but without
+individual plan information (in the ‘plans_info’ field of
+‘PlanDBState’).</td>
+</tr>
+<tr class="row-even"><td>6</td>
+<td>Get Database State (Detailed)</td>
+<td>GET_DSTATE</td>
+<td>Get detailed state of the entire DB. Successful replies
+will yield a ‘PlanDBState’ message in the ‘arg’ field with
+individual plan information (in the ‘plans_info’ field of
+‘PlanDBState’).</td>
+</tr>
+<tr class="row-odd"><td>7</td>
+<td>Boot Notification</td>
+<td>BOOT</td>
+<td>PlanDB replies of this type are sent automatically during
+bootstrap.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="plan-db-state">
+<span id="plandbstate"></span><h2>Plan DB State<a class="headerlink" href="#plan-db-state" title="Permalink to this headline">¶</a></h2>
+<p>Characterizes the state of the entire plan database.</p>
+<ul class="simple">
+<li>Abbreviation: PlanDBState</li>
+<li>Identification Number: 557</li>
+<li>Payload Size: 22+  bytes</li>
+<li>Message Size: 44+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="19%" />
+<col width="9%" />
+<col width="4%" />
+<col width="17%" />
+<col width="39%" />
+<col width="12%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Plan – Count</td>
+<td>plan_count</td>
+<td><em>-</em></td>
+<td>uint16_t</td>
+<td>Number of stored plans.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Plan – Size of all plans</td>
+<td>plan_size</td>
+<td><em>-</em></td>
+<td>uint32_t</td>
+<td>Size of all plans.The value equals the sum of the IMC payload
+sizes for ‘PlanSpecification’ stored in the DB.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Last Change – Time</td>
+<td>change_time</td>
+<td><em>s</em></td>
+<td>fp64_t</td>
+<td>Time of last change (Epoch time).</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Last Change – Source Address</td>
+<td>change_sid</td>
+<td><em>-</em></td>
+<td>uint16_t</td>
+<td>IMC address for source of last DB change.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Last Change – Source Name</td>
+<td>change_sname</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>IMC node name for source of last DB change.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>MD5</td>
+<td>md5</td>
+<td><em>-</em></td>
+<td>rawdata</td>
+<td>MD5 database verification code. The MD5 hash sum is computed
+over the stream formed by the MD5 of all plans, ordered by
+plan id, in compliance with RFC 1321.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Plan info</td>
+<td>plans_info</td>
+<td><em>-</em></td>
+<td>message-list
+(<a class="reference internal" href="#plandbinformation"><span class="std std-ref">Plan DB Information</span></a>)</td>
+<td>Individual information for plans.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="plan-db-information">
+<span id="plandbinformation"></span><h2>Plan DB Information<a class="headerlink" href="#plan-db-information" title="Permalink to this headline">¶</a></h2>
+<p>No description</p>
+<ul class="simple">
+<li>Abbreviation: PlanDBInformation</li>
+<li>Identification Number: 558</li>
+<li>Payload Size: 18+  bytes</li>
+<li>Message Size: 40+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="21%" />
+<col width="10%" />
+<col width="4%" />
+<col width="8%" />
+<col width="44%" />
+<col width="14%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Plan ID</td>
+<td>plan_id</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>Plan identifier.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Plan Size</td>
+<td>plan_size</td>
+<td><em>-</em></td>
+<td>uint16_t</td>
+<td>Plan size. The value equals the IMC message payload of the
+associated ‘PlanSpecification’ message in bytes.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Last Changed – Time</td>
+<td>change_time</td>
+<td><em>-</em></td>
+<td>fp64_t</td>
+<td>Time of last change to the plan (Epoch time).</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Last Change – Source Address</td>
+<td>change_sid</td>
+<td><em>-</em></td>
+<td>uint16_t</td>
+<td>IMC address for source of last change to the plan.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Last Change – Source Name</td>
+<td>change_sname</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>IMC node name for source of last change to the plan.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>MD5</td>
+<td>md5</td>
+<td><em>-</em></td>
+<td>rawdata</td>
+<td>MD5 plan verification code. The value is calculated over the
+message payload of the ‘PlanSpecification’, in compliance with
+RFC 1321.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="plan-control">
+<span id="plancontrol"></span><h2>Plan Control<a class="headerlink" href="#plan-control" title="Permalink to this headline">¶</a></h2>
+<p>Plan control request/reply.</p>
+<ul class="simple">
+<li>Abbreviation: PlanControl</li>
+<li>Identification Number: 559</li>
+<li>Payload Size: 12+  bytes</li>
+<li>Message Size: 34+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="8%" />
+<col width="22%" />
+<col width="6%" />
+<col width="38%" />
+<col width="12%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Type</td>
+<td>type</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="#plancontrol-enum-type"><span class="std std-ref">Enum Type</span></a>)</td>
+<td>uint8_t</td>
+<td>Indicates if the message is a request or a reply to a
+previous request. The <em>op</em>, <em>request_id</em> and <em>plan_id</em> fields
+of a request will be echoed in one or more responses to that
+request.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Operation</td>
+<td>op</td>
+<td><em>Enumerated</em>
+(<span class="xref std std-ref">PlanControl-enum-op</span>)</td>
+<td>uint8_t</td>
+<td>Plan control operation.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Request ID</td>
+<td>request_id</td>
+<td><em>-</em></td>
+<td>uint16_t</td>
+<td>Request ID. This may be used by interfacing modules e.g. using
+sequence counters.  to annotate requests and appropriately
+identify replies.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Plan Identifier</td>
+<td>plan_id</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>The identifier for the plan to be stopped / started / loaded /
+retrieved according to the command requested (<em>op</em> field).</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Flags</td>
+<td>flags</td>
+<td><em>Bitfield</em>
+(<a class="reference internal" href="#plancontrol-bitfield-flags"><span class="std std-ref">Bitfield Flags</span></a>)</td>
+<td>uint16_t</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Request/Reply Argument</td>
+<td>arg</td>
+<td><em>-</em></td>
+<td>message</td>
+<td>Complementary message argument for requests/replies.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Complementary Info</td>
+<td>info</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>Complementary human-readable information. This is used
+in association to replies.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="plancontrol-enum-prefix-pc">
+<span id="plancontrol-enum-type"></span><span id="id2"></span><h3>Enum Type<a class="headerlink" href="#plancontrol-enum-prefix-pc" title="Permalink to this headline">¶</a></h3>
+<p>Indicates if the message is a request or a reply to a
+previous request. The <em>op</em>, <em>request_id</em> and <em>plan_id</em> fields
+of a request will be echoed in one or more responses to that
+request.</p>
+<ul class="simple">
+<li>Abbreviation: type</li>
+<li>Prefix: PC</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="39%" />
+<col width="25%" />
+<col width="23%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0</td>
+<td>Request</td>
+<td>REQUEST</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>Reply – Success</td>
+<td>SUCCESS</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-even"><td>2</td>
+<td>Reply – Failure</td>
+<td>FAILURE</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>3</td>
+<td>Reply – In Progress</td>
+<td>IN_PROGRESS</td>
+<td><em>-</em></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id3">
+<span id="id4"></span><h3>Enum Operation<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p>Plan control operation.</p>
+<ul class="simple">
+<li>Abbreviation: op</li>
+<li>Prefix: PC</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="7%" />
+<col width="12%" />
+<col width="14%" />
+<col width="68%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0</td>
+<td>Start Plan</td>
+<td>START</td>
+<td><p class="first">Start plan identified by <em>plan_id</em> field.  The command will
+try to load the corresponding plan if none is loaded, and in
+that case will follow the same discipline as the <em>LOAD</em>
+command.</p>
+<p>If the message in <em>arg</em> is a <a class="reference internal" href="Message Format.html#maneuver"><span class="std std-ref">Message-Group Maneuver</span></a>, a single-maneuver plan
+will be generated and executed.</p>
+<p class="last">This will override any current plan being executed.</p>
+</td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>Stop Plan</td>
+<td>STOP</td>
+<td>Stop current plan being executed if any.</td>
+</tr>
+<tr class="row-even"><td>2</td>
+<td>Load Plan</td>
+<td>LOAD</td>
+<td>Load Plan. If a <a class="reference internal" href="#planspecification"><span class="std std-ref">Plan Specification</span></a> is given with the
+request in the <em>data</em> field, then that plan is used and
+stored in the Plan DB. Otherwise, the plan is loaded from
+the Plan DB.</td>
+</tr>
+<tr class="row-odd"><td>3</td>
+<td>Get Plan</td>
+<td>GET</td>
+<td>Get loaded plan. For a successful reply, the <em>data</em> field
+will contain the <a class="reference internal" href="#planspecification"><span class="std std-ref">Plan Specification</span></a> message that
+corresponds to the currently loaded plan.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="bitfield-flags">
+<span id="plancontrol-bitfield-prefix-flg"></span><span id="plancontrol-bitfield-flags"></span><h3>Bitfield Flags<a class="headerlink" href="#bitfield-flags" title="Permalink to this headline">¶</a></h3>
+<p>No description</p>
+<ul class="simple">
+<li>Abbreviation: flags</li>
+<li>Prefix: FLG</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="7%" />
+<col width="17%" />
+<col width="13%" />
+<col width="63%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0x0001</td>
+<td>Calibrate Vehicle</td>
+<td>CALIBRATE</td>
+<td>Perform vehicle calibration.</td>
+</tr>
+<tr class="row-odd"><td>0x0002</td>
+<td>Ignore Errors</td>
+<td>IGNORE_ERRORS</td>
+<td>Execute current plan while ignoring some errors that might be active.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="plan-control-state">
+<span id="plancontrolstate"></span><h2>Plan Control State<a class="headerlink" href="#plan-control-state" title="Permalink to this headline">¶</a></h2>
+<p>State of plan control.</p>
+<ul class="simple">
+<li>Abbreviation: PlanControlState</li>
+<li>Identification Number: 560</li>
+<li>Payload Size: 20+  bytes</li>
+<li>Message Size: 42+  bytes</li>
+<li>Flags: periodic</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="8%" />
+<col width="25%" />
+<col width="6%" />
+<col width="38%" />
+<col width="11%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>State</td>
+<td>state</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="#plancontrolstate-enum-state"><span class="std std-ref">Enum State</span></a>)</td>
+<td>uint8_t</td>
+<td>Describes overall state.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Plan – ID</td>
+<td>plan_id</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>Identifier of plan currently loaded.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Plan – ETA</td>
+<td>plan_eta</td>
+<td><em>s</em></td>
+<td>int32_t</td>
+<td>Current plan estimated time to completion.
+The value will be -1 if the time is unknown or undefined.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Plan – Progress</td>
+<td>plan_progress</td>
+<td><em>%</em></td>
+<td>fp32_t</td>
+<td>Current plan estimated progress in percent.
+The value will be negative if unknown or undefined.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Maneuver – ID</td>
+<td>man_id</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>Current node ID, when executing a plan.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Maneuver – Type</td>
+<td>man_type</td>
+<td><em>-</em></td>
+<td>uint16_t</td>
+<td>Type of maneuver being executed (IMC serialization id),
+when executing a plan.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Maneuver – ETA</td>
+<td>man_eta</td>
+<td><em>s</em></td>
+<td>int32_t</td>
+<td>Current node estimated time to completion, when executing a plan.
+The value will be -1 if the time is unknown or undefined.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Last Plan Outcome</td>
+<td>last_outcome</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="#plancontrolstate-enum-last-outcome"><span class="std std-ref">Enum Last Plan Outcome</span></a>)</td>
+<td>uint8_t</td>
+<td>Outcome of the last executed plan.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="plancontrolstate-enum-prefix-pcs">
+<span id="plancontrolstate-enum-state"></span><span id="id5"></span><h3>Enum State<a class="headerlink" href="#plancontrolstate-enum-prefix-pcs" title="Permalink to this headline">¶</a></h3>
+<p>Describes overall state.</p>
+<ul class="simple">
+<li>Abbreviation: state</li>
+<li>Prefix: PCS</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="8%" />
+<col width="15%" />
+<col width="15%" />
+<col width="62%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0</td>
+<td>Blocked</td>
+<td>BLOCKED</td>
+<td>Plan execution is blocked e.g., due to a vehicle error,
+or if no plan is loaded.</td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>Ready</td>
+<td>READY</td>
+<td>Ready to start plan execution.</td>
+</tr>
+<tr class="row-even"><td>2</td>
+<td>Initializing</td>
+<td>INITIALIZING</td>
+<td>Initializing plan for execution.</td>
+</tr>
+<tr class="row-odd"><td>3</td>
+<td>Executing</td>
+<td>EXECUTING</td>
+<td>Executing plan.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="enum-last-plan-outcome">
+<span id="plancontrolstate-enum-prefix-lpo"></span><span id="plancontrolstate-enum-last-outcome"></span><h3>Enum Last Plan Outcome<a class="headerlink" href="#enum-last-plan-outcome" title="Permalink to this headline">¶</a></h3>
+<p>Outcome of the last executed plan.</p>
+<ul class="simple">
+<li>Abbreviation: last_outcome</li>
+<li>Prefix: LPO</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="13%" />
+<col width="21%" />
+<col width="55%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0</td>
+<td>None</td>
+<td>NONE</td>
+<td>Unknown or not filled.</td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>Success</td>
+<td>SUCCESS</td>
+<td>Last plan execution was successful.</td>
+</tr>
+<tr class="row-even"><td>2</td>
+<td>Failure</td>
+<td>FAILURE</td>
+<td>Last plan execution was a failure.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="plan-variable">
+<span id="planvariable"></span><h2>Plan Variable<a class="headerlink" href="#plan-variable" title="Permalink to this headline">¶</a></h2>
+<p>A plan variable.</p>
+<ul class="simple">
+<li>Abbreviation: PlanVariable</li>
+<li>Identification Number: 561</li>
+<li>Payload Size: 6+  bytes</li>
+<li>Message Size: 28+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="13%" />
+<col width="33%" />
+<col width="10%" />
+<col width="12%" />
+<col width="19%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Name</td>
+<td>name</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Value</td>
+<td>value</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Type</td>
+<td>type</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="#planvariable-enum-type"><span class="std std-ref">Enum Type</span></a>)</td>
+<td>uint8_t</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Access Type</td>
+<td>access</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="#planvariable-enum-access"><span class="std std-ref">Enum Access Type</span></a>)</td>
+<td>uint8_t</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="planvariable-enum-prefix-pvt">
+<span id="planvariable-enum-type"></span><span id="id6"></span><h3>Enum Type<a class="headerlink" href="#planvariable-enum-prefix-pvt" title="Permalink to this headline">¶</a></h3>
+<p>No description</p>
+<ul class="simple">
+<li>Abbreviation: type</li>
+<li>Prefix: PVT</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="21%" />
+<col width="33%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0</td>
+<td>Boolean</td>
+<td>BOOLEAN</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>Number</td>
+<td>NUMBER</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-even"><td>2</td>
+<td>Text</td>
+<td>TEXT</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>3</td>
+<td>Message</td>
+<td>MESSAGE</td>
+<td><em>-</em></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="enum-access-type">
+<span id="planvariable-enum-prefix-pva"></span><span id="planvariable-enum-access"></span><h3>Enum Access Type<a class="headerlink" href="#enum-access-type" title="Permalink to this headline">¶</a></h3>
+<p>No description</p>
+<ul class="simple">
+<li>Abbreviation: access</li>
+<li>Prefix: PVA</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="17%" />
+<col width="19%" />
+<col width="33%" />
+<col width="31%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0</td>
+<td>Input</td>
+<td>INPUT</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>Output</td>
+<td>OUTPUT</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-even"><td>2</td>
+<td>Local</td>
+<td>LOCAL</td>
+<td><em>-</em></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="plan-generation">
+<span id="plangeneration"></span><h2>Plan Generation<a class="headerlink" href="#plan-generation" title="Permalink to this headline">¶</a></h2>
+<p>This message is used to order the generation of plans based on
+id and set of parameters.</p>
+<ul class="simple">
+<li>Abbreviation: PlanGeneration</li>
+<li>Identification Number: 562</li>
+<li>Payload Size: 6+  bytes</li>
+<li>Message Size: 28+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="9%" />
+<col width="23%" />
+<col width="7%" />
+<col width="36%" />
+<col width="13%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Command</td>
+<td>cmd</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="#plangeneration-enum-cmd"><span class="std std-ref">Enum Command</span></a>)</td>
+<td>uint8_t</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Operation</td>
+<td>op</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="#plangeneration-enum-op"><span class="std std-ref">Enum Operation</span></a>)</td>
+<td>uint8_t</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Plan Identifier</td>
+<td>plan_id</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>The name of the plan to be generated.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Parameters</td>
+<td>params</td>
+<td><em>TupleList</em></td>
+<td>plaintext</td>
+<td>An optional list of parameters to be used by the plan
+generation module.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="plangeneration-enum-prefix-cmd">
+<span id="plangeneration-enum-cmd"></span><span id="id7"></span><h3>Enum Command<a class="headerlink" href="#plangeneration-enum-prefix-cmd" title="Permalink to this headline">¶</a></h3>
+<p>No description</p>
+<ul class="simple">
+<li>Abbreviation: cmd</li>
+<li>Prefix: CMD</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="7%" />
+<col width="10%" />
+<col width="15%" />
+<col width="68%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0</td>
+<td>Generate</td>
+<td>GENERATE</td>
+<td>Generate the plan and store it in the PlanDB.</td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>Execute</td>
+<td>EXECUTE</td>
+<td>Generate (storing it in the PlanDB) and execute it immediately.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="plangeneration-enum-prefix-op">
+<span id="plangeneration-enum-op"></span><span id="id8"></span><h3>Enum Operation<a class="headerlink" href="#plangeneration-enum-prefix-op" title="Permalink to this headline">¶</a></h3>
+<p>No description</p>
+<ul class="simple">
+<li>Abbreviation: op</li>
+<li>Prefix: OP</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="8%" />
+<col width="10%" />
+<col width="16%" />
+<col width="66%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0</td>
+<td>Request</td>
+<td>REQUEST</td>
+<td>Request the execution of this command.</td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>Error</td>
+<td>ERROR</td>
+<td>Some error has occurred while executing the command. The
+error can be found in the ‘params’ tuplelist (under the
+key ‘error’).</td>
+</tr>
+<tr class="row-even"><td>2</td>
+<td>Success</td>
+<td>SUCCESS</td>
+<td>The requested command was executed successfully.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="leader-state">
+<span id="leaderstate"></span><h2>Leader State<a class="headerlink" href="#leader-state" title="Permalink to this headline">¶</a></h2>
+<p>This message defines the formation leader state.</p>
+<p>LeaderState is a complete description of the leader state
+in terms of parameters such as position, orientation and
+velocities at a particular moment in time.</p>
+<p>The system position is given by a North-East-Down (NED)
+local tangent plane displacement (x, y, z) relative to
+an absolute WGS-84 coordinate (latitude, longitude,
+height above ellipsoid).</p>
+<p>The symbols for position and attitude as well as linear and
+angular velocities were chosen according to SNAME’s notation (1950).
+The body-fixed reference frame and Euler angles are depicted
+next:</p>
+<div class="figure">
+<img alt="_images/euler-lauv.png" src="_images/euler-lauv.png" />
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">align:</th><td class="field-body">center</td>
+</tr>
+</tbody>
+</table>
+<p>Euler angles</p>
+<ul class="simple">
+<li>Abbreviation: LeaderState</li>
+<li>Identification Number: 563</li>
+<li>Payload Size: 83+  bytes</li>
+<li>Message Size: 105+  bytes</li>
+<li>Flags: periodic</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="8%" />
+<col width="17%" />
+<col width="6%" />
+<col width="37%" />
+<col width="15%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Group Name</td>
+<td>group_name</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>Name for the formation group.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Action on the leader state</td>
+<td>op</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="#leaderstate-enum-op"><span class="std std-ref">Enum Action on the leader state</span></a>)</td>
+<td>uint8_t</td>
+<td>Action on the formation leader state variables</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Latitude (WGS-84)</td>
+<td>lat</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>WGS-84 Latitude.</td>
+<td>min=-1.5707963267948966,
+max=1.5707963267948966</td>
+</tr>
+<tr class="row-odd"><td>Longitude (WGS-84)</td>
+<td>lon</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>WGS-84 Longitude.</td>
+<td>min=-3.141592653589793,
+max=3.141592653589793</td>
+</tr>
+<tr class="row-even"><td>Height (WGS-84)</td>
+<td>height</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Height above the WGS-84 ellipsoid.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Offset north</td>
+<td>x</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>The North offset of the North/East/Down field with respect to
+LLH.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Offset east</td>
+<td>y</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>The East offset of the North/East/Down field with respect to
+LLH.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Offset down</td>
+<td>z</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>The Down offset of the North/East/Down field with respect to
+LLH.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Rotation over x axis</td>
+<td>phi</td>
+<td><em>rad</em></td>
+<td>fp32_t</td>
+<td>The phi Euler angle from the vehicle’s attitude.</td>
+<td>min=-3.141592653589793,
+max=3.141592653589793</td>
+</tr>
+<tr class="row-odd"><td>Rotation over y axis</td>
+<td>theta</td>
+<td><em>rad</em></td>
+<td>fp32_t</td>
+<td>The theta Euler angle from the vehicle’s attitude.</td>
+<td>min=-1.57079632679490,
+max=1.57079632679490</td>
+</tr>
+<tr class="row-even"><td>Rotation over z axis</td>
+<td>psi</td>
+<td><em>rad</em></td>
+<td>fp32_t</td>
+<td>The psi Euler angle from the vehicle’s attitude.</td>
+<td>min=-3.141592653589793,
+max=3.141592653589793</td>
+</tr>
+<tr class="row-odd"><td>Ground Velocity X (North)</td>
+<td>vx</td>
+<td><em>m/s</em></td>
+<td>fp32_t</td>
+<td>Ground Velocity xx axis velocity component.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Ground Velocity Y (East)</td>
+<td>vy</td>
+<td><em>m/s</em></td>
+<td>fp32_t</td>
+<td>Ground Velocity yy axis velocity component.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Ground Velocity Z (Down)</td>
+<td>vz</td>
+<td><em>m/s</em></td>
+<td>fp32_t</td>
+<td>Ground Velocity zz axis velocity component.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Angular Velocity in x</td>
+<td>p</td>
+<td><em>rad/s</em></td>
+<td>fp32_t</td>
+<td>The angular velocity over body-fixed xx axis (roll).</td>
+<td>min=-3.141592653589793,
+max=3.141592653589793</td>
+</tr>
+<tr class="row-odd"><td>Angular Velocity in y</td>
+<td>q</td>
+<td><em>rad/s</em></td>
+<td>fp32_t</td>
+<td>The angular velocity over body-fixed yy axis (pitch).</td>
+<td>min=-3.141592653589793,
+max=3.141592653589793</td>
+</tr>
+<tr class="row-even"><td>Angular Velocity in z</td>
+<td>r</td>
+<td><em>rad/s</em></td>
+<td>fp32_t</td>
+<td>The angular velocity over body-fixed zz axis (yaw).</td>
+<td>min=-3.141592653589793,
+max=3.141592653589793</td>
+</tr>
+<tr class="row-odd"><td>Stream Velocity X (North)</td>
+<td>svx</td>
+<td><em>m/s</em></td>
+<td>fp32_t</td>
+<td>Stream Velocity xx axis velocity component.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Stream Velocity Y (East)</td>
+<td>svy</td>
+<td><em>m/s</em></td>
+<td>fp32_t</td>
+<td>Stream Velocity yy axis velocity component.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Stream Velocity Z (Down)</td>
+<td>svz</td>
+<td><em>m/s</em></td>
+<td>fp32_t</td>
+<td>Stream Velocity zz axis velocity component.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="enum-action-on-the-leader-state">
+<span id="leaderstate-enum-prefix-op"></span><span id="leaderstate-enum-op"></span><h3>Enum Action on the leader state<a class="headerlink" href="#enum-action-on-the-leader-state" title="Permalink to this headline">¶</a></h3>
+<p>Action on the formation leader state variables</p>
+<ul class="simple">
+<li>Abbreviation: op</li>
+<li>Prefix: OP</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="21%" />
+<col width="33%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0</td>
+<td>Request</td>
+<td>REQUEST</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>Set</td>
+<td>SET</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-even"><td>2</td>
+<td>Report</td>
+<td>REPORT</td>
+<td><em>-</em></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="plan-statistics">
+<span id="planstatistics"></span><h2>Plan Statistics<a class="headerlink" href="#plan-statistics" title="Permalink to this headline">¶</a></h2>
+<p>No description</p>
+<ul class="simple">
+<li>Abbreviation: PlanStatistics</li>
+<li>Identification Number: 564</li>
+<li>Payload Size: 12+  bytes</li>
+<li>Message Size: 34+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="7%" />
+<col width="6%" />
+<col width="19%" />
+<col width="5%" />
+<col width="55%" />
+<col width="8%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Plan Identifier</td>
+<td>plan_id</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>The name of the plan to be generated.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Type</td>
+<td>type</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="#planstatistics-enum-type"><span class="std std-ref">Enum Type</span></a>)</td>
+<td>uint8_t</td>
+<td>Type of plan statistics, if they are launched before, during or after the plan execution.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Properties</td>
+<td>properties</td>
+<td><em>Bitfield</em>
+(<a class="reference internal" href="#planstatistics-bitfield-properties"><span class="std std-ref">Bitfield Properties</span></a>)</td>
+<td>uint8_t</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Durations</td>
+<td>durations</td>
+<td><em>TupleList</em></td>
+<td>plaintext</td>
+<td>Maneuver and plan duration statistics in seconds, for example: “Total=1000,Goto1=20,Rows=980”</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Distances</td>
+<td>distances</td>
+<td><em>TupleList</em></td>
+<td>plaintext</td>
+<td>Distances travelled in meters in each maneuver and/or total: “Total=2000,Rows=1800,Elevator=200”</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Actions</td>
+<td>actions</td>
+<td><em>TupleList</em></td>
+<td>plaintext</td>
+<td>List of components active by plan actions during the plan and time active in seconds: “Sidescan=100,Camera Module=150”</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Fuel</td>
+<td>fuel</td>
+<td><em>TupleList</em></td>
+<td>plaintext</td>
+<td>Amount of fuel spent, in battery percentage, by different parcels (if applicable): “Total=35,Hotel=5,Payload=10,Motion=20,IMU=0”</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="planstatistics-enum-prefix-tp">
+<span id="planstatistics-enum-type"></span><span id="id9"></span><h3>Enum Type<a class="headerlink" href="#planstatistics-enum-prefix-tp" title="Permalink to this headline">¶</a></h3>
+<p>Type of plan statistics, if they are launched before, during or after the plan execution.</p>
+<ul class="simple">
+<li>Abbreviation: type</li>
+<li>Prefix: TP</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="28%" />
+<col width="30%" />
+<col width="28%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0</td>
+<td>Before Plan</td>
+<td>PREPLAN</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>During Plan</td>
+<td>INPLAN</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-even"><td>2</td>
+<td>After Plan</td>
+<td>POSTPLAN</td>
+<td><em>-</em></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="bitfield-properties">
+<span id="planstatistics-bitfield-prefix-prp"></span><span id="planstatistics-bitfield-properties"></span><h3>Bitfield Properties<a class="headerlink" href="#bitfield-properties" title="Permalink to this headline">¶</a></h3>
+<p>No description</p>
+<ul class="simple">
+<li>Abbreviation: properties</li>
+<li>Prefix: PRP</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="8%" />
+<col width="13%" />
+<col width="16%" />
+<col width="63%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0x00</td>
+<td>Basic Plan</td>
+<td>BASIC</td>
+<td>Basic plan, meaning it is Linear, Finite and Noncyclic.</td>
+</tr>
+<tr class="row-odd"><td>0x01</td>
+<td>Nonlinear</td>
+<td>NONLINEAR</td>
+<td>Plan is nonlinear.</td>
+</tr>
+<tr class="row-even"><td>0x02</td>
+<td>Infinite</td>
+<td>INFINITE</td>
+<td>Plan is infinite in duration.</td>
+</tr>
+<tr class="row-odd"><td>0x04</td>
+<td>Cyclical</td>
+<td>CYCLICAL</td>
+<td>Plan is cyclical.</td>
+</tr>
+<tr class="row-even"><td>0x07</td>
+<td>All</td>
+<td>ALL</td>
+<td>All properties checked.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<h3><a href="index.html">Table Of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Message Format.html">Message Format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Core.html">Core Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Simulation.html">Simulation Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Storage.html">Storage Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Networking.html">Networking Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Acoustic Networking.html">Acoustic Networking Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Sensors.html">Sensors Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Actuation.html">Actuation Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Navigation.html">Navigation Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Guidance.html">Guidance Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Maneuvering.html">Maneuvering Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Vehicle Supervision.html">Vehicle Supervision Messages</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Plan Supervision Messages</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#abort">Abort</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#plan-specification">Plan Specification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#plan-maneuver">Plan Maneuver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#plan-transition">Plan Transition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#emergency-control">Emergency Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#emergency-control-state">Emergency Control State</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#plan-db">Plan DB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#plan-db-state">Plan DB State</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#plan-db-information">Plan DB Information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#plan-control">Plan Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#plan-control-state">Plan Control State</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#plan-variable">Plan Variable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#plan-generation">Plan Generation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#leader-state">Leader State</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#plan-statistics">Plan Statistics</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="CCU.html">CCU Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Autonomy.html">Autonomy Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Vision.html">Vision Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="External.html">External Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Development.html">Development Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Custom.html">Custom Messages</a></li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013-2017, Universidade do Porto - Faculdade de Engenharia - LSTS.
+      <br/>
+      Last updated on Aug 21, 2019.
+    </div>
+  </body>
+</html>

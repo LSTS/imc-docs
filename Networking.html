@@ -1,0 +1,2062 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Networking Messages &mdash; IMC v5.4.11 Specification</title>
+    
+    <link rel="stylesheet" href="_static/pydoctheme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '5.4.11',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="top" title="IMC v5.4.11 Specification" href="index.html" />
+    <link rel="next" title="Acoustic Networking Messages" href="Acoustic Networking.html" />
+    <link rel="prev" title="Storage Messages" href="Storage.html" /> 
+  </head>
+  <body>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="networking-messages">
+<h1>Networking Messages<a class="headerlink" href="#networking-messages" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="heartbeat">
+<span id="id1"></span><h2>Heartbeat<a class="headerlink" href="#heartbeat" title="Permalink to this headline">¶</a></h2>
+<p>The Heartbeat message is used to inform other modules that the
+sending entity’s system is running normally and communications
+are alive.</p>
+<ul class="simple">
+<li>Abbreviation: Heartbeat</li>
+<li>Identification Number: 150</li>
+<li>Payload Size: 0 bytes</li>
+<li>Message Size: 22 bytes</li>
+<li>Flags: periodic</li>
+</ul>
+<p>This message has no fields.</p>
+</div>
+<div class="section" id="announce">
+<span id="id2"></span><h2>Announce<a class="headerlink" href="#announce" title="Permalink to this headline">¶</a></h2>
+<p>A system description that is to be broadcasted to other systems.</p>
+<ul class="simple">
+<li>Abbreviation: Announce</li>
+<li>Identification Number: 151</li>
+<li>Payload Size: 27+  bytes</li>
+<li>Message Size: 49+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="8%" />
+<col width="16%" />
+<col width="7%" />
+<col width="43%" />
+<col width="16%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>System Name</td>
+<td>sys_name</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>System name.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>System Type</td>
+<td>sys_type</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="Message Format.html#enum-systemtype"><span class="std std-ref">Enum System Type</span></a>)</td>
+<td>uint8_t</td>
+<td>System type.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Control Owner</td>
+<td>owner</td>
+<td><em>-</em></td>
+<td>uint16_t</td>
+<td>The owner IMC system ID.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Latitude WGS-84</td>
+<td>lat</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>WGS-84 Latitude. If lat=0 and lon=0 means location value is unknown.</td>
+<td>min=-1.5707963267948966,
+max=1.5707963267948966</td>
+</tr>
+<tr class="row-even"><td>Longitude WGS-84</td>
+<td>lon</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>WGS-84 Longitude. If lat=0 and lon=0 means location value is unknown.</td>
+<td>min=-3.141592653589793,
+max=3.141592653589793</td>
+</tr>
+<tr class="row-odd"><td>Height WGS-84</td>
+<td>height</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Height above WGS-84 ellipsoid.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Services</td>
+<td>services</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td><p class="first">Semicolon separated list of URLs. Examples of such URLs are:</p>
+<ul class="last simple">
+<li><em>imc+udp://192.168.106.34:6002/</em></li>
+<li><em>dune://0.0.0.0/uid/1294925553839635/</em></li>
+<li><em>http://192.168.106.34/dune/</em>.</li>
+</ul>
+</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="announce-service">
+<span id="announceservice"></span><h2>Announce Service<a class="headerlink" href="#announce-service" title="Permalink to this headline">¶</a></h2>
+<p>Announcement about the existence of a service.</p>
+<ul class="simple">
+<li>Abbreviation: AnnounceService</li>
+<li>Identification Number: 152</li>
+<li>Payload Size: 3+  bytes</li>
+<li>Message Size: 25+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="8%" />
+<col width="8%" />
+<col width="28%" />
+<col width="7%" />
+<col width="37%" />
+<col width="12%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Service</td>
+<td>service</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>Semicolon separated list of URLs (see <a class="reference internal" href="#announce"><span class="std std-ref">Announce</span></a>).</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>ServiceType</td>
+<td>service_type</td>
+<td><em>Bitfield</em>
+(<a class="reference internal" href="#announceservice-bitfield-service-type"><span class="std std-ref">Bitfield ServiceType</span></a>)</td>
+<td>uint8_t</td>
+<td>Informs about the availability of the service on internal and
+external networks.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="bitfield-servicetype">
+<span id="announceservice-bitfield-prefix-srv-type"></span><span id="announceservice-bitfield-service-type"></span><h3>Bitfield ServiceType<a class="headerlink" href="#bitfield-servicetype" title="Permalink to this headline">¶</a></h3>
+<p>Informs about the availability of the service on internal and
+external networks.</p>
+<ul class="simple">
+<li>Abbreviation: service_type</li>
+<li>Prefix: SRV_TYPE</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="23%" />
+<col width="32%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0x01</td>
+<td>External</td>
+<td>EXTERNAL</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>0x02</td>
+<td>Local</td>
+<td>LOCAL</td>
+<td><em>-</em></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="receive-signal-strength-information">
+<span id="rssi"></span><h2>Receive Signal Strength Information<a class="headerlink" href="#receive-signal-strength-information" title="Permalink to this headline">¶</a></h2>
+<p>Measure of the RSSI by a networking device.
+Indicates the gain or loss in the signal strength due to the transmission and reception equipment and the transmission medium and distance.</p>
+<ul class="simple">
+<li>Abbreviation: RSSI</li>
+<li>Identification Number: 153</li>
+<li>Payload Size: 4 bytes</li>
+<li>Message Size: 26 bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="22%" />
+<col width="10%" />
+<col width="13%" />
+<col width="30%" />
+<col width="14%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Value</td>
+<td>value</td>
+<td><em>%</em></td>
+<td>fp32_t</td>
+<td>RSSI measurement.</td>
+<td>max=100</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="voltage-standing-wave-ratio">
+<span id="vswr"></span><h2>Voltage Standing Wave Ratio<a class="headerlink" href="#voltage-standing-wave-ratio" title="Permalink to this headline">¶</a></h2>
+<p>Measure of the VSWR by a networking device.</p>
+<ul class="simple">
+<li>Abbreviation: VSWR</li>
+<li>Identification Number: 154</li>
+<li>Payload Size: 4 bytes</li>
+<li>Message Size: 26 bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="9%" />
+<col width="19%" />
+<col width="8%" />
+<col width="11%" />
+<col width="26%" />
+<col width="27%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Value</td>
+<td>value</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>VSWR measurement.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="link-level">
+<span id="linklevel"></span><h2>Link Level<a class="headerlink" href="#link-level" title="Permalink to this headline">¶</a></h2>
+<p>Measurement of link level quality. For instance, this may
+correspond to the acknowledgment ratio of a link. But,
+generally, the measure is link-dependent.</p>
+<ul class="simple">
+<li>Abbreviation: LinkLevel</li>
+<li>Identification Number: 155</li>
+<li>Payload Size: 4 bytes</li>
+<li>Message Size: 26 bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="9%" />
+<col width="19%" />
+<col width="8%" />
+<col width="11%" />
+<col width="26%" />
+<col width="27%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Value</td>
+<td>value</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Link level value.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="sms">
+<span id="id3"></span><h2>SMS<a class="headerlink" href="#sms" title="Permalink to this headline">¶</a></h2>
+<p>Send a SMS message.</p>
+<ul class="simple">
+<li>Abbreviation: Sms</li>
+<li>Identification Number: 156</li>
+<li>Payload Size: 6+  bytes</li>
+<li>Message Size: 28+  bytes</li>
+<li>Flags: deprecated</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="15%" />
+<col width="7%" />
+<col width="12%" />
+<col width="33%" />
+<col width="22%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Number</td>
+<td>number</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>Target mobile device number.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Timeout</td>
+<td>timeout</td>
+<td><em>-</em></td>
+<td>uint16_t</td>
+<td>Timeout for sending message.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Contents</td>
+<td>contents</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>Message contents.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="sms-transmit">
+<span id="smstx"></span><h2>SMS Transmit<a class="headerlink" href="#sms-transmit" title="Permalink to this headline">¶</a></h2>
+<p>Request to send SMS.</p>
+<ul class="simple">
+<li>Abbreviation: SmsTx</li>
+<li>Identification Number: 157</li>
+<li>Payload Size: 10+  bytes</li>
+<li>Message Size: 32+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="17%" />
+<col width="14%" />
+<col width="6%" />
+<col width="11%" />
+<col width="33%" />
+<col width="20%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Sequence Number</td>
+<td>seq</td>
+<td><em>-</em></td>
+<td>uint32_t</td>
+<td>Sequence number.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Destination</td>
+<td>destination</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>Number or name of the recipient.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Timeout</td>
+<td>timeout</td>
+<td><em>s</em></td>
+<td>uint16_t</td>
+<td>Timeout for sending message.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Data</td>
+<td>data</td>
+<td><em>-</em></td>
+<td>rawdata</td>
+<td>Message data.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="sms-receive">
+<span id="smsrx"></span><h2>SMS Receive<a class="headerlink" href="#sms-receive" title="Permalink to this headline">¶</a></h2>
+<p>Received SMS data.</p>
+<ul class="simple">
+<li>Abbreviation: SmsRx</li>
+<li>Identification Number: 158</li>
+<li>Payload Size: 4+  bytes</li>
+<li>Message Size: 26+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="9%" />
+<col width="16%" />
+<col width="7%" />
+<col width="12%" />
+<col width="34%" />
+<col width="22%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Source</td>
+<td>source</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>Number of name of the sender.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Data</td>
+<td>data</td>
+<td><em>-</em></td>
+<td>rawdata</td>
+<td>Message data.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="sms-state">
+<span id="smsstate"></span><h2>SMS State<a class="headerlink" href="#sms-state" title="Permalink to this headline">¶</a></h2>
+<p>No description</p>
+<ul class="simple">
+<li>Abbreviation: SmsState</li>
+<li>Identification Number: 159</li>
+<li>Payload Size: 7+  bytes</li>
+<li>Message Size: 29+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="11%" />
+<col width="23%" />
+<col width="8%" />
+<col width="29%" />
+<col width="15%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Sequence Number</td>
+<td>seq</td>
+<td><em>-</em></td>
+<td>uint32_t</td>
+<td>Sequence number.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>State</td>
+<td>state</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="#smsstate-enum-state"><span class="std std-ref">Enum State</span></a>)</td>
+<td>uint8_t</td>
+<td>Current state of an SMS transaction.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Error Message</td>
+<td>error</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="enum-state">
+<span id="smsstate-enum-prefix-sms"></span><span id="smsstate-enum-state"></span><h3>Enum State<a class="headerlink" href="#enum-state" title="Permalink to this headline">¶</a></h3>
+<p>Current state of an SMS transaction.</p>
+<ul class="simple">
+<li>Abbreviation: state</li>
+<li>Prefix: SMS</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="29%" />
+<col width="29%" />
+<col width="27%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0</td>
+<td>Accepted</td>
+<td>ACCEPTED</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>Rejected</td>
+<td>REJECTED</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-even"><td>2</td>
+<td>Interrupted</td>
+<td>INTERRUPTED</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>3</td>
+<td>Completed</td>
+<td>COMPLETED</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-even"><td>4</td>
+<td>Idle</td>
+<td>IDLE</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>5</td>
+<td>Transmitting</td>
+<td>TRANSMITTING</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-even"><td>6</td>
+<td>Receiving</td>
+<td>RECEIVING</td>
+<td><em>-</em></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="text-message">
+<span id="textmessage"></span><h2>Text Message<a class="headerlink" href="#text-message" title="Permalink to this headline">¶</a></h2>
+<p>A text message has been received.</p>
+<ul class="simple">
+<li>Abbreviation: TextMessage</li>
+<li>Identification Number: 160</li>
+<li>Payload Size: 4+  bytes</li>
+<li>Message Size: 26+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="9%" />
+<col width="16%" />
+<col width="7%" />
+<col width="13%" />
+<col width="32%" />
+<col width="23%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Origin</td>
+<td>origin</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>Message origin (if known).</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Text</td>
+<td>text</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>Message contents.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="received-iridium-message">
+<span id="iridiummsgrx"></span><h2>Received Iridium Message<a class="headerlink" href="#received-iridium-message" title="Permalink to this headline">¶</a></h2>
+<p>No description</p>
+<ul class="simple">
+<li>Abbreviation: IridiumMsgRx</li>
+<li>Identification Number: 170</li>
+<li>Payload Size: 28+  bytes</li>
+<li>Message Size: 50+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="9%" />
+<col width="4%" />
+<col width="7%" />
+<col width="54%" />
+<col width="13%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Origin Identifier</td>
+<td>origin</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>The unique identifier of this message’s origin device (e.g. lauv-xtreme-2, manta-0).</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Timestamp</td>
+<td>htime</td>
+<td><em>s</em></td>
+<td>fp64_t</td>
+<td>Timestamp (Epoch time).</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Latitude Reference</td>
+<td>lat</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Longitude Reference</td>
+<td>lon</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Data</td>
+<td>data</td>
+<td><em>-</em></td>
+<td>rawdata</td>
+<td>Message data.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="transmit-iridium-message">
+<span id="iridiummsgtx"></span><h2>Transmit Iridium Message<a class="headerlink" href="#transmit-iridium-message" title="Permalink to this headline">¶</a></h2>
+<p>No description</p>
+<ul class="simple">
+<li>Abbreviation: IridiumMsgTx</li>
+<li>Identification Number: 171</li>
+<li>Payload Size: 8+  bytes</li>
+<li>Message Size: 30+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="9%" />
+<col width="4%" />
+<col width="7%" />
+<col width="53%" />
+<col width="12%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Request Identifier</td>
+<td>req_id</td>
+<td><em>-</em></td>
+<td>uint16_t</td>
+<td>The request identifier used to receive transmission updates.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Time to live</td>
+<td>ttl</td>
+<td><em>s</em></td>
+<td>uint16_t</td>
+<td>Time, in seconds, after which there will be no more atempts to transmit the message.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Destination Identifier</td>
+<td>destination</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>The unique identifier of this message’s destination (e.g. lauv-xtreme-2, manta-0).</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Data</td>
+<td>data</td>
+<td><em>-</em></td>
+<td>rawdata</td>
+<td>Message data.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="iridium-transmission-status">
+<span id="iridiumtxstatus"></span><h2>Iridium Transmission Status<a class="headerlink" href="#iridium-transmission-status" title="Permalink to this headline">¶</a></h2>
+<p>No description</p>
+<ul class="simple">
+<li>Abbreviation: IridiumTxStatus</li>
+<li>Identification Number: 172</li>
+<li>Payload Size: 5+  bytes</li>
+<li>Message Size: 27+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="9%" />
+<col width="23%" />
+<col width="7%" />
+<col width="37%" />
+<col width="12%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Request Identifier</td>
+<td>req_id</td>
+<td><em>-</em></td>
+<td>uint16_t</td>
+<td>The request identifier used to receive transmission updates</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Status Code</td>
+<td>status</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="#iridiumtxstatus-enum-status"><span class="std std-ref">Enum Status Code</span></a>)</td>
+<td>uint8_t</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Status Text</td>
+<td>text</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="enum-status-code">
+<span id="iridiumtxstatus-enum-prefix-txstatus"></span><span id="iridiumtxstatus-enum-status"></span><h3>Enum Status Code<a class="headerlink" href="#enum-status-code" title="Permalink to this headline">¶</a></h3>
+<p>No description</p>
+<ul class="simple">
+<li>Abbreviation: status</li>
+<li>Prefix: TXSTATUS</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="8%" />
+<col width="60%" />
+<col width="16%" />
+<col width="15%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>1</td>
+<td>Successfull transmission</td>
+<td>OK</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>2</td>
+<td>Error while trying to transmit message</td>
+<td>ERROR</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-even"><td>3</td>
+<td>Message has been queued for transmission</td>
+<td>QUEUED</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>4</td>
+<td>Message is currently being transmitted</td>
+<td>TRANSMIT</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-even"><td>5</td>
+<td>Message’s TTL has expired. Transmition cancelled.</td>
+<td>EXPIRED</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>6</td>
+<td>No more messages to be transmitted or received.</td>
+<td>EMPTY</td>
+<td><em>-</em></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="group-membership-state">
+<span id="groupmembershipstate"></span><h2>Group Membership State<a class="headerlink" href="#group-membership-state" title="Permalink to this headline">¶</a></h2>
+<p>Group communication link assertion.</p>
+<ul class="simple">
+<li>Abbreviation: GroupMembershipState</li>
+<li>Identification Number: 180</li>
+<li>Payload Size: 6+  bytes</li>
+<li>Message Size: 28+  bytes</li>
+<li>Flags: periodic</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="22%" />
+<col width="10%" />
+<col width="4%" />
+<col width="8%" />
+<col width="41%" />
+<col width="14%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Group Name</td>
+<td>group_name</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>Name of the group of systems.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Communication Links Assertion</td>
+<td>links</td>
+<td><em>-</em></td>
+<td>uint32_t</td>
+<td>Communication link assertion for each group member.
+One bit to assert each system communication link state.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="system-group">
+<span id="systemgroup"></span><h2>System Group<a class="headerlink" href="#system-group" title="Permalink to this headline">¶</a></h2>
+<p>Group of systems configuration.</p>
+<ul class="simple">
+<li>Abbreviation: SystemGroup</li>
+<li>Identification Number: 181</li>
+<li>Payload Size: 5+  bytes</li>
+<li>Message Size: 27+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="9%" />
+<col width="22%" />
+<col width="7%" />
+<col width="38%" />
+<col width="13%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Group Name</td>
+<td>GroupName</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>Name of the group of systems.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Group List Action</td>
+<td>Action</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="#systemgroup-enum-action"><span class="std std-ref">Enum Group List Action</span></a>)</td>
+<td>uint8_t</td>
+<td>Actions on the group list.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Systems Name List</td>
+<td>GroupList</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>List of names of system in the group, separated by commas.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="enum-group-list-action">
+<span id="systemgroup-enum-prefix-op"></span><span id="systemgroup-enum-action"></span><h3>Enum Group List Action<a class="headerlink" href="#enum-group-list-action" title="Permalink to this headline">¶</a></h3>
+<p>Actions on the group list.</p>
+<ul class="simple">
+<li>Abbreviation: Action</li>
+<li>Prefix: OP</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="21%" />
+<col width="33%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0</td>
+<td>Disband</td>
+<td>Dis</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>Set</td>
+<td>Set</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-even"><td>2</td>
+<td>Request</td>
+<td>Req</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>3</td>
+<td>Change</td>
+<td>Chg</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-even"><td>4</td>
+<td>Report</td>
+<td>Rep</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>5</td>
+<td>Force</td>
+<td>Frc</td>
+<td><em>-</em></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="link-latency">
+<span id="linklatency"></span><h2>Link Latency<a class="headerlink" href="#link-latency" title="Permalink to this headline">¶</a></h2>
+<p>Communications latency between two systems.</p>
+<ul class="simple">
+<li>Abbreviation: LinkLatency</li>
+<li>Identification Number: 182</li>
+<li>Payload Size: 6 bytes</li>
+<li>Message Size: 28 bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="22%" />
+<col width="10%" />
+<col width="4%" />
+<col width="7%" />
+<col width="44%" />
+<col width="14%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Value</td>
+<td>value</td>
+<td><em>s</em></td>
+<td>fp32_t</td>
+<td>Time taken between the communications package/message is sent
+from the source until it arrives to the destination.</td>
+<td>min=0</td>
+</tr>
+<tr class="row-odd"><td>Communications Source System ID</td>
+<td>sys_src</td>
+<td><em>-</em></td>
+<td>uint16_t</td>
+<td>ID of system that was the source of the communication package.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="extended-receive-signal-strength-information">
+<span id="extendedrssi"></span><h2>Extended Receive Signal Strength Information<a class="headerlink" href="#extended-receive-signal-strength-information" title="Permalink to this headline">¶</a></h2>
+<p>Measure of the RSSI by a networking device.
+Indicates the gain or loss in the signal strenght due to the transmission
+and reception equipment and the transmission medium and distance.</p>
+<ul class="simple">
+<li>Abbreviation: ExtendedRSSI</li>
+<li>Identification Number: 183</li>
+<li>Payload Size: 5 bytes</li>
+<li>Message Size: 27 bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="11%" />
+<col width="20%" />
+<col width="7%" />
+<col width="37%" />
+<col width="16%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Value</td>
+<td>value</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>RSSI measurement.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>RSSI Units</td>
+<td>units</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="Message Format.html#enum-rssiunits"><span class="std std-ref">Enum RSSI Units</span></a>)</td>
+<td>uint8_t</td>
+<td>Indicates the units used for the RSSI value.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="historic-data-series">
+<span id="historicdata"></span><h2>Historic Data Series<a class="headerlink" href="#historic-data-series" title="Permalink to this headline">¶</a></h2>
+<p>This message holds a list of inline data samples produced by one or more vehicles in the past.
+It is used to transfer data over disruption tolerant networks.</p>
+<ul class="simple">
+<li>Abbreviation: HistoricData</li>
+<li>Identification Number: 184</li>
+<li>Payload Size: 14+  bytes</li>
+<li>Message Size: 36+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="9%" />
+<col width="4%" />
+<col width="13%" />
+<col width="51%" />
+<col width="13%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Base Latitude</td>
+<td>base_lat</td>
+<td><em>°</em></td>
+<td>fp32_t</td>
+<td>All data sent inside this message will have offsets relative to this latitude.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Base Longitude</td>
+<td>base_lon</td>
+<td><em>°</em></td>
+<td>fp32_t</td>
+<td>All data sent inside this message will have offsets relative to this longitude.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Base Timestamp</td>
+<td>base_time</td>
+<td><em>s</em></td>
+<td>fp32_t</td>
+<td>All data sent inside this message will use this time as the origin (0).</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Data</td>
+<td>data</td>
+<td><em>-</em></td>
+<td>message-list
+(<a class="reference internal" href="Message Format.html#remotedata"><span class="std std-ref">Message-Group RemoteData</span></a>)</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="compressed-historic-data-series">
+<span id="compressedhistory"></span><h2>Compressed Historic Data Series<a class="headerlink" href="#compressed-historic-data-series" title="Permalink to this headline">¶</a></h2>
+<p>This message holds a list of inline data samples produced by one or more vehicles in the past.
+It is used to transfer data over disruption tolerant networks.</p>
+<ul class="simple">
+<li>Abbreviation: CompressedHistory</li>
+<li>Identification Number: 185</li>
+<li>Payload Size: 14+  bytes</li>
+<li>Message Size: 36+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="10%" />
+<col width="4%" />
+<col width="6%" />
+<col width="55%" />
+<col width="14%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Base Latitude</td>
+<td>base_lat</td>
+<td><em>°</em></td>
+<td>fp32_t</td>
+<td>All data sent inside this message will have offsets relative to this latitude.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Base Longitude</td>
+<td>base_lon</td>
+<td><em>°</em></td>
+<td>fp32_t</td>
+<td>All data sent inside this message will have offsets relative to this longitude.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Base Timestamp</td>
+<td>base_time</td>
+<td><em>s</em></td>
+<td>fp32_t</td>
+<td>All data sent inside this message will use this time as the origin (0).</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Data</td>
+<td>data</td>
+<td><em>-</em></td>
+<td>rawdata</td>
+<td>A message-list of HistoricSample messages compressed with GZip algorithm.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="historic-data-sample">
+<span id="historicsample"></span><h2>Historic Data Sample<a class="headerlink" href="#historic-data-sample" title="Permalink to this headline">¶</a></h2>
+<p>No description</p>
+<ul class="simple">
+<li>Abbreviation: HistoricSample</li>
+<li>Identification Number: 186</li>
+<li>Payload Size: 13+  bytes</li>
+<li>Message Size: 35+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="8%" />
+<col width="3%" />
+<col width="6%" />
+<col width="60%" />
+<col width="11%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Original System Id</td>
+<td>sys_id</td>
+<td><em>-</em></td>
+<td>uint16_t</td>
+<td>The IMC identifier of the system that produced this sample.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Priority</td>
+<td>priority</td>
+<td><em>-</em></td>
+<td>int8_t</td>
+<td>The priority for this data sample. Default priority is 0. Samples with
+higher priorities will <em>always</em> be transmitted before samples with lower
+priorities. Samples with -127 priority will not be transmitted but just
+logged to disk locally.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>X offset</td>
+<td>x</td>
+<td><em>m</em></td>
+<td>int16_t</td>
+<td>Northing offsets relative to base latitude / longitude expressed in the enclosing <cite>HistoricData</cite> message.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Y offset</td>
+<td>y</td>
+<td><em>m</em></td>
+<td>int16_t</td>
+<td>Easting offsets relative to base latitude / longitude expressed in the enclosing <cite>HistoricData</cite> message.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Z offset</td>
+<td>z</td>
+<td><em>dm</em></td>
+<td>int16_t</td>
+<td>Altitude / depth offsets relative to sea level expressed in decimeters.
+Negative values mean depth and positive values mean altitude.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Time offset</td>
+<td>t</td>
+<td><em>s</em></td>
+<td>int16_t</td>
+<td>Time offset in seconds relative to the base time expressed in the enclosing <cite>HistoricData</cite> message.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Data Sample</td>
+<td>sample</td>
+<td><em>-</em></td>
+<td>message</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="historic-data-query">
+<span id="historicdataquery"></span><h2>Historic Data Query<a class="headerlink" href="#historic-data-query" title="Permalink to this headline">¶</a></h2>
+<p>No description</p>
+<ul class="simple">
+<li>Abbreviation: HistoricDataQuery</li>
+<li>Identification Number: 187</li>
+<li>Payload Size: 21+  bytes</li>
+<li>Message Size: 43+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="11%" />
+<col width="31%" />
+<col width="19%" />
+<col width="11%" />
+<col width="16%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Request Id</td>
+<td>req_id</td>
+<td><em>-</em></td>
+<td>uint16_t</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Request Type</td>
+<td>type</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="#historicdataquery-enum-type"><span class="std std-ref">Enum Request Type</span></a>)</td>
+<td>uint8_t</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Maximum Size</td>
+<td>max_size</td>
+<td><em>-</em></td>
+<td>uint16_t</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Data</td>
+<td>data</td>
+<td><em>-</em></td>
+<td>message
+(<a class="reference internal" href="#historicdata"><span class="std std-ref">Historic Data Series</span></a>)</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="enum-request-type">
+<span id="historicdataquery-enum-prefix-hrtype"></span><span id="historicdataquery-enum-type"></span><h3>Enum Request Type<a class="headerlink" href="#enum-request-type" title="Permalink to this headline">¶</a></h3>
+<p>No description</p>
+<ul class="simple">
+<li>Abbreviation: type</li>
+<li>Prefix: HRTYPE</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="9%" />
+<col width="9%" />
+<col width="18%" />
+<col width="65%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>1</td>
+<td>Query</td>
+<td>QUERY</td>
+<td>Request data from the Data Store</td>
+</tr>
+<tr class="row-odd"><td>2</td>
+<td>Reply</td>
+<td>REPLY</td>
+<td>Data Store response with Data (using field ‘data’)</td>
+</tr>
+<tr class="row-even"><td>3</td>
+<td>Clear</td>
+<td>CLEAR</td>
+<td>Clear ‘data’ from the Data Store</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="remote-command">
+<span id="remotecommand"></span><h2>Remote Command<a class="headerlink" href="#remote-command" title="Permalink to this headline">¶</a></h2>
+<p>Command to remote system. If a system receives a RemoteCommand and it isn’t the intended recipient, then it should
+resend it.</p>
+<ul class="simple">
+<li>Abbreviation: RemoteCommand</li>
+<li>Identification Number: 188</li>
+<li>Payload Size: 14+  bytes</li>
+<li>Message Size: 36+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="9%" />
+<col width="9%" />
+<col width="3%" />
+<col width="5%" />
+<col width="63%" />
+<col width="11%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Original Source</td>
+<td>original_source</td>
+<td><em>-</em></td>
+<td>uint16_t</td>
+<td>IMC id of the original sender.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Destination</td>
+<td>destination</td>
+<td><em>-</em></td>
+<td>uint16_t</td>
+<td>IMC id of the recipient.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Timeout</td>
+<td>timeout</td>
+<td><em>s</em></td>
+<td>fp64_t</td>
+<td>Expiration time of the message (Epoch Time), in seconds. If the message doesn’t reach the destination within timeout,
+the validity of the message expires and there will be no more attempts to transmit the message.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Command</td>
+<td>cmd</td>
+<td><em>-</em></td>
+<td>message</td>
+<td>Command to be unpacked by the recipient.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="communication-systems-query">
+<span id="commsystemsquery"></span><h2>Communication Systems Query<a class="headerlink" href="#communication-systems-query" title="Permalink to this headline">¶</a></h2>
+<p>Presence of Communication Interfaces query.</p>
+<ul class="simple">
+<li>Abbreviation: CommSystemsQuery</li>
+<li>Identification Number: 189</li>
+<li>Payload Size: 7+  bytes</li>
+<li>Message Size: 29+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="9%" />
+<col width="29%" />
+<col width="6%" />
+<col width="29%" />
+<col width="11%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Type</td>
+<td>type</td>
+<td><em>Bitfield</em>
+(<a class="reference internal" href="#commsystemsquery-bitfield-type"><span class="std std-ref">Bitfield Type</span></a>)</td>
+<td>uint8_t</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Communication Interface</td>
+<td>comm_interface</td>
+<td><em>Bitfield</em>
+(<span class="xref std std-ref">CommSystemsQuery-bitfield-comm_interface</span>)</td>
+<td>uint16_t</td>
+<td>Communication interface to be used for reports.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Model</td>
+<td>model</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="#commsystemsquery-enum-model"><span class="std std-ref">Enum Model</span></a>)</td>
+<td>uint16_t</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>System List</td>
+<td>list</td>
+<td><em>List</em></td>
+<td>plaintext</td>
+<td>Comma separated list of known Radio system names.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="bitfield-type">
+<span id="commsystemsquery-bitfield-prefix-ciq"></span><span id="commsystemsquery-bitfield-type"></span><h3>Bitfield Type<a class="headerlink" href="#bitfield-type" title="Permalink to this headline">¶</a></h3>
+<p>No description</p>
+<ul class="simple">
+<li>Abbreviation: type</li>
+<li>Prefix: CIQ</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="9%" />
+<col width="18%" />
+<col width="17%" />
+<col width="56%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0x01</td>
+<td>Query Systems</td>
+<td>QUERY</td>
+<td>Query systems about communication capability</td>
+</tr>
+<tr class="row-odd"><td>0x02</td>
+<td>Reply</td>
+<td>REPLY</td>
+<td>Reply systems about communication capability</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="bitfield-communication-interface">
+<span id="id4"></span><h3>Bitfield Communication Interface<a class="headerlink" href="#bitfield-communication-interface" title="Permalink to this headline">¶</a></h3>
+<p>Communication interface to be used for reports.</p>
+<ul class="simple">
+<li>Abbreviation: comm_interface</li>
+<li>Prefix: CIQ</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="9%" />
+<col width="14%" />
+<col width="18%" />
+<col width="58%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0x01</td>
+<td>Acoustic</td>
+<td>ACOUSTIC</td>
+<td>Use acoustic communications</td>
+</tr>
+<tr class="row-odd"><td>0x02</td>
+<td>Satellite</td>
+<td>SATELLITE</td>
+<td>Use satellite communications</td>
+</tr>
+<tr class="row-even"><td>0x04</td>
+<td>GSM</td>
+<td>GSM</td>
+<td>Use Global System for Mobile Communications</td>
+</tr>
+<tr class="row-odd"><td>0x08</td>
+<td>Mobile</td>
+<td>MOBILE</td>
+<td>Use mobile networks</td>
+</tr>
+<tr class="row-even"><td>0x10</td>
+<td>Radio</td>
+<td>RADIO</td>
+<td>Use Radio telemetry</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="enum-model">
+<span id="commsystemsquery-enum-prefix-ciq"></span><span id="commsystemsquery-enum-model"></span><h3>Enum Model<a class="headerlink" href="#enum-model" title="Permalink to this headline">¶</a></h3>
+<p>No description</p>
+<ul class="simple">
+<li>Abbreviation: model</li>
+<li>Prefix: CIQ</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="17%" />
+<col width="20%" />
+<col width="52%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0x00</td>
+<td>unknown</td>
+<td>UNKNOWN</td>
+<td>Model is not defined</td>
+</tr>
+<tr class="row-odd"><td>0x01</td>
+<td>3DR</td>
+<td>M3DR</td>
+<td>Radio Model 3DR</td>
+</tr>
+<tr class="row-even"><td>0x02</td>
+<td>RDFXXXxPtP</td>
+<td>RDFXXXXPTP</td>
+<td>Radio Model RDFXXXx point to point</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="telemetry-message">
+<span id="telemetrymsg"></span><h2>Telemetry Message<a class="headerlink" href="#telemetry-message" title="Permalink to this headline">¶</a></h2>
+<p>Message to handle telemetry transmissions.</p>
+<ul class="simple">
+<li>Abbreviation: TelemetryMsg</li>
+<li>Identification Number: 190</li>
+<li>Payload Size: 16+  bytes</li>
+<li>Message Size: 38+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="7%" />
+<col width="22%" />
+<col width="6%" />
+<col width="43%" />
+<col width="10%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Type</td>
+<td>type</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="#telemetrymsg-enum-type"><span class="std std-ref">Enum Type</span></a>)</td>
+<td>uint8_t</td>
+<td>Type of telemetry transmissions.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Request Identifier</td>
+<td>req_id</td>
+<td><em>-</em></td>
+<td>uint32_t</td>
+<td>The request identifier used to receive transmission updates.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Time to live</td>
+<td>ttl</td>
+<td><em>s</em></td>
+<td>uint16_t</td>
+<td>Time, in seconds, which will be considered a non-transmitted message.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Code</td>
+<td>code</td>
+<td><em>Enumerated</em>
+(<span class="xref std std-ref">TelemetryMsg-enum-code</span>)</td>
+<td>uint8_t</td>
+<td>Type of telemetry transmissions.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Destination Identifier</td>
+<td>destination</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>The unique identifier of this message’s destination (e.g. lauv-xtreme-2, manta-0).</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Source Identifier</td>
+<td>Source</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>The unique identifier of this message’s destination (e.g. lauv-xtreme-2, manta-0).</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Acknowledge</td>
+<td>acknowledge</td>
+<td><em>Bitfield</em>
+(<a class="reference internal" href="#telemetrymsg-bitfield-acknowledge"><span class="std std-ref">Bitfield Acknowledge</span></a>)</td>
+<td>uint8_t</td>
+<td>Type of telemetry transmissions.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Status</td>
+<td>status</td>
+<td><em>Enumerated</em>
+(<span class="xref std std-ref">TelemetryMsg-enum-status</span>)</td>
+<td>uint8_t</td>
+<td>State of the transmitted message.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Data</td>
+<td>data</td>
+<td><em>-</em></td>
+<td>rawdata</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="enum-type">
+<span id="telemetrymsg-enum-prefix-tm"></span><span id="telemetrymsg-enum-type"></span><h3>Enum Type<a class="headerlink" href="#enum-type" title="Permalink to this headline">¶</a></h3>
+<p>Type of telemetry transmissions.</p>
+<ul class="simple">
+<li>Abbreviation: type</li>
+<li>Prefix: TM</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="17%" />
+<col width="23%" />
+<col width="48%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0x01</td>
+<td>Tx</td>
+<td>TX</td>
+<td>Send telemetry data.</td>
+</tr>
+<tr class="row-odd"><td>0x02</td>
+<td>Rx</td>
+<td>RX</td>
+<td>Received telemetry data.</td>
+</tr>
+<tr class="row-even"><td>0x03</td>
+<td>TxStatus</td>
+<td>TXSTATUS</td>
+<td>Status of transmitted data.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="enum-code">
+<span id="id5"></span><h3>Enum Code<a class="headerlink" href="#enum-code" title="Permalink to this headline">¶</a></h3>
+<p>Type of telemetry transmissions.</p>
+<ul class="simple">
+<li>Abbreviation: code</li>
+<li>Prefix: TM</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="8%" />
+<col width="15%" />
+<col width="15%" />
+<col width="62%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0x00</td>
+<td>Code unknown</td>
+<td>CODE_UNK</td>
+<td>Unknown code type</td>
+</tr>
+<tr class="row-odd"><td>0x01</td>
+<td>Code Report</td>
+<td>CODE_REPORT</td>
+<td>Concise representation of entire system state message.
+Payload message is a MessageList.</td>
+</tr>
+<tr class="row-even"><td>0x02</td>
+<td>Code IMC</td>
+<td>CODE_IMC</td>
+<td>Payload message is INLINEMSG</td>
+</tr>
+<tr class="row-odd"><td>0x03</td>
+<td>Code raw</td>
+<td>CODE_RAW</td>
+<td>Payload message is in raw</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="bitfield-acknowledge">
+<span id="telemetrymsg-bitfield-prefix-tm"></span><span id="telemetrymsg-bitfield-acknowledge"></span><h3>Bitfield Acknowledge<a class="headerlink" href="#bitfield-acknowledge" title="Permalink to this headline">¶</a></h3>
+<p>Type of telemetry transmissions.</p>
+<ul class="simple">
+<li>Abbreviation: acknowledge</li>
+<li>Prefix: TM</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="7%" />
+<col width="17%" />
+<col width="14%" />
+<col width="62%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0x00</td>
+<td>Not acknowledge</td>
+<td>NAK</td>
+<td>Message transmitted without acknowledged reception response</td>
+</tr>
+<tr class="row-odd"><td>0x01</td>
+<td>acknowledge</td>
+<td>AK</td>
+<td>Message transmitted with acknowledged reception response</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="enum-status">
+<span id="id6"></span><h3>Enum Status<a class="headerlink" href="#enum-status" title="Permalink to this headline">¶</a></h3>
+<p>State of the transmitted message.</p>
+<ul class="simple">
+<li>Abbreviation: status</li>
+<li>Prefix: TM</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="8%" />
+<col width="60%" />
+<col width="17%" />
+<col width="15%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0x00</td>
+<td>Does not apply</td>
+<td>NONE</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>Successfull transmission</td>
+<td>DONE</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-even"><td>2</td>
+<td>Error while trying to transmit message</td>
+<td>FAILED</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>3</td>
+<td>Message has been queued for transmission</td>
+<td>QUEUED</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-even"><td>4</td>
+<td>Message is currently being transmitted</td>
+<td>TRANSMIT</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>5</td>
+<td>Message’s TTL has expired. Transmition cancelled</td>
+<td>EXPIRED</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-even"><td>6</td>
+<td>No more messages to be transmitted or received</td>
+<td>EMPTY</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>7</td>
+<td>Invalid address</td>
+<td>INV_ADDR</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-even"><td>8</td>
+<td>Invalid transmission size</td>
+<td>INV_SIZE</td>
+<td><em>-</em></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<h3><a href="index.html">Table Of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Message Format.html">Message Format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Core.html">Core Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Simulation.html">Simulation Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Storage.html">Storage Messages</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Networking Messages</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#heartbeat">Heartbeat</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#announce">Announce</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#announce-service">Announce Service</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#receive-signal-strength-information">Receive Signal Strength Information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#voltage-standing-wave-ratio">Voltage Standing Wave Ratio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#link-level">Link Level</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sms">SMS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sms-transmit">SMS Transmit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sms-receive">SMS Receive</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sms-state">SMS State</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#text-message">Text Message</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#received-iridium-message">Received Iridium Message</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#transmit-iridium-message">Transmit Iridium Message</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#iridium-transmission-status">Iridium Transmission Status</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#group-membership-state">Group Membership State</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#system-group">System Group</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#link-latency">Link Latency</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#extended-receive-signal-strength-information">Extended Receive Signal Strength Information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#historic-data-series">Historic Data Series</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#compressed-historic-data-series">Compressed Historic Data Series</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#historic-data-sample">Historic Data Sample</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#historic-data-query">Historic Data Query</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#remote-command">Remote Command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#communication-systems-query">Communication Systems Query</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#telemetry-message">Telemetry Message</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Acoustic Networking.html">Acoustic Networking Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Sensors.html">Sensors Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Actuation.html">Actuation Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Navigation.html">Navigation Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Guidance.html">Guidance Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Maneuvering.html">Maneuvering Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Vehicle Supervision.html">Vehicle Supervision Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Plan Supervision.html">Plan Supervision Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CCU.html">CCU Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Autonomy.html">Autonomy Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Vision.html">Vision Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="External.html">External Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Development.html">Development Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Custom.html">Custom Messages</a></li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013-2017, Universidade do Porto - Faculdade de Engenharia - LSTS.
+      <br/>
+      Last updated on Aug 21, 2019.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,1534 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Guidance Messages &mdash; IMC v5.4.11 Specification</title>
+    
+    <link rel="stylesheet" href="_static/pydoctheme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '5.4.11',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="top" title="IMC v5.4.11 Specification" href="index.html" />
+    <link rel="next" title="Maneuvering Messages" href="Maneuvering.html" />
+    <link rel="prev" title="Navigation Messages" href="Navigation.html" /> 
+  </head>
+  <body>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="guidance-messages">
+<h1>Guidance Messages<a class="headerlink" href="#guidance-messages" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="desired-heading">
+<span id="desiredheading"></span><h2>Desired Heading<a class="headerlink" href="#desired-heading" title="Permalink to this headline">¶</a></h2>
+<p>Desired Heading angle reference value for the control layer.</p>
+<ul class="simple">
+<li>Abbreviation: DesiredHeading</li>
+<li>Identification Number: 400</li>
+<li>Payload Size: 8 bytes</li>
+<li>Message Size: 30 bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="12%" />
+<col width="6%" />
+<col width="7%" />
+<col width="51%" />
+<col width="18%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Value</td>
+<td>value</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>The value of the desired heading angle, relative to true
+north, in radians.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="desired-z">
+<span id="desiredz"></span><h2>Desired Z<a class="headerlink" href="#desired-z" title="Permalink to this headline">¶</a></h2>
+<p>Desired Z reference value for the control layer.</p>
+<ul class="simple">
+<li>Abbreviation: DesiredZ</li>
+<li>Identification Number: 401</li>
+<li>Payload Size: 5 bytes</li>
+<li>Message Size: 27 bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="7%" />
+<col width="11%" />
+<col width="18%" />
+<col width="7%" />
+<col width="40%" />
+<col width="16%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Value</td>
+<td>value</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>The value of the desired z reference in meters.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Z Units</td>
+<td>z_units</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="Message Format.html#enum-zunits"><span class="std std-ref">Enum Z Units</span></a>)</td>
+<td>uint8_t</td>
+<td>Units of the z reference.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="desired-speed">
+<span id="desiredspeed"></span><h2>Desired Speed<a class="headerlink" href="#desired-speed" title="Permalink to this headline">¶</a></h2>
+<p>Desired Speed reference value for the control layer.</p>
+<ul class="simple">
+<li>Abbreviation: DesiredSpeed</li>
+<li>Identification Number: 402</li>
+<li>Payload Size: 9 bytes</li>
+<li>Message Size: 31 bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="9%" />
+<col width="10%" />
+<col width="18%" />
+<col width="6%" />
+<col width="43%" />
+<col width="14%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Value</td>
+<td>value</td>
+<td><em>-</em></td>
+<td>fp64_t</td>
+<td>The value of the desired speed, in the scale specified by the
+“Speed Units” field.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Speed Units</td>
+<td>speed_units</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="Message Format.html#enum-speedunits"><span class="std std-ref">Enum Speed Units</span></a>)</td>
+<td>uint8_t</td>
+<td>Indicates the units used for the speed value.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="desired-roll">
+<span id="desiredroll"></span><h2>Desired Roll<a class="headerlink" href="#desired-roll" title="Permalink to this headline">¶</a></h2>
+<p>Desired Roll angle reference value for the control layer.</p>
+<ul class="simple">
+<li>Abbreviation: DesiredRoll</li>
+<li>Identification Number: 403</li>
+<li>Payload Size: 8 bytes</li>
+<li>Message Size: 30 bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="7%" />
+<col width="15%" />
+<col width="7%" />
+<col width="9%" />
+<col width="40%" />
+<col width="21%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Value</td>
+<td>value</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>The value of the desired roll angle.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="desired-pitch">
+<span id="desiredpitch"></span><h2>Desired Pitch<a class="headerlink" href="#desired-pitch" title="Permalink to this headline">¶</a></h2>
+<p>Desired Pitch angle reference value for the control layer.</p>
+<ul class="simple">
+<li>Abbreviation: DesiredPitch</li>
+<li>Identification Number: 404</li>
+<li>Payload Size: 8 bytes</li>
+<li>Message Size: 30 bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="7%" />
+<col width="15%" />
+<col width="7%" />
+<col width="8%" />
+<col width="41%" />
+<col width="21%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Value</td>
+<td>value</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>The value of the desired pitch angle.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="desired-vertical-rate">
+<span id="desiredverticalrate"></span><h2>Desired Vertical Rate<a class="headerlink" href="#desired-vertical-rate" title="Permalink to this headline">¶</a></h2>
+<p>Desired Vertical Rate speed reference value for the control layer.</p>
+<ul class="simple">
+<li>Abbreviation: DesiredVerticalRate</li>
+<li>Identification Number: 405</li>
+<li>Payload Size: 8 bytes</li>
+<li>Message Size: 30 bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="12%" />
+<col width="6%" />
+<col width="7%" />
+<col width="52%" />
+<col width="17%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Value</td>
+<td>value</td>
+<td><em>m/s</em></td>
+<td>fp64_t</td>
+<td>The value of the desired vertical rate speed in meters per
+second.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="desired-path">
+<span id="desiredpath"></span><h2>Desired Path<a class="headerlink" href="#desired-path" title="Permalink to this headline">¶</a></h2>
+<p>Perform path control.</p>
+<p>The path is specified by two WGS-84 waypoints, respective
+altitude / depth settings, optional loitering at the end point,
+and some control flags.</p>
+<p>The start and end waypoints are defined by the specified end point fields
+(‘end_{lat/lon/z}’) plus:</p>
+<p>1. the start waypoint fields (‘start_{lat|lon|z}’) if the
+‘START’ flag (bit in ‘flags’ field) is set; or
+2. the end point of the previous path recently tracked; or
+3. the current location is the ‘DIRECT’ flag is set or if
+the tracker has been idle for some time.</p>
+<p>Altitude and depth control can be performed as follows:</p>
+<p>1. by default, the tracker will just transmit an altitude/depth
+reference value equal to ‘end_z’ to the appropriate controller;
+2. if the ‘NO_Z’ flag is set no altitude/depth control will take
+place, hence they can be controlled independently;
+3. if the ‘3DTRACK’ flag is set, 3D-tracking will be done
+(if supported by the active controller).</p>
+<p>Loitering can be specified at the end point with a certain
+radius (‘lradius’), duration (‘lduration’), and clockwise or
+counter-clockwise direction (‘CCLOCKW’ flag).</p>
+<ul class="simple">
+<li>Abbreviation: DesiredPath</li>
+<li>Identification Number: 406</li>
+<li>Payload Size: 56 bytes</li>
+<li>Message Size: 78 bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="7%" />
+<col width="18%" />
+<col width="5%" />
+<col width="43%" />
+<col width="12%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Path Reference</td>
+<td>path_ref</td>
+<td><em>-</em></td>
+<td>uint32_t</td>
+<td>Unsigned integer reference for the scope of the desired path message.
+Path reference should only be set by a maneuver.
+Should be set to an always increasing reference at the time of dispatching this message.
+Lower level path controllers must inherit the same path reference sent by maneuver.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Start Point – Latitude WGS-84</td>
+<td>start_lat</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>WGS-84 latitude of start point. This will be ignored unless
+the ‘START’ flag is set.</td>
+<td>min=-1.5707963267948966,
+max=1.5707963267948966</td>
+</tr>
+<tr class="row-even"><td>Start Point – WGS-84 Longitude</td>
+<td>start_lon</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>WGS-84 longitude of start point. This will be ignored unless
+the ‘START’ flag is set.</td>
+<td>min=-3.141592653589793,
+max=3.141592653589793</td>
+</tr>
+<tr class="row-odd"><td>Start Point – Z Reference</td>
+<td>start_z</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Altitude or depth of start point. This parameter will be
+ignored if the ‘NO_Z’ flag is set, or if the ‘START’ flag is
+not set.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Start Point – Z Units</td>
+<td>start_z_units</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="Message Format.html#enum-zunits"><span class="std std-ref">Enum Z Units</span></a>)</td>
+<td>uint8_t</td>
+<td>Units of the start point’s z reference.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>End Point – WGS84 Latitude</td>
+<td>end_lat</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>WGS-84 latitude of end point.</td>
+<td>min=-1.5707963267948966,
+max=1.5707963267948966</td>
+</tr>
+<tr class="row-even"><td>End Point – WGS-84 Longitude</td>
+<td>end_lon</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>WGS-84 longitude of end point.</td>
+<td>min=-3.141592653589793,
+max=3.141592653589793</td>
+</tr>
+<tr class="row-odd"><td>End Point – Z Reference</td>
+<td>end_z</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Depth or altitude for the end point. This parameter will be
+ignored if the ‘NO_Z’ flag is set.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>End Point – Z Units</td>
+<td>end_z_units</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="Message Format.html#enum-zunits"><span class="std std-ref">Enum Z Units</span></a>)</td>
+<td>uint8_t</td>
+<td>Units of the end point’s z reference.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Speed</td>
+<td>speed</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Maneuver speed reference.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Speed Units</td>
+<td>speed_units</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="Message Format.html#enum-speedunits"><span class="std std-ref">Enum Speed Units</span></a>)</td>
+<td>uint8_t</td>
+<td>Speed units.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Loiter – Radius</td>
+<td>lradius</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Radius for loitering at end point. Specify less or equal to 0
+for no loitering.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Flags</td>
+<td>flags</td>
+<td><em>Bitfield</em>
+(<a class="reference internal" href="#desiredpath-bitfield-flags"><span class="std std-ref">Bitfield Flags</span></a>)</td>
+<td>uint8_t</td>
+<td>Desired Path flags.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="bitfield-flags">
+<span id="desiredpath-bitfield-prefix-fl"></span><span id="desiredpath-bitfield-flags"></span><h3>Bitfield Flags<a class="headerlink" href="#bitfield-flags" title="Permalink to this headline">¶</a></h3>
+<p>Desired Path flags.</p>
+<ul class="simple">
+<li>Abbreviation: flags</li>
+<li>Prefix: FL</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="24%" />
+<col width="11%" />
+<col width="59%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0x01</td>
+<td>Start Point</td>
+<td>START</td>
+<td>Indicates that the start point specification is given,
+therefore it should be considered for tracking.</td>
+</tr>
+<tr class="row-odd"><td>0x02</td>
+<td>Direct</td>
+<td>DIRECT</td>
+<td>If start point is not given, ignore also the previous path’s
+endpoint and take the start point to be the current vehicle
+location.</td>
+</tr>
+<tr class="row-even"><td>0x04</td>
+<td>No Altitude/Depth control</td>
+<td>NO_Z</td>
+<td>Ignore altitude/depth setting and let them be controlled
+independently.</td>
+</tr>
+<tr class="row-odd"><td>0x08</td>
+<td>3D Tracking</td>
+<td>3DTRACK</td>
+<td>Perform 3D-tracking, i.e., consider the path formed in the
+XYZ plane taking into account both the ‘start_z’ and ‘end_z’
+values.</td>
+</tr>
+<tr class="row-even"><td>0x10</td>
+<td>Counter-Clockwise loiter</td>
+<td>CCLOCKW</td>
+<td>Indicates that loitering, if defined, should be done
+counter-clockwise. Clockwise loitering will apply
+otherwise.</td>
+</tr>
+<tr class="row-odd"><td>0x20</td>
+<td>Loiter from current position</td>
+<td>LOITER_CURR</td>
+<td>Indicates that loitering, if defined, should be done from
+the current vehicle position. The end_lat and end_lon
+fields will be ignored.</td>
+</tr>
+<tr class="row-even"><td>0x40</td>
+<td>Takeoff</td>
+<td>TAKEOFF</td>
+<td>Indicates that takeoff should be done before going to the end position.</td>
+</tr>
+<tr class="row-odd"><td>0x80</td>
+<td>Land</td>
+<td>LAND</td>
+<td>Indicates that the system should land at the end position.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="desired-control">
+<span id="desiredcontrol"></span><h2>Desired Control<a class="headerlink" href="#desired-control" title="Permalink to this headline">¶</a></h2>
+<p>Set the desired virtual forces and torques to be applied to the
+vehicle.</p>
+<ul class="simple">
+<li>Abbreviation: DesiredControl</li>
+<li>Identification Number: 407</li>
+<li>Payload Size: 49 bytes</li>
+<li>Message Size: 71 bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="17%" />
+<col width="10%" />
+<col width="27%" />
+<col width="6%" />
+<col width="26%" />
+<col width="14%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Force along the x axis</td>
+<td>x</td>
+<td><em>N</em></td>
+<td>fp64_t</td>
+<td>Force X along the vehicle’s x axis.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Force along the y axis</td>
+<td>y</td>
+<td><em>N</em></td>
+<td>fp64_t</td>
+<td>Force Y along the vehicle’s y axis.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Force along the z axis</td>
+<td>z</td>
+<td><em>N</em></td>
+<td>fp64_t</td>
+<td>Force Z along the vehicle’s z axis.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Torque about the x axis</td>
+<td>k</td>
+<td><em>Nm</em></td>
+<td>fp64_t</td>
+<td>Torque K about the vehicle’s x axis.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Torque about the y axis</td>
+<td>m</td>
+<td><em>Nm</em></td>
+<td>fp64_t</td>
+<td>Torque M about the vehicle’s y axis.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Torque about the z axis</td>
+<td>n</td>
+<td><em>Nm</em></td>
+<td>fp64_t</td>
+<td>Torque N about the vehicle’s z axis.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Flags</td>
+<td>flags</td>
+<td><em>Bitfield</em>
+(<a class="reference internal" href="#desiredcontrol-bitfield-flags"><span class="std std-ref">Bitfield Flags</span></a>)</td>
+<td>uint8_t</td>
+<td>Desired Control flags.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="desiredcontrol-bitfield-prefix-fl">
+<span id="desiredcontrol-bitfield-flags"></span><span id="id1"></span><h3>Bitfield Flags<a class="headerlink" href="#desiredcontrol-bitfield-prefix-fl" title="Permalink to this headline">¶</a></h3>
+<p>Desired Control flags.</p>
+<ul class="simple">
+<li>Abbreviation: flags</li>
+<li>Prefix: FL</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="7%" />
+<col width="27%" />
+<col width="15%" />
+<col width="51%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0x01</td>
+<td>Value of X is meaningful</td>
+<td>X</td>
+<td>If enabled then field X has a meaningful value.</td>
+</tr>
+<tr class="row-odd"><td>0x02</td>
+<td>Value of Y is meaningful</td>
+<td>Y</td>
+<td>If enabled then field Y has a meaningful value.</td>
+</tr>
+<tr class="row-even"><td>0x04</td>
+<td>Value of Z is meaningful</td>
+<td>Z</td>
+<td>If enabled then field Z has a meaningful value.</td>
+</tr>
+<tr class="row-odd"><td>0x08</td>
+<td>Value of K is meaningful</td>
+<td>K</td>
+<td>If enabled then field K has a meaningful value.</td>
+</tr>
+<tr class="row-even"><td>0x10</td>
+<td>Value of M is meaningful</td>
+<td>M</td>
+<td>If enabled then field M has a meaningful value.</td>
+</tr>
+<tr class="row-odd"><td>0x20</td>
+<td>Value of N is meaningful</td>
+<td>N</td>
+<td>If enabled then field N has a meaningful value.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="desired-heading-rate">
+<span id="desiredheadingrate"></span><h2>Desired Heading Rate<a class="headerlink" href="#desired-heading-rate" title="Permalink to this headline">¶</a></h2>
+<p>Desired Heading Rate speed reference value for the control layer.</p>
+<ul class="simple">
+<li>Abbreviation: DesiredHeadingRate</li>
+<li>Identification Number: 408</li>
+<li>Payload Size: 8 bytes</li>
+<li>Message Size: 30 bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="12%" />
+<col width="8%" />
+<col width="7%" />
+<col width="51%" />
+<col width="17%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Value</td>
+<td>value</td>
+<td><em>rad/s</em></td>
+<td>fp64_t</td>
+<td>The value of the desired heading rate speed in radians per
+second.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="desired-velocity">
+<span id="desiredvelocity"></span><h2>Desired Velocity<a class="headerlink" href="#desired-velocity" title="Permalink to this headline">¶</a></h2>
+<p>Desired value for each linear and angular speeds.</p>
+<ul class="simple">
+<li>Abbreviation: DesiredVelocity</li>
+<li>Identification Number: 409</li>
+<li>Payload Size: 49 bytes</li>
+<li>Message Size: 71 bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="19%" />
+<col width="9%" />
+<col width="26%" />
+<col width="6%" />
+<col width="28%" />
+<col width="13%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Desired Linear Speed in xx</td>
+<td>u</td>
+<td><em>m/s</em></td>
+<td>fp64_t</td>
+<td>Desired speed along the vehicle’s x axis.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Desired Linear Speed in yy</td>
+<td>v</td>
+<td><em>m/s</em></td>
+<td>fp64_t</td>
+<td>Desired speed along the vehicle’s y axis.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Desired Linear Speed in zz</td>
+<td>w</td>
+<td><em>m/s</em></td>
+<td>fp64_t</td>
+<td>Desired speed along the vehicle’s z axis.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Desired Angular Speed in xx</td>
+<td>p</td>
+<td><em>m/s</em></td>
+<td>fp64_t</td>
+<td>Desired speed about the vehicle’s x axis.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Desired Angular Speed in yy</td>
+<td>q</td>
+<td><em>m/s</em></td>
+<td>fp64_t</td>
+<td>Desired speed about the vehicle’s y axis.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Desired Angular Speed in zz</td>
+<td>r</td>
+<td><em>m/s</em></td>
+<td>fp64_t</td>
+<td>Desired speed about the vehicle’s z axis.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Flags</td>
+<td>flags</td>
+<td><em>Bitfield</em>
+(<a class="reference internal" href="#desiredvelocity-bitfield-flags"><span class="std std-ref">Bitfield Flags</span></a>)</td>
+<td>uint8_t</td>
+<td>Desired Velocity flags.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="desiredvelocity-bitfield-prefix-fl">
+<span id="desiredvelocity-bitfield-flags"></span><span id="id2"></span><h3>Bitfield Flags<a class="headerlink" href="#desiredvelocity-bitfield-prefix-fl" title="Permalink to this headline">¶</a></h3>
+<p>Desired Velocity flags.</p>
+<ul class="simple">
+<li>Abbreviation: flags</li>
+<li>Prefix: FL</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="7%" />
+<col width="27%" />
+<col width="15%" />
+<col width="51%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0x01</td>
+<td>Value of u is meaningful</td>
+<td>SURGE</td>
+<td>If enabled then field u has a meaningful value.</td>
+</tr>
+<tr class="row-odd"><td>0x02</td>
+<td>Value of v is meaningful</td>
+<td>SWAY</td>
+<td>If enabled then field u has a meaningful value.</td>
+</tr>
+<tr class="row-even"><td>0x04</td>
+<td>Value of w is meaningful</td>
+<td>HEAVE</td>
+<td>If enabled then field w has a meaningful value.</td>
+</tr>
+<tr class="row-odd"><td>0x08</td>
+<td>Value of p is meaningful</td>
+<td>ROLL</td>
+<td>If enabled then field p has a meaningful value.</td>
+</tr>
+<tr class="row-even"><td>0x10</td>
+<td>Value of q is meaningful</td>
+<td>PITCH</td>
+<td>If enabled then field q has a meaningful value.</td>
+</tr>
+<tr class="row-odd"><td>0x20</td>
+<td>Value of r is meaningful</td>
+<td>YAW</td>
+<td>If enabled then field r has a meaningful value.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="path-control-state">
+<span id="pathcontrolstate"></span><h2>Path Control State<a class="headerlink" href="#path-control-state" title="Permalink to this headline">¶</a></h2>
+<p>Path control state issued by Path Controller.</p>
+<ul class="simple">
+<li>Abbreviation: PathControlState</li>
+<li>Identification Number: 410</li>
+<li>Payload Size: 81 bytes</li>
+<li>Message Size: 103 bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="7%" />
+<col width="21%" />
+<col width="5%" />
+<col width="37%" />
+<col width="13%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Path Reference</td>
+<td>path_ref</td>
+<td><em>-</em></td>
+<td>uint32_t</td>
+<td>Unsigned integer reference of the desired path message to which this
+PathControlState message refers to.
+Path reference should only be set by a maneuver, not by path controllers.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Start Point – Latitude WGS-84</td>
+<td>start_lat</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>WGS-84 latitude of start point.</td>
+<td>min=-1.5707963267948966,
+max=1.5707963267948966</td>
+</tr>
+<tr class="row-even"><td>Start Point – WGS-84 Longitude</td>
+<td>start_lon</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>WGS-84 longitude of start point.</td>
+<td>min=-3.141592653589793,
+max=3.141592653589793</td>
+</tr>
+<tr class="row-odd"><td>Start Point – Z Reference</td>
+<td>start_z</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Altitude or depth of start point. This parameter will be
+ignored if the ‘NO_Z’ flag is set, or if the ‘START’ flag is
+not set.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Start Point – Z Units</td>
+<td>start_z_units</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="Message Format.html#enum-zunits"><span class="std std-ref">Enum Z Units</span></a>)</td>
+<td>uint8_t</td>
+<td>Units of the start point’s z reference.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>End Point – Latitude WGS-84</td>
+<td>end_lat</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>WGS-84 latitude of end point.</td>
+<td>min=-1.5707963267948966,
+max=1.5707963267948966</td>
+</tr>
+<tr class="row-even"><td>End Point – WGS-84 Longitude</td>
+<td>end_lon</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>WGS-84 longitude of end point.</td>
+<td>min=-3.141592653589793,
+max=3.141592653589793</td>
+</tr>
+<tr class="row-odd"><td>End Point – Z Reference</td>
+<td>end_z</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Depth or altitude for the end point. This parameter should be
+ignored if the ‘NO_Z’ flag is set.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>End Point – Z Units</td>
+<td>end_z_units</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="Message Format.html#enum-zunits"><span class="std std-ref">Enum Z Units</span></a>)</td>
+<td>uint8_t</td>
+<td>Units of the end point’s z reference.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Loiter – Radius</td>
+<td>lradius</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Radius for loitering at end point.
+Will be 0 if no loitering is active.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Flags</td>
+<td>flags</td>
+<td><em>Bitfield</em>
+(<a class="reference internal" href="#pathcontrolstate-bitfield-flags"><span class="std std-ref">Bitfield Flags</span></a>)</td>
+<td>uint8_t</td>
+<td>Path control state flags.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Along Track Position</td>
+<td>x</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Along-Track position value.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Cross Track Position</td>
+<td>y</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Cross-Track position value.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Vertical Track Position</td>
+<td>z</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Vertical-Track position value.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Along Track Velocity</td>
+<td>vx</td>
+<td><em>m/s</em></td>
+<td>fp32_t</td>
+<td>Along-Track velocity value.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Cross Track Velocity</td>
+<td>vy</td>
+<td><em>m/s</em></td>
+<td>fp32_t</td>
+<td>Cross-Track velocity value.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Vertical Track Velocity</td>
+<td>vz</td>
+<td><em>m/s</em></td>
+<td>fp32_t</td>
+<td>Vertical-Track velocity value.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Course Error</td>
+<td>course_error</td>
+<td><em>rad</em></td>
+<td>fp32_t</td>
+<td>Course error value.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Estimated Time to Arrival (ETA)</td>
+<td>eta</td>
+<td><em>s</em></td>
+<td>uint16_t</td>
+<td>Estimated time to reach target waypoint. The value will be
+65535 if the time is unknown or undefined, and 0 when
+loitering.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="pathcontrolstate-bitfield-prefix-fl">
+<span id="pathcontrolstate-bitfield-flags"></span><span id="id3"></span><h3>Bitfield Flags<a class="headerlink" href="#pathcontrolstate-bitfield-prefix-fl" title="Permalink to this headline">¶</a></h3>
+<p>Path control state flags.</p>
+<ul class="simple">
+<li>Abbreviation: flags</li>
+<li>Prefix: FL</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="25%" />
+<col width="13%" />
+<col width="56%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0x01</td>
+<td>Near Endpoint</td>
+<td>NEAR</td>
+<td>Set if near the target endpoint.</td>
+</tr>
+<tr class="row-odd"><td>0x02</td>
+<td>Loitering</td>
+<td>LOITERING</td>
+<td>Set if loitering.</td>
+</tr>
+<tr class="row-even"><td>0x04</td>
+<td>No Altitude/Depth control</td>
+<td>NO_Z</td>
+<td>Altitude/depth being controlled independently.</td>
+</tr>
+<tr class="row-odd"><td>0x08</td>
+<td>3D Tracking</td>
+<td>3DTRACK</td>
+<td>3D-tracking is active.</td>
+</tr>
+<tr class="row-even"><td>0x10</td>
+<td>Counter-Clockwise loiter</td>
+<td>CCLOCKW</td>
+<td>Indicates that loitering, if active, is being done
+counter-clockwise. Otherwise, clockwise loitering should be
+assumed.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="allocated-control-torques">
+<span id="allocatedcontroltorques"></span><h2>Allocated Control Torques<a class="headerlink" href="#allocated-control-torques" title="Permalink to this headline">¶</a></h2>
+<p>Control torques allocated to the actuators.</p>
+<ul class="simple">
+<li>Abbreviation: AllocatedControlTorques</li>
+<li>Identification Number: 411</li>
+<li>Payload Size: 24 bytes</li>
+<li>Message Size: 46 bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="23%" />
+<col width="13%" />
+<col width="5%" />
+<col width="7%" />
+<col width="34%" />
+<col width="18%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Torque about the x axis</td>
+<td>k</td>
+<td><em>Nm</em></td>
+<td>fp64_t</td>
+<td>Torque K about the vehicle’s x axis.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Torque about the y axis</td>
+<td>m</td>
+<td><em>Nm</em></td>
+<td>fp64_t</td>
+<td>Torque M about the vehicle’s y axis.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Torque about the x axis</td>
+<td>n</td>
+<td><em>Nm</em></td>
+<td>fp64_t</td>
+<td>Torque N about the vehicle’s z axis.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="control-parcel">
+<span id="controlparcel"></span><h2>Control Parcel<a class="headerlink" href="#control-parcel" title="Permalink to this headline">¶</a></h2>
+<p>Report of PID control parcels.</p>
+<ul class="simple">
+<li>Abbreviation: ControlParcel</li>
+<li>Identification Number: 412</li>
+<li>Payload Size: 16 bytes</li>
+<li>Message Size: 38 bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="22%" />
+<col width="14%" />
+<col width="6%" />
+<col width="8%" />
+<col width="29%" />
+<col width="21%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Proportional Parcel</td>
+<td>p</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Proportional parcel value.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Integrative Parcel</td>
+<td>i</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Integral parcel value.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Derivative Parcel</td>
+<td>d</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Derivative parcel value.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Anti-Windup Parcel</td>
+<td>a</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Anti-windup parcel value.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="brake">
+<span id="id4"></span><h2>Brake<a class="headerlink" href="#brake" title="Permalink to this headline">¶</a></h2>
+<p>Brake the vehicle in some way, i. e., reduce forward speed.</p>
+<ul class="simple">
+<li>Abbreviation: Brake</li>
+<li>Identification Number: 413</li>
+<li>Payload Size: 1 bytes</li>
+<li>Message Size: 23 bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="15%" />
+<col width="25%" />
+<col width="9%" />
+<col width="19%" />
+<col width="21%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Operation</td>
+<td>op</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="#brake-enum-op"><span class="std std-ref">Enum Operation</span></a>)</td>
+<td>uint8_t</td>
+<td>Brake operation.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="enum-operation">
+<span id="brake-enum-prefix-op"></span><span id="brake-enum-op"></span><h3>Enum Operation<a class="headerlink" href="#enum-operation" title="Permalink to this headline">¶</a></h3>
+<p>Brake operation.</p>
+<ul class="simple">
+<li>Abbreviation: op</li>
+<li>Prefix: OP</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="27%" />
+<col width="21%" />
+<col width="41%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0</td>
+<td>Stop Braking</td>
+<td>STOP</td>
+<td>Stop braking procedures.</td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>Start Braking</td>
+<td>START</td>
+<td>Start braking procedures.</td>
+</tr>
+<tr class="row-even"><td>2</td>
+<td>Revert Actuation</td>
+<td>REVERT</td>
+<td>Revert Actuation.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="desired-linear-state">
+<span id="desiredlinearstate"></span><h2>Desired Linear State<a class="headerlink" href="#desired-linear-state" title="Permalink to this headline">¶</a></h2>
+<p>Position, velocity and acceleration setpoints in NED</p>
+<ul class="simple">
+<li>Abbreviation: DesiredLinearState</li>
+<li>Identification Number: 414</li>
+<li>Payload Size: 74 bytes</li>
+<li>Message Size: 96 bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="21%" />
+<col width="9%" />
+<col width="27%" />
+<col width="6%" />
+<col width="25%" />
+<col width="12%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Desired pos in xx</td>
+<td>x</td>
+<td><em>m</em></td>
+<td>fp64_t</td>
+<td>Desired pos in x.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Desired pos in yy</td>
+<td>y</td>
+<td><em>m</em></td>
+<td>fp64_t</td>
+<td>Desired pos in y.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Desired pos in zz</td>
+<td>z</td>
+<td><em>m</em></td>
+<td>fp64_t</td>
+<td>Desired pos in z.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Desired Linear Speed in xx</td>
+<td>vx</td>
+<td><em>m/s</em></td>
+<td>fp64_t</td>
+<td>Desired speed along NED x axis.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Desired Linear Speed in yy</td>
+<td>vy</td>
+<td><em>m/s</em></td>
+<td>fp64_t</td>
+<td>Desired speed along NED y axis.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Desired Linear Speed in zz</td>
+<td>vz</td>
+<td><em>m/s</em></td>
+<td>fp64_t</td>
+<td>Desired speed along NED z axis.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Desired Linear Acceleration in xx</td>
+<td>ax</td>
+<td><em>m/s/s</em></td>
+<td>fp64_t</td>
+<td>Desired acceleration along NED x axis.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Desired Linear Acceleration in yy</td>
+<td>ay</td>
+<td><em>m/s/s</em></td>
+<td>fp64_t</td>
+<td>Desired acceleration along NED y axis.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Desired Linear Acceleration in zz</td>
+<td>az</td>
+<td><em>m/s/s</em></td>
+<td>fp64_t</td>
+<td>Desired acceleration along NED z axis.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Flags</td>
+<td>flags</td>
+<td><em>Bitfield</em>
+(<a class="reference internal" href="#desiredlinearstate-bitfield-flags"><span class="std std-ref">Bitfield Flags</span></a>)</td>
+<td>uint16_t</td>
+<td>Setpoint Flags</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="desiredlinearstate-bitfield-prefix-fl">
+<span id="desiredlinearstate-bitfield-flags"></span><span id="id5"></span><h3>Bitfield Flags<a class="headerlink" href="#desiredlinearstate-bitfield-prefix-fl" title="Permalink to this headline">¶</a></h3>
+<p>Setpoint Flags</p>
+<ul class="simple">
+<li>Abbreviation: flags</li>
+<li>Prefix: FL</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="8%" />
+<col width="27%" />
+<col width="14%" />
+<col width="51%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0x0001</td>
+<td>Value of x is meaningful</td>
+<td>X</td>
+<td>If enabled then field x has a meaningful value.</td>
+</tr>
+<tr class="row-odd"><td>0x0002</td>
+<td>Value of y is meaningful</td>
+<td>Y</td>
+<td>If enabled then field y has a meaningful value.</td>
+</tr>
+<tr class="row-even"><td>0x0004</td>
+<td>Value of z is meaningful</td>
+<td>Z</td>
+<td>If enabled then field z has a meaningful value.</td>
+</tr>
+<tr class="row-odd"><td>0x0008</td>
+<td>Value of vx is meaningful</td>
+<td>VX</td>
+<td>If enabled then field vx has a meaningful value.</td>
+</tr>
+<tr class="row-even"><td>0x0010</td>
+<td>Value of vy is meaningful</td>
+<td>VY</td>
+<td>If enabled then field vy has a meaningful value.</td>
+</tr>
+<tr class="row-odd"><td>0x0020</td>
+<td>Value of vz is meaningful</td>
+<td>VZ</td>
+<td>If enabled then field vz has a meaningful value.</td>
+</tr>
+<tr class="row-even"><td>0x0040</td>
+<td>Value of ax is meaningful</td>
+<td>AX</td>
+<td>If enabled then field ax has a meaningful value.</td>
+</tr>
+<tr class="row-odd"><td>0x0080</td>
+<td>Value of ay is meaningful</td>
+<td>AY</td>
+<td>If enabled then field ay has a meaningful value.</td>
+</tr>
+<tr class="row-even"><td>0x0100</td>
+<td>Value of az is meaningful</td>
+<td>AZ</td>
+<td>If enabled then field az has a meaningful value.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="desired-throttle">
+<span id="desiredthrottle"></span><h2>Desired Throttle<a class="headerlink" href="#desired-throttle" title="Permalink to this headline">¶</a></h2>
+<p>Desired throttle e.g. for Plane in FBWA-mode.</p>
+<ul class="simple">
+<li>Abbreviation: DesiredThrottle</li>
+<li>Identification Number: 415</li>
+<li>Payload Size: 8 bytes</li>
+<li>Message Size: 30 bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="8%" />
+<col width="15%" />
+<col width="7%" />
+<col width="9%" />
+<col width="40%" />
+<col width="22%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Value</td>
+<td>value</td>
+<td><em>%</em></td>
+<td>fp64_t</td>
+<td>The value of the desired throttle.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<h3><a href="index.html">Table Of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Message Format.html">Message Format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Core.html">Core Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Simulation.html">Simulation Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Storage.html">Storage Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Networking.html">Networking Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Acoustic Networking.html">Acoustic Networking Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Sensors.html">Sensors Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Actuation.html">Actuation Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Navigation.html">Navigation Messages</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Guidance Messages</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#desired-heading">Desired Heading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#desired-z">Desired Z</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#desired-speed">Desired Speed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#desired-roll">Desired Roll</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#desired-pitch">Desired Pitch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#desired-vertical-rate">Desired Vertical Rate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#desired-path">Desired Path</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#desired-control">Desired Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#desired-heading-rate">Desired Heading Rate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#desired-velocity">Desired Velocity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#path-control-state">Path Control State</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#allocated-control-torques">Allocated Control Torques</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#control-parcel">Control Parcel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#brake">Brake</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#desired-linear-state">Desired Linear State</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#desired-throttle">Desired Throttle</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Maneuvering.html">Maneuvering Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Vehicle Supervision.html">Vehicle Supervision Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Plan Supervision.html">Plan Supervision Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CCU.html">CCU Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Autonomy.html">Autonomy Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Vision.html">Vision Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="External.html">External Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Development.html">Development Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Custom.html">Custom Messages</a></li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013-2017, Universidade do Porto - Faculdade de Engenharia - LSTS.
+      <br/>
+      Last updated on Aug 21, 2019.
+    </div>
+  </body>
+</html>

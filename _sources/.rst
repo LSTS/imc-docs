@@ -1,0 +1,336 @@
+.. _UsblModem:
+
+USBL Modem Configuration
+-------------------------
+
+Position and configuration of an Ultra-Short Base Line modem.
+
+- Abbreviation: UsblModem
+- Identification Number: 901
+- Payload Size: 23+  bytes
+- Message Size: 45+  bytes
+
++------------------+--------------+----------------------+-----------+--------------------------------------------------------+--------------------------+
+| Name             | Abbreviation | Unit                 | Type      | Description                                            | Range                    | 
++==================+==============+======================+===========+========================================================+==========================+
+| Modem Name       | name         | *-*                  | plaintext | Name/Label of the acoustic modem.                      | Same as field type       | 
++------------------+--------------+----------------------+-----------+--------------------------------------------------------+--------------------------+
+| Latitude WGS-84  | lat          | *rad*                | fp64_t    | WGS-84 Latitude coordinate.                            | min=-1.5707963267948966, | 
+|                  |              |                      |           |                                                        | max=1.5707963267948966   | 
++------------------+--------------+----------------------+-----------+--------------------------------------------------------+--------------------------+
+| Longitude WGS-84 | lon          | *rad*                | fp64_t    | WGS-84 Longitude coordinate.                           | min=-3.141592653589793,  | 
+|                  |              |                      |           |                                                        | max=3.141592653589793    | 
++------------------+--------------+----------------------+-----------+--------------------------------------------------------+--------------------------+
+| Z Reference      | z            | *m*                  | fp32_t    | Target reference in the z axis. Use z_units to specify | Same as field type       | 
+|                  |              |                      |           | whether z represents depth, altitude or other.         |                          | 
++------------------+--------------+----------------------+-----------+--------------------------------------------------------+--------------------------+
+| Z Units          | z_units      | *Enumerated*         | uint8_t   | Units of the z reference.                              | Same as field type       | 
+|                  |              | (:ref:`enum-ZUnits`) |           |                                                        |                          | 
++------------------+--------------+----------------------+-----------+--------------------------------------------------------+--------------------------+
+
+.. _UsblConfig:
+
+USBL Configuration
+-------------------
+
+Ultra-Short Base Line configuration.
+
+- Abbreviation: UsblConfig
+- Identification Number: 902
+- Payload Size: 3+  bytes
+- Message Size: 25+  bytes
+
++-----------+--------------+-----------------------------+--------------------+--------------------------------------------------------------+--------------------+
+| Name      | Abbreviation | Unit                        | Type               | Description                                                  | Range              | 
++===========+==============+=============================+====================+==============================================================+====================+
+| Operation | op           | *Enumerated*                | uint8_t            | Used to define the type of the operation this message holds. | Same as field type | 
+|           |              | (:ref:`UsblConfig-enum-op`) |                    |                                                              |                    | 
++-----------+--------------+-----------------------------+--------------------+--------------------------------------------------------------+--------------------+
+| Modems    | modems       | *-*                         | message-list       | A list of USBL modem configuration messages.                 | Same as field type | 
+|           |              |                             | (:ref:`UsblModem`) |                                                              |                    | 
++-----------+--------------+-----------------------------+--------------------+--------------------------------------------------------------+--------------------+
+
+.. _UsblConfig-enum-op:
+
+.. _UsblConfig-enum-prefix-OP:
+
+Enum Operation
+^^^^^^^^^^^^^^^
+
+Used to define the type of the operation this message holds.
+
+- Abbreviation: op
+- Prefix: OP
+
++-------+----------------------------+--------------+----------------------------------------------------------------+
+| Value | Name                       | Abbreviation | Description                                                    | 
++=======+============================+==============+================================================================+
+| 0     | Set LBL Configuration      | SET_CFG      | Set the beacons configuration aboard the vehicle.              | 
++-------+----------------------------+--------------+----------------------------------------------------------------+
+| 1     | Retrieve LBL Configuration | GET_CFG      | Request the vehicle to send its current beacons configuration. | 
++-------+----------------------------+--------------+----------------------------------------------------------------+
+| 2     | Reply to a GET command     | CUR_CFG      | *-*                                                            | 
++-------+----------------------------+--------------+----------------------------------------------------------------+
+
+.. _DissolvedOrganicMatter:
+
+Dissolved Organic Matter
+-------------------------
+
+Dissolved Organic Matter measurement.
+
+- Abbreviation: DissolvedOrganicMatter
+- Identification Number: 903
+- Payload Size: 5 bytes
+- Message Size: 27 bytes
+- Flags: periodic
+
++---------------------+--------------+-------------------------------------------+---------+-----------------------------------+--------------------+
+| Name                | Abbreviation | Unit                                      | Type    | Description                       | Range              | 
++=====================+==============+===========================================+=========+===================================+====================+
+| Value               | value        | *PPB*                                     | fp32_t  | Dissolved Organic Matter reading. | Same as field type | 
++---------------------+--------------+-------------------------------------------+---------+-----------------------------------+--------------------+
+| Type of measurement | type         | *Enumerated*                              | uint8_t | Type of measurement.              | Same as field type | 
+|                     |              | (:ref:`DissolvedOrganicMatter-enum-type`) |         |                                   |                    | 
++---------------------+--------------+-------------------------------------------+---------+-----------------------------------+--------------------+
+
+.. _DissolvedOrganicMatter-enum-type:
+
+.. _DissolvedOrganicMatter-enum-prefix-DT:
+
+Enum Type of measurement
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Type of measurement.
+  
+- Abbreviation: type
+- Prefix: DT
+
++-------+-------------+--------------+-------------+
+| Value | Name        | Abbreviation | Description | 
++=======+=============+==============+=============+
+| 0     | Colored     | COLORED      | *-*         | 
++-------+-------------+--------------+-------------+
+| 1     | Fluorescent | FLUORESCENT  | *-*         | 
++-------+-------------+--------------+-------------+
+
+.. _OpticalBackscatter:
+
+Optical Backscattering Coefficient
+-----------------------------------
+
+The optical backscattering coefficient refers to all the photons that have been redirected in the backward directions
+when a photon of light propagates in water and interacts with a "particle" (varying from water molecules to fish).
+
+- Abbreviation: OpticalBackscatter
+- Identification Number: 904
+- Payload Size: 4 bytes
+- Message Size: 26 bytes
+- Flags: periodic
+
++-------+--------------+-------+--------+-------------------------------------+--------------------+
+| Name  | Abbreviation | Unit  | Type   | Description                         | Range              | 
++=======+==============+=======+========+=====================================+====================+
+| Value | value        | *1/m* | fp32_t | Optical Backscattering Coefficient. | Same as field type | 
++-------+--------------+-------+--------+-------------------------------------+--------------------+
+
+.. _Tachograph:
+
+Tachograph
+-----------
+
+This messages is used to record system activity parameters. These
+parameters are mainly used for used for maintenance purposes.
+
+- Abbreviation: Tachograph
+- Identification Number: 905
+- Payload Size: 64 bytes
+- Message Size: 86 bytes
+- Flags: periodic
+
++---------------------------+-------------------------+-------+---------+--------------------------------------------------------------------------------------+--------------------+
+| Name                      | Abbreviation            | Unit  | Type    | Description                                                                          | Range              | 
++===========================+=========================+=======+=========+======================================================================================+====================+
+| Last Service Timestamp    | timestamp_last_service  | *s*   | fp64_t  | The time when the last service was performed. The number of                          | Same as field type | 
+|                           |                         |       |         | seconds is represented in Universal Coordinated Time (UCT) in                        |                    | 
+|                           |                         |       |         | seconds since Jan 1, 1970.                                                           |                    | 
++---------------------------+-------------------------+-------+---------+--------------------------------------------------------------------------------------+--------------------+
+| Time - Next Service       | time_next_service       | *s*   | fp32_t  | Amount of time until the next recommended service.                                   | Same as field type | 
++---------------------------+-------------------------+-------+---------+--------------------------------------------------------------------------------------+--------------------+
+| Time Motor - Next Service | time_motor_next_service | *s*   | fp32_t  | Amount of time the motor can run until the next recommended service.                 | Same as field type | 
++---------------------------+-------------------------+-------+---------+--------------------------------------------------------------------------------------+--------------------+
+| Time Idle - Ground        | time_idle_ground        | *s*   | fp32_t  | Amount of time the system spent idle on the ground.                                  | Same as field type | 
++---------------------------+-------------------------+-------+---------+--------------------------------------------------------------------------------------+--------------------+
+| Time Idle - Air           | time_idle_air           | *s*   | fp32_t  | Amount of time the system spent idle in the air.                                     | Same as field type | 
++---------------------------+-------------------------+-------+---------+--------------------------------------------------------------------------------------+--------------------+
+| Time Idle - Water         | time_idle_water         | *s*   | fp32_t  | Amount of time the system spent idle on the water (not submerged).                   | Same as field type | 
++---------------------------+-------------------------+-------+---------+--------------------------------------------------------------------------------------+--------------------+
+| Time Idle - Underwater    | time_idle_underwater    | *s*   | fp32_t  | Amount of time the system spent idle underwater.                                     | Same as field type | 
++---------------------------+-------------------------+-------+---------+--------------------------------------------------------------------------------------+--------------------+
+| Time Idle - Unknown       | time_idle_unknown       | *s*   | fp32_t  | Amount of time the system spent idle in an unknown medium.                           | Same as field type | 
++---------------------------+-------------------------+-------+---------+--------------------------------------------------------------------------------------+--------------------+
+| Time Motor - Ground       | time_motor_ground       | *s*   | fp32_t  | Amount of time the system spent on the ground with the motor running.                | Same as field type | 
++---------------------------+-------------------------+-------+---------+--------------------------------------------------------------------------------------+--------------------+
+| Time Motor - Air          | time_motor_air          | *s*   | fp32_t  | Amount of time the system spent in the air with the motor running.                   | Same as field type | 
++---------------------------+-------------------------+-------+---------+--------------------------------------------------------------------------------------+--------------------+
+| Time Motor - Water        | time_motor_water        | *s*   | fp32_t  | Amount of time the system spent on the water (not submerged) with the motor running. | Same as field type | 
++---------------------------+-------------------------+-------+---------+--------------------------------------------------------------------------------------+--------------------+
+| Time Motor - Underwater   | time_motor_underwater   | *s*   | fp32_t  | Amount of time the system spent underwater with the motor running.                   | Same as field type | 
++---------------------------+-------------------------+-------+---------+--------------------------------------------------------------------------------------+--------------------+
+| Time Motor - Unknown      | time_motor_unknown      | *s*   | fp32_t  | Amount of time the system spent in an unknown medium with the motor running.         | Same as field type | 
++---------------------------+-------------------------+-------+---------+--------------------------------------------------------------------------------------+--------------------+
+| Recorded RPMs - Minimum   | rpm_min                 | *rpm* | int16_t | The minimum recorded RPM value.                                                      | Same as field type | 
++---------------------------+-------------------------+-------+---------+--------------------------------------------------------------------------------------+--------------------+
+| Recorded RPMs - Maximum   | rpm_max                 | *rpm* | int16_t | The maximum recorded RPM value.                                                      | Same as field type | 
++---------------------------+-------------------------+-------+---------+--------------------------------------------------------------------------------------+--------------------+
+| Recorded Depth - Maximum  | depth_max               | *m*   | fp32_t  | The maximum recorded depth value.                                                    | Same as field type | 
++---------------------------+-------------------------+-------+---------+--------------------------------------------------------------------------------------+--------------------+
+
+.. _ApmStatus:
+
+APM Status
+-----------
+
+StatusText message from ardupilot.
+
+- Abbreviation: ApmStatus
+- Identification Number: 906
+- Payload Size: 3+  bytes
+- Message Size: 25+  bytes
+
++----------+--------------+----------------------------------+-----------+----------------------+--------------------+
+| Name     | Abbreviation | Unit                             | Type      | Description          | Range              | 
++==========+==============+==================================+===========+======================+====================+
+| Severity | severity     | *Enumerated*                     | uint8_t   | Severity of status.  | Same as field type | 
+|          |              | (:ref:`ApmStatus-enum-severity`) |           |                      |                    | 
++----------+--------------+----------------------------------+-----------+----------------------+--------------------+
+| Text     | text         | *-*                              | plaintext | Status text message. | Same as field type | 
++----------+--------------+----------------------------------+-----------+----------------------+--------------------+
+
+.. _ApmStatus-enum-severity:
+
+.. _ApmStatus-enum-prefix-APM:
+
+Enum Severity
+^^^^^^^^^^^^^^
+
+Severity of status.
+
+- Abbreviation: severity
+- Prefix: APM
+
++-------+-----------+--------------+-------------+
+| Value | Name      | Abbreviation | Description | 
++=======+===========+==============+=============+
+| 0     | Emergency | EMERGENCY    | *-*         | 
++-------+-----------+--------------+-------------+
+| 1     | Alert     | ALERT        | *-*         | 
++-------+-----------+--------------+-------------+
+| 2     | Critical  | CRITICAL     | *-*         | 
++-------+-----------+--------------+-------------+
+| 3     | Error     | ERROR        | *-*         | 
++-------+-----------+--------------+-------------+
+| 4     | Warning   | WARNING      | *-*         | 
++-------+-----------+--------------+-------------+
+| 5     | Notice    | NOTICE       | *-*         | 
++-------+-----------+--------------+-------------+
+| 6     | Info      | INFO         | *-*         | 
++-------+-----------+--------------+-------------+
+| 7     | Debug     | DEBUG        | *-*         | 
++-------+-----------+--------------+-------------+
+
+.. _SadcReadings:
+
+SADC Readings
+--------------
+
+Readings from SADC board.
+
+- Abbreviation: SadcReadings
+- Identification Number: 907
+- Payload Size: 6 bytes
+- Message Size: 28 bytes
+
++---------+--------------+---------------------------------+---------+----------------------------+--------------------+
+| Name    | Abbreviation | Unit                            | Type    | Description                | Range              | 
++=========+==============+=================================+=========+============================+====================+
+| Channel | channel      | *-*                             | int8_t  | Channel of SADC to read.   | min=1,             | 
+|         |              |                                 |         |                            | max=4              | 
++---------+--------------+---------------------------------+---------+----------------------------+--------------------+
+| Value   | value        | *-*                             | int32_t | Value raw of sadc channel. | Same as field type | 
++---------+--------------+---------------------------------+---------+----------------------------+--------------------+
+| Gain    | gain         | *Enumerated*                    | uint8_t | Gain value of readings.    | Same as field type | 
+|         |              | (:ref:`SadcReadings-enum-gain`) |         |                            |                    | 
++---------+--------------+---------------------------------+---------+----------------------------+--------------------+
+
+.. _SadcReadings-enum-gain:
+
+.. _SadcReadings-enum-prefix-GAIN:
+
+Enum Gain
+^^^^^^^^^^
+
+Gain value of readings.
+
+- Abbreviation: gain
+- Prefix: GAIN
+
++-------+------+--------------+-------------+
+| Value | Name | Abbreviation | Description | 
++=======+======+==============+=============+
+| 0     | x1   | X1           | *-*         | 
++-------+------+--------------+-------------+
+| 1     | x10  | X10          | *-*         | 
++-------+------+--------------+-------------+
+| 2     | x100 | X100         | *-*         | 
++-------+------+--------------+-------------+
+
+.. _DmsDetection:
+
+DMS Detection
+--------------
+
+Presence of DMS (Dimethyl Sulphide).
+If the value of the channel is greater than zero, it means DMS was detected.
+
+- Abbreviation: DmsDetection
+- Identification Number: 908
+- Payload Size: 64 bytes
+- Message Size: 86 bytes
+
++------------+--------------+------+--------+-------------+--------------------+
+| Name       | Abbreviation | Unit | Type   | Description | Range              | 
++============+==============+======+========+=============+====================+
+| Channel 1  | ch01         | *-*  | fp32_t |             | Same as field type | 
++------------+--------------+------+--------+-------------+--------------------+
+| Channel 2  | ch02         | *-*  | fp32_t |             | Same as field type | 
++------------+--------------+------+--------+-------------+--------------------+
+| Channel 3  | ch03         | *-*  | fp32_t |             | Same as field type | 
++------------+--------------+------+--------+-------------+--------------------+
+| Channel 4  | ch04         | *-*  | fp32_t |             | Same as field type | 
++------------+--------------+------+--------+-------------+--------------------+
+| Channel 5  | ch05         | *-*  | fp32_t |             | Same as field type | 
++------------+--------------+------+--------+-------------+--------------------+
+| Channel 6  | ch06         | *-*  | fp32_t |             | Same as field type | 
++------------+--------------+------+--------+-------------+--------------------+
+| Channel 7  | ch07         | *-*  | fp32_t |             | Same as field type | 
++------------+--------------+------+--------+-------------+--------------------+
+| Channel 8  | ch08         | *-*  | fp32_t |             | Same as field type | 
++------------+--------------+------+--------+-------------+--------------------+
+| Channel 9  | ch09         | *-*  | fp32_t |             | Same as field type | 
++------------+--------------+------+--------+-------------+--------------------+
+| Channel 10 | ch10         | *-*  | fp32_t |             | Same as field type | 
++------------+--------------+------+--------+-------------+--------------------+
+| Channel 11 | ch11         | *-*  | fp32_t |             | Same as field type | 
++------------+--------------+------+--------+-------------+--------------------+
+| Channel 12 | ch12         | *-*  | fp32_t |             | Same as field type | 
++------------+--------------+------+--------+-------------+--------------------+
+| Channel 13 | ch13         | *-*  | fp32_t |             | Same as field type | 
++------------+--------------+------+--------+-------------+--------------------+
+| Channel 14 | ch14         | *-*  | fp32_t |             | Same as field type | 
++------------+--------------+------+--------+-------------+--------------------+
+| Channel 15 | ch15         | *-*  | fp32_t |             | Same as field type | 
++------------+--------------+------+--------+-------------+--------------------+
+| Channel 16 | ch16         | *-*  | fp32_t |             | Same as field type | 
++------------+--------------+------+--------+-------------+--------------------+
+

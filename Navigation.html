@@ -1,0 +1,1330 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Navigation Messages &mdash; IMC v5.4.11 Specification</title>
+    
+    <link rel="stylesheet" href="_static/pydoctheme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '5.4.11',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="top" title="IMC v5.4.11 Specification" href="index.html" />
+    <link rel="next" title="Guidance Messages" href="Guidance.html" />
+    <link rel="prev" title="Actuation Messages" href="Actuation.html" /> 
+  </head>
+  <body>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="navigation-messages">
+<h1>Navigation Messages<a class="headerlink" href="#navigation-messages" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="estimated-state">
+<span id="estimatedstate"></span><h2>Estimated State<a class="headerlink" href="#estimated-state" title="Permalink to this headline">¶</a></h2>
+<p>This message presents the estimated state of the vehicle.</p>
+<p>EstimatedState is a complete description of the system
+in terms of parameters such as position, orientation and
+velocities at a particular moment in time.</p>
+<p>The system position is given by a North-East-Down (NED)
+local tangent plane displacement (x, y, z) relative to
+an absolute WGS-84 coordinate (latitude, longitude,
+height above ellipsoid).</p>
+<p>The symbols for position and attitude as well as linear and
+angular velocities were chosen according to SNAME’s notation (1950).
+The body-fixed reference frame and Euler angles are depicted
+next:</p>
+<div class="figure align-center">
+<img alt="_images/euler-lauv.png" src="_images/euler-lauv.png" />
+</div>
+<p>Euler angles</p>
+<ul class="simple">
+<li>Abbreviation: EstimatedState</li>
+<li>Identification Number: 350</li>
+<li>Payload Size: 88 bytes</li>
+<li>Message Size: 110 bytes</li>
+<li>Flags: periodic</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="18%" />
+<col width="9%" />
+<col width="6%" />
+<col width="5%" />
+<col width="43%" />
+<col width="18%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Latitude (WGS-84)</td>
+<td>lat</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>WGS-84 Latitude.</td>
+<td>min=-1.5707963267948966,
+max=1.5707963267948966</td>
+</tr>
+<tr class="row-odd"><td>Longitude (WGS-84)</td>
+<td>lon</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>WGS-84 Longitude.</td>
+<td>min=-3.141592653589793,
+max=3.141592653589793</td>
+</tr>
+<tr class="row-even"><td>Height (WGS-84)</td>
+<td>height</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Height above the WGS-84 ellipsoid.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Offset north</td>
+<td>x</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>The North offset of the North/East/Down field with respect to
+LLH.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Offset east</td>
+<td>y</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>The East offset of the North/East/Down field with respect to
+LLH.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Offset down</td>
+<td>z</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>The Down offset of the North/East/Down field with respect to
+LLH.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Rotation over x axis</td>
+<td>phi</td>
+<td><em>rad</em></td>
+<td>fp32_t</td>
+<td>The phi Euler angle from the vehicle’s attitude.</td>
+<td>min=-3.141592653589793,
+max=3.141592653589793</td>
+</tr>
+<tr class="row-odd"><td>Rotation over y axis</td>
+<td>theta</td>
+<td><em>rad</em></td>
+<td>fp32_t</td>
+<td>The theta Euler angle from the vehicle’s attitude.</td>
+<td>min=-1.57079632679490,
+max=1.57079632679490</td>
+</tr>
+<tr class="row-even"><td>Rotation over z axis</td>
+<td>psi</td>
+<td><em>rad</em></td>
+<td>fp32_t</td>
+<td>The psi Euler angle from the vehicle’s attitude.</td>
+<td>min=-3.141592653589793,
+max=3.141592653589793</td>
+</tr>
+<tr class="row-odd"><td>Body-Fixed xx Velocity</td>
+<td>u</td>
+<td><em>m/s</em></td>
+<td>fp32_t</td>
+<td>Body-fixed frame xx axis velocity component.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Body-Fixed yy Velocity</td>
+<td>v</td>
+<td><em>m/s</em></td>
+<td>fp32_t</td>
+<td>Body-fixed frame yy axis velocity component.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Body-Fixed zz Velocity</td>
+<td>w</td>
+<td><em>m/s</em></td>
+<td>fp32_t</td>
+<td>Body-fixed frame zz axis velocity component.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Ground Velocity X (North)</td>
+<td>vx</td>
+<td><em>m/s</em></td>
+<td>fp32_t</td>
+<td>Ground Velocity xx axis velocity component.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Ground Velocity Y (East)</td>
+<td>vy</td>
+<td><em>m/s</em></td>
+<td>fp32_t</td>
+<td>Ground Velocity yy axis velocity component.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Ground Velocity Z (Down)</td>
+<td>vz</td>
+<td><em>m/s</em></td>
+<td>fp32_t</td>
+<td>Ground Velocity zz axis velocity component.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Angular Velocity in x</td>
+<td>p</td>
+<td><em>rad/s</em></td>
+<td>fp32_t</td>
+<td>The angular velocity over body-fixed xx axis (roll).</td>
+<td>min=-3.141592653589793,
+max=3.141592653589793</td>
+</tr>
+<tr class="row-even"><td>Angular Velocity in y</td>
+<td>q</td>
+<td><em>rad/s</em></td>
+<td>fp32_t</td>
+<td>The angular velocity over body-fixed yy axis (pitch).</td>
+<td>min=-3.141592653589793,
+max=3.141592653589793</td>
+</tr>
+<tr class="row-odd"><td>Angular Velocity in z</td>
+<td>r</td>
+<td><em>rad/s</em></td>
+<td>fp32_t</td>
+<td>The angular velocity over body-fixed zz axis (yaw).</td>
+<td>min=-3.141592653589793,
+max=3.141592653589793</td>
+</tr>
+<tr class="row-even"><td>Depth</td>
+<td>depth</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Depth, in meters. To be used by underwater vehicles. Negative
+values denote invalid estimates.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Altitude</td>
+<td>alt</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Altitude, in meters. Negative values denote invalid estimates.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="estimated-stream-velocity">
+<span id="estimatedstreamvelocity"></span><h2>Estimated Stream Velocity<a class="headerlink" href="#estimated-stream-velocity" title="Permalink to this headline">¶</a></h2>
+<p>The estimated stream velocity, typically for water or air
+streams.</p>
+<ul class="simple">
+<li>Abbreviation: EstimatedStreamVelocity</li>
+<li>Identification Number: 351</li>
+<li>Payload Size: 24 bytes</li>
+<li>Message Size: 46 bytes</li>
+<li>Flags: periodic</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="23%" />
+<col width="15%" />
+<col width="8%" />
+<col width="9%" />
+<col width="24%" />
+<col width="22%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>X component (North)</td>
+<td>x</td>
+<td><em>m/s</em></td>
+<td>fp64_t</td>
+<td>X component (North).</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Y component (East)</td>
+<td>y</td>
+<td><em>m/s</em></td>
+<td>fp64_t</td>
+<td>Y component (East).</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Z component (Down)</td>
+<td>z</td>
+<td><em>m/s</em></td>
+<td>fp64_t</td>
+<td>Z component (Down).</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="indicated-speed">
+<span id="indicatedspeed"></span><h2>Indicated Speed<a class="headerlink" href="#indicated-speed" title="Permalink to this headline">¶</a></h2>
+<p>Speed measured by the navigation filter.</p>
+<ul class="simple">
+<li>Abbreviation: IndicatedSpeed</li>
+<li>Identification Number: 352</li>
+<li>Payload Size: 8 bytes</li>
+<li>Message Size: 30 bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="21%" />
+<col width="18%" />
+<col width="9%" />
+<col width="10%" />
+<col width="17%" />
+<col width="26%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Measured speed</td>
+<td>value</td>
+<td><em>m/s</em></td>
+<td>fp64_t</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="true-speed">
+<span id="truespeed"></span><h2>True Speed<a class="headerlink" href="#true-speed" title="Permalink to this headline">¶</a></h2>
+<p>Ground true speed.</p>
+<ul class="simple">
+<li>Abbreviation: TrueSpeed</li>
+<li>Identification Number: 353</li>
+<li>Payload Size: 8 bytes</li>
+<li>Message Size: 30 bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="22%" />
+<col width="18%" />
+<col width="9%" />
+<col width="10%" />
+<col width="16%" />
+<col width="25%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Estimated value</td>
+<td>value</td>
+<td><em>m/s</em></td>
+<td>fp64_t</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="navigation-uncertainty">
+<span id="navigationuncertainty"></span><h2>Navigation Uncertainty<a class="headerlink" href="#navigation-uncertainty" title="Permalink to this headline">¶</a></h2>
+<p>Report of navigation uncertainty.
+This is usually given by the output of the state
+covariance matrix of an Extended Kalman Filter.</p>
+<ul class="simple">
+<li>Abbreviation: NavigationUncertainty</li>
+<li>Identification Number: 354</li>
+<li>Payload Size: 56 bytes</li>
+<li>Message Size: 78 bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="22%" />
+<col width="9%" />
+<col width="6%" />
+<col width="5%" />
+<col width="46%" />
+<col width="13%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Variance - x Position</td>
+<td>x</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td><dl class="first last docutils">
+<dt>The North offset variance of the North/East/Down</dt>
+<dd>field with respect to LLH.</dd>
+</dl>
+</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Variance - y Position</td>
+<td>y</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td><dl class="first last docutils">
+<dt>The East offset variance of the North/East/Down</dt>
+<dd>field with respect to LLH.</dd>
+</dl>
+</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Variance - z Position</td>
+<td>z</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td><dl class="first last docutils">
+<dt>The Down offset variance of the North/East/Down</dt>
+<dd>field with respect to LLH.</dd>
+</dl>
+</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Variance - Roll</td>
+<td>phi</td>
+<td><em>rad</em></td>
+<td>fp32_t</td>
+<td>The phi Euler angle variance from the vehicle’s attitude.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Variance - Pitch</td>
+<td>theta</td>
+<td><em>rad</em></td>
+<td>fp32_t</td>
+<td>The theta Euler angle variance from the vehicle’s attitude.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Variance - Yaw</td>
+<td>psi</td>
+<td><em>rad</em></td>
+<td>fp32_t</td>
+<td>The psi Euler angle variance from the vehicle’s attitude.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Variance - Gyro. Roll Rate</td>
+<td>p</td>
+<td><em>rad/s</em></td>
+<td>fp32_t</td>
+<td>The angular velocity variance over body-fixed xx axis (roll).</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Variance - Gyro. Pitch Rate</td>
+<td>q</td>
+<td><em>rad/s</em></td>
+<td>fp32_t</td>
+<td>The angular velocity variance over body-fixed yy axis (pitch).</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Variance - Gyro. Yaw Rate</td>
+<td>r</td>
+<td><em>rad/s</em></td>
+<td>fp32_t</td>
+<td>The angular velocity variance over body-fixed zz axis (yaw).</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Variance - Body-Fixed xx Velocity</td>
+<td>u</td>
+<td><em>m/s</em></td>
+<td>fp32_t</td>
+<td>Body-fixed frame xx axis velocity variance component.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Variance - Body-Fixed yy Velocity</td>
+<td>v</td>
+<td><em>m/s</em></td>
+<td>fp32_t</td>
+<td>Body-fixed frame yy axis velocity variance component.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Variance - Body-Fixed ww Velocity</td>
+<td>w</td>
+<td><em>m/s</em></td>
+<td>fp32_t</td>
+<td>Body-fixed frame zz axis velocity variance component.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Variance - Yaw Bias</td>
+<td>bias_psi</td>
+<td><em>rad</em></td>
+<td>fp32_t</td>
+<td>The psi Euler angle bias variance from the vehicle’s sensed attitude.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Variance - Gyro. Yaw Rate Bias</td>
+<td>bias_r</td>
+<td><em>rad/s</em></td>
+<td>fp32_t</td>
+<td>The angular velocity over body-fixed zz axis bias variance from sensor.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="navigation-data">
+<span id="navigationdata"></span><h2>Navigation Data<a class="headerlink" href="#navigation-data" title="Permalink to this headline">¶</a></h2>
+<p>Report of navigation data.
+This is constituted by data which is not
+part of the vehicle estimated state but
+that the user may refer for more information.</p>
+<ul class="simple">
+<li>Abbreviation: NavigationData</li>
+<li>Identification Number: 355</li>
+<li>Payload Size: 36 bytes</li>
+<li>Message Size: 58 bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="21%" />
+<col width="10%" />
+<col width="6%" />
+<col width="5%" />
+<col width="44%" />
+<col width="14%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Yaw Bias</td>
+<td>bias_psi</td>
+<td><em>rad</em></td>
+<td>fp32_t</td>
+<td>The psi Euler angle bias from the vehicle’s sensed attitude.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Gyro. Yaw Rate Bias</td>
+<td>bias_r</td>
+<td><em>rad/s</em></td>
+<td>fp32_t</td>
+<td>The angular velocity over body-fixed zz axis bias from sensor.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Course Over Ground</td>
+<td>cog</td>
+<td><em>rad</em></td>
+<td>fp32_t</td>
+<td>Course over ground given by NED ground velocity vectors.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Continuous Yaw</td>
+<td>cyaw</td>
+<td><em>rad</em></td>
+<td>fp32_t</td>
+<td>Continuous psi Euler angle (without normalizations).</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>GPS Rejection Filter Level</td>
+<td>lbl_rej_level</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>GPS rejection filter level.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>LBL Rejection Filter Level</td>
+<td>gps_rej_level</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>LBL rejection filter level.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Variance - Custom Variable X</td>
+<td>custom_x</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Custom variable.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Variance - Custom Variable Y</td>
+<td>custom_y</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Custom variable.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Variance - Custom Variable Z</td>
+<td>custom_z</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Custom variable.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="gps-fix-rejection">
+<span id="gpsfixrejection"></span><h2>GPS Fix Rejection<a class="headerlink" href="#gps-fix-rejection" title="Permalink to this headline">¶</a></h2>
+<p>No description</p>
+<ul class="simple">
+<li>Abbreviation: GpsFixRejection</li>
+<li>Identification Number: 356</li>
+<li>Payload Size: 5 bytes</li>
+<li>Message Size: 27 bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="9%" />
+<col width="24%" />
+<col width="6%" />
+<col width="38%" />
+<col width="13%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>UTC Time of Fix</td>
+<td>utc_time</td>
+<td><em>s</em></td>
+<td>fp32_t</td>
+<td>UTC time of the rejected GPS fix measured in seconds since
+00:00:00 (midnight).</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Reason</td>
+<td>reason</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="#gpsfixrejection-enum-reason"><span class="std std-ref">Enum Reason</span></a>)</td>
+<td>uint8_t</td>
+<td>Reason for rejection.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="enum-reason">
+<span id="gpsfixrejection-enum-prefix-rr"></span><span id="gpsfixrejection-enum-reason"></span><h3>Enum Reason<a class="headerlink" href="#enum-reason" title="Permalink to this headline">¶</a></h3>
+<p>Reason for rejection.</p>
+<ul class="simple">
+<li>Abbreviation: reason</li>
+<li>Prefix: RR</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="7%" />
+<col width="19%" />
+<col width="16%" />
+<col width="58%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0</td>
+<td>Above Threshold</td>
+<td>ABOVE_THRESHOLD</td>
+<td>New GPS Fix position is above a computed threshold.</td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>Invalid Fix</td>
+<td>INVALID</td>
+<td>Invalid measurement.</td>
+</tr>
+<tr class="row-even"><td>2</td>
+<td>Above Maximum HDOP</td>
+<td>ABOVE_MAX_HDOP</td>
+<td>Above maximum horizontal dilution of precision.</td>
+</tr>
+<tr class="row-odd"><td>3</td>
+<td>Above Maximum HACC</td>
+<td>ABOVE_MAX_HACC</td>
+<td>Above maximum horizontal accuracy index.</td>
+</tr>
+<tr class="row-even"><td>4</td>
+<td>Lost Validity Bit</td>
+<td>LOST_VAL_BIT</td>
+<td>Lost one of the validity bits between consecutive GPS fixes.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="lbl-range-acceptance">
+<span id="lblrangeacceptance"></span><h2>LBL Range Acceptance<a class="headerlink" href="#lbl-range-acceptance" title="Permalink to this headline">¶</a></h2>
+<p>When the vehicle uses Long Base Line navigation, this message
+notifies that a new range was received from one of the acoustics
+transponders. The message fields are used to identify the range
+value and the transponder name. Also, this message has an
+acceptance field that indicates whether a LBL range was accepted
+or rejected, and if rejected, the reason why.</p>
+<ul class="simple">
+<li>Abbreviation: LblRangeAcceptance</li>
+<li>Identification Number: 357</li>
+<li>Payload Size: 6 bytes</li>
+<li>Message Size: 28 bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="17%" />
+<col width="8%" />
+<col width="25%" />
+<col width="5%" />
+<col width="34%" />
+<col width="11%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Beacon Identification Number</td>
+<td>id</td>
+<td><em>-</em></td>
+<td>uint8_t</td>
+<td>Identification number of the acoustic transponder from which
+the range information was received.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Range</td>
+<td>range</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Distance to the acoustic transponder.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Acceptance</td>
+<td>acceptance</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="#lblrangeacceptance-enum-acceptance"><span class="std std-ref">Enum Acceptance</span></a>)</td>
+<td>uint8_t</td>
+<td>Reason for acceptance/rejection.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="enum-acceptance">
+<span id="lblrangeacceptance-enum-prefix-rr"></span><span id="lblrangeacceptance-enum-acceptance"></span><h3>Enum Acceptance<a class="headerlink" href="#enum-acceptance" title="Permalink to this headline">¶</a></h3>
+<p>Reason for acceptance/rejection.</p>
+<ul class="simple">
+<li>Abbreviation: acceptance</li>
+<li>Prefix: RR</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="5%" />
+<col width="27%" />
+<col width="13%" />
+<col width="54%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0</td>
+<td>Accepted</td>
+<td>ACCEPTED</td>
+<td>This LBL range is accepted by the navigation filter.</td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>Rejected - Above Threshold</td>
+<td>ABOVE_THRESHOLD</td>
+<td>New LBL Range is above a computed threshold.</td>
+</tr>
+<tr class="row-even"><td>2</td>
+<td>Rejected - Singular Point</td>
+<td>SINGULAR</td>
+<td>Singular point.</td>
+</tr>
+<tr class="row-odd"><td>3</td>
+<td>Rejected - Not Enough Information</td>
+<td>NO_INFO</td>
+<td>The filter lacks information to properly use the received LBL range.</td>
+</tr>
+<tr class="row-even"><td>4</td>
+<td>Rejected - Vehicle At Surface</td>
+<td>AT_SURFACE</td>
+<td>Vehicle is using only GPS fix when it is at surface.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="dvl-rejection">
+<span id="dvlrejection"></span><h2>DVL Rejection<a class="headerlink" href="#dvl-rejection" title="Permalink to this headline">¶</a></h2>
+<p>When the vehicle uses Doppler Velocity Log sensor, this message
+notifies that a new measurement was locally rejected by the
+navigation filter.</p>
+<ul class="simple">
+<li>Abbreviation: DvlRejection</li>
+<li>Identification Number: 358</li>
+<li>Payload Size: 10 bytes</li>
+<li>Message Size: 32 bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="9%" />
+<col width="23%" />
+<col width="6%" />
+<col width="39%" />
+<col width="12%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Type of velocity</td>
+<td>type</td>
+<td><em>Bitfield</em>
+(<a class="reference internal" href="#dvlrejection-bitfield-type"><span class="std std-ref">Bitfield Type of velocity</span></a>)</td>
+<td>uint8_t</td>
+<td>This field represents the type of the rejected velocity.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Reason</td>
+<td>reason</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="#dvlrejection-enum-reason"><span class="std std-ref">Enum Reason</span></a>)</td>
+<td>uint8_t</td>
+<td>Reason for rejection. There are two types of DVL measurement
+filters. An Innovation filter checks the innovation between
+the current measurement and the previous measurement within a
+certain amount of time and an Absolute filter compares the
+measurement with an absolute threshold value. Those filters
+are tested using horizontal speed measurements, i.e.,
+measurements in the x-axis and in the y-axis.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Value</td>
+<td>value</td>
+<td><em>m/s</em></td>
+<td>fp32_t</td>
+<td>Value of the rejection.
+If it is an innovation rejection the value is
+the absolute difference between the previous
+accepted DVL measurement and the current one.
+If it is an absolute rejection the value is
+the current DVL measurement.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Timestep</td>
+<td>timestep</td>
+<td><em>s</em></td>
+<td>fp32_t</td>
+<td>Timestep of the rejection.
+The timestep is 0 for an absolute rejection
+since it is an instantaneous reading. For
+innovation rejection it is the time difference
+between the previous accepted DVL measurement
+and the current one.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="bitfield-type-of-velocity">
+<span id="dvlrejection-bitfield-prefix-type"></span><span id="dvlrejection-bitfield-type"></span><h3>Bitfield Type of velocity<a class="headerlink" href="#bitfield-type-of-velocity" title="Permalink to this headline">¶</a></h3>
+<p>This field represents the type of the rejected velocity.</p>
+<ul class="simple">
+<li>Abbreviation: type</li>
+<li>Prefix: TYPE</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="33%" />
+<col width="27%" />
+<col width="25%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0x01</td>
+<td>Ground velocity</td>
+<td>GV</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>0x02</td>
+<td>Water velocity</td>
+<td>WV</td>
+<td><em>-</em></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="dvlrejection-enum-prefix-rr">
+<span id="dvlrejection-enum-reason"></span><span id="id1"></span><h3>Enum Reason<a class="headerlink" href="#dvlrejection-enum-prefix-rr" title="Permalink to this headline">¶</a></h3>
+<p>Reason for rejection. There are two types of DVL measurement
+filters. An Innovation filter checks the innovation between
+the current measurement and the previous measurement within a
+certain amount of time and an Absolute filter compares the
+measurement with an absolute threshold value. Those filters
+are tested using horizontal speed measurements, i.e.,
+measurements in the x-axis and in the y-axis.</p>
+<ul class="simple">
+<li>Abbreviation: reason</li>
+<li>Prefix: RR</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="7%" />
+<col width="25%" />
+<col width="19%" />
+<col width="49%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0</td>
+<td>Innovation Threshold - X</td>
+<td>INNOV_THRESHOLD_X</td>
+<td>The current DVL x-axis measurement is discarded
+because the absolute difference between the
+value and the previous accepted DVL measurement
+with a given time window is above a configurable
+threshold.</td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>Innovation Threshold - Y</td>
+<td>INNOV_THRESHOLD_Y</td>
+<td>The current DVL y-axis measurement is discarded
+because the absolute difference between the
+value and the previous accepted DVL measurement
+with a given time window is above a configurable
+threshold.</td>
+</tr>
+<tr class="row-even"><td>2</td>
+<td>Absolute Threshold - X</td>
+<td>ABS_THRESHOLD_X</td>
+<td>The current DVL x-axis measurement is discarded
+because the the absolute value is above a
+configurable threshold.</td>
+</tr>
+<tr class="row-odd"><td>3</td>
+<td>Absolute Threshold - Y</td>
+<td>ABS_THRESHOLD_Y</td>
+<td>The current DVL y-axis measurement is discarded
+because the the absolute value is above a
+configurable threshold.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="lbl-beacon-position-estimate">
+<span id="lblestimate"></span><h2>LBL Beacon Position Estimate<a class="headerlink" href="#lbl-beacon-position-estimate" title="Permalink to this headline">¶</a></h2>
+<p>LBL Beacon position estimate.</p>
+<ul class="simple">
+<li>Abbreviation: LblEstimate</li>
+<li>Identification Number: 360</li>
+<li>Payload Size: 47+  bytes</li>
+<li>Message Size: 69+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="17%" />
+<col width="9%" />
+<col width="4%" />
+<col width="13%" />
+<col width="45%" />
+<col width="13%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>LBL Beacon Configuration</td>
+<td>beacon</td>
+<td><em>-</em></td>
+<td>message
+(<a class="reference internal" href="Acoustic Networking.html#lblbeacon"><span class="std std-ref">LBL Beacon Configuration</span></a>)</td>
+<td>LBL Beacon configuration estimate.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>North position</td>
+<td>x</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>The North position offset of the NED field with respect to origin.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>East position</td>
+<td>y</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>The East position offset of the NED field with respect to origin.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>North position variance</td>
+<td>var_x</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>The North offset variance of the North/East/Down
+field with respect to LLH.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>East position variance</td>
+<td>var_y</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>The East offset variance of the North/East/Down
+field with respect to LLH.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Distance</td>
+<td>distance</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Distance between current LBL Beacon position and filter estimation.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="alignment-state">
+<span id="alignmentstate"></span><h2>Alignment State<a class="headerlink" href="#alignment-state" title="Permalink to this headline">¶</a></h2>
+<p>This message notifies the vehicle is ready for dead-reckoning missions.</p>
+<ul class="simple">
+<li>Abbreviation: AlignmentState</li>
+<li>Identification Number: 361</li>
+<li>Payload Size: 1 bytes</li>
+<li>Message Size: 23 bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="7%" />
+<col width="13%" />
+<col width="35%" />
+<col width="9%" />
+<col width="17%" />
+<col width="19%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>State</td>
+<td>state</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="#alignmentstate-enum-state"><span class="std std-ref">Enum State</span></a>)</td>
+<td>uint8_t</td>
+<td>Alignment State.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="enum-state">
+<span id="alignmentstate-enum-prefix-as"></span><span id="alignmentstate-enum-state"></span><h3>Enum State<a class="headerlink" href="#enum-state" title="Permalink to this headline">¶</a></h3>
+<p>Alignment State.</p>
+<ul class="simple">
+<li>Abbreviation: state</li>
+<li>Prefix: AS</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="30%" />
+<col width="30%" />
+<col width="26%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0</td>
+<td>Not Aligned</td>
+<td>NOT_ALIGNED</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>Aligned</td>
+<td>ALIGNED</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-even"><td>2</td>
+<td>Not Supported</td>
+<td>NOT_SUPPORTED</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>3</td>
+<td>Aligning</td>
+<td>ALIGNING</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-even"><td>4</td>
+<td>Wrong Medium</td>
+<td>WRONG_MEDIUM</td>
+<td><em>-</em></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="groupstreamvelocity">
+<span id="id2"></span><h2>GroupStreamVelocity<a class="headerlink" href="#groupstreamvelocity" title="Permalink to this headline">¶</a></h2>
+<p>The stream velocity estimated by a group of systems.
+Typically for water or air streams.</p>
+<ul class="simple">
+<li>Abbreviation: GroupStreamVelocity</li>
+<li>Identification Number: 362</li>
+<li>Payload Size: 24 bytes</li>
+<li>Message Size: 46 bytes</li>
+<li>Flags: periodic</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="23%" />
+<col width="15%" />
+<col width="8%" />
+<col width="9%" />
+<col width="24%" />
+<col width="22%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>X component (North)</td>
+<td>x</td>
+<td><em>m/s</em></td>
+<td>fp64_t</td>
+<td>X component (North).</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Y component (East)</td>
+<td>y</td>
+<td><em>m/s</em></td>
+<td>fp64_t</td>
+<td>Y component (East).</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Z component (Down)</td>
+<td>z</td>
+<td><em>m/s</em></td>
+<td>fp64_t</td>
+<td>Z component (Down).</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="airflow">
+<span id="id3"></span><h2>Airflow<a class="headerlink" href="#airflow" title="Permalink to this headline">¶</a></h2>
+<p>Airspeed along with airflow angles.</p>
+<ul class="simple">
+<li>Abbreviation: Airflow</li>
+<li>Identification Number: 363</li>
+<li>Payload Size: 12 bytes</li>
+<li>Message Size: 34 bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="12%" />
+<col width="6%" />
+<col width="7%" />
+<col width="42%" />
+<col width="18%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Airspeed</td>
+<td>va</td>
+<td><em>m/s</em></td>
+<td>fp32_t</td>
+<td>Airspeed, the 2-norm of the relative velocity.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Angle of attack</td>
+<td>aoa</td>
+<td><em>rad</em></td>
+<td>fp32_t</td>
+<td>Angle of attack.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Sideslip angle</td>
+<td>ssa</td>
+<td><em>rad</em></td>
+<td>fp32_t</td>
+<td>Sideslip angle.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<h3><a href="index.html">Table Of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Message Format.html">Message Format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Core.html">Core Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Simulation.html">Simulation Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Storage.html">Storage Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Networking.html">Networking Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Acoustic Networking.html">Acoustic Networking Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Sensors.html">Sensors Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Actuation.html">Actuation Messages</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Navigation Messages</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#estimated-state">Estimated State</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#estimated-stream-velocity">Estimated Stream Velocity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#indicated-speed">Indicated Speed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#true-speed">True Speed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#navigation-uncertainty">Navigation Uncertainty</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#navigation-data">Navigation Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#gps-fix-rejection">GPS Fix Rejection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#lbl-range-acceptance">LBL Range Acceptance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#dvl-rejection">DVL Rejection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#lbl-beacon-position-estimate">LBL Beacon Position Estimate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#alignment-state">Alignment State</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#groupstreamvelocity">GroupStreamVelocity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#airflow">Airflow</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Guidance.html">Guidance Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Maneuvering.html">Maneuvering Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Vehicle Supervision.html">Vehicle Supervision Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Plan Supervision.html">Plan Supervision Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CCU.html">CCU Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Autonomy.html">Autonomy Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Vision.html">Vision Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="External.html">External Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Development.html">Development Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Custom.html">Custom Messages</a></li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013-2017, Universidade do Porto - Faculdade de Engenharia - LSTS.
+      <br/>
+      Last updated on Aug 21, 2019.
+    </div>
+  </body>
+</html>

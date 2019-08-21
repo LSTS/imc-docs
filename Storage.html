@@ -1,0 +1,1282 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Storage Messages &mdash; IMC v5.4.11 Specification</title>
+    
+    <link rel="stylesheet" href="_static/pydoctheme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '5.4.11',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="top" title="IMC v5.4.11 Specification" href="index.html" />
+    <link rel="next" title="Networking Messages" href="Networking.html" />
+    <link rel="prev" title="Simulation Messages" href="Simulation.html" /> 
+  </head>
+  <body>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="storage-messages">
+<h1>Storage Messages<a class="headerlink" href="#storage-messages" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="storage-usage">
+<span id="storageusage"></span><h2>Storage Usage<a class="headerlink" href="#storage-usage" title="Permalink to this headline">¶</a></h2>
+<p>Report of storage usage.</p>
+<ul class="simple">
+<li>Abbreviation: StorageUsage</li>
+<li>Identification Number: 100</li>
+<li>Payload Size: 5 bytes</li>
+<li>Message Size: 27 bytes</li>
+<li>Flags: periodic</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="9%" />
+<col width="12%" />
+<col width="6%" />
+<col width="8%" />
+<col width="48%" />
+<col width="17%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Available</td>
+<td>available</td>
+<td><em>MiB</em></td>
+<td>uint32_t</td>
+<td>The available storage of the reporting device.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Usage</td>
+<td>value</td>
+<td><em>%</em></td>
+<td>uint8_t</td>
+<td>The percentage of storage used by the reporting device.</td>
+<td>max=100</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="cache-control">
+<span id="cachecontrol"></span><h2>Cache Control<a class="headerlink" href="#cache-control" title="Permalink to this headline">¶</a></h2>
+<p>Control caching of messages to persistent storage.</p>
+<ul class="simple">
+<li>Abbreviation: CacheControl</li>
+<li>Identification Number: 101</li>
+<li>Payload Size: 5+  bytes</li>
+<li>Message Size: 27+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="10%" />
+<col width="22%" />
+<col width="8%" />
+<col width="30%" />
+<col width="14%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Control Operation</td>
+<td>op</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="#cachecontrol-enum-op"><span class="std std-ref">Enum Control Operation</span></a>)</td>
+<td>uint8_t</td>
+<td>Operation to perform.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Snapshot destination</td>
+<td>snapshot</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>Destination for the cache snapshot file.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Message</td>
+<td>message</td>
+<td><em>-</em></td>
+<td>message</td>
+<td>Message to store.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="enum-control-operation">
+<span id="cachecontrol-enum-prefix-cop"></span><span id="cachecontrol-enum-op"></span><h3>Enum Control Operation<a class="headerlink" href="#enum-control-operation" title="Permalink to this headline">¶</a></h3>
+<p>Operation to perform.</p>
+<ul class="simple">
+<li>Abbreviation: op</li>
+<li>Prefix: COP</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="41%" />
+<col width="25%" />
+<col width="22%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0</td>
+<td>Store</td>
+<td>STORE</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>Load</td>
+<td>LOAD</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-even"><td>2</td>
+<td>Clear</td>
+<td>CLEAR</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>3</td>
+<td>Copy Snapshot</td>
+<td>COPY</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-even"><td>4</td>
+<td>Snapshot Copy Complete</td>
+<td>COPY_COMPLETE</td>
+<td><em>-</em></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="logging-control">
+<span id="loggingcontrol"></span><h2>Logging Control<a class="headerlink" href="#logging-control" title="Permalink to this headline">¶</a></h2>
+<p>Control logging of messages to persistent storage.</p>
+<ul class="simple">
+<li>Abbreviation: LoggingControl</li>
+<li>Identification Number: 102</li>
+<li>Payload Size: 3+  bytes</li>
+<li>Message Size: 25+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="9%" />
+<col width="21%" />
+<col width="7%" />
+<col width="38%" />
+<col width="13%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Control Operation</td>
+<td>op</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="#loggingcontrol-enum-op"><span class="std std-ref">Enum Control Operation</span></a>)</td>
+<td>uint8_t</td>
+<td>Operation to perform.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Log Label / Path</td>
+<td>name</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>The meaning of this field depends on the operation and is
+explained in the operation’s description.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="loggingcontrol-enum-prefix-cop">
+<span id="loggingcontrol-enum-op"></span><span id="id1"></span><h3>Enum Control Operation<a class="headerlink" href="#loggingcontrol-enum-prefix-cop" title="Permalink to this headline">¶</a></h3>
+<p>Operation to perform.</p>
+<ul class="simple">
+<li>Abbreviation: op</li>
+<li>Prefix: COP</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="22%" />
+<col width="19%" />
+<col width="53%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0</td>
+<td>Request Start of Logging</td>
+<td>REQUEST_START</td>
+<td>Request the logging manager to start logging. The logging
+manager will reply with a STARTED operation. If logging is
+already in progress the current log will be closed and a new
+one will be opened (therefore the logging manager will send
+two messages - STOPPED and STARTED). The field ‘name’
+represents the label that will be appended to the log path.</td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>Logging Started</td>
+<td>STARTED</td>
+<td>The logging manager will send a message with this operation
+everytime a log is successfully started. The field ‘name’
+contains the complete name of the log.</td>
+</tr>
+<tr class="row-even"><td>2</td>
+<td>Request Logging Stop</td>
+<td>REQUEST_STOP</td>
+<td>Request the logging manager to stop logging messages. The
+logging manager will reply with a STOPPED operation and
+logging will be suspended until a message with operation
+START is received. If logging is already stoppped the
+logging manager will ignore this operation and will not
+reply with a STOPPED operation. The field ‘name’ with this
+operation type has no meaning.</td>
+</tr>
+<tr class="row-odd"><td>3</td>
+<td>Logging Stopped</td>
+<td>STOPPED</td>
+<td>The logging manager will send a message with this operation
+when logging is successfully stopped. The field ‘name’
+contains the complete name of the log that was closed.</td>
+</tr>
+<tr class="row-even"><td>4</td>
+<td>Request Current Log Name</td>
+<td>REQUEST_CURRENT_NAME</td>
+<td>This operation instructs the logging manager to send a
+message with operation CURRENT_NAME containing the complete
+name of the current log in the field ‘name’. The field
+‘name’ with this operation type has no meaning.</td>
+</tr>
+<tr class="row-odd"><td>5</td>
+<td>Current Log Name</td>
+<td>CURRENT_NAME</td>
+<td>The logging manager will send a message with this operation
+when asked via the REQUEST_CURRENT_NAME operation. The field
+‘name’ contains the complete name of the log.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="log-book-entry">
+<span id="logbookentry"></span><h2>Log Book Entry<a class="headerlink" href="#log-book-entry" title="Permalink to this headline">¶</a></h2>
+<p>Human readable message reporting an event of interest.</p>
+<ul class="simple">
+<li>Abbreviation: LogBookEntry</li>
+<li>Identification Number: 103</li>
+<li>Payload Size: 13+  bytes</li>
+<li>Message Size: 35+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="12%" />
+<col width="29%" />
+<col width="10%" />
+<col width="22%" />
+<col width="18%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Type</td>
+<td>type</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="#logbookentry-enum-type"><span class="std std-ref">Enum Type</span></a>)</td>
+<td>uint8_t</td>
+<td>Type of message.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Timestamp</td>
+<td>htime</td>
+<td><em>s</em></td>
+<td>fp64_t</td>
+<td>Timestamp (Epoch time).</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Context</td>
+<td>context</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>Message context.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Text</td>
+<td>text</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>Message text.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="enum-type">
+<span id="logbookentry-enum-prefix-lbet"></span><span id="logbookentry-enum-type"></span><h3>Enum Type<a class="headerlink" href="#enum-type" title="Permalink to this headline">¶</a></h3>
+<p>Type of message.</p>
+<ul class="simple">
+<li>Abbreviation: type</li>
+<li>Prefix: LBET</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="28%" />
+<col width="30%" />
+<col width="28%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0</td>
+<td>Information</td>
+<td>INFO</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>Warning</td>
+<td>WARNING</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-even"><td>2</td>
+<td>Error</td>
+<td>ERROR</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>3</td>
+<td>Critical</td>
+<td>CRITICAL</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-even"><td>4</td>
+<td>Debug</td>
+<td>DEBUG</td>
+<td><em>-</em></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="log-book-control">
+<span id="logbookcontrol"></span><h2>Log Book Control<a class="headerlink" href="#log-book-control" title="Permalink to this headline">¶</a></h2>
+<p>Control history log.</p>
+<ul class="simple">
+<li>Abbreviation: LogBookControl</li>
+<li>Identification Number: 104</li>
+<li>Payload Size: 11+  bytes</li>
+<li>Message Size: 33+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="7%" />
+<col width="9%" />
+<col width="25%" />
+<col width="15%" />
+<col width="29%" />
+<col width="13%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Command</td>
+<td>command</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="#logbookcontrol-enum-command"><span class="std std-ref">Enum Command</span></a>)</td>
+<td>uint8_t</td>
+<td>Command to perform.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Timestamp</td>
+<td>htime</td>
+<td><em>s</em></td>
+<td>fp64_t</td>
+<td>Timestamp for command (Epoch time).</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Messages</td>
+<td>msg</td>
+<td><em>-</em></td>
+<td>message-list
+(<a class="reference internal" href="#logbookentry"><span class="std std-ref">Log Book Entry</span></a>)</td>
+<td>Argument, currently used only for ‘REPLY’.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="enum-command">
+<span id="logbookcontrol-enum-prefix-lbc"></span><span id="logbookcontrol-enum-command"></span><h3>Enum Command<a class="headerlink" href="#enum-command" title="Permalink to this headline">¶</a></h3>
+<p>Command to perform.</p>
+<ul class="simple">
+<li>Abbreviation: command</li>
+<li>Prefix: LBC</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="8%" />
+<col width="13%" />
+<col width="15%" />
+<col width="64%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0</td>
+<td>Get</td>
+<td>GET</td>
+<td>Retrieve log book entries.</td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>Clear</td>
+<td>CLEAR</td>
+<td>Clear log book entries.</td>
+</tr>
+<tr class="row-even"><td>2</td>
+<td>Get Errors</td>
+<td>GET_ERR</td>
+<td>Retrieve log book entries corresponding to errors.</td>
+</tr>
+<tr class="row-odd"><td>3</td>
+<td>Reply</td>
+<td>REPLY</td>
+<td>Reply to a GET command. Message argument is a MessageList
+instance containing LogBookEntry messages.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="replay-control">
+<span id="replaycontrol"></span><h2>Replay Control<a class="headerlink" href="#replay-control" title="Permalink to this headline">¶</a></h2>
+<p>Control replay of LSF logged data.</p>
+<ul class="simple">
+<li>Abbreviation: ReplayControl</li>
+<li>Identification Number: 105</li>
+<li>Payload Size: 3+  bytes</li>
+<li>Message Size: 25+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="11%" />
+<col width="26%" />
+<col width="9%" />
+<col width="24%" />
+<col width="16%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Operation</td>
+<td>op</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="#replaycontrol-enum-op"><span class="std std-ref">Enum Operation</span></a>)</td>
+<td>uint8_t</td>
+<td>Operation to perform.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>File To Replay</td>
+<td>file</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>Pathname of file to replay.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="enum-operation">
+<span id="replaycontrol-enum-prefix-rop"></span><span id="replaycontrol-enum-op"></span><h3>Enum Operation<a class="headerlink" href="#enum-operation" title="Permalink to this headline">¶</a></h3>
+<p>Operation to perform.</p>
+<ul class="simple">
+<li>Abbreviation: op</li>
+<li>Prefix: ROP</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="17%" />
+<col width="19%" />
+<col width="33%" />
+<col width="31%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0</td>
+<td>Start</td>
+<td>START</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>Stop</td>
+<td>STOP</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-even"><td>2</td>
+<td>Pause</td>
+<td>PAUSE</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>3</td>
+<td>Resume</td>
+<td>RESUME</td>
+<td><em>-</em></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="clock-control">
+<span id="clockcontrol"></span><h2>Clock Control<a class="headerlink" href="#clock-control" title="Permalink to this headline">¶</a></h2>
+<p>Clock control.</p>
+<ul class="simple">
+<li>Abbreviation: ClockControl</li>
+<li>Identification Number: 106</li>
+<li>Payload Size: 10 bytes</li>
+<li>Message Size: 32 bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="13%" />
+<col width="28%" />
+<col width="8%" />
+<col width="24%" />
+<col width="18%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Operation</td>
+<td>op</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="#clockcontrol-enum-op"><span class="std std-ref">Enum Operation</span></a>)</td>
+<td>uint8_t</td>
+<td>Operation to perform.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Clock</td>
+<td>clock</td>
+<td><em>s</em></td>
+<td>fp64_t</td>
+<td>Clock value (Epoch time).</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Timezone</td>
+<td>tz</td>
+<td><em>-</em></td>
+<td>int8_t</td>
+<td>Timezone.</td>
+<td>min=-23,
+max=23</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="clockcontrol-enum-prefix-cop">
+<span id="clockcontrol-enum-op"></span><span id="id2"></span><h3>Enum Operation<a class="headerlink" href="#clockcontrol-enum-prefix-cop" title="Permalink to this headline">¶</a></h3>
+<p>Operation to perform.</p>
+<ul class="simple">
+<li>Abbreviation: op</li>
+<li>Prefix: COP</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="8%" />
+<col width="18%" />
+<col width="16%" />
+<col width="58%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0</td>
+<td>Execute Sync.</td>
+<td>SYNC_EXEC</td>
+<td>Synchronize clock according to given clock value.</td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>Request Sync.</td>
+<td>SYNC_REQUEST</td>
+<td>Request autonomous clock synchronization.</td>
+</tr>
+<tr class="row-even"><td>2</td>
+<td>Sync. Started</td>
+<td>SYNC_STARTED</td>
+<td>Synchronization start notification.</td>
+</tr>
+<tr class="row-odd"><td>3</td>
+<td>Sync. done</td>
+<td>SYNC_DONE</td>
+<td>Synchronization completion notification.</td>
+</tr>
+<tr class="row-even"><td>4</td>
+<td>Set Timezone</td>
+<td>SET_TZ</td>
+<td>Set timezone.</td>
+</tr>
+<tr class="row-odd"><td>5</td>
+<td>Timezone Setup</td>
+<td>SET_TZ_DONE</td>
+<td>Notification due to timezone modification.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="historic-ctd">
+<span id="historicctd"></span><h2>Historic CTD<a class="headerlink" href="#historic-ctd" title="Permalink to this headline">¶</a></h2>
+<p>This message is used to store historic (transmitted afterwards) CTD data .</p>
+<ul class="simple">
+<li>Abbreviation: HistoricCTD</li>
+<li>Identification Number: 107</li>
+<li>Payload Size: 12 bytes</li>
+<li>Message Size: 34 bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="18%" />
+<col width="18%" />
+<col width="9%" />
+<col width="11%" />
+<col width="17%" />
+<col width="26%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Conductivity</td>
+<td>conductivity</td>
+<td><em>S/m</em></td>
+<td>fp32_t</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Temperature</td>
+<td>temperature</td>
+<td><em>°C</em></td>
+<td>fp32_t</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Depth</td>
+<td>depth</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="historic-telemetry">
+<span id="historictelemetry"></span><h2>Historic Telemetry<a class="headerlink" href="#historic-telemetry" title="Permalink to this headline">¶</a></h2>
+<p>This message is used to store historic (transmitted afterwards) telemetry information.</p>
+<ul class="simple">
+<li>Abbreviation: HistoricTelemetry</li>
+<li>Identification Number: 108</li>
+<li>Payload Size: 12 bytes</li>
+<li>Message Size: 34 bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="15%" />
+<col width="6%" />
+<col width="11%" />
+<col width="36%" />
+<col width="21%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Altitude</td>
+<td>altitude</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Roll</td>
+<td>roll</td>
+<td><em>-</em></td>
+<td>uint16_t</td>
+<td>Roll encoded as α.(65535/(2.π))</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Pitch</td>
+<td>pitch</td>
+<td><em>-</em></td>
+<td>uint16_t</td>
+<td>Pitch encoded as α.(65535/(2.π))</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Yaw</td>
+<td>yaw</td>
+<td><em>-</em></td>
+<td>uint16_t</td>
+<td>Yaw encoded as α.(65535/(2.π))</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Speed</td>
+<td>speed</td>
+<td><em>dm</em></td>
+<td>int16_t</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="historic-sonar-data">
+<span id="historicsonardata"></span><h2>Historic Sonar Data<a class="headerlink" href="#historic-sonar-data" title="Permalink to this headline">¶</a></h2>
+<p>This message is used to store historic (transmitted afterwards) sonar data.</p>
+<ul class="simple">
+<li>Abbreviation: HistoricSonarData</li>
+<li>Identification Number: 109</li>
+<li>Payload Size: 21+  bytes</li>
+<li>Message Size: 43+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="8%" />
+<col width="25%" />
+<col width="5%" />
+<col width="38%" />
+<col width="12%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Altitude</td>
+<td>altitude</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Width</td>
+<td>width</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Length</td>
+<td>length</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Bearing</td>
+<td>bearing</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Pixels Per Line</td>
+<td>pxl</td>
+<td><em>-</em></td>
+<td>int16_t</td>
+<td>The number of pixels per line as the data in ‘sonar_data’ may
+correspond to more than one sequential sidescan lines.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Encoding</td>
+<td>encoding</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="#historicsonardata-enum-encoding"><span class="std std-ref">Enum Encoding</span></a>)</td>
+<td>uint8_t</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>SonarData</td>
+<td>sonar_data</td>
+<td><em>-</em></td>
+<td>rawdata</td>
+<td>Sonar data encoded as in ‘encoding’.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="enum-encoding">
+<span id="historicsonardata-enum-prefix-enc"></span><span id="historicsonardata-enum-encoding"></span><h3>Enum Encoding<a class="headerlink" href="#enum-encoding" title="Permalink to this headline">¶</a></h3>
+<p>No description</p>
+<ul class="simple">
+<li>Abbreviation: encoding</li>
+<li>Prefix: ENC</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="37%" />
+<col width="32%" />
+<col width="21%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0</td>
+<td>One Byte Per Pixel</td>
+<td>ONE_BYTE_PER_PIXEL</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>PNG compressed image</td>
+<td>PNG</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-even"><td>2</td>
+<td>JPEG compressed image</td>
+<td>JPEG</td>
+<td><em>-</em></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="historic-event">
+<span id="historicevent"></span><h2>Historic Event<a class="headerlink" href="#historic-event" title="Permalink to this headline">¶</a></h2>
+<p>This message is used to store historic event log entries.</p>
+<ul class="simple">
+<li>Abbreviation: HistoricEvent</li>
+<li>Identification Number: 110</li>
+<li>Payload Size: 3+  bytes</li>
+<li>Message Size: 25+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="13%" />
+<col width="32%" />
+<col width="10%" />
+<col width="15%" />
+<col width="19%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Event</td>
+<td>text</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Event Type</td>
+<td>type</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="#historicevent-enum-type"><span class="std std-ref">Enum Event Type</span></a>)</td>
+<td>uint8_t</td>
+<td>Type of event.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="enum-event-type">
+<span id="historicevent-enum-prefix-evtype"></span><span id="historicevent-enum-type"></span><h3>Enum Event Type<a class="headerlink" href="#enum-event-type" title="Permalink to this headline">¶</a></h3>
+<p>Type of event.</p>
+<ul class="simple">
+<li>Abbreviation: type</li>
+<li>Prefix: EVTYPE</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="28%" />
+<col width="30%" />
+<col width="28%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0</td>
+<td>Information</td>
+<td>INFO</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>Error</td>
+<td>ERROR</td>
+<td><em>-</em></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="vertical-profile">
+<span id="verticalprofile"></span><h2>Vertical Profile<a class="headerlink" href="#vertical-profile" title="Permalink to this headline">¶</a></h2>
+<p>This message is used to store historic profiles for water parameters: Temperature, Salinity, Chlorophyll…</p>
+<ul class="simple">
+<li>Abbreviation: VerticalProfile</li>
+<li>Identification Number: 111</li>
+<li>Payload Size: 20+  bytes</li>
+<li>Message Size: 42+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="8%" />
+<col width="23%" />
+<col width="14%" />
+<col width="33%" />
+<col width="11%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Parameter</td>
+<td>parameter</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="#verticalprofile-enum-parameter"><span class="std std-ref">Enum Parameter</span></a>)</td>
+<td>uint8_t</td>
+<td>Water parameter used to calculate the vertical profile.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Number of Samples</td>
+<td>numSamples</td>
+<td><em>-</em></td>
+<td>uint8_t</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Samples</td>
+<td>samples</td>
+<td><em>-</em></td>
+<td>message-list
+(<a class="reference internal" href="#profilesample"><span class="std std-ref">Profile Sample</span></a>)</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Latitude</td>
+<td>lat</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>Latitude where the profile was calculated.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Longitude</td>
+<td>lon</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>Longitude where the profile was calculated.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="enum-parameter">
+<span id="verticalprofile-enum-prefix-prof"></span><span id="verticalprofile-enum-parameter"></span><h3>Enum Parameter<a class="headerlink" href="#enum-parameter" title="Permalink to this headline">¶</a></h3>
+<p>Water parameter used to calculate the vertical profile.</p>
+<ul class="simple">
+<li>Abbreviation: parameter</li>
+<li>Prefix: PROF</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="29%" />
+<col width="29%" />
+<col width="27%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0</td>
+<td>Temperature</td>
+<td>TEMPERATURE</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>Salinity</td>
+<td>SALINITY</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-even"><td>2</td>
+<td>Conductivity</td>
+<td>CONDUCTIVITY</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>3</td>
+<td>pH</td>
+<td>PH</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-even"><td>4</td>
+<td>Redox</td>
+<td>REDOX</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>5</td>
+<td>Chlorophyll</td>
+<td>CHLOROPHYLL</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-even"><td>6</td>
+<td>Turbidity</td>
+<td>TURBIDITY</td>
+<td><em>-</em></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="profile-sample">
+<span id="profilesample"></span><h2>Profile Sample<a class="headerlink" href="#profile-sample" title="Permalink to this headline">¶</a></h2>
+<p>Samples to calculate a vertical profile.</p>
+<ul class="simple">
+<li>Abbreviation: ProfileSample</li>
+<li>Identification Number: 112</li>
+<li>Payload Size: 6 bytes</li>
+<li>Message Size: 28 bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="19%" />
+<col width="8%" />
+<col width="14%" />
+<col width="18%" />
+<col width="28%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Depth</td>
+<td>depth</td>
+<td><em>dm</em></td>
+<td>uint16_t</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Average</td>
+<td>avg</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<h3><a href="index.html">Table Of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Message Format.html">Message Format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Core.html">Core Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Simulation.html">Simulation Messages</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Storage Messages</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#storage-usage">Storage Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#cache-control">Cache Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#logging-control">Logging Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#log-book-entry">Log Book Entry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#log-book-control">Log Book Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#replay-control">Replay Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#clock-control">Clock Control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#historic-ctd">Historic CTD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#historic-telemetry">Historic Telemetry</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#historic-sonar-data">Historic Sonar Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#historic-event">Historic Event</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#vertical-profile">Vertical Profile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#profile-sample">Profile Sample</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Networking.html">Networking Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Acoustic Networking.html">Acoustic Networking Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Sensors.html">Sensors Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Actuation.html">Actuation Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Navigation.html">Navigation Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Guidance.html">Guidance Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Maneuvering.html">Maneuvering Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Vehicle Supervision.html">Vehicle Supervision Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Plan Supervision.html">Plan Supervision Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CCU.html">CCU Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Autonomy.html">Autonomy Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Vision.html">Vision Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="External.html">External Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Development.html">Development Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Custom.html">Custom Messages</a></li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013-2017, Universidade do Porto - Faculdade de Engenharia - LSTS.
+      <br/>
+      Last updated on Aug 21, 2019.
+    </div>
+  </body>
+</html>

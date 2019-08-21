@@ -1,0 +1,5524 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Maneuvering Messages &mdash; IMC v5.4.11 Specification</title>
+    
+    <link rel="stylesheet" href="_static/pydoctheme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '5.4.11',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="top" title="IMC v5.4.11 Specification" href="index.html" />
+    <link rel="next" title="Vehicle Supervision Messages" href="Vehicle Supervision.html" />
+    <link rel="prev" title="Guidance Messages" href="Guidance.html" /> 
+  </head>
+  <body>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="maneuvering-messages">
+<h1>Maneuvering Messages<a class="headerlink" href="#maneuvering-messages" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="goto-maneuver">
+<span id="goto"></span><h2>Goto Maneuver<a class="headerlink" href="#goto-maneuver" title="Permalink to this headline">¶</a></h2>
+<p>A “Goto” is a maneuver specifying a movement of the vehicle to a
+target waypoint. The waypoint is described by the WGS-84
+waypoint coordinate and target Z reference.</p>
+<p>Mandatory parameters defined for a “Goto” are
+timeout, speed and speed units.</p>
+<p>Optional parameters may be defined for the target Euler
+Angles (roll, pitch and yaw) though these parameters may
+not be considered by all maneuver controllers in charge
+of the execution of this type of maneuver.</p>
+<ul class="simple">
+<li>Abbreviation: Goto</li>
+<li>Identification Number: 450</li>
+<li>Payload Size: 54+  bytes</li>
+<li>Message Size: 76+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="18%" />
+<col width="8%" />
+<col width="15%" />
+<col width="6%" />
+<col width="37%" />
+<col width="15%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Timeout</td>
+<td>timeout</td>
+<td><em>s</em></td>
+<td>uint16_t</td>
+<td>The amount of time the maneuver is allowed to run.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Latitude WGS-84</td>
+<td>lat</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>WGS-84 Latitude of target waypoint.</td>
+<td>min=-1.5707963267948966,
+max=1.5707963267948966</td>
+</tr>
+<tr class="row-even"><td>Longitude WGS-84</td>
+<td>lon</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>WGS-84 Longitude of target waypoint.</td>
+<td>min=-3.141592653589793,
+max=3.141592653589793</td>
+</tr>
+<tr class="row-odd"><td>Z Reference</td>
+<td>z</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Target reference in the z axis. Use z_units to specify
+whether z represents depth, altitude or other.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Z Units</td>
+<td>z_units</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="Message Format.html#enum-zunits"><span class="std std-ref">Enum Z Units</span></a>)</td>
+<td>uint8_t</td>
+<td>Units of the z reference.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Speed</td>
+<td>speed</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Maneuver speed reference.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Speed Units</td>
+<td>speed_units</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="Message Format.html#enum-speedunits"><span class="std std-ref">Enum Speed Units</span></a>)</td>
+<td>uint8_t</td>
+<td>Speed units.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Roll</td>
+<td>roll</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>The phi Euler angle in which the vehicle should set its
+attitude. Use ‘-1’ for this field to be
+unconsidered. Otherwise the value spans from 0 to 2 Pi.</td>
+<td>min=-1,
+max=6.283185307179586</td>
+</tr>
+<tr class="row-even"><td>Pitch</td>
+<td>pitch</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>The theta Euler angle in which the vehicle should set its
+attitude. Use ‘-1’ for this field to be
+disconcerted. Otherwise the value spans from 0 to 2 Pi.</td>
+<td>min=-1,
+max=6.283185307179586</td>
+</tr>
+<tr class="row-odd"><td>Yaw</td>
+<td>yaw</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>The psi Euler angle in which the vehicle should set its
+attitude. Use ‘-1’ for this field to be considered. Otherwise
+the value spans from 0 to 2 Pi.</td>
+<td>min=-1,
+max=6.283185307179586</td>
+</tr>
+<tr class="row-even"><td>Custom settings for maneuver</td>
+<td>custom</td>
+<td><em>TupleList</em></td>
+<td>plaintext</td>
+<td>Custom settings for maneuver.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="popup-maneuver">
+<span id="popup"></span><h2>PopUp Maneuver<a class="headerlink" href="#popup-maneuver" title="Permalink to this headline">¶</a></h2>
+<p>The Pop Up maneuver makes the vehicle come to the surface at a
+specific waypoint. This maneuver is restricted to underwater vehicles.</p>
+<ul class="simple">
+<li>Abbreviation: PopUp</li>
+<li>Identification Number: 451</li>
+<li>Payload Size: 37+  bytes</li>
+<li>Message Size: 59+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="17%" />
+<col width="8%" />
+<col width="18%" />
+<col width="6%" />
+<col width="36%" />
+<col width="15%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Timeout</td>
+<td>timeout</td>
+<td><em>s</em></td>
+<td>uint16_t</td>
+<td>The amount of time the maneuver is allowed to run. If the
+maneuver is not completed in the amount of time specified an
+error will be generated.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Latitude WGS-84</td>
+<td>lat</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>WGS-84 Latitude.</td>
+<td>min=-1.5707963267948966,
+max=1.5707963267948966</td>
+</tr>
+<tr class="row-even"><td>Longitude WGS-84</td>
+<td>lon</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>WGS-84 Longitude.</td>
+<td>min=-3.141592653589793,
+max=3.141592653589793</td>
+</tr>
+<tr class="row-odd"><td>Z Reference</td>
+<td>z</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Maneuver reference in the z axis. Use z_units to specify
+whether z represents depth, altitude or other.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Z Units</td>
+<td>z_units</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="Message Format.html#enum-zunits"><span class="std std-ref">Enum Z Units</span></a>)</td>
+<td>uint8_t</td>
+<td>Units of the z reference.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Speed</td>
+<td>speed</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Maneuver speed reference.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Speed Units</td>
+<td>speed_units</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="Message Format.html#enum-speedunits"><span class="std std-ref">Enum Speed Units</span></a>)</td>
+<td>uint8_t</td>
+<td>Speed units.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Duration</td>
+<td>duration</td>
+<td><em>s</em></td>
+<td>uint16_t</td>
+<td>The duration of this maneuver at surface level.
+Only used if flag WAIT_AT_SURFACE is on.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Radius</td>
+<td>radius</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Radius of the maneuver.
+Only used if flag STATION_KEEP is on.</td>
+<td>min=1,
+max=100000</td>
+</tr>
+<tr class="row-odd"><td>Flags</td>
+<td>flags</td>
+<td><em>Bitfield</em>
+(<a class="reference internal" href="#popup-bitfield-flags"><span class="std std-ref">Bitfield Flags</span></a>)</td>
+<td>uint8_t</td>
+<td>Flags of the maneuver.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Custom settings for maneuver</td>
+<td>custom</td>
+<td><em>TupleList</em></td>
+<td>plaintext</td>
+<td>Custom settings for maneuver.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="bitfield-flags">
+<span id="popup-bitfield-prefix-flg"></span><span id="popup-bitfield-flags"></span><h3>Bitfield Flags<a class="headerlink" href="#bitfield-flags" title="Permalink to this headline">¶</a></h3>
+<p>Flags of the maneuver.</p>
+<ul class="simple">
+<li>Abbreviation: flags</li>
+<li>Prefix: FLG</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="23%" />
+<col width="13%" />
+<col width="58%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0x01</td>
+<td>Start from current position</td>
+<td>CURR_POS</td>
+<td>If this flag is set, lat/lon/start_z fields should be
+ignored and current vehicle position should be considered as
+starting point for ascent/descent.</td>
+</tr>
+<tr class="row-odd"><td>0x02</td>
+<td>Wait at surface</td>
+<td>WAIT_AT_SURFACE</td>
+<td>If this flag is set, duration field is used to hold position at surface
+for that amount of time.</td>
+</tr>
+<tr class="row-even"><td>0x04</td>
+<td>Station keeping</td>
+<td>STATION_KEEP</td>
+<td>This flag will only make sense if WAIT_AT_SURFACE is also set.
+While holding position at surface the vehicle will assume a
+station keeping behavior.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="teleoperation-maneuver">
+<span id="teleoperation"></span><h2>Teleoperation Maneuver<a class="headerlink" href="#teleoperation-maneuver" title="Permalink to this headline">¶</a></h2>
+<p>The Teleoperation Maneuver lets the vehicle be controlled by an
+external human operator.</p>
+<ul class="simple">
+<li>Abbreviation: Teleoperation</li>
+<li>Identification Number: 452</li>
+<li>Payload Size: 2+  bytes</li>
+<li>Message Size: 24+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="25%" />
+<col width="12%" />
+<col width="11%" />
+<col width="9%" />
+<col width="26%" />
+<col width="17%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Custom settings for maneuver</td>
+<td>custom</td>
+<td><em>TupleList</em></td>
+<td>plaintext</td>
+<td>Custom settings for maneuver.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="loiter-maneuver">
+<span id="loiter"></span><h2>Loiter Maneuver<a class="headerlink" href="#loiter-maneuver" title="Permalink to this headline">¶</a></h2>
+<p>The Loiter maneuver makes the vehicle circle around a specific
+waypoint with fixed depth reference.</p>
+<ul class="simple">
+<li>Abbreviation: Loiter</li>
+<li>Identification Number: 453</li>
+<li>Payload Size: 50+  bytes</li>
+<li>Message Size: 72+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="17%" />
+<col width="8%" />
+<col width="18%" />
+<col width="6%" />
+<col width="36%" />
+<col width="15%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Timeout</td>
+<td>timeout</td>
+<td><em>s</em></td>
+<td>uint16_t</td>
+<td>The timeout indicates the time that an error should occur if
+exceeded.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Latitude WGS-84</td>
+<td>lat</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>WGS-84 Latitude coordinate.</td>
+<td>min=-1.5707963267948966,
+max=1.5707963267948966</td>
+</tr>
+<tr class="row-even"><td>Longitude WGS-84</td>
+<td>lon</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>WGS-84 Longitude coordinate.</td>
+<td>min=-3.141592653589793,
+max=3.141592653589793</td>
+</tr>
+<tr class="row-odd"><td>Z Reference</td>
+<td>z</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Maneuver reference in the z axis. Use z_units to specify
+whether z represents depth, altitude or other.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Z Units</td>
+<td>z_units</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="Message Format.html#enum-zunits"><span class="std std-ref">Enum Z Units</span></a>)</td>
+<td>uint8_t</td>
+<td>Units of the z reference.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Duration</td>
+<td>duration</td>
+<td><em>s</em></td>
+<td>uint16_t</td>
+<td>The duration of this maneuver. Use ‘0’ for unlimited duration
+time.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Speed</td>
+<td>speed</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Maneuver speed reference.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Speed Units</td>
+<td>speed_units</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="Message Format.html#enum-speedunits"><span class="std std-ref">Enum Speed Units</span></a>)</td>
+<td>uint8_t</td>
+<td>Speed units.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Loiter Type</td>
+<td>type</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="#loiter-enum-type"><span class="std std-ref">Enum Loiter Type</span></a>)</td>
+<td>uint8_t</td>
+<td>Loiter maneuver type.</td>
+<td>max=4</td>
+</tr>
+<tr class="row-odd"><td>Radius</td>
+<td>radius</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Radius of the maneuver.</td>
+<td>min=1,
+max=100000</td>
+</tr>
+<tr class="row-even"><td>Length</td>
+<td>length</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Length of the maneuver.</td>
+<td>min=1,
+max=100000</td>
+</tr>
+<tr class="row-odd"><td>Bearing</td>
+<td>bearing</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>Bearing of the maneuver.</td>
+<td>min=0,
+max=6.283185307179586</td>
+</tr>
+<tr class="row-even"><td>Direction</td>
+<td>direction</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="#loiter-enum-direction"><span class="std std-ref">Enum Direction</span></a>)</td>
+<td>uint8_t</td>
+<td>Desired direction.</td>
+<td>max=3</td>
+</tr>
+<tr class="row-odd"><td>Custom settings for maneuver</td>
+<td>custom</td>
+<td><em>TupleList</em></td>
+<td>plaintext</td>
+<td>Custom settings for maneuver.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="enum-loiter-type">
+<span id="loiter-enum-prefix-lt"></span><span id="loiter-enum-type"></span><h3>Enum Loiter Type<a class="headerlink" href="#enum-loiter-type" title="Permalink to this headline">¶</a></h3>
+<p>Loiter maneuver type.</p>
+<ul class="simple">
+<li>Abbreviation: type</li>
+<li>Prefix: LT</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="26%" />
+<col width="30%" />
+<col width="28%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0</td>
+<td>Default</td>
+<td>DEFAULT</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>Circular</td>
+<td>CIRCULAR</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-even"><td>2</td>
+<td>Race track</td>
+<td>RACETRACK</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>3</td>
+<td>Figure 8</td>
+<td>EIGHT</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-even"><td>4</td>
+<td>Hover</td>
+<td>HOVER</td>
+<td><em>-</em></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="enum-direction">
+<span id="loiter-enum-prefix-ld"></span><span id="loiter-enum-direction"></span><h3>Enum Direction<a class="headerlink" href="#enum-direction" title="Permalink to this headline">¶</a></h3>
+<p>Desired direction.</p>
+<ul class="simple">
+<li>Abbreviation: direction</li>
+<li>Prefix: LD</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="40%" />
+<col width="25%" />
+<col width="23%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0</td>
+<td>Vehicle Dependent</td>
+<td>VDEP</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>Clockwise</td>
+<td>CLOCKW</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-even"><td>2</td>
+<td>Counter Clockwise</td>
+<td>CCLOCKW</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>3</td>
+<td>Into the wind/current</td>
+<td>IWINDCURR</td>
+<td><em>-</em></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="idlemaneuver">
+<span id="idle-maneuver"></span><h2>Idle Maneuver<a class="headerlink" href="#idlemaneuver" title="Permalink to this headline">¶</a></h2>
+<p>Causes the vehicle to stay idle for some time.</p>
+<ul class="simple">
+<li>Abbreviation: IdleManeuver</li>
+<li>Identification Number: 454</li>
+<li>Payload Size: 4+  bytes</li>
+<li>Message Size: 26+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="20%" />
+<col width="9%" />
+<col width="9%" />
+<col width="7%" />
+<col width="42%" />
+<col width="13%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Duration</td>
+<td>duration</td>
+<td><em>s</em></td>
+<td>uint16_t</td>
+<td>Optional duration of the Idle maneuver. Use ‘0’ for unlimited
+duration time (maneuver will have to be explicitly stopped).</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Custom settings for maneuver</td>
+<td>custom</td>
+<td><em>TupleList</em></td>
+<td>plaintext</td>
+<td>Custom settings for maneuver.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="low-level-control-maneuver">
+<span id="lowlevelcontrol"></span><h2>Low Level Control Maneuver<a class="headerlink" href="#low-level-control-maneuver" title="Permalink to this headline">¶</a></h2>
+<p>Low level maneuver that sends a (heading, roll, speed, …)
+reference to a controller of the vehicle and then optionally
+lingers for some time.</p>
+<ul class="simple">
+<li>Abbreviation: LowLevelControl</li>
+<li>Identification Number: 455</li>
+<li>Payload Size: 6+  bytes</li>
+<li>Message Size: 28+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="17%" />
+<col width="8%" />
+<col width="7%" />
+<col width="14%" />
+<col width="42%" />
+<col width="11%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Control</td>
+<td>control</td>
+<td><em>-</em></td>
+<td>message
+(<a class="reference internal" href="Message Format.html#controlcommand"><span class="std std-ref">Message-Group Control Command</span></a>)</td>
+<td>Control command: can be of type DesiredZ, DesiredHeading,
+DesiredRoll, DesiredPitch, DesiredSpeed, DesiredThrottle or DesiredPath.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Duration</td>
+<td>duration</td>
+<td><em>s</em></td>
+<td>uint16_t</td>
+<td>Duration of the control.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Custom settings for maneuver</td>
+<td>custom</td>
+<td><em>TupleList</em></td>
+<td>plaintext</td>
+<td>Custom settings for maneuver.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="rows-maneuver">
+<span id="rows"></span><h2>Rows Maneuver<a class="headerlink" href="#rows-maneuver" title="Permalink to this headline">¶</a></h2>
+<p>Rows maneuver (i.e: lawn mower type maneuver)</p>
+<ul class="simple">
+<li>Abbreviation: Rows</li>
+<li>Identification Number: 456</li>
+<li>Payload Size: 61+  bytes</li>
+<li>Message Size: 83+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="18%" />
+<col width="8%" />
+<col width="18%" />
+<col width="7%" />
+<col width="34%" />
+<col width="15%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Timeout</td>
+<td>timeout</td>
+<td><em>s</em></td>
+<td>uint16_t</td>
+<td>The amount of time the maneuver is allowed to run.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Latitude WGS-84</td>
+<td>lat</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>WGS-84 Latitude of target waypoint.</td>
+<td>min=-1.5707963267948966,
+max=1.5707963267948966</td>
+</tr>
+<tr class="row-even"><td>Longitude WGS-84</td>
+<td>lon</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>WGS-84 Longitude of target waypoint.</td>
+<td>min=-3.141592653589793,
+max=3.141592653589793</td>
+</tr>
+<tr class="row-odd"><td>Z Reference</td>
+<td>z</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Maneuver reference in the z axis. Use z_units to specify
+whether z represents depth, altitude or other.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Z Units</td>
+<td>z_units</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="Message Format.html#enum-zunits"><span class="std std-ref">Enum Z Units</span></a>)</td>
+<td>uint8_t</td>
+<td>Units of the z reference.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Speed</td>
+<td>speed</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Maneuver speed reference.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Speed Units</td>
+<td>speed_units</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="Message Format.html#enum-speedunits"><span class="std std-ref">Enum Speed Units</span></a>)</td>
+<td>uint8_t</td>
+<td>Speed units.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Bearing</td>
+<td>bearing</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>Rows bearing angle.</td>
+<td>min=0,
+max=6.283185307179586</td>
+</tr>
+<tr class="row-even"><td>Cross Angle</td>
+<td>cross_angle</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>Rows cross angle reference.</td>
+<td>min=-1.047197551197,
+max=1.047197551197</td>
+</tr>
+<tr class="row-odd"><td>Width</td>
+<td>width</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Width of the maneuver.</td>
+<td>min=0</td>
+</tr>
+<tr class="row-even"><td>Length</td>
+<td>length</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Length of the maneuver.</td>
+<td>min=0</td>
+</tr>
+<tr class="row-odd"><td>Horizontal Step</td>
+<td>hstep</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Horizontal step.</td>
+<td>min=0</td>
+</tr>
+<tr class="row-even"><td>Curve Offset</td>
+<td>coff</td>
+<td><em>m</em></td>
+<td>uint8_t</td>
+<td>Desired curve offset.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Alternation Parameter</td>
+<td>alternation</td>
+<td><em>%</em></td>
+<td>uint8_t</td>
+<td>Alternation parameter.</td>
+<td>max=100</td>
+</tr>
+<tr class="row-even"><td>Flags</td>
+<td>flags</td>
+<td><em>Bitfield</em>
+(<a class="reference internal" href="#rows-bitfield-flags"><span class="std std-ref">Bitfield Flags</span></a>)</td>
+<td>uint8_t</td>
+<td>Maneuver flags.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Custom settings for maneuver</td>
+<td>custom</td>
+<td><em>TupleList</em></td>
+<td>plaintext</td>
+<td>Custom settings for maneuver.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="rows-bitfield-prefix-flg">
+<span id="rows-bitfield-flags"></span><span id="id1"></span><h3>Bitfield Flags<a class="headerlink" href="#rows-bitfield-prefix-flg" title="Permalink to this headline">¶</a></h3>
+<p>Maneuver flags.</p>
+<ul class="simple">
+<li>Abbreviation: flags</li>
+<li>Prefix: FLG</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="35%" />
+<col width="26%" />
+<col width="24%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0x0001</td>
+<td>Square Curve</td>
+<td>SQUARE_CURVE</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>0x0002</td>
+<td>First Curve Right</td>
+<td>CURVE_RIGHT</td>
+<td><em>-</em></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="follow-path-maneuver">
+<span id="followpath"></span><h2>Follow Path Maneuver<a class="headerlink" href="#follow-path-maneuver" title="Permalink to this headline">¶</a></h2>
+<p>Maneuver constituted by a list of Path Points.</p>
+<ul class="simple">
+<li>Abbreviation: FollowPath</li>
+<li>Identification Number: 457</li>
+<li>Payload Size: 32+  bytes</li>
+<li>Message Size: 54+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="17%" />
+<col width="8%" />
+<col width="15%" />
+<col width="11%" />
+<col width="33%" />
+<col width="15%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Timeout</td>
+<td>timeout</td>
+<td><em>s</em></td>
+<td>uint16_t</td>
+<td>The amount of time the maneuver is allowed to run.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Latitude WGS-84</td>
+<td>lat</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>WGS-84 Latitude of start point.</td>
+<td>min=-1.5707963267948966,
+max=1.5707963267948966</td>
+</tr>
+<tr class="row-even"><td>Longitude WGS-84</td>
+<td>lon</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>WGS-84 Longitude of start point.</td>
+<td>min=-3.141592653589793,
+max=3.141592653589793</td>
+</tr>
+<tr class="row-odd"><td>Z Reference</td>
+<td>z</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Maneuver reference in the z axis. Use z_units to specify
+whether z represents depth, altitude or other.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Z Units</td>
+<td>z_units</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="Message Format.html#enum-zunits"><span class="std std-ref">Enum Z Units</span></a>)</td>
+<td>uint8_t</td>
+<td>Units of the z reference.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Speed</td>
+<td>speed</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Maneuver speed reference.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Speed Units</td>
+<td>speed_units</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="Message Format.html#enum-speedunits"><span class="std std-ref">Enum Speed Units</span></a>)</td>
+<td>uint8_t</td>
+<td>Speed units.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Path Points</td>
+<td>points</td>
+<td><em>-</em></td>
+<td>message-list
+(<a class="reference internal" href="#pathpoint"><span class="std std-ref">Path Point</span></a>)</td>
+<td>List of PathPoint messages, encoding the path points.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Custom settings for maneuver</td>
+<td>custom</td>
+<td><em>TupleList</em></td>
+<td>plaintext</td>
+<td>Custom settings for maneuver.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="path-point">
+<span id="pathpoint"></span><h2>Path Point<a class="headerlink" href="#path-point" title="Permalink to this headline">¶</a></h2>
+<p>Waypoint coordinate of a Follow Path maneuver.</p>
+<ul class="simple">
+<li>Abbreviation: PathPoint</li>
+<li>Identification Number: 458</li>
+<li>Payload Size: 12 bytes</li>
+<li>Message Size: 34 bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="11%" />
+<col width="5%" />
+<col width="6%" />
+<col width="48%" />
+<col width="16%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>North Offset (m)</td>
+<td>x</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>The North offset of the North/East/Down coordinate of this
+point in relation to the path start point.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>East Offset (m)</td>
+<td>y</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>The East offset of the North/East/Down coordinate of this
+point in relation to the path start point.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Down Offset (m)</td>
+<td>z</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>The Down offset of the North/East/Down coordinate of this
+point in relation to the path start point.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="yo-yo-maneuver">
+<span id="yoyo"></span><h2>Yo-Yo Maneuver<a class="headerlink" href="#yo-yo-maneuver" title="Permalink to this headline">¶</a></h2>
+<p>A “yo-yo” is a maneuver specifying a vehicle movement to a
+target waypoint in which depth/altitude varies along the way
+between two values with a desired pitch angle.</p>
+<ul class="simple">
+<li>Abbreviation: YoYo</li>
+<li>Identification Number: 459</li>
+<li>Payload Size: 38+  bytes</li>
+<li>Message Size: 60+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="17%" />
+<col width="8%" />
+<col width="15%" />
+<col width="6%" />
+<col width="40%" />
+<col width="15%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Timeout</td>
+<td>timeout</td>
+<td><em>s</em></td>
+<td>uint16_t</td>
+<td>The amount of time the maneuver is allowed to run.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Latitude WGS-84</td>
+<td>lat</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>WGS-84 Latitude of target waypoint.</td>
+<td>min=-1.5707963267948966,
+max=1.5707963267948966</td>
+</tr>
+<tr class="row-even"><td>Longitude WGS-84</td>
+<td>lon</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>WGS-84 Longitude of target waypoint.</td>
+<td>min=-3.141592653589793,
+max=3.141592653589793</td>
+</tr>
+<tr class="row-odd"><td>Z Reference</td>
+<td>z</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Maneuver reference in the z axis.
+Use z_units to specify whether z represents depth, altitude or other.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Z Units</td>
+<td>z_units</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="Message Format.html#enum-zunits"><span class="std std-ref">Enum Z Units</span></a>)</td>
+<td>uint8_t</td>
+<td>Units of the z reference.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Amplitude</td>
+<td>amplitude</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Amplitude.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Pitch Angle</td>
+<td>pitch</td>
+<td><em>rad</em></td>
+<td>fp32_t</td>
+<td>Pitch angle for use in ascent/descent.</td>
+<td>min=0,
+max=0.78539816</td>
+</tr>
+<tr class="row-odd"><td>Speed</td>
+<td>speed</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Maneuver speed reference.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Speed Units</td>
+<td>speed_units</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="Message Format.html#enum-speedunits"><span class="std std-ref">Enum Speed Units</span></a>)</td>
+<td>uint8_t</td>
+<td>Speed units.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Custom settings for maneuver</td>
+<td>custom</td>
+<td><em>TupleList</em></td>
+<td>plaintext</td>
+<td>Custom settings for maneuver.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="teleoperation-done">
+<span id="teleoperationdone"></span><h2>Teleoperation Done<a class="headerlink" href="#teleoperation-done" title="Permalink to this headline">¶</a></h2>
+<p>Notification of completion of a Teleoperation maneuver.</p>
+<ul class="simple">
+<li>Abbreviation: TeleoperationDone</li>
+<li>Identification Number: 460</li>
+<li>Payload Size: 0 bytes</li>
+<li>Message Size: 22 bytes</li>
+</ul>
+<p>This message has no fields.</p>
+</div>
+<div class="section" id="station-keeping">
+<span id="stationkeeping"></span><h2>Station Keeping<a class="headerlink" href="#station-keeping" title="Permalink to this headline">¶</a></h2>
+<p>The Station Keeping maneuver makes the vehicle come to the surface
+and then enter a given circular perimeter around a waypoint coordinate
+for a certain amount of time.</p>
+<ul class="simple">
+<li>Abbreviation: StationKeeping</li>
+<li>Identification Number: 461</li>
+<li>Payload Size: 34+  bytes</li>
+<li>Message Size: 56+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="18%" />
+<col width="8%" />
+<col width="16%" />
+<col width="7%" />
+<col width="35%" />
+<col width="16%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Latitude WGS-84</td>
+<td>lat</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>WGS-84 Latitude.</td>
+<td>min=-1.5707963267948966,
+max=1.5707963267948966</td>
+</tr>
+<tr class="row-odd"><td>Longitude WGS-84</td>
+<td>lon</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>WGS-84 Longitude.</td>
+<td>min=-3.141592653589793,
+max=3.141592653589793</td>
+</tr>
+<tr class="row-even"><td>Z Reference</td>
+<td>z</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Maneuver reference in the z axis. Use z_units to specify
+whether z represents depth, altitude or other.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Z Units</td>
+<td>z_units</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="Message Format.html#enum-zunits"><span class="std std-ref">Enum Z Units</span></a>)</td>
+<td>uint8_t</td>
+<td>Units of the z reference.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Radius</td>
+<td>radius</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Radius.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Duration</td>
+<td>duration</td>
+<td><em>s</em></td>
+<td>uint16_t</td>
+<td>Duration (0 for unlimited).</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Speed</td>
+<td>speed</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>The value of the desired speed, in the scale specified
+by the “Speed Units” field.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Speed Units</td>
+<td>speed_units</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="Message Format.html#enum-speedunits"><span class="std std-ref">Enum Speed Units</span></a>)</td>
+<td>uint8_t</td>
+<td>Indicates the units used for the speed value.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Custom settings for maneuver</td>
+<td>custom</td>
+<td><em>TupleList</em></td>
+<td>plaintext</td>
+<td>Custom settings for maneuver.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="elevator-maneuver">
+<span id="elevator"></span><h2>Elevator Maneuver<a class="headerlink" href="#elevator-maneuver" title="Permalink to this headline">¶</a></h2>
+<p>The Elevator maneuver specifies a vehicle to reach a target
+waypoint using a cruise altitude/depth and then ascend or
+descend to another target altitude/depth. The ascent/descent
+slope and radius can also be optionally specified.</p>
+<ul class="simple">
+<li>Abbreviation: Elevator</li>
+<li>Identification Number: 462</li>
+<li>Payload Size: 40+  bytes</li>
+<li>Message Size: 62+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="17%" />
+<col width="8%" />
+<col width="19%" />
+<col width="6%" />
+<col width="35%" />
+<col width="15%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Timeout</td>
+<td>timeout</td>
+<td><em>s</em></td>
+<td>uint16_t</td>
+<td>The amount of time the maneuver is allowed to run. If the
+maneuver is not completed in the amount of time specified an
+error will be generated.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Flags</td>
+<td>flags</td>
+<td><em>Bitfield</em>
+(<a class="reference internal" href="#elevator-bitfield-flags"><span class="std std-ref">Bitfield Flags</span></a>)</td>
+<td>uint8_t</td>
+<td>Flags of the maneuver.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Latitude WGS-84</td>
+<td>lat</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>WGS-84 Latitude.</td>
+<td>min=-1.5707963267948966,
+max=1.5707963267948966</td>
+</tr>
+<tr class="row-odd"><td>Longitude WGS-84</td>
+<td>lon</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>WGS-84 Longitude.</td>
+<td>min=-3.141592653589793,
+max=3.141592653589793</td>
+</tr>
+<tr class="row-even"><td>Start Point – Z Reference</td>
+<td>start_z</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Altitude or depth of start point. This parameter will be
+ignored if the ‘NO_Z’ flag is set, or if the ‘START’ flag is
+not set.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Start Point – Z Units</td>
+<td>start_z_units</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="Message Format.html#enum-zunits"><span class="std std-ref">Enum Z Units</span></a>)</td>
+<td>uint8_t</td>
+<td>Units of the start point’s z reference.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>End Point – Z Reference</td>
+<td>end_z</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Depth or altitude for the end point.  This parameter will be
+ignored if the ‘NO_Z’ flag is set.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>End Point – Z Units</td>
+<td>end_z_units</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="Message Format.html#enum-zunits"><span class="std std-ref">Enum Z Units</span></a>)</td>
+<td>uint8_t</td>
+<td>Units of the end point’s z reference.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Radius</td>
+<td>radius</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Radius for use in ascent/descent. If 0 the controller to
+should use a custom control strategy.</td>
+<td>min=0</td>
+</tr>
+<tr class="row-odd"><td>Speed</td>
+<td>speed</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Maneuver speed.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Speed Units</td>
+<td>speed_units</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="Message Format.html#enum-speedunits"><span class="std std-ref">Enum Speed Units</span></a>)</td>
+<td>uint8_t</td>
+<td>Speed units.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Custom settings for maneuver</td>
+<td>custom</td>
+<td><em>TupleList</em></td>
+<td>plaintext</td>
+<td>Custom settings for maneuver.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="elevator-bitfield-prefix-flg">
+<span id="elevator-bitfield-flags"></span><span id="id2"></span><h3>Bitfield Flags<a class="headerlink" href="#elevator-bitfield-prefix-flg" title="Permalink to this headline">¶</a></h3>
+<p>Flags of the maneuver.</p>
+<ul class="simple">
+<li>Abbreviation: flags</li>
+<li>Prefix: FLG</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="26%" />
+<col width="13%" />
+<col width="55%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0x01</td>
+<td>Start from current position</td>
+<td>CURR_POS</td>
+<td>If this flag is set, lat/lon/start_z fields should be
+ignored and current vehicle position should be considered as
+starting point for ascent/descent.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="follow-trajectory">
+<span id="followtrajectory"></span><h2>Follow Trajectory<a class="headerlink" href="#follow-trajectory" title="Permalink to this headline">¶</a></h2>
+<p>Maneuver constituted by a list of Trajectory Points.</p>
+<ul class="simple">
+<li>Abbreviation: FollowTrajectory</li>
+<li>Identification Number: 463</li>
+<li>Payload Size: 32+  bytes</li>
+<li>Message Size: 54+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="17%" />
+<col width="8%" />
+<col width="14%" />
+<col width="14%" />
+<col width="32%" />
+<col width="14%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Timeout</td>
+<td>timeout</td>
+<td><em>s</em></td>
+<td>uint16_t</td>
+<td>The amount of time the maneuver is allowed to run.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Latitude WGS-84</td>
+<td>lat</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>WGS-84 Latitude for start point.</td>
+<td>min=-1.5707963267948966,
+max=1.5707963267948966</td>
+</tr>
+<tr class="row-even"><td>Longitude WGS-84</td>
+<td>lon</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>WGS-84 Longitude for start point.</td>
+<td>min=-3.141592653589793,
+max=3.141592653589793</td>
+</tr>
+<tr class="row-odd"><td>Z Reference</td>
+<td>z</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Maneuver reference in the z axis. Use z_units to specify
+whether z represents depth, altitude or other.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Z Units</td>
+<td>z_units</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="Message Format.html#enum-zunits"><span class="std std-ref">Enum Z Units</span></a>)</td>
+<td>uint8_t</td>
+<td>Units of the z reference.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Speed</td>
+<td>speed</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Maneuver speed.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Speed Units</td>
+<td>speed_units</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="Message Format.html#enum-speedunits"><span class="std std-ref">Enum Speed Units</span></a>)</td>
+<td>uint8_t</td>
+<td>Speed units.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Trajectory Points</td>
+<td>points</td>
+<td><em>-</em></td>
+<td>message-list
+(<a class="reference internal" href="#trajectorypoint"><span class="std std-ref">Trajectory Point</span></a>)</td>
+<td>List of trajectory points.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Custom settings for maneuver</td>
+<td>custom</td>
+<td><em>TupleList</em></td>
+<td>plaintext</td>
+<td>Custom settings for maneuver.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="trajectory-point">
+<span id="trajectorypoint"></span><h2>Trajectory Point<a class="headerlink" href="#trajectory-point" title="Permalink to this headline">¶</a></h2>
+<p>Waypoint coordinate of a Follow Trajectory maneuver.</p>
+<ul class="simple">
+<li>Abbreviation: TrajectoryPoint</li>
+<li>Identification Number: 464</li>
+<li>Payload Size: 16 bytes</li>
+<li>Message Size: 38 bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="11%" />
+<col width="5%" />
+<col width="6%" />
+<col width="48%" />
+<col width="16%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>North Offset (m)</td>
+<td>x</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>The North offset of the North/East/Down coordinate of this
+point in relation to the trajectory start point.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>East Offset (m)</td>
+<td>y</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>The East offset of the North/East/Down coordinate of this
+point in relation to the trajectory start point.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Down Offset (m)</td>
+<td>z</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>The Down offset of the North/East/Down coordinate of this
+point in relation to the trajectory start point.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Time Offset (s)</td>
+<td>t</td>
+<td><em>s</em></td>
+<td>fp32_t</td>
+<td>The time offset relative to the previous trajectory point.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="custom-maneuver">
+<span id="custommaneuver"></span><h2>Custom Maneuver<a class="headerlink" href="#custom-maneuver" title="Permalink to this headline">¶</a></h2>
+<p>The Custom Maneuver message may be used as specification of a
+very specific maneuver not covered by the IMC scope. The
+settings of the maneuver are just its id, timeout and other
+settings encoded as a tuple list.</p>
+<ul class="simple">
+<li>Abbreviation: CustomManeuver</li>
+<li>Identification Number: 465</li>
+<li>Payload Size: 6+  bytes</li>
+<li>Message Size: 28+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="20%" />
+<col width="9%" />
+<col width="9%" />
+<col width="7%" />
+<col width="41%" />
+<col width="13%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Timeout</td>
+<td>timeout</td>
+<td><em>s</em></td>
+<td>uint16_t</td>
+<td>The amount of time the maneuver is allowed to run. If the
+maneuver is not completed in the amount of time specified an
+error will be generated.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Maneuver Name</td>
+<td>name</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>The maneuver name, used as key by an implementation to bind
+the maneuver to the corresponding controller.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Custom settings for maneuver</td>
+<td>custom</td>
+<td><em>TupleList</em></td>
+<td>plaintext</td>
+<td>Custom settings for maneuver.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="vehicle-formation">
+<span id="vehicleformation"></span><h2>Vehicle Formation<a class="headerlink" href="#vehicle-formation" title="Permalink to this headline">¶</a></h2>
+<p>Coordinate maneuver using two or more cooperating systems.</p>
+<ul class="simple">
+<li>Abbreviation: VehicleFormation</li>
+<li>Identification Number: 466</li>
+<li>Payload Size: 40+  bytes</li>
+<li>Message Size: 62+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="7%" />
+<col width="14%" />
+<col width="20%" />
+<col width="30%" />
+<col width="14%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Latitude WGS-84</td>
+<td>lat</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>WGS-84 Latitude for start point.</td>
+<td>min=-1.5707963267948966,
+max=1.5707963267948966</td>
+</tr>
+<tr class="row-odd"><td>Longitude WGS-84</td>
+<td>lon</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>WGS-84 Longitude for start point.</td>
+<td>min=-3.141592653589793,
+max=3.141592653589793</td>
+</tr>
+<tr class="row-even"><td>Z Reference</td>
+<td>z</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Maneuver reference in the z axis. Use z_units to specify
+whether z represents depth, altitude or other.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Z Units</td>
+<td>z_units</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="Message Format.html#enum-zunits"><span class="std std-ref">Enum Z Units</span></a>)</td>
+<td>uint8_t</td>
+<td>Units of the z reference.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Speed</td>
+<td>speed</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Reference speed.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Speed Units</td>
+<td>speed_units</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="Message Format.html#enum-speedunits"><span class="std std-ref">Enum Speed Units</span></a>)</td>
+<td>uint8_t</td>
+<td>Reference speed units.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Trajectory Points</td>
+<td>points</td>
+<td><em>-</em></td>
+<td>message-list
+(<a class="reference internal" href="#trajectorypoint"><span class="std std-ref">Trajectory Point</span></a>)</td>
+<td>List of trajectory points.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Formation Participants</td>
+<td>participants</td>
+<td><em>-</em></td>
+<td>message-list
+(<a class="reference internal" href="#vehicleformationparticipant"><span class="std std-ref">Vehicle Formation Participant</span></a>)</td>
+<td>List of formation participants.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Start Time</td>
+<td>start_time</td>
+<td><em>s</em></td>
+<td>fp64_t</td>
+<td>Optional start time hint for vehicle formation.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Custom settings for maneuver</td>
+<td>custom</td>
+<td><em>TupleList</em></td>
+<td>plaintext</td>
+<td>Custom settings for maneuver.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="vehicle-formation-participant">
+<span id="vehicleformationparticipant"></span><h2>Vehicle Formation Participant<a class="headerlink" href="#vehicle-formation-participant" title="Permalink to this headline">¶</a></h2>
+<p>Definition of a vehicle participant in a VehicleFormation maneuver.</p>
+<ul class="simple">
+<li>Abbreviation: VehicleFormationParticipant</li>
+<li>Identification Number: 467</li>
+<li>Payload Size: 14 bytes</li>
+<li>Message Size: 36 bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="25%" />
+<col width="10%" />
+<col width="4%" />
+<col width="7%" />
+<col width="40%" />
+<col width="14%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>ID (IMC address)</td>
+<td>vid</td>
+<td><em>-</em></td>
+<td>uint16_t</td>
+<td>IMC address of vehicle.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Formation offset – Along-track</td>
+<td>off_x</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Distance that the system must respect along the xx axis.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Formation offset – Cross-track</td>
+<td>off_y</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Distance that the system must respect along the yy axis.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Formation offset – Depth/Altitude</td>
+<td>off_z</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Distance that the system must respect along the zz axis.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="stop-maneuver">
+<span id="stopmaneuver"></span><h2>Stop Maneuver<a class="headerlink" href="#stop-maneuver" title="Permalink to this headline">¶</a></h2>
+<p>Command used to stop currently executing maneuver.</p>
+<ul class="simple">
+<li>Abbreviation: StopManeuver</li>
+<li>Identification Number: 468</li>
+<li>Payload Size: 0 bytes</li>
+<li>Message Size: 22 bytes</li>
+</ul>
+<p>This message has no fields.</p>
+</div>
+<div class="section" id="register-maneuver">
+<span id="registermaneuver"></span><h2>Register Maneuver<a class="headerlink" href="#register-maneuver" title="Permalink to this headline">¶</a></h2>
+<p>Command used to indicate maneuver can be executed in the
+vehicle.</p>
+<ul class="simple">
+<li>Abbreviation: RegisterManeuver</li>
+<li>Identification Number: 469</li>
+<li>Payload Size: 2 bytes</li>
+<li>Message Size: 24 bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="14%" />
+<col width="6%" />
+<col width="10%" />
+<col width="39%" />
+<col width="19%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Maneuver ID</td>
+<td>mid</td>
+<td><em>-</em></td>
+<td>uint16_t</td>
+<td>IMC serialization ID of maneuver type.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="maneuver-control-state">
+<span id="maneuvercontrolstate"></span><h2>Maneuver Control State<a class="headerlink" href="#maneuver-control-state" title="Permalink to this headline">¶</a></h2>
+<p>Maneuver control state.</p>
+<ul class="simple">
+<li>Abbreviation: ManeuverControlState</li>
+<li>Identification Number: 470</li>
+<li>Payload Size: 5+  bytes</li>
+<li>Message Size: 27+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="8%" />
+<col width="25%" />
+<col width="7%" />
+<col width="38%" />
+<col width="12%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>State</td>
+<td>state</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="#maneuvercontrolstate-enum-state"><span class="std std-ref">Enum State</span></a>)</td>
+<td>uint8_t</td>
+<td>Code indicating maneuver state.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Completion Time</td>
+<td>eta</td>
+<td><em>s</em></td>
+<td>uint16_t</td>
+<td>Estimated time to completion of the maneuver, when executing.
+The value will be 65535 if the time is unknown or undefined.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Info</td>
+<td>info</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>Complementary information, e.g., regarding errors.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="enum-state">
+<span id="maneuvercontrolstate-enum-prefix-mcs"></span><span id="maneuvercontrolstate-enum-state"></span><h3>Enum State<a class="headerlink" href="#enum-state" title="Permalink to this headline">¶</a></h3>
+<p>Code indicating maneuver state.</p>
+<ul class="simple">
+<li>Abbreviation: state</li>
+<li>Prefix: MCS</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="33%" />
+<col width="21%" />
+<col width="35%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0</td>
+<td>Maneuver in progress</td>
+<td>EXECUTING</td>
+<td>Maneuver in progress.</td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>Maneuver completed</td>
+<td>DONE</td>
+<td>Maneuver completed.</td>
+</tr>
+<tr class="row-even"><td>2</td>
+<td>Maneuver error</td>
+<td>ERROR</td>
+<td>Maneuver error.</td>
+</tr>
+<tr class="row-odd"><td>3</td>
+<td>Maneuver stopped</td>
+<td>STOPPED</td>
+<td>Maneuver stopped.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="follow-system">
+<span id="followsystem"></span><h2>Follow System<a class="headerlink" href="#follow-system" title="Permalink to this headline">¶</a></h2>
+<p>System-following maneuver.</p>
+<ul class="simple">
+<li>Abbreviation: FollowSystem</li>
+<li>Identification Number: 471</li>
+<li>Payload Size: 22 bytes</li>
+<li>Message Size: 44 bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="9%" />
+<col width="17%" />
+<col width="7%" />
+<col width="41%" />
+<col width="13%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>System To Follow</td>
+<td>system</td>
+<td><em>-</em></td>
+<td>uint16_t</td>
+<td>IMC address of system to follow.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Duration</td>
+<td>duration</td>
+<td><em>s</em></td>
+<td>uint16_t</td>
+<td>Duration of maneuver, 0 for unlimited duration.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Speed</td>
+<td>speed</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Reference speed.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Speed Units</td>
+<td>speed_units</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="Message Format.html#enum-speedunits"><span class="std std-ref">Enum Speed Units</span></a>)</td>
+<td>uint8_t</td>
+<td>Reference speed units.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Offset – X</td>
+<td>x</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Along-track offset.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Offset – Y</td>
+<td>y</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Cross-track offset.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Coordinate – Z</td>
+<td>z</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Coordinate z during follow maneuver. Use z_units to specify
+whether z represents depth, altitude or other.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Z Units</td>
+<td>z_units</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="Message Format.html#enum-zunits"><span class="std std-ref">Enum Z Units</span></a>)</td>
+<td>uint8_t</td>
+<td>Units of the z reference.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="communications-relay">
+<span id="commsrelay"></span><h2>Communications Relay<a class="headerlink" href="#communications-relay" title="Permalink to this headline">¶</a></h2>
+<p>In this maneuver, a vehicle drives to the center of two other
+systems (a, b) in order to be used as a communications relay.</p>
+<ul class="simple">
+<li>Abbreviation: CommsRelay</li>
+<li>Identification Number: 472</li>
+<li>Payload Size: 31 bytes</li>
+<li>Message Size: 53 bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="10%" />
+<col width="17%" />
+<col width="6%" />
+<col width="39%" />
+<col width="17%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Latitude WGS-84</td>
+<td>lat</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>WGS-84 Latitude for start point.</td>
+<td>min=-1.5707963267948966,
+max=1.5707963267948966</td>
+</tr>
+<tr class="row-odd"><td>Longitude WGS-84</td>
+<td>lon</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>WGS-84 Longitude for start point.</td>
+<td>min=-3.141592653589793,
+max=3.141592653589793</td>
+</tr>
+<tr class="row-even"><td>Speed</td>
+<td>speed</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Reference speed.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Speed Units</td>
+<td>speed_units</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="Message Format.html#enum-speedunits"><span class="std std-ref">Enum Speed Units</span></a>)</td>
+<td>uint8_t</td>
+<td>Reference speed units.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Duration</td>
+<td>duration</td>
+<td><em>s</em></td>
+<td>uint16_t</td>
+<td>Duration of maneuver, 0 for unlimited duration.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>System A</td>
+<td>sys_a</td>
+<td><em>-</em></td>
+<td>uint16_t</td>
+<td>The IMC id of the system A.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>System B</td>
+<td>sys_b</td>
+<td><em>-</em></td>
+<td>uint16_t</td>
+<td>The IMC id of the system B.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Move threshold</td>
+<td>move_threshold</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Move only if the distance to the target is bigger than this
+threshold.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="cover-area">
+<span id="coverarea"></span><h2>Cover Area<a class="headerlink" href="#cover-area" title="Permalink to this headline">¶</a></h2>
+<p>Given a polygonal area, generates trajectories to cover the
+area.</p>
+<ul class="simple">
+<li>Abbreviation: CoverArea</li>
+<li>Identification Number: 473</li>
+<li>Payload Size: 30+  bytes</li>
+<li>Message Size: 52+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="8%" />
+<col width="16%" />
+<col width="14%" />
+<col width="35%" />
+<col width="16%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Latitude WGS-84</td>
+<td>lat</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>WGS-84 Latitude for start point.</td>
+<td>min=-1.5707963267948966,
+max=1.5707963267948966</td>
+</tr>
+<tr class="row-odd"><td>Longitude WGS-84</td>
+<td>lon</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>WGS-84 Longitude for start point.</td>
+<td>min=-3.141592653589793,
+max=3.141592653589793</td>
+</tr>
+<tr class="row-even"><td>Z Reference</td>
+<td>z</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Maneuver reference in the z axis. Use z_units to specify
+whether z represents depth, altitude or other.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Z Units</td>
+<td>z_units</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="Message Format.html#enum-zunits"><span class="std std-ref">Enum Z Units</span></a>)</td>
+<td>uint8_t</td>
+<td>Units of the z reference.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Speed</td>
+<td>speed</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Reference speed.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Speed Units</td>
+<td>speed_units</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="Message Format.html#enum-speedunits"><span class="std std-ref">Enum Speed Units</span></a>)</td>
+<td>uint8_t</td>
+<td>Reference speed units.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Polygon</td>
+<td>polygon</td>
+<td><em>-</em></td>
+<td>message-list
+(<a class="reference internal" href="#polygonvertex"><span class="std std-ref">Polygon Vertex</span></a>)</td>
+<td>Message list of type PolygonVertex.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>CustomParameters</td>
+<td>custom</td>
+<td><em>TupleList</em></td>
+<td>plaintext</td>
+<td>Additional parameters to be used by the controller.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="polygon-vertex">
+<span id="polygonvertex"></span><h2>Polygon Vertex<a class="headerlink" href="#polygon-vertex" title="Permalink to this headline">¶</a></h2>
+<p>This message is used to store the various polygon vertices for
+CoverArea maneuvers.</p>
+<ul class="simple">
+<li>Abbreviation: PolygonVertex</li>
+<li>Identification Number: 474</li>
+<li>Payload Size: 16 bytes</li>
+<li>Message Size: 38 bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="17%" />
+<col width="13%" />
+<col width="6%" />
+<col width="7%" />
+<col width="32%" />
+<col width="24%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Latitude WGS-84</td>
+<td>lat</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>WGS-84 Latitude for start point.</td>
+<td>min=-1.5707963267948966,
+max=1.5707963267948966</td>
+</tr>
+<tr class="row-odd"><td>Longitude WGS-84</td>
+<td>lon</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>WGS-84 Longitude for start point.</td>
+<td>min=-3.141592653589793,
+max=3.141592653589793</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="compass-calibration-maneuver">
+<span id="compasscalibration"></span><h2>Compass Calibration Maneuver<a class="headerlink" href="#compass-calibration-maneuver" title="Permalink to this headline">¶</a></h2>
+<p>This maneuver is a mix between the Loiter maneuver and the YoYo maneuver.
+The vehicle cirlcles around a specific waypoint with a variable Z
+reference between a minimum and maximum value.</p>
+<ul class="simple">
+<li>Abbreviation: CompassCalibration</li>
+<li>Identification Number: 475</li>
+<li>Payload Size: 45+  bytes</li>
+<li>Message Size: 67+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="7%" />
+<col width="23%" />
+<col width="6%" />
+<col width="36%" />
+<col width="13%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Timeout</td>
+<td>timeout</td>
+<td><em>s</em></td>
+<td>uint16_t</td>
+<td>The timeout indicates the time that an error should occur if
+exceeded.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Latitude WGS-84</td>
+<td>lat</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>WGS-84 Latitude coordinate.</td>
+<td>min=-1.5707963267948966,
+max=1.5707963267948966</td>
+</tr>
+<tr class="row-even"><td>Longitude WGS-84</td>
+<td>lon</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>WGS-84 Longitude coordinate.</td>
+<td>min=-3.141592653589793,
+max=3.141592653589793</td>
+</tr>
+<tr class="row-odd"><td>Z Reference</td>
+<td>z</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Maneuver reference in the z axis. Use z_units to specify
+whether z represents depth, altitude or other.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Z Units</td>
+<td>z_units</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="Message Format.html#enum-zunits"><span class="std std-ref">Enum Z Units</span></a>)</td>
+<td>uint8_t</td>
+<td>Units of the z reference.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Pitch</td>
+<td>pitch</td>
+<td><em>rad</em></td>
+<td>fp32_t</td>
+<td>Pitch angle used to perform the maneuver.</td>
+<td>min=-1.5707963267948966,
+max=1.5707963267948966</td>
+</tr>
+<tr class="row-even"><td>Amplitude</td>
+<td>amplitude</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Yoyo motion amplitude.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Duration</td>
+<td>duration</td>
+<td><em>s</em></td>
+<td>uint16_t</td>
+<td>The duration of this maneuver. Use ‘0’ for unlimited duration time.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Speed</td>
+<td>speed</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Maneuver speed.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Speed Units</td>
+<td>speed_units</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="Message Format.html#enum-speedunits"><span class="std std-ref">Enum Speed Units</span></a>)</td>
+<td>uint8_t</td>
+<td>Speed units.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Radius</td>
+<td>radius</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Radius of the maneuver.</td>
+<td>min=1,
+max=100000</td>
+</tr>
+<tr class="row-odd"><td>Direction</td>
+<td>direction</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="#compasscalibration-enum-direction"><span class="std std-ref">Enum Direction</span></a>)</td>
+<td>uint8_t</td>
+<td>Direction of the maneuver.</td>
+<td>max=3</td>
+</tr>
+<tr class="row-even"><td>Custom settings for maneuver</td>
+<td>custom</td>
+<td><em>TupleList</em></td>
+<td>plaintext</td>
+<td>Custom settings for maneuver.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="compasscalibration-enum-prefix-ld">
+<span id="compasscalibration-enum-direction"></span><span id="id3"></span><h3>Enum Direction<a class="headerlink" href="#compasscalibration-enum-prefix-ld" title="Permalink to this headline">¶</a></h3>
+<p>Direction of the maneuver.</p>
+<ul class="simple">
+<li>Abbreviation: direction</li>
+<li>Prefix: LD</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="40%" />
+<col width="25%" />
+<col width="23%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0</td>
+<td>Vehicle Dependent</td>
+<td>VDEP</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>Clockwise</td>
+<td>CLOCKW</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-even"><td>2</td>
+<td>Counter Clockwise</td>
+<td>CCLOCKW</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>3</td>
+<td>Into the wind/current</td>
+<td>IWINDCURR</td>
+<td><em>-</em></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="formation-parameters">
+<span id="formationparameters"></span><h2>Formation Parameters<a class="headerlink" href="#formation-parameters" title="Permalink to this headline">¶</a></h2>
+<p>A “Formation” is defined by the relative positions of the vehicles
+inside the formation, and the reference frame where this positions are defined.</p>
+<p>The formation reference frame may be:
+- Earth Fixed: Where the vehicles relative position do not depend on the followed path.
+This results in all UAVs following the same path with an offset relative to each other;
+- Path Fixed:  Where the vehicles relative position depends on the followed path,
+changing the inter-vehicle offset direction with the path direction.
+- Path Curved:  Where the vehicles relative position depends on the followed path,
+changing the inter-vehicle offset direction with the path direction and direction
+change rate.
+An offset in the xx axis results in a distance over the curved path line.
+An offset in the yy axis results in an offset of the vehicle path line relative to the
+formation center path line.</p>
+<ul class="simple">
+<li>Abbreviation: FormationParameters</li>
+<li>Identification Number: 476</li>
+<li>Payload Size: 7+  bytes</li>
+<li>Message Size: 29+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="8%" />
+<col width="25%" />
+<col width="18%" />
+<col width="24%" />
+<col width="10%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Formation Name</td>
+<td>formation_name</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>Name of the formation configuration.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Formation Reference Frame</td>
+<td>reference_frame</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="#formationparameters-enum-reference-frame"><span class="std std-ref">Enum Formation Reference Frame</span></a>)</td>
+<td>uint8_t</td>
+<td>Formation reference frame</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Formation Participants</td>
+<td>participants</td>
+<td><em>-</em></td>
+<td>message-list
+(<a class="reference internal" href="#vehicleformationparticipant"><span class="std std-ref">Vehicle Formation Participant</span></a>)</td>
+<td>List of formation participants.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Custom settings for formation</td>
+<td>custom</td>
+<td><em>TupleList</em></td>
+<td>plaintext</td>
+<td>Custom settings for the formation configuration.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="enum-formation-reference-frame">
+<span id="formationparameters-enum-prefix-op"></span><span id="formationparameters-enum-reference-frame"></span><h3>Enum Formation Reference Frame<a class="headerlink" href="#enum-formation-reference-frame" title="Permalink to this headline">¶</a></h3>
+<p>Formation reference frame</p>
+<ul class="simple">
+<li>Abbreviation: reference_frame</li>
+<li>Prefix: OP</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="28%" />
+<col width="30%" />
+<col width="28%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0</td>
+<td>Earth Fixed</td>
+<td>EARTH_FIXED</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>Path Fixed</td>
+<td>PATH_FIXED</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-even"><td>2</td>
+<td>Path Curved</td>
+<td>PATH_CURVED</td>
+<td><em>-</em></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="formation-plan-execution">
+<span id="formationplanexecution"></span><h2>Formation Plan Execution<a class="headerlink" href="#formation-plan-execution" title="Permalink to this headline">¶</a></h2>
+<p>A “Formation Plan” is a maneuver specifying a plan for a team of vehicles.
+The maneuver defines:
+- Vehicles included in the formation group
+- Formation shape configuration
+- Plan (set of maneuvers) to be followed by the formation center
+- Speed at which that plan is followed
+- Path contrains (virtual leader bank limit)
+- Supervision settings</p>
+<ul class="simple">
+<li>Abbreviation: FormationPlanExecution</li>
+<li>Identification Number: 477</li>
+<li>Payload Size: 40+  bytes</li>
+<li>Message Size: 62+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="17%" />
+<col width="10%" />
+<col width="6%" />
+<col width="5%" />
+<col width="52%" />
+<col width="9%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Target Group Name</td>
+<td>group_name</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>Target group for the formation plan.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Formation Name</td>
+<td>formation_name</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>Name of the formation configuration.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Formation Plan ID</td>
+<td>plan_id</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>The flight plan’s identifier.
+Flight plan defined to be tracked by the formation leader.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Plan Description</td>
+<td>description</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>Verbose text description of plan.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Formation Leader Flight Airspeed</td>
+<td>leader_speed</td>
+<td><em>m/s</em></td>
+<td>fp32_t</td>
+<td>Formation leader flight airspeed during the plan tracking.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Formation leader flight bank limit</td>
+<td>leader_bank_lim</td>
+<td><em>m/s</em></td>
+<td>fp32_t</td>
+<td>Formation leader flight bank limit during the plan tracking.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Position mismatch limit</td>
+<td>pos_sim_err_lim</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Limit for the position mismatch between real and simulated position, before a maneuver abort is asserted.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Position mismatch threshold</td>
+<td>pos_sim_err_wrn</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Warning threshold for the position mismatch between real and simulated position.
+Above this threshold a time-out limit is evaluated to assert a maneuver abort state.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Position mismatch time-out</td>
+<td>pos_sim_err_timeout</td>
+<td><em>s</em></td>
+<td>uint16_t</td>
+<td>The amount of time the maneuver is allowed to run after the position mismatch threshold is surpassed.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Convergence threshold</td>
+<td>converg_max</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Threshold for the convergence measure, above which a time-out limit
+is evaluated to assert a maneuver abort state.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Convergence time-out</td>
+<td>converg_timeout</td>
+<td><em>s</em></td>
+<td>uint16_t</td>
+<td>The amount of time the maneuver is allowed to run after the convergence threshold is surpassed.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Communications time-out</td>
+<td>comms_timeout</td>
+<td><em>s</em></td>
+<td>uint16_t</td>
+<td>The amount of time the maneuver is allowed to run without any update on the other formation vehicles states.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Turbulence limit</td>
+<td>turb_lim</td>
+<td><em>m/s</em></td>
+<td>fp32_t</td>
+<td>Turbulence limit above which a maneuver abort is asserted.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Custom settings for maneuver</td>
+<td>custom</td>
+<td><em>TupleList</em></td>
+<td>plaintext</td>
+<td>Custom settings for maneuver.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="follow-reference-maneuver">
+<span id="followreference"></span><h2>Follow Reference Maneuver<a class="headerlink" href="#follow-reference-maneuver" title="Permalink to this headline">¶</a></h2>
+<p>This maneuver follows a reference given by an external entity.</p>
+<ul class="simple">
+<li>Abbreviation: FollowReference</li>
+<li>Identification Number: 478</li>
+<li>Payload Size: 15 bytes</li>
+<li>Message Size: 37 bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="10%" />
+<col width="3%" />
+<col width="5%" />
+<col width="59%" />
+<col width="10%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Controlling Source</td>
+<td>control_src</td>
+<td><em>-</em></td>
+<td>uint16_t</td>
+<td>The IMC identifier of the source system that is allowed to provide references to this maneuver.
+If the value ‘‘0xFFFF’’ is used, any system is allowed to command references.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Controlling Entity</td>
+<td>control_ent</td>
+<td><em>-</em></td>
+<td>uint8_t</td>
+<td>The entity identifier of the entity that is allowed to provide references to this maneuver.
+If the value ‘‘0xFF’’ is used, any entity is allowed to command references.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Reference Update Timeout</td>
+<td>timeout</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>The ammount of time, in seconds, after which the maneuver will be terminated if no reference has
+been received. In other words, the controlling entity should send reference updates in shorter periods than
+‘timeout’.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Loiter Radius</td>
+<td>loiter_radius</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Whenever an intended reference is achieved, this maneuver will maintain the vehicle in vaticiny of that
+location. The loiter radius is used to define the radius of this (xy) area.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Altitude Interval</td>
+<td>altitude_interval</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Similarly to Loiter Radius, this field is used to define the “z” distance considered to be inside the vacitiny of
+the target location. An AUV may, for instance, be floating until it more than z units above the current reference,
+in which case it actively changes its position in order to achieve the desired depth / altitude.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="reference-to-follow">
+<span id="reference"></span><h2>Reference To Follow<a class="headerlink" href="#reference-to-follow" title="Permalink to this headline">¶</a></h2>
+<p>No description</p>
+<ul class="simple">
+<li>Abbreviation: Reference</li>
+<li>Identification Number: 479</li>
+<li>Payload Size: 39 bytes</li>
+<li>Message Size: 61 bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="17%" />
+<col width="11%" />
+<col width="28%" />
+<col width="18%" />
+<col width="10%" />
+<col width="16%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Flags</td>
+<td>flags</td>
+<td><em>Bitfield</em>
+(<a class="reference internal" href="#reference-bitfield-flags"><span class="std std-ref">Bitfield Flags</span></a>)</td>
+<td>uint8_t</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Speed Reference</td>
+<td>speed</td>
+<td><em>-</em></td>
+<td>message
+(<a class="reference internal" href="Guidance.html#desiredspeed"><span class="std std-ref">Desired Speed</span></a>)</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Z Reference</td>
+<td>z</td>
+<td><em>-</em></td>
+<td>message
+(<a class="reference internal" href="Guidance.html#desiredz"><span class="std std-ref">Desired Z</span></a>)</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Latitude Reference</td>
+<td>lat</td>
+<td><em>-</em></td>
+<td>fp64_t</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Longitude Reference</td>
+<td>lon</td>
+<td><em>-</em></td>
+<td>fp64_t</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Radius</td>
+<td>radius</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="reference-bitfield-prefix-flag">
+<span id="reference-bitfield-flags"></span><span id="id4"></span><h3>Bitfield Flags<a class="headerlink" href="#reference-bitfield-prefix-flag" title="Permalink to this headline">¶</a></h3>
+<p>No description</p>
+<ul class="simple">
+<li>Abbreviation: flags</li>
+<li>Prefix: FLAG</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="8%" />
+<col width="63%" />
+<col width="15%" />
+<col width="14%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0x01</td>
+<td>Use Location Reference</td>
+<td>LOCATION</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>0x02</td>
+<td>Use Speed Reference</td>
+<td>SPEED</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-even"><td>0x04</td>
+<td>Use Z Reference</td>
+<td>Z</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>0x08</td>
+<td>Use Radius Reference</td>
+<td>RADIUS</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-even"><td>0x10</td>
+<td>Use this Reference as Start Position for PathControler</td>
+<td>START_POINT</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>0x20</td>
+<td>Use Current Position as Start Position for PathControler</td>
+<td>DIRECT</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-even"><td>0x80</td>
+<td>Flag Maneuver Completion</td>
+<td>MANDONE</td>
+<td><em>-</em></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="follow-reference-state">
+<span id="followrefstate"></span><h2>Follow Reference State<a class="headerlink" href="#follow-reference-state" title="Permalink to this headline">¶</a></h2>
+<p>No description</p>
+<ul class="simple">
+<li>Abbreviation: FollowRefState</li>
+<li>Identification Number: 480</li>
+<li>Payload Size: 46 bytes</li>
+<li>Message Size: 68 bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="7%" />
+<col width="22%" />
+<col width="10%" />
+<col width="41%" />
+<col width="10%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Controlling Source</td>
+<td>control_src</td>
+<td><em>-</em></td>
+<td>uint16_t</td>
+<td>The IMC identifier of the source system that is allowed to control the vehicle.
+If the value ‘‘0xFFFF’’ is used, any system is allowed to command references.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Controlling Entity</td>
+<td>control_ent</td>
+<td><em>-</em></td>
+<td>uint8_t</td>
+<td>The entity identifier of the entity that is allowed to control the vehicle.
+If the value ‘‘0xFF’’ is used, any entity is allowed to command references.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Reference</td>
+<td>reference</td>
+<td><em>-</em></td>
+<td>message
+(<a class="reference internal" href="#reference"><span class="std std-ref">Reference To Follow</span></a>)</td>
+<td>Reference currently being followed.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>State</td>
+<td>state</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="#followrefstate-enum-state"><span class="std std-ref">Enum State</span></a>)</td>
+<td>uint8_t</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Proximity</td>
+<td>proximity</td>
+<td><em>Bitfield</em>
+(<a class="reference internal" href="#followrefstate-bitfield-proximity"><span class="std std-ref">Bitfield Proximity</span></a>)</td>
+<td>uint8_t</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="followrefstate-enum-prefix-fr">
+<span id="followrefstate-enum-state"></span><span id="id5"></span><h3>Enum State<a class="headerlink" href="#followrefstate-enum-prefix-fr" title="Permalink to this headline">¶</a></h3>
+<p>No description</p>
+<ul class="simple">
+<li>Abbreviation: state</li>
+<li>Prefix: FR</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="8%" />
+<col width="60%" />
+<col width="16%" />
+<col width="15%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>1</td>
+<td>Waiting for first reference</td>
+<td>WAIT</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>2</td>
+<td>Going towards received reference</td>
+<td>GOTO</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-even"><td>3</td>
+<td>Loitering after arriving at the reference</td>
+<td>LOITER</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>4</td>
+<td>Hovering after arriving at the reference</td>
+<td>HOVER</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-even"><td>5</td>
+<td>Moving in z after arriving at the target cylinder</td>
+<td>ELEVATOR</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>6</td>
+<td>Controlling system timed out</td>
+<td>TIMEOUT</td>
+<td><em>-</em></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="bitfield-proximity">
+<span id="followrefstate-bitfield-prefix-prox"></span><span id="followrefstate-bitfield-proximity"></span><h3>Bitfield Proximity<a class="headerlink" href="#bitfield-proximity" title="Permalink to this headline">¶</a></h3>
+<p>No description</p>
+<ul class="simple">
+<li>Abbreviation: proximity</li>
+<li>Prefix: PROX</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="51%" />
+<col width="22%" />
+<col width="18%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0x01</td>
+<td>Far from the destination</td>
+<td>FAR</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>0x02</td>
+<td>Near in the horizontal plane</td>
+<td>XY_NEAR</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-even"><td>0x04</td>
+<td>Near in the vertical plane</td>
+<td>Z_NEAR</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>0x08</td>
+<td>Unreachable in the horizontal plane</td>
+<td>XY_UNREACHABLE</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-even"><td>0x10</td>
+<td>Unreachable in the vertical plane</td>
+<td>Z_UNREACHABLE</td>
+<td><em>-</em></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="formation-monitoring-data">
+<span id="formationmonitor"></span><h2>Formation Monitoring Data<a class="headerlink" href="#formation-monitoring-data" title="Permalink to this headline">¶</a></h2>
+<p>Monitoring variables for the formation state and performance.</p>
+<ul class="simple">
+<li>Abbreviation: FormationMonitor</li>
+<li>Identification Number: 481</li>
+<li>Payload Size: 74+  bytes</li>
+<li>Message Size: 96+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="20%" />
+<col width="8%" />
+<col width="3%" />
+<col width="13%" />
+<col width="45%" />
+<col width="11%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Commanded X Acceleration (North)</td>
+<td>ax_cmd</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Commanded acceleration computed by the formation controller: northward direction.
+On the vehicle directional reference frame.
+Constrained by the vehicle operational limits.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Commanded Y Acceleration (East)</td>
+<td>ay_cmd</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Commanded acceleration computed by the formation controller: eastward direction.
+On the vehicle directional reference frame.
+Constrained by the vehicle operational limits.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Commanded Z Acceleration (Down)</td>
+<td>az_cmd</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Commanded acceleration computed by the formation controller: downward direction.
+On the vehicle directional reference frame.
+Constrained by the vehicle operational limits.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Desired X Acceleration (North)</td>
+<td>ax_des</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Desired acceleration computed by the formation controller: northward direction.
+On the fixed reference frame.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Desired Y Acceleration (East)</td>
+<td>ay_des</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Desired acceleration computed by the formation controller: eastward direction.
+On the fixed reference frame.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Desired Z Acceleration (Down)</td>
+<td>az_des</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Desired acceleration computed by the formation controller: downward direction.
+On the fixed reference frame.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>X Virtual Error (North)</td>
+<td>virt_err_x</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Components of the vehicle desired acceleration.
+Overall formation combined virtual error: northward direction.
+On the fixed reference frame.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Y Virtual Error (East)</td>
+<td>virt_err_y</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Components of the vehicle desired acceleration.
+Overall formation combined virtual error: eastward direction.
+On the fixed reference frame.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Z Virtual Error (Down)</td>
+<td>virt_err_z</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Components of the vehicle desired acceleration.
+Overall formation combined virtual error: downward direction.
+On the fixed reference frame.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>X Sliding Surface Feedback (North)</td>
+<td>surf_fdbk_x</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Components of the vehicle desired acceleration.
+Overall formation combined sliding surface feedback: northward direction.
+On the fixed reference frame.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Y Sliding Surface Feedback (East)</td>
+<td>surf_fdbk_y</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Components of the vehicle desired acceleration.
+Overall formation combined sliding surface feedback: eastward direction.
+On the fixed reference frame.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Z Sliding Surface Feedback (Down)</td>
+<td>surf_fdbk_z</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Components of the vehicle desired acceleration.
+Overall formation combined sliding surface feedback: downward direction.
+On the fixed reference frame.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>X Uncertainty Compensation (North)</td>
+<td>surf_unkn_x</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Components of the vehicle desired acceleration.
+Dynamics uncertainty compensation: northward direction.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Y Uncertainty Compensation (East)</td>
+<td>surf_unkn_y</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Components of the vehicle desired acceleration.
+Dynamics uncertainty compensation: eastward direction.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Z Uncertainty Compensation (Down)</td>
+<td>surf_unkn_z</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Components of the vehicle desired acceleration.
+Dynamics uncertainty compensation: downward direction.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>X Convergence Deviation (North)</td>
+<td>ss_x</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Combined deviation from convergence (sliding surface): North component.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Y Convergence Deviation (East)</td>
+<td>ss_y</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Combined deviation from convergence (sliding surface): East component.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Z Convergence Deviation (Down)</td>
+<td>ss_z</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Combined deviation from convergence (sliding surface): Down component.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Relative State</td>
+<td>rel_state</td>
+<td><em>-</em></td>
+<td>message-list
+(<a class="reference internal" href="#relativestate"><span class="std std-ref">Relative State</span></a>)</td>
+<td>List of RelativeState messages, encoding the inter-vehicle formation state.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="relative-state">
+<span id="relativestate"></span><h2>Relative State<a class="headerlink" href="#relative-state" title="Permalink to this headline">¶</a></h2>
+<p>Inter-vehicle formation state.</p>
+<ul class="simple">
+<li>Abbreviation: RelativeState</li>
+<li>Identification Number: 482</li>
+<li>Payload Size: 86+  bytes</li>
+<li>Message Size: 108+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="23%" />
+<col width="7%" />
+<col width="3%" />
+<col width="6%" />
+<col width="51%" />
+<col width="10%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>System Identifier</td>
+<td>s_id</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>The identifier of the vehicle whose relative state is being reported.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Distance</td>
+<td>dist</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Distance between vehicles.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Position Error</td>
+<td>err</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Relative position error norm.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Control Importance</td>
+<td>ctrl_imp</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Weight in the computation of the desired acceleration.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Relative Direction X (North)</td>
+<td>rel_dir_x</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Inter-vehicle direction vector: North component.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Relative Direction Y (East)</td>
+<td>rel_dir_y</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Inter-vehicle direction vector: East component.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Relative Direction Z (Down)</td>
+<td>rel_dir_z</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Inter-vehicle direction vector: Down component.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>X Position Error (North)</td>
+<td>err_x</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Relative position error: North component.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Y Position Error (East)</td>
+<td>err_y</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Relative position error: East component.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Z Position Error (Down)</td>
+<td>err_z</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Relative position error: Down component.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>X Position Error In Relative Frame (North)</td>
+<td>rf_err_x</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Relative position error: X component on the inter-vehicle reference frame.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Y Position Error In Relative Frame (East)</td>
+<td>rf_err_y</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Relative position error: Y component on the inter-vehicle reference frame.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Z Position Error In Relative Frame (Down)</td>
+<td>rf_err_z</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Relative position error: Z component on the inter-vehicle reference frame.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>X Velocity Error In Relative Frame (North)</td>
+<td>rf_err_vx</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Relative veloctity error: X component in the inter-vehicle reference frame.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Y Velocity Error In Relative Frame (East)</td>
+<td>rf_err_vy</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Relative velocity error: Y component on the inter-vehicle reference frame.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Z Velocity Error In Relative Frame (Down)</td>
+<td>rf_err_vz</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Relative velocity error: Z component on the inter-vehicle reference frame.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>X Convergence Deviation (North)</td>
+<td>ss_x</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Deviation from convergence (sliding surface): X component on the inter-vehicle reference frame.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Y Convergence Deviation (East)</td>
+<td>ss_y</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Deviation from convergence (sliding surface): Y component on the inter-vehicle reference frame.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Z Convergence Deviation (Down)</td>
+<td>ss_z</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Deviation from convergence (sliding surface): Z component on the inter-vehicle reference frame.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>X Virtual Error (North)</td>
+<td>virt_err_x</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Components of the vehicle desired acceleration.
+Relative virtual error: northward direction.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Y Virtual Error (East)</td>
+<td>virt_err_y</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Components of the vehicle desired acceleration.
+Relative virtual error: eastward direction.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Z Virtual Error (Down)</td>
+<td>virt_err_z</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Components of the vehicle desired acceleration.
+Relative virtual error: downward direction.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="dislodge-maneuver">
+<span id="dislodge"></span><h2>Dislodge Maneuver<a class="headerlink" href="#dislodge-maneuver" title="Permalink to this headline">¶</a></h2>
+<p>A “Dislodge” is a maneuver ordering the vehicle to attempt a
+series of thruster operations that will hopefully get it
+unstuck from an entangled condition.</p>
+<p>Parameters are RPMs for the motor when attempting dislodge and
+and a flag specifying whether the thrust burst should be attempted
+forward, backward or auto (letting the vehicle decide).</p>
+<ul class="simple">
+<li>Abbreviation: Dislodge</li>
+<li>Identification Number: 483</li>
+<li>Payload Size: 9+  bytes</li>
+<li>Message Size: 31+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="18%" />
+<col width="8%" />
+<col width="20%" />
+<col width="7%" />
+<col width="35%" />
+<col width="12%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Timeout</td>
+<td>timeout</td>
+<td><em>s</em></td>
+<td>uint16_t</td>
+<td>The amount of time the maneuver is allowed to run.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>RPM</td>
+<td>rpm</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Maneuver RPM reference.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Direction</td>
+<td>direction</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="#dislodge-enum-direction"><span class="std std-ref">Enum Direction</span></a>)</td>
+<td>uint8_t</td>
+<td>Direction to which the vehicle should attempt to unstuck.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Custom settings for maneuver</td>
+<td>custom</td>
+<td><em>TupleList</em></td>
+<td>plaintext</td>
+<td>Custom settings for maneuver.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="dislodge-enum-prefix-dir">
+<span id="dislodge-enum-direction"></span><span id="id6"></span><h3>Enum Direction<a class="headerlink" href="#dislodge-enum-prefix-dir" title="Permalink to this headline">¶</a></h3>
+<p>Direction to which the vehicle should attempt to unstuck.</p>
+<ul class="simple">
+<li>Abbreviation: direction</li>
+<li>Prefix: DIR</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="43%" />
+<col width="23%" />
+<col width="22%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0</td>
+<td>Let the vehicle decide</td>
+<td>AUTO</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>Attempt to move forward</td>
+<td>FORWARD</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-even"><td>2</td>
+<td>Attempt to move backward</td>
+<td>BACKWARD</td>
+<td><em>-</em></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="formation">
+<span id="id7"></span><h2>Formation<a class="headerlink" href="#formation" title="Permalink to this headline">¶</a></h2>
+<p>The “Formation” is a controller to execute a maneuver with a team of vehicles.
+It defines the:
+- Vehicles included in the formation group
+- Vehicles relative positions inside the formation
+- Reference frame where the relative positions are defined
+- Formation shape configuration
+- Plan (set of maneuvers) to be followed by the formation center
+- Plan contrains (virtual leader speed and bank limits)
+- Supervision settings</p>
+<p>The formation reference frame may be:
+- Earth Fixed: Where the vehicles relative position do not depend on the followed path.
+This results in all UAVs following the same path with an offset relative to each other;
+- Path Fixed:  Where the vehicles relative position depends on the followed path,
+changing the inter-vehicle offset direction with the path direction.
+- Path Curved:  Where the vehicles relative position depends on the followed path,
+changing the inter-vehicle offset direction with the path direction and direction
+change rate.
+An offset in the xx axis results in a distance over the curved path line.
+An offset in the yy axis results in an offset of the vehicle path line relative to the
+formation center path line.</p>
+<ul class="simple">
+<li>Abbreviation: Formation</li>
+<li>Identification Number: 484</li>
+<li>Payload Size: 57+  bytes</li>
+<li>Message Size: 79+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="8%" />
+<col width="15%" />
+<col width="14%" />
+<col width="42%" />
+<col width="8%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Formation Name</td>
+<td>formation_name</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>Name of the formation configuration.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Type</td>
+<td>type</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="#formation-enum-type"><span class="std std-ref">Enum Type</span></a>)</td>
+<td>uint8_t</td>
+<td>Indicates if the message is a request, or a reply to a previous request.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Operation</td>
+<td>op</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="#formation-enum-op"><span class="std std-ref">Enum Operation</span></a>)</td>
+<td>uint8_t</td>
+<td>Operation to perform.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Target Group Name</td>
+<td>group_name</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>Target group for the formation plan.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Formation Plan ID</td>
+<td>plan_id</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>The flight plan’s identifier.
+Flight plan defined to be tracked by the formation leader.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Plan Description</td>
+<td>description</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>Verbose text description of plan.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Formation Reference Frame</td>
+<td>reference_frame</td>
+<td><em>Enumerated</em>
+(<span class="xref std std-ref">Formation-enum-reference_frame</span>)</td>
+<td>uint8_t</td>
+<td>Formation reference frame</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Formation Participants</td>
+<td>participants</td>
+<td><em>-</em></td>
+<td>message-list
+(<a class="reference internal" href="#vehicleformationparticipant"><span class="std std-ref">Vehicle Formation Participant</span></a>)</td>
+<td>List of formation participants.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Formation Leader Bank Limit</td>
+<td>leader_bank_lim</td>
+<td><em>rad</em></td>
+<td>fp32_t</td>
+<td>Maximum absolute bank allowed for the formation leader.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Formation Leader Minimum Speed</td>
+<td>leader_speed_min</td>
+<td><em>m/s</em></td>
+<td>fp32_t</td>
+<td>Minimum speed allowed for the formation leader flight.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Formation Leader Maximum Speed</td>
+<td>leader_speed_max</td>
+<td><em>m/s</em></td>
+<td>fp32_t</td>
+<td>Maximum speed allowed for the formation leader flight.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Formation Leader Minimum Altitude</td>
+<td>leader_alt_min</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Minimum altitude allowed for the formation leader flight.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Formation Leader Maximum Altitude</td>
+<td>leader_alt_max</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Maximum altitude allowed for the formation leader flight.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Position mismatch limit</td>
+<td>pos_sim_err_lim</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Limit for the position mismatch between real and simulated position, before a maneuver abort is asserted.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Position mismatch threshold</td>
+<td>pos_sim_err_wrn</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Warning threshold for the position mismatch between real and simulated position.
+Above this threshold a time-out limit is evaluated to assert a maneuver abort state.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Position mismatch time-out</td>
+<td>pos_sim_err_timeout</td>
+<td><em>s</em></td>
+<td>uint16_t</td>
+<td>The amount of time the maneuver is allowed to run after the position mismatch threshold is surpassed.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Convergence threshold</td>
+<td>converg_max</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Threshold for the convergence measure, above which a time-out limit
+is evaluated to assert a maneuver abort state.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Convergence time-out</td>
+<td>converg_timeout</td>
+<td><em>s</em></td>
+<td>uint16_t</td>
+<td>The amount of time the maneuver is allowed to run after the convergence threshold is surpassed.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Communications time-out</td>
+<td>comms_timeout</td>
+<td><em>s</em></td>
+<td>uint16_t</td>
+<td>The amount of time the maneuver is allowed to run without any update on the other formation vehicles states.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Turbulence limit</td>
+<td>turb_lim</td>
+<td><em>m/s</em></td>
+<td>fp32_t</td>
+<td>Turbulence limit above which a maneuver abort is asserted.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Custom settings for maneuver</td>
+<td>custom</td>
+<td><em>TupleList</em></td>
+<td>plaintext</td>
+<td>Custom settings for maneuver.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="enum-type">
+<span id="formation-enum-prefix-fc"></span><span id="formation-enum-type"></span><h3>Enum Type<a class="headerlink" href="#enum-type" title="Permalink to this headline">¶</a></h3>
+<p>Indicates if the message is a request, or a reply to a previous request.</p>
+<ul class="simple">
+<li>Abbreviation: type</li>
+<li>Prefix: FC</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="21%" />
+<col width="33%" />
+<col width="30%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0</td>
+<td>Request</td>
+<td>REQUEST</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>Report</td>
+<td>REPORT</td>
+<td><em>-</em></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="enum-operation">
+<span id="formation-enum-prefix-op"></span><span id="formation-enum-op"></span><h3>Enum Operation<a class="headerlink" href="#enum-operation" title="Permalink to this headline">¶</a></h3>
+<p>Operation to perform.</p>
+<ul class="simple">
+<li>Abbreviation: op</li>
+<li>Prefix: OP</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="17%" />
+<col width="22%" />
+<col width="49%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0</td>
+<td>Start</td>
+<td>START</td>
+<td>Start the formation maneuver.</td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>Stop</td>
+<td>STOP</td>
+<td>Stop the formation maneuver.</td>
+</tr>
+<tr class="row-even"><td>2</td>
+<td>Ready</td>
+<td>READY</td>
+<td>Stop the formation maneuver.</td>
+</tr>
+<tr class="row-odd"><td>3</td>
+<td>Executing</td>
+<td>EXECUTING</td>
+<td>Stop the formation maneuver.</td>
+</tr>
+<tr class="row-even"><td>4</td>
+<td>Failure</td>
+<td>FAILURE</td>
+<td>Stop the formation maneuver.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id8">
+<span id="id9"></span><h3>Enum Formation Reference Frame<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+<p>Formation reference frame</p>
+<ul class="simple">
+<li>Abbreviation: reference_frame</li>
+<li>Prefix: OP</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="28%" />
+<col width="30%" />
+<col width="28%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0</td>
+<td>Earth Fixed</td>
+<td>EARTH_FIXED</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>Path Fixed</td>
+<td>PATH_FIXED</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-even"><td>2</td>
+<td>Path Curved</td>
+<td>PATH_CURVED</td>
+<td><em>-</em></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="launch-maneuver">
+<span id="launch"></span><h2>Launch Maneuver<a class="headerlink" href="#launch-maneuver" title="Permalink to this headline">¶</a></h2>
+<p>A “Launch” is a maneuver specifying a movement of the vehicle to a
+target waypoint after being launched from a ship or pier.
+The waypoint is described by the WGS-84 waypoint coordinate and
+target Z reference.</p>
+<p>Mandatory parameters defined for a “Launch” are
+timeout, speed and speed units.</p>
+<ul class="simple">
+<li>Abbreviation: Launch</li>
+<li>Identification Number: 485</li>
+<li>Payload Size: 30+  bytes</li>
+<li>Message Size: 52+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="18%" />
+<col width="9%" />
+<col width="16%" />
+<col width="7%" />
+<col width="34%" />
+<col width="16%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Timeout</td>
+<td>timeout</td>
+<td><em>s</em></td>
+<td>uint16_t</td>
+<td>The amount of time the maneuver is allowed to run.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Latitude WGS-84</td>
+<td>lat</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>WGS-84 Latitude of target waypoint.</td>
+<td>min=-1.5707963267948966,
+max=1.5707963267948966</td>
+</tr>
+<tr class="row-even"><td>Longitude WGS-84</td>
+<td>lon</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>WGS-84 Longitude of target waypoint.</td>
+<td>min=-3.141592653589793,
+max=3.141592653589793</td>
+</tr>
+<tr class="row-odd"><td>Z Reference</td>
+<td>z</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Target reference in the z axis. Use z_units to specify
+whether z represents depth, altitude or other.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Z Units</td>
+<td>z_units</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="Message Format.html#enum-zunits"><span class="std std-ref">Enum Z Units</span></a>)</td>
+<td>uint8_t</td>
+<td>Units of the z reference.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Speed</td>
+<td>speed</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Maneuver speed reference.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Speed Units</td>
+<td>speed_units</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="Message Format.html#enum-speedunits"><span class="std std-ref">Enum Speed Units</span></a>)</td>
+<td>uint8_t</td>
+<td>Speed units.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Custom settings for maneuver</td>
+<td>custom</td>
+<td><em>TupleList</em></td>
+<td>plaintext</td>
+<td>Custom settings for maneuver.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="drop-maneuver">
+<span id="drop"></span><h2>Drop Maneuver<a class="headerlink" href="#drop-maneuver" title="Permalink to this headline">¶</a></h2>
+<p>A “Drop” is a maneuver specifying a movement of the vehicle to a
+target waypoint. The waypoint is described by the WGS-84
+waypoint coordinate and target Z reference.</p>
+<p>Mandatory parameters defined for a “Goto” are
+timeout, speed and speed units.</p>
+<ul class="simple">
+<li>Abbreviation: Drop</li>
+<li>Identification Number: 486</li>
+<li>Payload Size: 30+  bytes</li>
+<li>Message Size: 52+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="18%" />
+<col width="9%" />
+<col width="16%" />
+<col width="7%" />
+<col width="34%" />
+<col width="16%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Timeout</td>
+<td>timeout</td>
+<td><em>s</em></td>
+<td>uint16_t</td>
+<td>The amount of time the maneuver is allowed to run.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Latitude WGS-84</td>
+<td>lat</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>WGS-84 Latitude of target waypoint.</td>
+<td>min=-1.5707963267948966,
+max=1.5707963267948966</td>
+</tr>
+<tr class="row-even"><td>Longitude WGS-84</td>
+<td>lon</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>WGS-84 Longitude of target waypoint.</td>
+<td>min=-3.141592653589793,
+max=3.141592653589793</td>
+</tr>
+<tr class="row-odd"><td>Z Reference</td>
+<td>z</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Target reference in the z axis. Use z_units to specify
+whether z represents depth, altitude or other.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Z Units</td>
+<td>z_units</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="Message Format.html#enum-zunits"><span class="std std-ref">Enum Z Units</span></a>)</td>
+<td>uint8_t</td>
+<td>Units of the z reference.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Speed</td>
+<td>speed</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Maneuver speed reference.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Speed Units</td>
+<td>speed_units</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="Message Format.html#enum-speedunits"><span class="std std-ref">Enum Speed Units</span></a>)</td>
+<td>uint8_t</td>
+<td>Speed units.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Custom settings for maneuver</td>
+<td>custom</td>
+<td><em>TupleList</em></td>
+<td>plaintext</td>
+<td>Custom settings for maneuver.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="scheduled-goto">
+<span id="scheduledgoto"></span><h2>Scheduled Goto<a class="headerlink" href="#scheduled-goto" title="Permalink to this headline">¶</a></h2>
+<p>This maneuver is used to command the vehicle to arrive at some destination at
+a specified absolute time.</p>
+<p>The vehicle’s speed will vary according to environment conditions and/or maneuver start time.</p>
+<ul class="simple">
+<li>Abbreviation: ScheduledGoto</li>
+<li>Identification Number: 487</li>
+<li>Payload Size: 35 bytes</li>
+<li>Message Size: 57 bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="8%" />
+<col width="19%" />
+<col width="5%" />
+<col width="39%" />
+<col width="13%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Time of arrival</td>
+<td>arrival_time</td>
+<td><em>s</em></td>
+<td>fp64_t</td>
+<td>Unix timestamp, in seconds, for the arrival at the destination.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Destination Latitude WGS-84</td>
+<td>lat</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>WGS-84 Latitude of target waypoint.</td>
+<td>min=-1.5707963267948966,
+max=1.5707963267948966</td>
+</tr>
+<tr class="row-even"><td>Destination Longitude WGS-84</td>
+<td>lon</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>WGS-84 Longitude of target waypoint.</td>
+<td>min=-3.141592653589793,
+max=3.141592653589793</td>
+</tr>
+<tr class="row-odd"><td>Destination Z Reference</td>
+<td>z</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Target reference in the z axis. Use z_units to specify
+whether z represents depth, altitude or other.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Z Units</td>
+<td>z_units</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="Message Format.html#enum-zunits"><span class="std std-ref">Enum Z Units</span></a>)</td>
+<td>uint8_t</td>
+<td>Units of the destination z reference.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Travel Z Reference</td>
+<td>travel_z</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Z reference to use while travelling to the destination.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Travel Z Units</td>
+<td>travel_z_units</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="Message Format.html#enum-zunits"><span class="std std-ref">Enum Z Units</span></a>)</td>
+<td>uint8_t</td>
+<td>Z reference units to use while travelling to the destination.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Delayed Behavior</td>
+<td>delayed</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="#scheduledgoto-enum-delayed"><span class="std std-ref">Enum Delayed Behavior</span></a>)</td>
+<td>uint8_t</td>
+<td>What to do if the vehicle fails to arrive before or at the requested time.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="enum-delayed-behavior">
+<span id="scheduledgoto-enum-prefix-dbeh"></span><span id="scheduledgoto-enum-delayed"></span><h3>Enum Delayed Behavior<a class="headerlink" href="#enum-delayed-behavior" title="Permalink to this headline">¶</a></h3>
+<p>What to do if the vehicle fails to arrive before or at the requested time.</p>
+<ul class="simple">
+<li>Abbreviation: delayed</li>
+<li>Prefix: DBEH</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="7%" />
+<col width="11%" />
+<col width="76%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0</td>
+<td>Resume</td>
+<td>RESUME</td>
+<td>If the vehicle fails to arrive at the specified time, it will keep going to the destination
+at top speed and only then consider this maneuver completed.</td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>Skip</td>
+<td>SKIP</td>
+<td>If the vehicle fails to arrive at the specified time, it will stop the current maneuver and
+advance to the next one (independently of how far it is from destination).</td>
+</tr>
+<tr class="row-even"><td>2</td>
+<td>Fail</td>
+<td>FAIL</td>
+<td>If the vehicle fails to arrive at the specified time, it will stop the execution of this
+maneuver with a FAILED result (the entire plan will be stopped).</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="rows-coverage">
+<span id="rowscoverage"></span><h2>Rows Coverage<a class="headerlink" href="#rows-coverage" title="Permalink to this headline">¶</a></h2>
+<p>Rows coverage (i.e: lawn mower type maneuver) but with adaptive cover</p>
+<ul class="simple">
+<li>Abbreviation: RowsCoverage</li>
+<li>Identification Number: 488</li>
+<li>Payload Size: 61+  bytes</li>
+<li>Message Size: 83+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="7%" />
+<col width="19%" />
+<col width="6%" />
+<col width="40%" />
+<col width="13%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Latitude WGS-84</td>
+<td>lat</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>WGS-84 Latitude of target waypoint.</td>
+<td>min=-1.5707963267948966,
+max=1.5707963267948966</td>
+</tr>
+<tr class="row-odd"><td>Longitude WGS-84</td>
+<td>lon</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>WGS-84 Longitude of target waypoint.</td>
+<td>min=-3.141592653589793,
+max=3.141592653589793</td>
+</tr>
+<tr class="row-even"><td>Z Reference</td>
+<td>z</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Maneuver reference in the z axis. Use z_units to specify
+whether z represents depth, altitude or other.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Z Units</td>
+<td>z_units</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="Message Format.html#enum-zunits"><span class="std std-ref">Enum Z Units</span></a>)</td>
+<td>uint8_t</td>
+<td>Units of the z reference.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Speed</td>
+<td>speed</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Maneuver speed reference.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Speed Units</td>
+<td>speed_units</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="Message Format.html#enum-speedunits"><span class="std std-ref">Enum Speed Units</span></a>)</td>
+<td>uint8_t</td>
+<td>Speed units.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Bearing</td>
+<td>bearing</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>Rows bearing angle.</td>
+<td>min=0,
+max=6.283185307179586</td>
+</tr>
+<tr class="row-odd"><td>Cross Angle</td>
+<td>cross_angle</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>Rows cross angle reference.</td>
+<td>min=-1.047197551197,
+max=1.047197551197</td>
+</tr>
+<tr class="row-even"><td>Width</td>
+<td>width</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Width of the maneuver.</td>
+<td>min=0</td>
+</tr>
+<tr class="row-odd"><td>Length</td>
+<td>length</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Length of the maneuver.</td>
+<td>min=0</td>
+</tr>
+<tr class="row-even"><td>Curve Offset</td>
+<td>coff</td>
+<td><em>m</em></td>
+<td>uint8_t</td>
+<td>Desired curve offset.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Angular Aperture</td>
+<td>angAperture</td>
+<td><em>rad</em></td>
+<td>fp32_t</td>
+<td>Angular aperture of the sensor (looking downwards).</td>
+<td>min=-3.141592653589793,
+max=3.141592653589793</td>
+</tr>
+<tr class="row-even"><td>Range</td>
+<td>range</td>
+<td><em>m</em></td>
+<td>uint16_t</td>
+<td>Maximum range of the sensor (in meters downwards from the vehicle’s position).</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Overlap</td>
+<td>overlap</td>
+<td><em>%</em></td>
+<td>uint8_t</td>
+<td>Amount of overlap among different transect surveys.</td>
+<td>max=100</td>
+</tr>
+<tr class="row-even"><td>Flags</td>
+<td>flags</td>
+<td><em>Bitfield</em>
+(<a class="reference internal" href="#rowscoverage-bitfield-flags"><span class="std std-ref">Bitfield Flags</span></a>)</td>
+<td>uint8_t</td>
+<td>Maneuver optional flags.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Custom settings for maneuver</td>
+<td>custom</td>
+<td><em>TupleList</em></td>
+<td>plaintext</td>
+<td>Custom settings for maneuver.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="rowscoverage-bitfield-prefix-flg">
+<span id="rowscoverage-bitfield-flags"></span><span id="id10"></span><h3>Bitfield Flags<a class="headerlink" href="#rowscoverage-bitfield-prefix-flg" title="Permalink to this headline">¶</a></h3>
+<p>Maneuver optional flags.</p>
+<ul class="simple">
+<li>Abbreviation: flags</li>
+<li>Prefix: FLG</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="5%" />
+<col width="13%" />
+<col width="10%" />
+<col width="72%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0x01</td>
+<td>Square Curve</td>
+<td>SQUARE_CURVE</td>
+<td>Whether to move between transects using an additional perpendicular transect.</td>
+</tr>
+<tr class="row-odd"><td>0x02</td>
+<td>First Curve Right</td>
+<td>CURVE_RIGHT</td>
+<td>Shall the vehicle turn towards the right after the first transect (alternatively it will turn left).</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="sample-maneuver">
+<span id="sample"></span><h2>Sample Maneuver<a class="headerlink" href="#sample-maneuver" title="Permalink to this headline">¶</a></h2>
+<p>A “Sample” is a maneuver specifying a movement of the vehicle to a
+target waypoint. The waypoint is described by the WGS-84
+waypoint coordinate and target Z reference.</p>
+<p>Mandatory parameters defined for a “Goto” are
+timeout, speed and speed units.</p>
+<ul class="simple">
+<li>Abbreviation: Sample</li>
+<li>Identification Number: 489</li>
+<li>Payload Size: 33+  bytes</li>
+<li>Message Size: 55+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="18%" />
+<col width="9%" />
+<col width="16%" />
+<col width="7%" />
+<col width="34%" />
+<col width="16%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Timeout</td>
+<td>timeout</td>
+<td><em>s</em></td>
+<td>uint16_t</td>
+<td>The amount of time the maneuver is allowed to run.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Latitude WGS-84</td>
+<td>lat</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>WGS-84 Latitude of target waypoint.</td>
+<td>min=-1.5707963267948966,
+max=1.5707963267948966</td>
+</tr>
+<tr class="row-even"><td>Longitude WGS-84</td>
+<td>lon</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>WGS-84 Longitude of target waypoint.</td>
+<td>min=-3.141592653589793,
+max=3.141592653589793</td>
+</tr>
+<tr class="row-odd"><td>Z Reference</td>
+<td>z</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Target reference in the z axis. Use z_units to specify
+whether z represents depth, altitude or other.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Z Units</td>
+<td>z_units</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="Message Format.html#enum-zunits"><span class="std std-ref">Enum Z Units</span></a>)</td>
+<td>uint8_t</td>
+<td>Units of the z reference.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Speed</td>
+<td>speed</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Maneuver speed reference.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Speed Units</td>
+<td>speed_units</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="Message Format.html#enum-speedunits"><span class="std std-ref">Enum Speed Units</span></a>)</td>
+<td>uint8_t</td>
+<td>Speed units.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Syringe0</td>
+<td>syringe0</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="Message Format.html#enum-boolean"><span class="std std-ref">Enum Boolean Value</span></a>)</td>
+<td>uint8_t</td>
+<td>True when sampling with servo 0.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Syringe1</td>
+<td>syringe1</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="Message Format.html#enum-boolean"><span class="std std-ref">Enum Boolean Value</span></a>)</td>
+<td>uint8_t</td>
+<td>True when sampling with servo 1.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Syringe2</td>
+<td>syringe2</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="Message Format.html#enum-boolean"><span class="std std-ref">Enum Boolean Value</span></a>)</td>
+<td>uint8_t</td>
+<td>True when sampling with servo 2.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Custom settings for maneuver</td>
+<td>custom</td>
+<td><em>TupleList</em></td>
+<td>plaintext</td>
+<td>Custom settings for maneuver.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="image-tracking">
+<span id="imagetracking"></span><h2>Image Tracking<a class="headerlink" href="#image-tracking" title="Permalink to this headline">¶</a></h2>
+<p>A “ImageTracking” is a maneuver specifying a particular heading to the
+detected object.</p>
+<ul class="simple">
+<li>Abbreviation: ImageTracking</li>
+<li>Identification Number: 490</li>
+<li>Payload Size: 0 bytes</li>
+<li>Message Size: 22 bytes</li>
+</ul>
+<p>This message has no fields.</p>
+</div>
+<div class="section" id="takeoff-maneuver">
+<span id="takeoff"></span><h2>Takeoff Maneuver<a class="headerlink" href="#takeoff-maneuver" title="Permalink to this headline">¶</a></h2>
+<p>Automatic takeoff for UAVs.
+This maneuver specifies a target waypoint where to takeoff.</p>
+<p>Takeoff direction is set from the direction the plane is pointing when the auto takeoff command is started.
+It will remain that way until the vehicle reaches the target z reference. After that it will go to the target waypoint.</p>
+<ul class="simple">
+<li>Abbreviation: Takeoff</li>
+<li>Identification Number: 491</li>
+<li>Payload Size: 32+  bytes</li>
+<li>Message Size: 54+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="19%" />
+<col width="9%" />
+<col width="16%" />
+<col width="7%" />
+<col width="33%" />
+<col width="16%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Latitude WGS-84</td>
+<td>lat</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>WGS-84 Latitude of target waypoint.</td>
+<td>min=-1.5707963267948966,
+max=1.5707963267948966</td>
+</tr>
+<tr class="row-odd"><td>Longitude WGS-84</td>
+<td>lon</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>WGS-84 Longitude of target waypoint.</td>
+<td>min=-3.141592653589793,
+max=3.141592653589793</td>
+</tr>
+<tr class="row-even"><td>Z Reference</td>
+<td>z</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Target altitude or height for the automatic takeoff.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Z Units</td>
+<td>z_units</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="Message Format.html#enum-zunits"><span class="std std-ref">Enum Z Units</span></a>)</td>
+<td>uint8_t</td>
+<td>Units of the z reference.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Speed</td>
+<td>speed</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Maneuver speed reference.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Speed Units</td>
+<td>speed_units</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="Message Format.html#enum-speedunits"><span class="std std-ref">Enum Speed Units</span></a>)</td>
+<td>uint8_t</td>
+<td>Speed units.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Pitch Angle</td>
+<td>takeoff_pitch</td>
+<td><em>rad</em></td>
+<td>fp32_t</td>
+<td>Minimum pitch angle during automatic takeoff.</td>
+<td>min=0,
+max=1.57079632679490</td>
+</tr>
+<tr class="row-odd"><td>Custom settings for maneuver</td>
+<td>custom</td>
+<td><em>TupleList</em></td>
+<td>plaintext</td>
+<td>Custom settings for maneuver.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="land-maneuver">
+<span id="land"></span><h2>Land Maneuver<a class="headerlink" href="#land-maneuver" title="Permalink to this headline">¶</a></h2>
+<p>Automatic landing on the ground, for UAVs.
+This maneuver specifies the target touchdown location and sets the final approach based on the maneuver bearing and glide slope parameters.</p>
+<ul class="simple">
+<li>Abbreviation: Land</li>
+<li>Identification Number: 492</li>
+<li>Payload Size: 45+  bytes</li>
+<li>Message Size: 67+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="7%" />
+<col width="10%" />
+<col width="4%" />
+<col width="57%" />
+<col width="10%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Latitude WGS-84</td>
+<td>lat</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>WGS-84 Latitude of touchdown waypoint.</td>
+<td>min=-1.5707963267948966,
+max=1.5707963267948966</td>
+</tr>
+<tr class="row-odd"><td>Longitude WGS-84</td>
+<td>lon</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>WGS-84 Longitude of touchdown waypoint.</td>
+<td>min=-3.141592653589793,
+max=3.141592653589793</td>
+</tr>
+<tr class="row-even"><td>Z Reference</td>
+<td>z</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Target altitude or height for the automatic landing.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Z Units</td>
+<td>z_units</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="Message Format.html#enum-zunits"><span class="std std-ref">Enum Z Units</span></a>)</td>
+<td>uint8_t</td>
+<td>Units of the z reference and abort z reference.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Speed</td>
+<td>speed</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Maneuver speed reference.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Speed Units</td>
+<td>speed_units</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="Message Format.html#enum-speedunits"><span class="std std-ref">Enum Speed Units</span></a>)</td>
+<td>uint8_t</td>
+<td>Speed units.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Abort Z Reference</td>
+<td>abort_z</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Abort altitude or height. If landing is aborted while executing, the UAV will maintain its course and attempt to climb to the abort z reference.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Bearing</td>
+<td>bearing</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>Land bearing angle.</td>
+<td>min=0,
+max=6.283185307179586</td>
+</tr>
+<tr class="row-even"><td>Glide Slope</td>
+<td>glide_slope</td>
+<td><em>%</em></td>
+<td>uint8_t</td>
+<td>Ratio of the distance from the last waypoint to the landing point (touchdown) and the height difference between them.</td>
+<td>max=10</td>
+</tr>
+<tr class="row-odd"><td>Glide Slope Altitude</td>
+<td>glide_slope_alt</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Height difference between the last waypoint to the landing point (touchdown).</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Custom settings for maneuver</td>
+<td>custom</td>
+<td><em>TupleList</em></td>
+<td>plaintext</td>
+<td>Custom settings for maneuver.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="autonomous-section">
+<span id="autonomoussection"></span><h2>Autonomous Section<a class="headerlink" href="#autonomous-section" title="Permalink to this headline">¶</a></h2>
+<p>This maneuver triggers an external controller that will guide the vehicle during a specified duration
+of time or until it relinquishes control using (ManeuverDone). The external controller is allowed to
+drive the vehicle only inside the specified boundaries.</p>
+<ul class="simple">
+<li>Abbreviation: AutonomousSection</li>
+<li>Identification Number: 493</li>
+<li>Payload Size: 52+  bytes</li>
+<li>Message Size: 74+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="6%" />
+<col width="18%" />
+<col width="10%" />
+<col width="44%" />
+<col width="11%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Latitude WGS-84</td>
+<td>lat</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>WGS-84 Latitude of the initial location.</td>
+<td>min=-1.5707963267948966,
+max=1.5707963267948966</td>
+</tr>
+<tr class="row-odd"><td>Longitude WGS-84</td>
+<td>lon</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>WGS-84 Longitude of the initial location.</td>
+<td>min=-3.141592653589793,
+max=3.141592653589793</td>
+</tr>
+<tr class="row-even"><td>Speed</td>
+<td>speed</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Maneuver speed reference.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Speed Units</td>
+<td>speed_units</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="Message Format.html#enum-speedunits"><span class="std std-ref">Enum Speed Units</span></a>)</td>
+<td>uint8_t</td>
+<td>Speed units.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Enforced Limits</td>
+<td>limits</td>
+<td><em>Bitfield</em>
+(<a class="reference internal" href="#autonomoussection-bitfield-limits"><span class="std std-ref">Bitfield Enforced Limits</span></a>)</td>
+<td>uint8_t</td>
+<td>&#160;</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Maximum depth</td>
+<td>max_depth</td>
+<td><em>m</em></td>
+<td>fp64_t</td>
+<td>Maximum depth the autonomous controller is allowed to drive to.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Minimum altitude</td>
+<td>min_alt</td>
+<td><em>m</em></td>
+<td>fp64_t</td>
+<td>Minimum altitude the autonomous controller is allowed to drive to.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Time Limit</td>
+<td>time_limit</td>
+<td><em>s</em></td>
+<td>fp64_t</td>
+<td>The time after which this maneuver should be stopped (if still active and TIMEOUT is enforced).</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Area Limits</td>
+<td>area_limits</td>
+<td><em>-</em></td>
+<td>message-list
+(<a class="reference internal" href="#polygonvertex"><span class="std std-ref">Polygon Vertex</span></a>)</td>
+<td>The boundaries of the admissable area for this autonomous section.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Controller</td>
+<td>controller</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>The name of the controlling agent that will be allowed to guide the vehicle during the AutononousSection.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Custom settings for maneuver</td>
+<td>custom</td>
+<td><em>TupleList</em></td>
+<td>plaintext</td>
+<td>Custom settings for maneuver.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="bitfield-enforced-limits">
+<span id="autonomoussection-bitfield-prefix-enforce"></span><span id="autonomoussection-bitfield-limits"></span><h3>Bitfield Enforced Limits<a class="headerlink" href="#bitfield-enforced-limits" title="Permalink to this headline">¶</a></h3>
+<p>No description</p>
+<ul class="simple">
+<li>Abbreviation: limits</li>
+<li>Prefix: ENFORCE</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="41%" />
+<col width="24%" />
+<col width="22%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0x01</td>
+<td>Maximum Depth Limit</td>
+<td>DEPTH</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>0x02</td>
+<td>Minimum Altitude Limit</td>
+<td>ALTITUDE</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-even"><td>0x04</td>
+<td>Time Limit</td>
+<td>TIMEOUT</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>0x08</td>
+<td>Polygonal Area Limits</td>
+<td>AREA2D</td>
+<td><em>-</em></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="follow-point-maneuver">
+<span id="followpoint"></span><h2>Follow Point Maneuver<a class="headerlink" href="#follow-point-maneuver" title="Permalink to this headline">¶</a></h2>
+<p>This maneuver behaves by following a point.</p>
+<ul class="simple">
+<li>Abbreviation: FollowPoint</li>
+<li>Identification Number: 494</li>
+<li>Payload Size: 30+  bytes</li>
+<li>Message Size: 52+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="7%" />
+<col width="13%" />
+<col width="6%" />
+<col width="45%" />
+<col width="13%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Source To Follow</td>
+<td>target</td>
+<td><em>-</em></td>
+<td>plaintext</td>
+<td>The identifier of the point source to follow (via RemoteSensorInfo or EstimatedState).</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Maximum Speed</td>
+<td>max_speed</td>
+<td><em>m/s</em></td>
+<td>fp32_t</td>
+<td>Use this speed when travelling from afar.</td>
+<td>min=0</td>
+</tr>
+<tr class="row-even"><td>Speed Units</td>
+<td>speed_units</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="Message Format.html#enum-speedunits"><span class="std std-ref">Enum Speed Units</span></a>)</td>
+<td>uint8_t</td>
+<td>Indicates the units used for the maximum speed value.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Latitude WGS-84</td>
+<td>lat</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>WGS-84 Latitude of maneuver in the map. Ignored during execution.</td>
+<td>min=-1.5707963267948966,
+max=1.5707963267948966</td>
+</tr>
+<tr class="row-even"><td>Longitude WGS-84</td>
+<td>lon</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>WGS-84 Longitude of maneuver in the map. Ignored during execution.</td>
+<td>min=-3.141592653589793,
+max=3.141592653589793</td>
+</tr>
+<tr class="row-odd"><td>Z</td>
+<td>z</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Use z_units to specify whether z represents depth, altitude or other.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Z Units</td>
+<td>z_units</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="Message Format.html#enum-zunits"><span class="std std-ref">Enum Z Units</span></a>)</td>
+<td>uint8_t</td>
+<td>Units of the z reference.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Custom settings for maneuver</td>
+<td>custom</td>
+<td><em>TupleList</em></td>
+<td>plaintext</td>
+<td>Custom settings for maneuver.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="alignment-maneuver">
+<span id="alignment"></span><h2>Alignment Maneuver<a class="headerlink" href="#alignment-maneuver" title="Permalink to this headline">¶</a></h2>
+<p>An “Alignment” is a maneuver specifying a movement of the vehicle to a
+target waypoint intended to control activation of an IMU/INS in order
+to start aligning navigation for more precise dead reckoning operation.</p>
+<ul class="simple">
+<li>Abbreviation: Alignment</li>
+<li>Identification Number: 495</li>
+<li>Payload Size: 25+  bytes</li>
+<li>Message Size: 47+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="19%" />
+<col width="9%" />
+<col width="16%" />
+<col width="7%" />
+<col width="33%" />
+<col width="16%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Timeout</td>
+<td>timeout</td>
+<td><em>s</em></td>
+<td>uint16_t</td>
+<td>The amount of time the maneuver is allowed to run.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Latitude WGS-84</td>
+<td>lat</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>WGS-84 Latitude of target waypoint.</td>
+<td>min=-1.5707963267948966,
+max=1.5707963267948966</td>
+</tr>
+<tr class="row-even"><td>Longitude WGS-84</td>
+<td>lon</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>WGS-84 Longitude of target waypoint.</td>
+<td>min=-3.141592653589793,
+max=3.141592653589793</td>
+</tr>
+<tr class="row-odd"><td>Speed</td>
+<td>speed</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Maneuver speed reference.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Speed Units</td>
+<td>speed_units</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="Message Format.html#enum-speedunits"><span class="std std-ref">Enum Speed Units</span></a>)</td>
+<td>uint8_t</td>
+<td>Speed units.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Custom settings for maneuver</td>
+<td>custom</td>
+<td><em>TupleList</em></td>
+<td>plaintext</td>
+<td>Custom settings for maneuver.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="station-keeping-extended">
+<span id="stationkeepingextended"></span><h2>Station Keeping Extended<a class="headerlink" href="#station-keeping-extended" title="Permalink to this headline">¶</a></h2>
+<p>The Station Keeping Extended maneuver makes the vehicle come to the surface
+and then enter a given circular perimeter around a waypoint coordinate
+for a certain amount of time. It extends the Station Keeping maneuver with the feature
+‘Keep Safe’, which allows for the vehicle to hold position underwater and popup periodically
+to communicate.</p>
+<ul class="simple">
+<li>Abbreviation: StationKeepingExtended</li>
+<li>Identification Number: 496</li>
+<li>Payload Size: 39+  bytes</li>
+<li>Message Size: 61+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="8%" />
+<col width="24%" />
+<col width="5%" />
+<col width="35%" />
+<col width="13%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Latitude WGS-84</td>
+<td>lat</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>WGS-84 Latitude.</td>
+<td>min=-1.5707963267948966,
+max=1.5707963267948966</td>
+</tr>
+<tr class="row-odd"><td>Longitude WGS-84</td>
+<td>lon</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>WGS-84 Longitude.</td>
+<td>min=-3.141592653589793,
+max=3.141592653589793</td>
+</tr>
+<tr class="row-even"><td>Z Reference</td>
+<td>z</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Maneuver reference in the z axis. Use z_units to specify
+whether z represents depth, altitude or other.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Z Units</td>
+<td>z_units</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="Message Format.html#enum-zunits"><span class="std std-ref">Enum Z Units</span></a>)</td>
+<td>uint8_t</td>
+<td>Units of the z reference.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Radius</td>
+<td>radius</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Radius.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Duration</td>
+<td>duration</td>
+<td><em>s</em></td>
+<td>uint16_t</td>
+<td>Duration (0 for unlimited).</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Speed</td>
+<td>speed</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>The value of the desired speed, in the scale specified
+by the “Speed Units” field.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Speed Units</td>
+<td>speed_units</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="Message Format.html#enum-speedunits"><span class="std std-ref">Enum Speed Units</span></a>)</td>
+<td>uint8_t</td>
+<td>Indicates the units used for the speed value.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>PopUp Period</td>
+<td>popup_period</td>
+<td><em>s</em></td>
+<td>uint16_t</td>
+<td>The period at which the vehicle will popup to report its position.
+Only used if flag KEEP_SAFE is on.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>PopUp Duration</td>
+<td>popup_duration</td>
+<td><em>s</em></td>
+<td>uint16_t</td>
+<td>The duration of the station keeping at surface level when it pops up.
+Only used if flag KEEP_SAFE is on.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Flags</td>
+<td>flags</td>
+<td><em>Bitfield</em>
+(<a class="reference internal" href="#stationkeepingextended-bitfield-flags"><span class="std std-ref">Bitfield Flags</span></a>)</td>
+<td>uint8_t</td>
+<td>Flags of the maneuver.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Custom settings for maneuver</td>
+<td>custom</td>
+<td><em>TupleList</em></td>
+<td>plaintext</td>
+<td>Custom settings for maneuver.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="stationkeepingextended-bitfield-prefix-flg">
+<span id="stationkeepingextended-bitfield-flags"></span><span id="id11"></span><h3>Bitfield Flags<a class="headerlink" href="#stationkeepingextended-bitfield-prefix-flg" title="Permalink to this headline">¶</a></h3>
+<p>Flags of the maneuver.</p>
+<ul class="simple">
+<li>Abbreviation: flags</li>
+<li>Prefix: FLG</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="3%" />
+<col width="10%" />
+<col width="7%" />
+<col width="80%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0x01</td>
+<td>Keep safe behaviour</td>
+<td>KEEP_SAFE</td>
+<td>If this flag is set, the vehicle will hold position underwater, loitering at z reference.
+It will popup periodically to report position. When it pops up, it will stay at surface in “normal” station keeping behaviour for a certain time (popup_duration).</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="magnetometer-maneuver">
+<span id="magnetometer"></span><h2>Magnetometer Maneuver<a class="headerlink" href="#magnetometer-maneuver" title="Permalink to this headline">¶</a></h2>
+<p>Magnetometer calibration maneuver (i.e: one square pattern
+in one direction, a second square in the opposite direction)</p>
+<ul class="simple">
+<li>Abbreviation: Magnetometer</li>
+<li>Identification Number: 499</li>
+<li>Payload Size: 43+  bytes</li>
+<li>Message Size: 65+  bytes</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="17%" />
+<col width="8%" />
+<col width="21%" />
+<col width="6%" />
+<col width="33%" />
+<col width="15%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Unit</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+<th class="head">Range</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Timeout</td>
+<td>timeout</td>
+<td><em>s</em></td>
+<td>uint16_t</td>
+<td>The amount of time the maneuver is allowed to run.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Latitude WGS-84</td>
+<td>lat</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>WGS-84 Latitude of target waypoint.</td>
+<td>min=-1.5707963267948966,
+max=1.5707963267948966</td>
+</tr>
+<tr class="row-even"><td>Longitude WGS-84</td>
+<td>lon</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>WGS-84 Longitude of target waypoint.</td>
+<td>min=-3.141592653589793,
+max=3.141592653589793</td>
+</tr>
+<tr class="row-odd"><td>Z Reference</td>
+<td>z</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Maneuver reference in the z axis. Use z_units to specify
+whether z represents depth, altitude or other.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Z Units</td>
+<td>z_units</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="Message Format.html#enum-zunits"><span class="std std-ref">Enum Z Units</span></a>)</td>
+<td>uint8_t</td>
+<td>Units of the z reference.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Speed</td>
+<td>speed</td>
+<td><em>-</em></td>
+<td>fp32_t</td>
+<td>Maneuver speed reference.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-even"><td>Speed Units</td>
+<td>speed_units</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="Message Format.html#enum-speedunits"><span class="std std-ref">Enum Speed Units</span></a>)</td>
+<td>uint8_t</td>
+<td>Speed units.</td>
+<td>Same as field type</td>
+</tr>
+<tr class="row-odd"><td>Bearing</td>
+<td>bearing</td>
+<td><em>rad</em></td>
+<td>fp64_t</td>
+<td>Rows bearing angle.</td>
+<td>min=0,
+max=6.283185307179586</td>
+</tr>
+<tr class="row-even"><td>Width</td>
+<td>width</td>
+<td><em>m</em></td>
+<td>fp32_t</td>
+<td>Width of the maneuver.</td>
+<td>min=50</td>
+</tr>
+<tr class="row-odd"><td>Direction</td>
+<td>direction</td>
+<td><em>Enumerated</em>
+(<a class="reference internal" href="#magnetometer-enum-direction"><span class="std std-ref">Enum Direction</span></a>)</td>
+<td>uint8_t</td>
+<td>Desired direction.</td>
+<td>max=1</td>
+</tr>
+<tr class="row-even"><td>Custom settings for maneuver</td>
+<td>custom</td>
+<td><em>TupleList</em></td>
+<td>plaintext</td>
+<td>Custom settings for maneuver.</td>
+<td>Same as field type</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="magnetometer-enum-prefix-md">
+<span id="magnetometer-enum-direction"></span><span id="id12"></span><h3>Enum Direction<a class="headerlink" href="#magnetometer-enum-prefix-md" title="Permalink to this headline">¶</a></h3>
+<p>Desired direction.</p>
+<ul class="simple">
+<li>Abbreviation: direction</li>
+<li>Prefix: MD</li>
+</ul>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="42%" />
+<col width="25%" />
+<col width="22%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Name</th>
+<th class="head">Abbreviation</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0</td>
+<td>Clockwise First</td>
+<td>CLOCKW_FIRST</td>
+<td><em>-</em></td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>Counter Clockwise First</td>
+<td>CCLOCKW_FIRST</td>
+<td><em>-</em></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<h3><a href="index.html">Table Of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Message Format.html">Message Format</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Core.html">Core Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Simulation.html">Simulation Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Storage.html">Storage Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Networking.html">Networking Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Acoustic Networking.html">Acoustic Networking Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Sensors.html">Sensors Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Actuation.html">Actuation Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Navigation.html">Navigation Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Guidance.html">Guidance Messages</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Maneuvering Messages</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#goto-maneuver">Goto Maneuver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#popup-maneuver">PopUp Maneuver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#teleoperation-maneuver">Teleoperation Maneuver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#loiter-maneuver">Loiter Maneuver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#idlemaneuver">Idle Maneuver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#low-level-control-maneuver">Low Level Control Maneuver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rows-maneuver">Rows Maneuver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#follow-path-maneuver">Follow Path Maneuver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#path-point">Path Point</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#yo-yo-maneuver">Yo-Yo Maneuver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#teleoperation-done">Teleoperation Done</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#station-keeping">Station Keeping</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#elevator-maneuver">Elevator Maneuver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#follow-trajectory">Follow Trajectory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#trajectory-point">Trajectory Point</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#custom-maneuver">Custom Maneuver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#vehicle-formation">Vehicle Formation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#vehicle-formation-participant">Vehicle Formation Participant</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#stop-maneuver">Stop Maneuver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#register-maneuver">Register Maneuver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#maneuver-control-state">Maneuver Control State</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#follow-system">Follow System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#communications-relay">Communications Relay</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#cover-area">Cover Area</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#polygon-vertex">Polygon Vertex</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#compass-calibration-maneuver">Compass Calibration Maneuver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#formation-parameters">Formation Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#formation-plan-execution">Formation Plan Execution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#follow-reference-maneuver">Follow Reference Maneuver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#reference-to-follow">Reference To Follow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#follow-reference-state">Follow Reference State</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#formation-monitoring-data">Formation Monitoring Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#relative-state">Relative State</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#dislodge-maneuver">Dislodge Maneuver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#formation">Formation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#launch-maneuver">Launch Maneuver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#drop-maneuver">Drop Maneuver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#scheduled-goto">Scheduled Goto</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rows-coverage">Rows Coverage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sample-maneuver">Sample Maneuver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#image-tracking">Image Tracking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#takeoff-maneuver">Takeoff Maneuver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#land-maneuver">Land Maneuver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#autonomous-section">Autonomous Section</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#follow-point-maneuver">Follow Point Maneuver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#alignment-maneuver">Alignment Maneuver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#station-keeping-extended">Station Keeping Extended</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#magnetometer-maneuver">Magnetometer Maneuver</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Vehicle Supervision.html">Vehicle Supervision Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Plan Supervision.html">Plan Supervision Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CCU.html">CCU Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Autonomy.html">Autonomy Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Vision.html">Vision Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="External.html">External Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Development.html">Development Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Custom.html">Custom Messages</a></li>
+</ul>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013-2017, Universidade do Porto - Faculdade de Engenharia - LSTS.
+      <br/>
+      Last updated on Aug 21, 2019.
+    </div>
+  </body>
+</html>
